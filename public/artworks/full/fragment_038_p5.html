@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fragment #038 – Ghost Message</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(180, 0, 255, 0.6);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Ghost Message”</div>
+    <script>
+      let chars = ["ᛪ", "♱", "×", "‧₊•", "♱", "ᛪ"];
+      let glyphs = [];
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        textAlign(CENTER, CENTER);
+        textSize(28);
+        for (let i = 0; i < 40; i++) {
+          glyphs.push({
+            x: random(width),
+            y: random(height),
+            c: color(random(270, 330), 90, random(60, 90)),
+            ch: random(chars),
+            spd: random(0.3, 1.5),
+          });
+        }
+      }
+
+      function draw() {
+        background(0, 0, 0, 0.1);
+        for (let g of glyphs) {
+          fill(g.c);
+          text(g.ch, g.x, g.y);
+          g.y += g.spd;
+          if (g.y > height) {
+            g.y = -20;
+            g.x = random(width);
+            g.ch = random(chars);
+          }
+        }
+
+        // ノイズエフェクト
+        loadPixels();
+        for (let i = 0; i < pixels.length; i += 4 * 50) {
+          pixels[i] += random(-30, 30);
+        }
+        updatePixels();
+      }
+    </script>
+  </body>
+</html>

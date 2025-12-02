@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fragment #010 – Pink Overdose</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(255, 100, 200, 0.6);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        color: rgba(255, 255, 255, 0.8);
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Pink Overdose”</div>
+    <script>
+      let bubbles = [];
+      let loopDuration = 5; // ループ時間（秒）
+      let fps = 60; // フレームレート
+      let totalFrames = loopDuration * fps;
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        blendMode(ADD);
+        frameRate(fps);
+        for (let i = 0; i < 60; i++) {
+          bubbles.push({
+            x: random(width),
+            y: random(height),
+            r: random(10, 50),
+            spd: random(0.2, 1),
+            phase: random(TWO_PI), // ずらすための位相
+          });
+        }
+      }
+
+      function draw() {
+        let t = (frameCount % totalFrames) / totalFrames; // 0〜1で5秒ループ
+        background(300, 60, 5, 0.1);
+        noStroke();
+
+        // バブルのアニメーション
+        for (let b of bubbles) {
+          let y = (b.y - b.spd * frameCount * 2) % height;
+          fill(330, 80, 70, 0.6);
+          ellipse(b.x, (y + height) % height, b.r);
+        }
+
+        // 中央の脈動する円
+        fill(330, 90, 80, 0.5);
+        let pulse = 200 + sin(TWO_PI * t) * 40;
+        ellipse(width / 2, height / 2, pulse);
+      }
+    </script>
+  </body>
+</html>

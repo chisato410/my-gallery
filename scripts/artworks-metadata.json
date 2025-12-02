@@ -572,5 +572,152 @@
       "dynamic",
       "geometry"
     ]
+  },
+  {
+    "filename": "fragment_032_p5.html",
+    "title": "GeoFlow",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "geometry",
+      "orbit",
+      "hsl-color",
+      "rotation",
+      "particle-motion",
+      "ellipse-field",
+      "flow",
+      "dynamic",
+      "minimal"
+    ]
+  },
+  {
+    "filename": "fragment_033_p5.html",
+    "title": "Yami Cute",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "cute",
+      "heart",
+      "bubble",
+      "glitter",
+      "hsb-color",
+      "floating",
+      "kawaii-dark",
+      "soft-motion",
+      "aesthetic"
+    ]
+  },
+  {
+    "filename": "fragment_034_p5.html",
+    "title": "Toxic Heart",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "heart",
+      "toxic",
+      "hsl-color",
+      "pulse",
+      "particles",
+      "dark-theme",
+      "glow",
+      "organic-motion"
+    ]
+  },
+  {
+    "filename": "fragment_035_p5.html",
+    "title": "Broken Doll",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "shards",
+      "triangle",
+      "fragmented",
+      "glow",
+      "pink-core",
+      "pulse",
+      "rotation",
+      "surreal",
+      "dark-pop"
+    ]
+  },
+  {
+    "filename": "fragment_036_p5.html",
+    "title": "Pink Overdose",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "pink",
+      "bubble",
+      "pulse",
+      "loop",
+      "5sec-loop",
+      "hsl-color",
+      "additive-blend",
+      "soft-glow"
+    ]
+  },
+  {
+    "filename": "fragment_037_p5.html",
+    "title": "Holy Sin",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "cross",
+      "red-glow",
+      "rotation",
+      "hsl-color",
+      "pulse",
+      "sacred",
+      "dark-aesthetic",
+      "symbolic"
+    ]
+  },
+  {
+    "filename": "fragment_038_p5.html",
+    "title": "Ghost Message",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "glyph",
+      "floating-text",
+      "noise-effect",
+      "purple-glow",
+      "hsl-color",
+      "ghostly",
+      "vertical-flow",
+      "ambient"
+    ]
+  },
+  {
+    "filename": "fragment_039_p5.html",
+    "title": "Fallen Halo",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "halo",
+      "ellipse",
+      "rotation",
+      "light-particles",
+      "sacred",
+      "yellow-glow",
+      "soft-motion",
+      "aura"
+    ]
+  },
+  {
+    "filename": "fragment_040_p5.html",
+    "title": "Feather Drift",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "feather",
+      "drift",
+      "floating",
+      "hsl-color",
+      "soft-motion",
+      "lightness",
+      "gentle-flow",
+      "minimal"
+    ]
   }
 ]

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #032 – GeoFlow</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption" id="caption">"GeoFlow"</div>
+
+    <script>
+      let shapes = [];
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        strokeWeight(2);
+        noFill();
+
+        for (let i = 0; i < 120; i++) {
+          shapes.push({
+            a: random(TWO_PI),
+            r: random(30, 250),
+            hue: random(360),
+            sp: random(0.005, 0.02),
+          });
+        }
+      }
+
+      function draw() {
+        background(0, 0, 5, 0.1);
+        translate(width / 2, height / 2);
+        rotate(frameCount * 0.01);
+
+        for (let s of shapes) {
+          stroke((s.hue + frameCount) % 360, 100, 60);
+          let x = cos(s.a + frameCount * s.sp) * s.r;
+          let y = sin(s.a + frameCount * s.sp) * s.r;
+          ellipse(x, y, 15);
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_032_geoflow", "png");
+      }
+    </script>
+  </body>
+</html>

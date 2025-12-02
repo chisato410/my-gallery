@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fragment #034 – Toxic Heart</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(255, 0, 50, 0.4);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        color: rgba(255, 255, 255, 0.7);
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Toxic Heart”</div>
+    <script>
+      let particles = [];
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+        for (let i = 0; i < 150; i++) {
+          particles.push(createVector(random(width), random(height)));
+        }
+      }
+
+      function draw() {
+        background(0, 0, 0, 0.1);
+        translate(width / 2, height / 2);
+        let pulse = sin(frameCount * 0.08) * 0.1 + 1;
+        drawHeart(0, 0, 100 * pulse, color(0, 80, 60));
+
+        for (let p of particles) {
+          fill(0, 80, random(50, 80), 0.3);
+          ellipse(p.x - width / 2, p.y - height / 2, 3);
+          p.add(p5.Vector.random2D().mult(0.5));
+          if (p.x > width) p.x = 0;
+          if (p.y > height) p.y = 0;
+        }
+      }
+
+      function drawHeart(x, y, s, c) {
+        fill(c);
+        beginShape();
+        for (let a = 0; a < TWO_PI; a += 0.1) {
+          let px = 16 * pow(sin(a), 3);
+          let py = -(
+            13 * cos(a) -
+            5 * cos(2 * a) -
+            2 * cos(3 * a) -
+            cos(4 * a)
+          );
+          vertex(x + px * s * 0.05, y + py * s * 0.05);
+        }
+        endShape(CLOSE);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fragment #040 – Feather Drift</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(255, 240, 255, 0.7);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Feather Drift”</div>
+    <script>
+      let feathers = [];
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        for (let i = 0; i < 60; i++) {
+          feathers.push({
+            x: random(width),
+            y: random(height),
+            s: random(10, 25),
+            spd: random(0.3, 1),
+            hue: random(280, 360),
+          });
+        }
+      }
+
+      function draw() {
+        background(0, 0, 10, 0.2);
+        noStroke();
+        for (let f of feathers) {
+          fill(f.hue, 100, random(80, 100), 0.7);
+          ellipse(f.x, f.y, f.s * 0.6, f.s);
+
+          f.y += f.spd;
+          f.x += sin(frameCount * 0.02 + f.y * 0.05) * 0.5;
+          if (f.y > height + 10) f.y = -10;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fragment #037 – Holy Sin</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(255, 0, 80, 0.6);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Holy Sin”</div>
+    <script>
+      let crosses = [];
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+        for (let i = 0; i < 50; i++) {
+          crosses.push({
+            x: random(width),
+            y: random(height),
+            s: random(10, 40),
+            r: random(TWO_PI),
+            col: color(random(340, 10), 100, random(40, 70)),
+          });
+        }
+      }
+
+      function draw() {
+        background(0, 0, 5, 0.2);
+        for (let c of crosses) {
+          push();
+          translate(c.x, c.y);
+          rotate(c.r + sin(frameCount * 0.02) * 0.2);
+          stroke(c.col);
+          strokeWeight(2 + sin(frameCount * 0.05 + c.x) * 1.2);
+          line(-c.s / 2, 0, c.s / 2, 0);
+          line(0, -c.s, 0, c.s);
+          pop();
+
+          // ゆっくり動かす
+          c.y += sin(frameCount * 0.01 + c.x * 0.05) * 0.5;
+          if (c.y > height + 20) c.y = -20;
+        }
+
+        // 中央に赤い十字の残光
+        push();
+        translate(width / 2, height / 2);
+        stroke(0, 100, 60, 0.8);
+        strokeWeight(5 + sin(frameCount * 0.1) * 3);
+        line(-40, 0, 40, 0);
+        line(0, -60, 0, 60);
+        pop();
+      }
+    </script>
+  </body>
+</html>

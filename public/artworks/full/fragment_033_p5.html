@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #033 – Yami Cute</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption" id="caption">"Yami Cute"</div>
+
+    <script>
+      let bubbles = [];
+      let hearts = [];
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSB);
+        noStroke();
+
+        // バブルを生成
+        for (let i = 0; i < 40; i++) {
+          bubbles.push({
+            x: random(width),
+            y: random(height),
+            r: random(10, 40),
+            spd: random(0.2, 0.8),
+            hue: random(310, 350),
+            alpha: random(0.2, 0.6),
+          });
+        }
+
+        // ハートを生成
+        for (let i = 0; i < 12; i++) {
+          hearts.push({
+            x: random(width),
+            y: random(height),
+            s: random(0.6, 1.3),
+            rot: random(TWO_PI),
+            hue: random(330, 360),
+          });
+        }
+      }
+
+      function draw() {
+        background(0, 0, 5, 0.15);
+
+        // バブル描画
+        for (let b of bubbles) {
+          fill(b.hue, 60, 100, b.alpha);
+          ellipse(b.x, b.y, b.r);
+          b.y -= b.spd;
+          if (b.y < -50) {
+            b.y = height + 50;
+            b.x = random(width);
+          }
+        }
+
+        // ハート描画
+        push();
+        translate(width / 2, height / 2);
+        for (let h of hearts) {
+          push();
+          translate(h.x - width / 2, h.y - height / 2);
+          rotate(h.rot + sin(frameCount * 0.01) * 0.2);
+          scale(h.s);
+          fill(h.hue, 80, 100, 0.9);
+          heartShape(0, 0, 25);
+          pop();
+        }
+        pop();
+
+        // ゆらめくグリッター
+        for (let i = 0; i < 3; i++) {
+          let x = random(width);
+          let y = random(height);
+          fill(330, 50, 100, 1);
+          ellipse(x, y, random(2, 6));
+        }
+      }
+
+      function heartShape(x, y, size) {
+        beginShape();
+        for (let a = 0; a < TWO_PI; a += 0.1) {
+          let r = size * (1 - sin(a)) * 0.8;
+          let px = x + 16 * pow(sin(a), 3) * (size / 20);
+          let py =
+            y -
+            (13 * cos(a) - 5 * cos(2 * a) - 2 * cos(3 * a) - cos(4 * a)) *
+              (size / 20);
+          vertex(px, py);
+        }
+        endShape(CLOSE);
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_033_yami_cute", "png");
+      }
+    </script>
+  </body>
+</html>

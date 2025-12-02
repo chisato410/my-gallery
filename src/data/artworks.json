@@ -668,5 +668,179 @@
     "url": "/artworks/full/fragment_031_p5.html",
     "previewUrl": "/artworks/previews/fragment_031_p5.html",
     "filename": "fragment_031_p5.html"
+  },
+  {
+    "id": 33,
+    "title": "GeoFlow",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "geometry",
+      "orbit",
+      "hsl-color",
+      "rotation",
+      "particle-motion",
+      "ellipse-field",
+      "flow",
+      "dynamic",
+      "minimal"
+    ],
+    "url": "/artworks/full/fragment_032_p5.html",
+    "previewUrl": "/artworks/previews/fragment_032_p5.html",
+    "filename": "fragment_032_p5.html"
+  },
+  {
+    "id": 34,
+    "title": "Yami Cute",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "cute",
+      "heart",
+      "bubble",
+      "glitter",
+      "hsb-color",
+      "floating",
+      "kawaii-dark",
+      "soft-motion",
+      "aesthetic"
+    ],
+    "url": "/artworks/full/fragment_033_p5.html",
+    "previewUrl": "/artworks/previews/fragment_033_p5.html",
+    "filename": "fragment_033_p5.html"
+  },
+  {
+    "id": 35,
+    "title": "Toxic Heart",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "heart",
+      "toxic",
+      "hsl-color",
+      "pulse",
+      "particles",
+      "dark-theme",
+      "glow",
+      "organic-motion"
+    ],
+    "url": "/artworks/full/fragment_034_p5.html",
+    "previewUrl": "/artworks/previews/fragment_034_p5.html",
+    "filename": "fragment_034_p5.html"
+  },
+  {
+    "id": 36,
+    "title": "Broken Doll",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "shards",
+      "triangle",
+      "fragmented",
+      "glow",
+      "pink-core",
+      "pulse",
+      "rotation",
+      "surreal",
+      "dark-pop"
+    ],
+    "url": "/artworks/full/fragment_035_p5.html",
+    "previewUrl": "/artworks/previews/fragment_035_p5.html",
+    "filename": "fragment_035_p5.html"
+  },
+  {
+    "id": 37,
+    "title": "Pink Overdose",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "pink",
+      "bubble",
+      "pulse",
+      "loop",
+      "5sec-loop",
+      "hsl-color",
+      "additive-blend",
+      "soft-glow"
+    ],
+    "url": "/artworks/full/fragment_036_p5.html",
+    "previewUrl": "/artworks/previews/fragment_036_p5.html",
+    "filename": "fragment_036_p5.html"
+  },
+  {
+    "id": 38,
+    "title": "Holy Sin",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "cross",
+      "red-glow",
+      "rotation",
+      "hsl-color",
+      "pulse",
+      "sacred",
+      "dark-aesthetic",
+      "symbolic"
+    ],
+    "url": "/artworks/full/fragment_037_p5.html",
+    "previewUrl": "/artworks/previews/fragment_037_p5.html",
+    "filename": "fragment_037_p5.html"
+  },
+  {
+    "id": 39,
+    "title": "Ghost Message",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "glyph",
+      "floating-text",
+      "noise-effect",
+      "purple-glow",
+      "hsl-color",
+      "ghostly",
+      "vertical-flow",
+      "ambient"
+    ],
+    "url": "/artworks/full/fragment_038_p5.html",
+    "previewUrl": "/artworks/previews/fragment_038_p5.html",
+    "filename": "fragment_038_p5.html"
+  },
+  {
+    "id": 40,
+    "title": "Fallen Halo",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "halo",
+      "ellipse",
+      "rotation",
+      "light-particles",
+      "sacred",
+      "yellow-glow",
+      "soft-motion",
+      "aura"
+    ],
+    "url": "/artworks/full/fragment_039_p5.html",
+    "previewUrl": "/artworks/previews/fragment_039_p5.html",
+    "filename": "fragment_039_p5.html"
+  },
+  {
+    "id": 41,
+    "title": "Feather Drift",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "feather",
+      "drift",
+      "floating",
+      "hsl-color",
+      "soft-motion",
+      "lightness",
+      "gentle-flow",
+      "minimal"
+    ],
+    "url": "/artworks/full/fragment_040_p5.html",
+    "previewUrl": "/artworks/previews/fragment_040_p5.html",
+    "filename": "fragment_040_p5.html"
   }
 ]
