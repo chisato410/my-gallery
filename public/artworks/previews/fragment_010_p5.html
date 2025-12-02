@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #010 – Starfield</title>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(circle at center, #03030a, #000);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      canvas {
+        display: block;
+        border-radius: 8px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.6);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">“Starfield”</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <script>
+      let stars = [];
+      let shootingStars = [];
+
+      function setup() {
+        createCanvas(500, 500);
+        noStroke();
+      }
+
+      function draw() {
+        drawSky();
+
+        // 新しい星をランダムに生成
+        if (random(1) < 0.08) {
+          stars.push(new Star(random(width), random(height * 0.6)));
+        }
+
+        // 星たちの更新と描画
+        for (let s of stars) {
+          s.update();
+          s.display();
+        }
+        stars = stars.filter((s) => !s.isDead());
+
+        // たまに流れ星を出す
+        if (random(1) < 0.002) {
+          shootingStars.push(
+            new ShootingStar(random(width), random(height / 2))
+          );
+        }
+
+        // 流れ星描画
+        for (let ss of shootingStars) {
+          ss.update();
+          ss.display();
+        }
+        shootingStars = shootingStars.filter((ss) => !ss.isDead());
+      }
+
+      // 星空のグラデーション
+      function drawSky() {
+        noStroke();
+        for (let y = 0; y < height; y++) {
+          let c = lerpColor(color(5, 5, 20), color(0, 0, 0), y / height);
+          fill(c);
+          rect(0, y, width, 1);
+        }
+      }
+
+      // 星クラス
+      class Star {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.size = random(1, 3);
+          this.life = 255;
+          this.phase = random(TWO_PI);
+        }
+
+        update() {
+          this.life -= 1;
+          this.alpha = map(
+            sin(frameCount * 0.05 + this.phase),
+            -1,
+            1,
+            100,
+            255
+          );
+        }
+
+        display() {
+          fill(255, 255, 220, this.alpha * (this.life / 255));
+          ellipse(this.x, this.y, this.size * 2);
+        }
+
+        isDead() {
+          return this.life < 0;
+        }
+      }
+
+      // 流れ星クラス
+      class ShootingStar {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.vx = random(-8, -4);
+          this.vy = random(2, 4);
+          this.alpha = 255;
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= 6;
+        }
+
+        display() {
+          stroke(255, 255, 200, this.alpha);
+          strokeWeight(2);
+          line(this.x, this.y, this.x + 20, this.y - 10);
+          noStroke();
+        }
+
+        isDead() {
+          return this.alpha <= 0;
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_008_starfield", "png");
+      }
+    </script>
+  </body>
+</html>

@@ -90,7 +90,6 @@
   {
     "filename": "fragment_005_p5.html",
     "title": "Grid Motion",
-    "description": "A grid of rectangles shifts and rotates with noise-driven, flowing motion",
     "tech": "p5.js",
     "createdAt": "2025-11-05",
     "tags": [
@@ -104,6 +103,96 @@
       "interactive",
       "procedural",
       "generative"
+    ]
+  },
+  {
+    "filename": "fragment_006_p5.html",
+    "title": "Fancy Grid",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "grid",
+      "geometric",
+      "interactive",
+      "colorful",
+      "smooth-motion",
+      "wave-pattern",
+      "mouse-driven",
+      "generative",
+      "abstract",
+      "soft-light"
+    ]
+  },
+  {
+    "filename": "fragment_007_p5.html",
+    "title": "Moiré",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "moire",
+      "lines",
+      "layered",
+      "rotation",
+      "optical-illusion",
+      "abstract",
+      "geometric",
+      "procedural",
+      "minimal",
+      "generative"
+    ]
+  },
+  {
+    "filename": "fragment_008_p5.html",
+    "title": "Random Walk",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "random-walk",
+      "line-art",
+      "organic-motion",
+      "color-shifting",
+      "reflective",
+      "procedural",
+      "generative",
+      "abstract",
+      "minimal",
+      "dynamic"
+    ]
+  },
+  {
+    "filename": "fragment_009_p5.html",
+    "title": "Rotational Geometry",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "rotation",
+      "geometry",
+      "layered",
+      "colorful",
+      "dynamic",
+      "abstract",
+      "generative",
+      "procedural",
+      "pattern",
+      "minimal"
+    ]
+  },
+  {
+    "filename": "fragment_010_p5.html",
+    "title": "Starfield",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "stars",
+      "night-sky",
+      "twinkling",
+      "shooting-stars",
+      "gradient-sky",
+      "celestial",
+      "generative",
+      "interactive",
+      "soft-light",
+      "procedural"
     ]
   }
 ]

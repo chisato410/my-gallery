@@ -105,7 +105,6 @@
   {
     "id": 6,
     "title": "Grid Motion",
-    "description": "A grid of rectangles shifts and rotates with noise-driven, flowing motion",
     "tech": "p5.js",
     "createdAt": "2025-11-05",
     "tags": [
@@ -123,5 +122,110 @@
     "url": "/artworks/full/fragment_005_p5.html",
     "previewUrl": "/artworks/previews/fragment_005_p5.html",
     "filename": "fragment_005_p5.html"
+  },
+  {
+    "id": 7,
+    "title": "Fancy Grid",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "grid",
+      "geometric",
+      "interactive",
+      "colorful",
+      "smooth-motion",
+      "wave-pattern",
+      "mouse-driven",
+      "generative",
+      "abstract",
+      "soft-light"
+    ],
+    "url": "/artworks/full/fragment_006_p5.html",
+    "previewUrl": "/artworks/previews/fragment_006_p5.html",
+    "filename": "fragment_006_p5.html"
+  },
+  {
+    "id": 8,
+    "title": "Moiré",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "moire",
+      "lines",
+      "layered",
+      "rotation",
+      "optical-illusion",
+      "abstract",
+      "geometric",
+      "procedural",
+      "minimal",
+      "generative"
+    ],
+    "url": "/artworks/full/fragment_007_p5.html",
+    "previewUrl": "/artworks/previews/fragment_007_p5.html",
+    "filename": "fragment_007_p5.html"
+  },
+  {
+    "id": 9,
+    "title": "Random Walk",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "random-walk",
+      "line-art",
+      "organic-motion",
+      "color-shifting",
+      "reflective",
+      "procedural",
+      "generative",
+      "abstract",
+      "minimal",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_008_p5.html",
+    "previewUrl": "/artworks/previews/fragment_008_p5.html",
+    "filename": "fragment_008_p5.html"
+  },
+  {
+    "id": 10,
+    "title": "Rotational Geometry",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "rotation",
+      "geometry",
+      "layered",
+      "colorful",
+      "dynamic",
+      "abstract",
+      "generative",
+      "procedural",
+      "pattern",
+      "minimal"
+    ],
+    "url": "/artworks/full/fragment_009_p5.html",
+    "previewUrl": "/artworks/previews/fragment_009_p5.html",
+    "filename": "fragment_009_p5.html"
+  },
+  {
+    "id": 11,
+    "title": "Starfield",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "stars",
+      "night-sky",
+      "twinkling",
+      "shooting-stars",
+      "gradient-sky",
+      "celestial",
+      "generative",
+      "interactive",
+      "soft-light",
+      "procedural"
+    ],
+    "url": "/artworks/full/fragment_010_p5.html",
+    "previewUrl": "/artworks/previews/fragment_010_p5.html",
+    "filename": "fragment_010_p5.html"
   }
 ]

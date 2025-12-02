@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #006 – Fancy Grid</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #111;
+        color: #fff;
+        font-family: "Helvetica Neue", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      canvas {
+        display: block;
+        background: radial-gradient(circle at center, #202020, #000);
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        transition: 0.3s ease;
+      }
+
+      canvas:hover {
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">Fragment #005 – “Fancy Grid”</div>
+
+    <script>
+      const cellSize = 25;
+      let seed = 99;
+      let t = 0;
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        rectMode(CENTER);
+        noStroke();
+      }
+
+      function draw() {
+        background(15);
+        randomSeed(seed);
+        t += 0.02;
+
+        for (let y = 0; y < height; y += cellSize) {
+          for (let x = 0; x < width; x += cellSize) {
+            let cx = x + cellSize / 2;
+            let cy = y + cellSize / 2;
+            let d = dist(cx, cy, mouseX, mouseY);
+
+            // 揺らぎをスムーズに
+            let wave = sin(d * 0.05 + t) * 0.5 + 0.5;
+            let size = map(wave, 0, 1, cellSize * 0.2, cellSize * 0.8);
+
+            // 柔らかな色調変化
+            let hue = (map(d, 0, width, 180, 360) + frameCount * 0.3) % 360;
+            let light = map(d, 0, width, 60, 85);
+
+            // ほんの少しだけランダムオフセット
+            let offsetX = random(-1.5, 1.5);
+            let offsetY = random(-1.5, 1.5);
+
+            fill(hue, 80, light, 0.9);
+            ellipse(cx + offsetX, cy + offsetY, size);
+          }
+        }
+
+        // 微妙な光の層（奥行き演出）
+        noStroke();
+      }
+
+      function mouseReleased() {
+        seed = random(99999);
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_005_fancygrid", "png");
+      }
+    </script>
+  </body>
+</html>
