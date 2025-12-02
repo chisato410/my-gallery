@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragment #021 – Predator’s Orbit</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #111;
+      }
+      canvas {
+        border-radius: 8px;
+        display: block;
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Predator’s Orbit”</div>
+    <script>
+      let boids = [];
+      let predators = [];
+
+      function setup() {
+        createCanvas(500, 500);
+        // 群れのBoids
+        for (let i = 0; i < 80; i++) {
+          boids.push(new Boid(random(width), random(height)));
+        }
+        // 捕食者
+        for (let i = 0; i < 2; i++) {
+          predators.push(new Predator(random(width), random(height)));
+        }
+      }
+
+      function draw() {
+        background(20, 20, 30, 50);
+
+        // Boids更新
+        for (let b of boids) {
+          b.flee(predators);
+          b.update();
+          b.edges();
+          b.show();
+        }
+
+        // 捕食者更新
+        for (let p of predators) {
+          p.hunt(boids);
+          p.update();
+          p.edges();
+          p.show();
+        }
+      }
+
+      class Boid {
+        constructor(x, y) {
+          this.pos = createVector(x, y);
+          this.vel = p5.Vector.random2D().mult(random(1, 2));
+          this.acc = createVector();
+          this.maxSpeed = 2;
+          this.maxForce = 0.1;
+        }
+
+        flee(predators) {
+          let totalForce = createVector();
+          for (let p of predators) {
+            let d = dist(this.pos.x, this.pos.y, p.pos.x, p.pos.y);
+            if (d < 100) {
+              let fleeForce = p5.Vector.sub(this.pos, p.pos);
+              fleeForce.setMag(this.maxSpeed);
+              fleeForce.sub(this.vel);
+              fleeForce.limit(this.maxForce * 2);
+              totalForce.add(fleeForce);
+            }
+          }
+          this.applyForce(totalForce);
+        }
+
+        applyForce(f) {
+          this.acc.add(f);
+        }
+        update() {
+          this.vel.add(this.acc);
+          this.vel.limit(this.maxSpeed);
+          this.pos.add(this.vel);
+          this.acc.mult(0);
+        }
+        edges() {
+          if (this.pos.x > width) this.pos.x = 0;
+          if (this.pos.x < 0) this.pos.x = width;
+          if (this.pos.y > height) this.pos.y = 0;
+          if (this.pos.y < 0) this.pos.y = height;
+        }
+
+        show() {
+          push();
+          translate(this.pos.x, this.pos.y);
+          rotate(this.vel.heading());
+          noStroke();
+          fill(100, 200, 255, 200);
+          triangle(0, -5, 0, 5, 10, 0);
+          pop();
+        }
+      }
+
+      class Predator {
+        constructor(x, y) {
+          this.pos = createVector(x, y);
+          this.vel = p5.Vector.random2D().mult(random(1, 2));
+          this.acc = createVector();
+          this.maxSpeed = 3;
+          this.maxForce = 0.15;
+        }
+
+        hunt(boids) {
+          if (boids.length == 0) return;
+          // 追う対象は群れの中心
+          let center = createVector(0, 0);
+          for (let b of boids) center.add(b.pos);
+          center.div(boids.length);
+
+          let desired = p5.Vector.sub(center, this.pos);
+          desired.setMag(this.maxSpeed);
+          let steer = p5.Vector.sub(desired, this.vel);
+          steer.limit(this.maxForce);
+          this.applyForce(steer);
+        }
+
+        applyForce(f) {
+          this.acc.add(f);
+        }
+        update() {
+          this.vel.add(this.acc);
+          this.vel.limit(this.maxSpeed);
+          this.pos.add(this.vel);
+          this.acc.mult(0);
+        }
+        edges() {
+          if (this.pos.x > width) this.pos.x = 0;
+          if (this.pos.x < 0) this.pos.x = width;
+          if (this.pos.y > height) this.pos.y = 0;
+          if (this.pos.y < 0) this.pos.y = height;
+        }
+
+        show() {
+          push();
+          translate(this.pos.x, this.pos.y);
+          rotate(this.vel.heading());
+          noStroke();
+          fill(255, 50, 50, 220);
+          ellipse(0, 0, 12, 12);
+          pop();
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_021_predator", "png");
+      }
+    </script>
+  </body>
+</html>

@@ -437,5 +437,236 @@
     "url": "/artworks/full/fragment_020_p5.html",
     "previewUrl": "/artworks/previews/fragment_020_p5.html",
     "filename": "fragment_020_p5.html"
+  },
+  {
+    "id": 22,
+    "title": "Predator’s Orbit",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "boids",
+      "predator-prey",
+      "orbit",
+      "flocking",
+      "chase",
+      "swarm",
+      "simulation",
+      "generative",
+      "dynamic",
+      "tension"
+    ],
+    "url": "/artworks/full/fragment_021_p5.html",
+    "previewUrl": "/artworks/previews/fragment_021_p5.html",
+    "filename": "fragment_021_p5.html"
+  },
+  {
+    "id": 23,
+    "title": "Celestial Flock (Reset)",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "boids",
+      "gravity",
+      "reset",
+      "swirl",
+      "celestial",
+      "particle",
+      "loop",
+      "generative",
+      "ambient",
+      "cosmic"
+    ],
+    "url": "/artworks/full/fragment_022_p5.html",
+    "previewUrl": "/artworks/previews/fragment_022_p5.html",
+    "filename": "fragment_022_p5.html"
+  },
+  {
+    "id": 24,
+    "title": "Symmetry Flow",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "symmetry",
+      "radial",
+      "boids",
+      "orbit",
+      "harmonic",
+      "geometric",
+      "pattern",
+      "generative",
+      "motion",
+      "abstract"
+    ],
+    "url": "/artworks/full/fragment_023_p5.html",
+    "previewUrl": "/artworks/previews/fragment_023_p5.html",
+    "filename": "fragment_023_p5.html"
+  },
+  {
+    "id": 25,
+    "title": "Particle Bloom",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "particles",
+      "bloom",
+      "explosion",
+      "burst",
+      "trail",
+      "generative",
+      "color",
+      "abstract",
+      "fade",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_024_p5.html",
+    "previewUrl": "/artworks/previews/fragment_024_p5.html",
+    "filename": "fragment_024_p5.html"
+  },
+  {
+    "id": 26,
+    "title": "Spiral Nebula",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "spiral",
+      "nebula",
+      "galaxy",
+      "rotation",
+      "color",
+      "particle",
+      "swirl",
+      "generative",
+      "cosmic",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_025_p5.html",
+    "previewUrl": "/artworks/previews/fragment_025_p5.html",
+    "filename": "fragment_025_p5.html"
+  },
+  {
+    "id": 27,
+    "title": "Modular Shapes Grid",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "grid",
+      "shapes",
+      "pastel",
+      "geometric",
+      "modular",
+      "pattern",
+      "generative",
+      "motion",
+      "interactive",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_026_p5.html",
+    "previewUrl": "/artworks/previews/fragment_026_p5.html",
+    "filename": "fragment_026_p5.html"
+  },
+  {
+    "id": 28,
+    "title": "Template",
+    "tech": "p5.js",
+    "createdAt": "2025-11-07",
+    "tags": [
+      "template",
+      "orbit",
+      "shapes",
+      "structure",
+      "generative",
+      "motion",
+      "centered",
+      "abstract",
+      "dynamic",
+      "scaffold"
+    ],
+    "url": "/artworks/full/fragment_027_p5.html",
+    "previewUrl": "/artworks/previews/fragment_027_p5.html",
+    "filename": "fragment_027_p5.html"
+  },
+  {
+    "id": 29,
+    "title": "Pulse Bloom",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "pulse",
+      "rings",
+      "bloom",
+      "wave",
+      "color-shift",
+      "generative",
+      "breathing",
+      "radial",
+      "ambient",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_028_p5.html",
+    "previewUrl": "/artworks/previews/fragment_028_p5.html",
+    "filename": "fragment_028_p5.html"
+  },
+  {
+    "id": 30,
+    "title": "Breathing Mandala",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "mandala",
+      "breathing",
+      "petals",
+      "radial",
+      "symmetry",
+      "generative",
+      "wave",
+      "pattern",
+      "color",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_029_p5.html",
+    "previewUrl": "/artworks/previews/fragment_029_p5.html",
+    "filename": "fragment_029_p5.html"
+  },
+  {
+    "id": 31,
+    "title": "Chromatic Orbit",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "orbit",
+      "color",
+      "chromatic",
+      "rotation",
+      "trail",
+      "generative",
+      "radial",
+      "light",
+      "dynamic",
+      "abstract"
+    ],
+    "url": "/artworks/full/fragment_030_p5.html",
+    "previewUrl": "/artworks/previews/fragment_030_p5.html",
+    "filename": "fragment_030_p5.html"
+  },
+  {
+    "id": 32,
+    "title": "Fractal Pulse",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "fractal",
+      "pulse",
+      "radial",
+      "layers",
+      "color-shift",
+      "generative",
+      "oscillation",
+      "abstract",
+      "dynamic",
+      "geometry"
+    ],
+    "url": "/artworks/full/fragment_031_p5.html",
+    "previewUrl": "/artworks/previews/fragment_031_p5.html",
+    "filename": "fragment_031_p5.html"
   }
 ]

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #028 – Pulse Bloom</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Pulse Bloom”</div>
+
+    <script>
+      let rings = [];
+      let hueShift = 0;
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+
+        // 波状リングを初期化
+        for (let i = 0; i < 40; i++) {
+          rings.push({
+            r: i * 10,
+            phase: random(TWO_PI),
+            speed: random(0.01, 0.03),
+            hueOffset: random(360),
+          });
+        }
+      }
+
+      function draw() {
+        background(0, 0, 0, 0.1); // 残像効果
+        translate(width / 2, height / 2);
+
+        hueShift = (hueShift + 0.5) % 360;
+
+        for (let ring of rings) {
+          let pulse = sin(frameCount * ring.speed + ring.phase) * 20;
+          let radius = ring.r + pulse;
+
+          stroke((hueShift + ring.hueOffset) % 360, 100, 60, 0.7);
+          ellipse(0, 0, radius * 2);
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_028_pulse_bloom", "png");
+      }
+    </script>
+  </body>
+</html>

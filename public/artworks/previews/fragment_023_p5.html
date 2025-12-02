@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragment #023 – Symmetry Flow</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+        border-radius: 8px;
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">Symmetry Flow</div>
+    <script>
+      let boids = [];
+      let symmetry = 6; // 回転対称の数
+
+      function setup() {
+        createCanvas(500, 500);
+        for (let i = 0; i < 50; i++) {
+          boids.push(new Boid(random(50, 250), random(TWO_PI)));
+        }
+        colorMode(HSB, 360, 100, 100, 100);
+      }
+
+      function draw() {
+        background(0, 0, 0, 10); // 軌跡を残す
+        translate(width / 2, height / 2);
+
+        for (let b of boids) {
+          b.update();
+          b.show();
+        }
+      }
+
+      class Boid {
+        constructor(r, angle) {
+          this.r = r; // 中心からの距離
+          this.angle = angle; // 角度
+          this.velR = random(-0.5, 0.5); // 半径方向速度
+          this.velA = random(-0.02, 0.02); // 角度方向速度
+        }
+
+        update() {
+          this.r += this.velR;
+          this.angle += this.velA;
+          // 境界反射
+          if (this.r > 250 || this.r < 50) this.velR *= -1;
+        }
+
+        show() {
+          for (let i = 0; i < symmetry; i++) {
+            let a = this.angle + (i * TWO_PI) / symmetry;
+            let x = this.r * cos(a);
+            let y = this.r * sin(a);
+            stroke((frameCount * 2 + i * 30) % 360, 80, 100, 80);
+            strokeWeight(2);
+            point(x, y);
+          }
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_023_symmetry_flow", "png");
+      }
+    </script>
+  </body>
+</html>

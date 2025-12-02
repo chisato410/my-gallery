@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #030 – Chromatic Orbit</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption" id="caption">"Chromatic Orbit"</div>
+
+    <script>
+      let orbits = [];
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+        for (let i = 0; i < 60; i++) {
+          orbits.push({
+            radius: random(40, 200),
+            speed: random(0.01, 0.03),
+            hue: random(360),
+            offset: random(TWO_PI),
+          });
+        }
+      }
+
+      function draw() {
+        background(0, 0, 0, 0.15);
+        translate(width / 2, height / 2);
+
+        for (let o of orbits) {
+          let angle = frameCount * o.speed + o.offset;
+          let x = cos(angle) * o.radius;
+          let y = sin(angle) * o.radius;
+
+          stroke((o.hue + frameCount * 0.5) % 360, 100, 50);
+          line(0, 0, x, y);
+          ellipse(x, y, 8);
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_030_orbit", "png");
+      }
+    </script>
+  </body>
+</html>

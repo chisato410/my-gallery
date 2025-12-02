@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #029 – Breathing Mandala</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption" id="caption">"Breathing Mandala"</div>
+
+    <script>
+      let petals = [];
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+        strokeWeight(2);
+        for (let i = 0; i < 24; i++) {
+          petals.push({
+            angle: (TWO_PI / 24) * i,
+            offset: random(TWO_PI),
+            hue: random(360),
+          });
+        }
+      }
+
+      function draw() {
+        background(0, 0, 5, 0.2);
+        translate(width / 2, height / 2);
+        let t = frameCount * 0.02;
+
+        for (let p of petals) {
+          let radius = 120 + sin(t + p.offset) * 40;
+          let x = cos(p.angle) * radius;
+          let y = sin(p.angle) * radius;
+
+          stroke((p.hue + frameCount) % 360, 100, 60);
+          ellipse(x, y, 50 + sin(t) * 20);
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_029_mandala", "png");
+      }
+    </script>
+  </body>
+</html>

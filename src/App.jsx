@@ -17,7 +17,7 @@ export default function App() {
   const [selectedArt, setSelectedArt] = useState(null);
 
   const { artworks, loading } = useArtworks(sortBy);
-  const itemsPerPage = 24;
+  const itemsPerPage = 25;
 
   // フィルタリング
   const filteredArtworks =

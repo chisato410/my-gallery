@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #031 – Fractal Pulse</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption" id="caption">"Fractal Pulse"</div>
+
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+        strokeWeight(1.5);
+      }
+
+      function draw() {
+        background(0, 0, 0, 0.1);
+        translate(width / 2, height / 2);
+
+        let t = frameCount * 0.03;
+        for (let i = 0; i < 50; i++) {
+          let r = i * 5 + sin(t + i * 0.3) * 40;
+          let c = color((i * 10 + frameCount) % 360, 90, 60);
+          stroke(c);
+          beginShape();
+          for (let a = 0; a < TWO_PI; a += 0.1) {
+            let x = cos(a) * r * sin(t * 0.5 + i);
+            let y = sin(a) * r * cos(t * 0.7 + i);
+            vertex(x, y);
+          }
+          endShape(CLOSE);
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_031_fractal_pulse", "png");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragment #026 – Modular Shapes Grid (Readable Colors)</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #0d1b2a; /* 濃いブルー背景 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: "Helvetica Neue", sans-serif;
+        color: #fff;
+      }
+      canvas {
+        display: block;
+        border-radius: 8px;
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">"Modular Shapes Grid""</div>
+    <script>
+      const cellSize = 40;
+      let seed = 42;
+      let t = 0;
+      const shapes = ["circle", "triangle", "star"];
+
+      function setup() {
+        createCanvas(500, 500);
+        angleMode(DEGREES);
+        noStroke();
+      }
+
+      function draw() {
+        background(13, 26, 42, 20); // 軌跡を残す
+        randomSeed(seed);
+        t += 0.02;
+
+        for (let y = 0; y < height; y += cellSize) {
+          for (let x = 0; x < width; x += cellSize) {
+            let cx = x + cellSize / 2;
+            let cy = y + cellSize / 2;
+            let d = dist(cx, cy, mouseX, mouseY);
+
+            // 大きさの揺れ
+            let wave = sin(d * 0.1 + t + random(0, PI)) * 0.5 + 0.5;
+            let size = map(wave, 0, 1, cellSize * 0.3, cellSize * 0.9);
+
+            // 明るめパステル＋アクセント色
+            let hue = (map(d, 0, width, 200, 360) + frameCount * 0.2) % 360;
+            let light = map(d, 0, width, 65, 90);
+            fill(hue, 70, light, 0.95);
+
+            // ランダム回転
+            push();
+            translate(cx, cy);
+            rotate(wave * 360);
+
+            // ランダム形状
+            let shapeType = random(shapes);
+            if (shapeType === "circle") {
+              ellipse(0, 0, size);
+            } else if (shapeType === "triangle") {
+              triangle(0, -size / 2, -size / 2, size / 2, size / 2, size / 2);
+            } else if (shapeType === "star") {
+              drawStar(0, 0, size / 2, size, 5);
+            }
+            pop();
+          }
+        }
+      }
+
+      function drawStar(x, y, radius1, radius2, npoints) {
+        let angle = 360 / npoints;
+        beginShape();
+        for (let a = 0; a < 72; a += angle) {
+          let sx = x + cos(a) * radius2;
+          let sy = y + sin(a) * radius2;
+          vertex(sx, sy);
+          sx = x + cos(a + angle / 2) * radius1;
+          sy = y + sin(a + angle / 2) * radius1;
+          vertex(sx, sy);
+        }
+        endShape(CLOSE);
+      }
+
+      function mouseReleased() {
+        seed = random(99999);
+      }
+      function keyPressed() {
+        if (key === "s")
+          saveCanvas("fragment_026_modular_shapes_readable", "png");
+      }
+    </script>
+  </body>
+</html>

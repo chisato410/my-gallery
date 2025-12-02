@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragment #022 – Celestial Flock (Reset)</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+        border-radius: 8px;
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">Celestial Flock (Reset)</div>
+    <script>
+      let boids = [];
+      let lastReset = 0;
+      let resetInterval = 5000; // 5秒ごとにリセット
+
+      function setup() {
+        createCanvas(500, 500);
+        resetBoids();
+      }
+
+      function draw() {
+        background(0, 20); // 軌跡を残す
+        translate(width / 2, height / 2);
+
+        // 一定時間ごとにBoidsをリセット
+        if (millis() - lastReset > resetInterval) {
+          resetBoids();
+          lastReset = millis();
+        }
+
+        for (let b of boids) {
+          b.applyGravity();
+          b.update();
+          b.show();
+        }
+      }
+
+      function resetBoids() {
+        boids = [];
+        for (let i = 0; i < 50; i++) {
+          boids.push(
+            new Boid(
+              random(-width / 2, width / 2),
+              random(-height / 2, height / 2)
+            )
+          );
+        }
+      }
+
+      class Boid {
+        constructor(x, y) {
+          this.pos = createVector(x, y);
+          this.vel = p5.Vector.random2D().mult(random(0.5, 2));
+          this.acc = createVector();
+          this.maxSpeed = 3;
+        }
+
+        applyGravity() {
+          // 中心への重力
+          let center = createVector(0, 0);
+          let force = p5.Vector.sub(center, this.pos);
+          let d = force.mag();
+          d = constrain(d, 5, 200);
+          let strength = 50 / (d * d);
+          force.setMag(strength);
+          this.applyForce(force);
+
+          // 渦状にするための回転成分
+          let tangent = createVector(-force.y, force.x);
+          tangent.setMag(0.05);
+          this.applyForce(tangent);
+        }
+
+        applyForce(f) {
+          this.acc.add(f);
+        }
+
+        update() {
+          this.vel.add(this.acc);
+          this.vel.limit(this.maxSpeed);
+          this.pos.add(this.vel);
+          this.acc.mult(0);
+        }
+
+        show() {
+          stroke(
+            lerpColor(color(0, 0, 255), color(255, 255, 255), random(0, 1)),
+            200
+          );
+          strokeWeight(2);
+          point(this.pos.x, this.pos.y);
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_022_celestial_reset", "png");
+      }
+    </script>
+  </body>
+</html>
