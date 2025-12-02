@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #011 – TimeColor</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+        background: #000;
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.6);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“TimeColor”</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        noStroke();
+        colorMode(HSL);
+      }
+
+      function draw() {
+        let t = (frameCount % 600) / 600; // 0〜1でループ
+        let dayProgress = t * TWO_PI;
+
+        // --- 空の色 ---
+        let skyTop = color(210, 80, map(sin(dayProgress), -1, 1, 15, 85));
+        let skyBottom = color(30, 80, map(sin(dayProgress), -1, 1, 5, 60));
+
+        for (let y = 0; y < height / 2; y++) {
+          let inter = map(y, 0, height / 2, 0, 1);
+          let c = lerpColor(skyTop, skyBottom, inter);
+          stroke(c);
+          line(0, y, width, y);
+        }
+
+        // --- 太陽の位置と色 ---
+        let sunX = map(t, 0, 1, -50, width + 50);
+        let sunY = height / 2 - sin(dayProgress) * 150;
+        let sunColor = color(50, 100, map(sin(dayProgress), -1, 1, 60, 90));
+
+        noStroke();
+        fill(sunColor);
+        ellipse(sunX, sunY, 70, 70);
+
+        // --- 地面の色 ---
+        for (let y = height / 2; y < height; y++) {
+          let inter = map(y, height / 2, height, 0, 1);
+          let groundColor = lerpColor(
+            color(100, 50, 20),
+            color(130, 60, 30),
+            inter
+          );
+          stroke(groundColor);
+          line(0, y, width, y);
+        }
+
+        // --- 太陽の反射（柔らかく）---
+        fill(60, 80, 80, 0.15);
+        ellipse(sunX, height - 60, 120, 25);
+
+        // --- 保存機能 ---
+        if (keyIsPressed && key === "s") {
+          saveCanvas("fragment_011_timecolor_square", "png");
+        }
+      }
+    </script>
+  </body>
+</html>

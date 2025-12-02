@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #013 – Moiré</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #1a1a1a;
+        color: #fff;
+        font-family: "Helvetica Neue", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      canvas {
+        display: block;
+        background: #111;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        transition: box-shadow 0.3s ease;
+      }
+
+      canvas:hover {
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">“Moiré”</div>
+
+    <script>
+      let t = 0;
+
+      function setup() {
+        createCanvas(500, 500);
+        noFill();
+        strokeWeight(1);
+      }
+
+      function draw() {
+        background(20);
+        translate(width / 2, height / 2);
+        t += 0.01;
+
+        // グリッド状の円を描画（2層でモアレ）
+        for (let i = 0; i < 50; i++) {
+          let r = i * 8;
+          stroke(200, 200, 255, 80);
+          ellipse(0, 0, r * 2);
+        }
+
+        // 少しずらした第2層
+        push();
+        rotate(t * 0.5);
+        for (let i = 0; i < 50; i++) {
+          let r = i * 8;
+          stroke(255, 100, 180, 80);
+          ellipse(0, 0, r * 2.02); // 少しスケールを変える
+        }
+        pop();
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_013", "png");
+      }
+
+      function windowResized() {
+        resizeCanvas(500, 500);
+      }
+    </script>
+  </body>
+</html>

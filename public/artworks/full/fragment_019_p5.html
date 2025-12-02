@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #019 – Neo Boids</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(circle at center, #020202, #000);
+        color: #fff;
+        font-family: "Helvetica Neue", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      canvas {
+        display: block;
+        background: transparent;
+        border-radius: 8px;
+        box-shadow: 0 0 60px rgba(255, 255, 255, 0.05);
+        transition: 0.3s;
+      }
+
+      canvas:hover {
+        box-shadow: 0 0 80px rgba(255, 255, 255, 0.2);
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">“Neo Boids”</div>
+
+    <script>
+      let boids = [];
+      let t = 0;
+
+      function setup() {
+        createCanvas(600, 600);
+        colorMode(HSB, 360, 100, 100, 100);
+        noStroke();
+        for (let i = 0; i < 100; i++) {
+          boids.push(new Boid(random(width), random(height)));
+        }
+      }
+
+      function draw() {
+        background(0, 0, 0, 10); // フェードで軌跡を残す
+        t += 0.01;
+
+        // マウスが動くとき波紋のような影響を与える
+        let mouseVec = createVector(mouseX, mouseY);
+
+        for (let boid of boids) {
+          boid.flock(boids);
+          boid.reactToMouse(mouseVec);
+          boid.update();
+          boid.show();
+        }
+      }
+
+      class Boid {
+        constructor(x, y) {
+          this.pos = createVector(x, y);
+          this.vel = p5.Vector.random2D().mult(random(1, 2));
+          this.acc = createVector();
+          this.maxSpeed = 2;
+          this.maxForce = 0.05;
+          this.hue = random(360);
+        }
+
+        flock(boids) {
+          let align = this.align(boids);
+          let cohesion = this.cohesion(boids);
+          let separation = this.separation(boids);
+
+          align.mult(1.2);
+          cohesion.mult(0.8);
+          separation.mult(1.5);
+
+          this.applyForce(align);
+          this.applyForce(cohesion);
+          this.applyForce(separation);
+        }
+
+        align(boids) {
+          let perception = 60;
+          let steering = createVector();
+          let total = 0;
+          for (let other of boids) {
+            let d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+            if (other != this && d < perception) {
+              steering.add(other.vel);
+              total++;
+            }
+          }
+          if (total > 0) {
+            steering.div(total);
+            steering.setMag(this.maxSpeed);
+            steering.sub(this.vel);
+            steering.limit(this.maxForce);
+          }
+          return steering;
+        }
+
+        cohesion(boids) {
+          let perception = 80;
+          let steering = createVector();
+          let total = 0;
+          for (let other of boids) {
+            let d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+            if (other != this && d < perception) {
+              steering.add(other.pos);
+              total++;
+            }
+          }
+          if (total > 0) {
+            steering.div(total);
+            steering.sub(this.pos);
+            steering.setMag(this.maxSpeed);
+            steering.sub(this.vel);
+            steering.limit(this.maxForce);
+          }
+          return steering;
+        }
+
+        separation(boids) {
+          let perception = 30;
+          let steering = createVector();
+          let total = 0;
+          for (let other of boids) {
+            let d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+            if (other != this && d < perception) {
+              let diff = p5.Vector.sub(this.pos, other.pos);
+              diff.div(d * d);
+              steering.add(diff);
+              total++;
+            }
+          }
+          if (total > 0) {
+            steering.div(total);
+            steering.setMag(this.maxSpeed);
+            steering.sub(this.vel);
+            steering.limit(this.maxForce * 1.5);
+          }
+          return steering;
+        }
+
+        reactToMouse(mouseVec) {
+          if (mouseX > 0 && mouseY > 0) {
+            let d = dist(this.pos.x, this.pos.y, mouseVec.x, mouseVec.y);
+            if (d < 120) {
+              let flee = p5.Vector.sub(this.pos, mouseVec);
+              flee.setMag(map(d, 0, 120, 1.5, 0));
+              this.applyForce(flee);
+            }
+          }
+        }
+
+        applyForce(force) {
+          this.acc.add(force);
+        }
+
+        update() {
+          this.vel.add(this.acc);
+          this.vel.limit(this.maxSpeed);
+          this.pos.add(this.vel);
+          this.acc.mult(0);
+          this.edges();
+        }
+
+        edges() {
+          if (this.pos.x > width) this.pos.x = 0;
+          if (this.pos.x < 0) this.pos.x = width;
+          if (this.pos.y > height) this.pos.y = 0;
+          if (this.pos.y < 0) this.pos.y = height;
+        }
+
+        show() {
+          push();
+          translate(this.pos.x, this.pos.y);
+          rotate(this.vel.heading());
+          let c = color((this.hue + frameCount * 0.5) % 360, 90, 100, 90);
+          fill(c);
+          // 光の尾
+          ellipse(0, 0, 6, 6);
+          pop();
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_019_neo_boids", "png");
+      }
+    </script>
+  </body>
+</html>

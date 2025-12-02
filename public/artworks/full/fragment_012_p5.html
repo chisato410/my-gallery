@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragment #012 – Boid Flow</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+        background: #111;
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.6);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">“Boid Flow”</div>
+
+    <script>
+      let boids = [];
+
+      function setup() {
+        createCanvas(500, 500);
+        for (let i = 0; i < 60; i++) {
+          boids.push(new Boid(random(width), random(height)));
+        }
+      }
+
+      function draw() {
+        background(20);
+        for (let boid of boids) {
+          boid.update();
+          boid.show();
+        }
+
+        // 保存機能
+        if (keyIsPressed && key === "s") {
+          saveCanvas("fragment_012_boid_flow", "png");
+        }
+      }
+
+      class Boid {
+        constructor(x, y) {
+          this.pos = createVector(x, y);
+          this.vel = p5.Vector.random2D();
+          this.acc = createVector();
+          this.maxSpeed = 2;
+          this.maxForce = 0.05;
+        }
+
+        update() {
+          this.pos.add(this.vel);
+          this.vel.add(this.acc);
+          this.acc.mult(0);
+          this.edges();
+        }
+
+        show() {
+          push();
+          translate(this.pos.x, this.pos.y);
+          rotate(this.vel.heading());
+          fill(200, 200, 255, 100);
+          stroke(255, 100);
+          strokeWeight(1);
+          triangle(0, -6, 0, 6, 12, 0);
+          pop();
+        }
+
+        edges() {
+          if (this.pos.x > width) this.pos.x = 0;
+          if (this.pos.x < 0) this.pos.x = width;
+          if (this.pos.y > height) this.pos.y = 0;
+          if (this.pos.y < 0) this.pos.y = height;
+        }
+      }
+    </script>
+  </body>
+</html>

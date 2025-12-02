@@ -227,5 +227,215 @@
     "url": "/artworks/full/fragment_010_p5.html",
     "previewUrl": "/artworks/previews/fragment_010_p5.html",
     "filename": "fragment_010_p5.html"
+  },
+  {
+    "id": 12,
+    "title": "TimeColor",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "color-cycle",
+      "time-based",
+      "sun-motion",
+      "gradient",
+      "sky",
+      "landscape",
+      "generative",
+      "ambient",
+      "light",
+      "abstract"
+    ],
+    "url": "/artworks/full/fragment_011_p5.html",
+    "previewUrl": "/artworks/previews/fragment_011_p5.html",
+    "filename": "fragment_011_p5.html"
+  },
+  {
+    "id": 13,
+    "title": "Boid Flow",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "boids",
+      "flocking",
+      "motion",
+      "triangle-agents",
+      "loop",
+      "generative",
+      "organic",
+      "movement",
+      "minimal",
+      "swarm"
+    ],
+    "url": "/artworks/full/fragment_012_p5.html",
+    "previewUrl": "/artworks/previews/fragment_012_p5.html",
+    "filename": "fragment_012_p5.html"
+  },
+  {
+    "id": 14,
+    "title": "Moiré",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "moire",
+      "interference",
+      "circles",
+      "rotation",
+      "geometric",
+      "layered",
+      "pattern",
+      "abstract",
+      "minimal",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_013_p5.html",
+    "previewUrl": "/artworks/previews/fragment_013_p5.html",
+    "filename": "fragment_013_p5.html"
+  },
+  {
+    "id": 15,
+    "title": "CircleMoiré",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "waves",
+      "moire",
+      "sin",
+      "dual-layer",
+      "oscillation",
+      "line-art",
+      "pattern",
+      "abstract",
+      "minimal",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_014_p5.html",
+    "previewUrl": "/artworks/previews/fragment_014_p5.html",
+    "filename": "fragment_014_p5.html"
+  },
+  {
+    "id": 16,
+    "title": "Grid Moiré",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "grid",
+      "moire",
+      "rotation",
+      "interference",
+      "lines",
+      "pattern",
+      "contrast",
+      "geometric",
+      "abstract",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_015_p5.html",
+    "previewUrl": "/artworks/previews/fragment_015_p5.html",
+    "filename": "fragment_015_p5.html"
+  },
+  {
+    "id": 17,
+    "title": "Dynamic Radial Moiré",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "radial",
+      "moire",
+      "rotation",
+      "lines",
+      "wave",
+      "interference",
+      "geometric",
+      "layered",
+      "abstract",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_016_p5.html",
+    "previewUrl": "/artworks/previews/fragment_016_p5.html",
+    "filename": "fragment_016_p5.html"
+  },
+  {
+    "id": 18,
+    "title": "Interference",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "interference",
+      "wave-fields",
+      "sin-cos",
+      "dual-layer",
+      "color-shift",
+      "motion",
+      "geometric",
+      "points",
+      "abstract",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_017_p5.html",
+    "previewUrl": "/artworks/previews/fragment_017_p5.html",
+    "filename": "fragment_017_p5.html"
+  },
+  {
+    "id": 19,
+    "title": "Resonant Interference",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "interference",
+      "resonance",
+      "multi-layer",
+      "color-cycle",
+      "radial-motion",
+      "pulse",
+      "generative",
+      "oscillation",
+      "abstract",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_018_p5.html",
+    "previewUrl": "/artworks/previews/fragment_018_p5.html",
+    "filename": "fragment_018_p5.html"
+  },
+  {
+    "id": 20,
+    "title": "Neo Boids",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "boids",
+      "hsb",
+      "swarm",
+      "color-motion",
+      "interactive",
+      "trail",
+      "generative",
+      "organic",
+      "agents",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_019_p5.html",
+    "previewUrl": "/artworks/previews/fragment_019_p5.html",
+    "filename": "fragment_019_p5.html"
+  },
+  {
+    "id": 21,
+    "title": "Wind Field",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "flow-field",
+      "noise",
+      "wind",
+      "boids",
+      "soft-motion",
+      "perlin",
+      "particles",
+      "ambient",
+      "generative",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_020_p5.html",
+    "previewUrl": "/artworks/previews/fragment_020_p5.html",
+    "filename": "fragment_020_p5.html"
   }
 ]

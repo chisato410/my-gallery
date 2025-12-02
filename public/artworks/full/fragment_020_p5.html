@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragment #020 – Wind Field</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #e0f7fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+        border-radius: 8px;
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 0.9rem;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Wind Field”</div>
+    <script>
+      let boids = [];
+      let flowfield = [];
+      let cols, rows;
+      let scl = 20;
+
+      function setup() {
+        createCanvas(500, 500);
+        cols = floor(width / scl);
+        rows = floor(height / scl);
+
+        // Boids生成
+        for (let i = 0; i < 100; i++) {
+          boids.push(new Boid(random(width), random(height)));
+        }
+
+        // Flow field初期化
+        for (let i = 0; i < cols * rows; i++) {
+          flowfield[i] = createVector(0, 0);
+        }
+      }
+
+      function draw() {
+        background(224, 247, 250, 50); // 軽い残像で柔らかさ
+
+        // Flow field更新
+        let yoff = 0;
+        for (let y = 0; y < rows; y++) {
+          let xoff = 0;
+          for (let x = 0; x < cols; x++) {
+            let index = x + y * cols;
+            let angle = noise(xoff, yoff, frameCount * 0.005) * TWO_PI * 2;
+            flowfield[index] = p5.Vector.fromAngle(angle);
+            xoff += 0.1;
+          }
+          yoff += 0.1;
+        }
+
+        for (let boid of boids) {
+          boid.follow(flowfield);
+          boid.update();
+          boid.edges();
+          boid.show();
+        }
+      }
+
+      class Boid {
+        constructor(x, y) {
+          this.pos = createVector(x, y);
+          this.vel = p5.Vector.random2D();
+          this.acc = createVector();
+          this.maxSpeed = 2;
+          this.maxForce = 0.1;
+        }
+
+        follow(flow) {
+          let x = floor(this.pos.x / scl);
+          let y = floor(this.pos.y / scl);
+          let index = x + y * cols;
+          let force = flow[index];
+          this.applyForce(force);
+        }
+
+        applyForce(f) {
+          this.acc.add(f);
+        }
+
+        update() {
+          this.vel.add(this.acc);
+          this.vel.limit(this.maxSpeed);
+          this.pos.add(this.vel);
+          this.acc.mult(0);
+        }
+
+        edges() {
+          if (this.pos.x > width) this.pos.x = 0;
+          if (this.pos.x < 0) this.pos.x = width;
+          if (this.pos.y > height) this.pos.y = 0;
+          if (this.pos.y < 0) this.pos.y = height;
+        }
+
+        show() {
+          stroke(0, 50);
+          strokeWeight(2);
+          fill(0, 50);
+          ellipse(this.pos.x, this.pos.y, 4, 4);
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_020_windfield", "png");
+      }
+    </script>
+  </body>
+</html>

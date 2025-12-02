@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #015 – Grid Moiré</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #1a1a1a;
+        color: #fff;
+        font-family: "Helvetica Neue", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      canvas {
+        display: block;
+        background: #111;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        transition: box-shadow 0.3s ease;
+      }
+
+      canvas:hover {
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">“Grid Moiré”</div>
+
+    <script>
+      let t = 0;
+
+      function setup() {
+        createCanvas(500, 500);
+        strokeWeight(1);
+      }
+
+      function draw() {
+        background(20);
+        translate(width / 2, height / 2);
+        t += 0.01;
+
+        stroke(255, 180, 200, 100);
+
+        // グリッド1
+        for (let x = -width / 2; x < width / 2; x += 15) {
+          line(x, -height / 2, x, height / 2);
+        }
+        for (let y = -height / 2; y < height / 2; y += 15) {
+          line(-width / 2, y, width / 2, y);
+        }
+
+        // グリッド2（回転）
+        push();
+        rotate(t * 0.3);
+        stroke(180, 220, 255, 80);
+        for (let x = -width / 2; x < width / 2; x += 15) {
+          line(x, -height / 2, x, height / 2);
+        }
+        for (let y = -height / 2; y < height / 2; y += 15) {
+          line(-width / 2, y, width / 2, y);
+        }
+        pop();
+      }
+    </script>
+  </body>
+</html>

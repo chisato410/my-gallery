@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #017 – Interference</title>
+
+    <!-- p5.js -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #1a1a1a;
+        color: #fff;
+        font-family: "Helvetica Neue", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      canvas {
+        display: block;
+        background: #111;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        transition: box-shadow 0.3s ease;
+      }
+
+      canvas:hover {
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">“Interference”</div>
+
+    <script>
+      let t = 0;
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSB, 360, 100, 100, 100);
+        strokeWeight(2);
+        noFill();
+      }
+
+      function draw() {
+        // トレイル効果を作る（背景をゆっくりフェード）
+        background(0, 0, 10, 10);
+
+        translate(width / 2, height / 2);
+        t += 0.02;
+
+        // 2層の波動（干渉構造）
+        for (let layer = 0; layer < 2; layer++) {
+          let offset = (layer * PI) / 8; // 少し位相をずらす
+          let hueBase = (frameCount * 2 + layer * 180) % 360;
+          stroke(hueBase, 80, 100, 80);
+
+          beginShape(POINTS);
+          for (let i = 0; i < 400; i++) {
+            let angle = i * 0.08;
+            let r =
+              120 * sin(angle * 3 + t + offset) +
+              60 * cos(angle * 5 - t * 1.2 + offset * 2);
+
+            let x = r * cos(angle + offset);
+            let y = r * sin(angle + offset);
+
+            vertex(x, y);
+          }
+          endShape();
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_002", "png");
+      }
+
+      function windowResized() {
+        resizeCanvas(500, 500);
+      }
+    </script>
+  </body>
+</html>
