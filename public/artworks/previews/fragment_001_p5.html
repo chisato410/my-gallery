@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Abstract</title>
+
+    <!-- p5.js -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #1a1a1a;
+        color: #fff;
+        font-family: "Helvetica Neue", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      canvas {
+        display: block;
+        background: #111;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        transition: box-shadow 0.3s ease;
+      }
+
+      canvas:hover {
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+      }
+
+      /* optional caption area (for standalone view) */
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">“Abstract”</div>
+
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        noFill();
+        stroke(255);
+        strokeWeight(2);
+      }
+
+      function draw() {
+        background(20);
+
+        translate(width / 2, height / 2);
+        let t = frameCount * 0.02;
+
+        for (let i = 0; i < 50; i++) {
+          let angle = i * 0.1;
+          let radius = 100 * sin(angle * 3 + t) + 50 * cos(angle * 7 - t);
+          let x = radius * cos(angle);
+          let y = radius * sin(angle);
+
+          stroke(
+            180 + 75 * sin(i * 0.05 + t),
+            180 + 75 * cos(i * 0.03 - t),
+            255,
+            150
+          );
+          point(x, y);
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_001", "png");
+      }
+
+      function windowResized() {
+        resizeCanvas(500, 500);
+      }
+    </script>
+  </body>
+</html>

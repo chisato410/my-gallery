@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Fragment Template",
+    "description": "Byproduct of the template",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "neon-colors",
+      "dark-background",
+      "color-orbits",
+      "rotational-motion",
+      "orbital-drift",
+      "multi-primitive",
+      "centripetal-layout",
+      "fragment-style"
+    ],
+    "url": "/artworks/full/fragment_000_p5.html",
+    "previewUrl": "/artworks/previews/fragment_000_p5.html",
+    "filename": "fragment_000_p5.html"
+  },
+  {
+    "id": 2,
+    "title": "Abstract",
+    "description": "Oscillating points create a shifting abstract pattern",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "luminous-points",
+      "blue-tint",
+      "dark-canvas",
+      "constellation-like",
+      "sinusoidal-motion",
+      "waveform-orbits",
+      "oscillating-field",
+      "point-cloud",
+      "radial-abstraction",
+      "minimal-geometry"
+    ],
+    "url": "/artworks/full/fragment_001_p5.html",
+    "previewUrl": "/artworks/previews/fragment_001_p5.html",
+    "filename": "fragment_001_p5.html"
+  }
+]

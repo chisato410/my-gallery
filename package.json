@@ -1,0 +1,36 @@
+{
+  "name": "my-gallery",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "create-previews": "node scripts/create-previews.js",
+    "generate": "node scripts/generate-artworks.js",
+    "setup": "npm run create-previews && npm run generate",
+    "init-firebase": "node scripts/init-firebase.js",
+    "add-to-firebase": "node scripts/add-new-to-firebase.js",
+    "add": "npm run setup && npm run add-to-firebase && add-new-to-firebase.js && echo '✅ 作品が追加されました！'",
+    "test-firebase": "node scripts/test-firebase.js",
+    "test-env": "node scripts/test-env.js",
+    "update-artwork": "node scripts/update-artwork.js"
+  },
+  "dependencies": {
+    "firebase": "^12.6.0",
+    "lucide-react": "^0.555.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "dotenv": "^16.6.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "vite": "^7.2.4"
+  }
+}
