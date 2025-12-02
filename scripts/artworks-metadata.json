@@ -2,7 +2,6 @@
   {
     "filename": "fragment_000_p5.html",
     "title": "Fragment Template",
-    "description": "Byproduct of the template",
     "tech": "p5.js",
     "createdAt": "2025-11-05",
     "tags": [
@@ -19,7 +18,6 @@
   {
     "filename": "fragment_001_p5.html",
     "title": "Abstract",
-    "description": "Oscillating points create a shifting abstract pattern",
     "tech": "p5.js",
     "createdAt": "2025-11-05",
     "tags": [
@@ -33,6 +31,79 @@
       "point-cloud",
       "radial-abstraction",
       "minimal-geometry"
+    ]
+  },
+  {
+    "filename": "fragment_002_p5.html",
+    "title": "Boids",
+    "tech": "p5.js",
+    "createdAt": "2025-11-05",
+    "tags": [
+      "flocking",
+      "boids",
+      "dark-canvas",
+      "triangles",
+      "particle-swarm",
+      "emergent-behavior",
+      "dynamic-patterns",
+      "interactive-motion",
+      "radial-drift",
+      "soft-trails"
+    ]
+  },
+  {
+    "filename": "fragment_003_p5.html",
+    "title": "Feel",
+    "tech": "p5.js",
+    "createdAt": "2025-12-02",
+    "tags": [
+      "interactive",
+      "particles",
+      "colorful",
+      "soft-motion",
+      "mouse-driven",
+      "emotional-expression",
+      "flowing-pattern",
+      "dynamic-color",
+      "translucent-trails",
+      "generative"
+    ]
+  },
+  {
+    "filename": "fragment_004_p5.html",
+    "title": "Grassland",
+    "tech": "p5.js",
+    "createdAt": "2025-12-02",
+    "tags": [
+      "nature-inspired",
+      "grass",
+      "wind-motion",
+      "gradient-sky",
+      "sunlight",
+      "procedural",
+      "soft-animation",
+      "interactive-wind",
+      "calm",
+      "generative"
+    ]
+  },
+  {
+    "filename": "fragment_005_p5.html",
+    "title": "Grid Motion",
+    "description": "A grid of rectangles shifts and rotates with noise-driven, flowing motion",
+    "tech": "p5.js",
+    "createdAt": "2025-12-02",
+    "tags": [
+      "grid",
+      "geometric",
+      "noise-driven",
+      "rotation",
+      "flowing-pattern",
+      "abstract",
+      "minimal",
+      "interactive",
+      "procedural",
+      "generative"
     ]
   }
 ]

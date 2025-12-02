@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #005 – Grid Motion</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: #111;
+        color: #fff;
+        font-family: "Helvetica Neue", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      canvas {
+        display: block;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        background: radial-gradient(circle at center, #222, #000);
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">Fragment #005 – “Grid Motion”</div>
+
+    <script>
+      let cols = 10;
+      let rows = 10;
+      let cellSize;
+
+      function setup() {
+        createCanvas(500, 500);
+        rectMode(CENTER);
+        noFill();
+        strokeWeight(1.5);
+        cellSize = width / cols;
+      }
+
+      function draw() {
+        background(15);
+
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            let xPos = x * cellSize + cellSize / 2;
+            let yPos = y * cellSize + cellSize / 2;
+
+            // ノイズによる角度のゆらぎ
+            let n = noise(x * 0.2, y * 0.2, frameCount * 0.01);
+            let angle = n * TWO_PI * 2 + sin(frameCount * 0.02 + n * 10) * 0.3;
+
+            // ノイズから色を決定
+            let brightness = map(n, 0, 1, 80, 255);
+            stroke(brightness, 200);
+
+            push();
+            translate(xPos, yPos);
+            rotate(angle);
+            rect(0, 0, cellSize * 0.6, cellSize * 0.6);
+            pop();
+          }
+        }
+
+        // オプション: マウスでスピード変化
+        if (mouseIsPressed) {
+          frameRate(60);
+        } else {
+          frameRate(30);
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_005_gridmotion", "png");
+      }
+    </script>
+  </body>
+</html>

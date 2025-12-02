@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #004 – Grassland</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #111;
+        color: #fff;
+        font-family: "Helvetica Neue", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      canvas {
+        display: block;
+        background: radial-gradient(circle at center, #99d0ff, #3388cc);
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">Fragment #004 – “Grassland”</div>
+
+    <script>
+      let blades = [];
+
+      function setup() {
+        createCanvas(500, 500);
+        noFill();
+
+        // 草を生成
+        for (let x = 0; x < width; x += 10) {
+          blades.push(new Blade(x, random(80, 160)));
+        }
+      }
+
+      function draw() {
+        drawSky();
+        drawGround();
+
+        for (let b of blades) {
+          b.update();
+          b.display();
+        }
+
+        drawSunlight();
+      }
+
+      function drawSky() {
+        noFill();
+        for (let y = 0; y < height * 0.7; y++) {
+          let c = lerpColor(
+            color(80, 160, 250),
+            color(190, 230, 255),
+            y / (height * 0.7)
+          );
+          stroke(c);
+          line(0, y, width, y);
+        }
+      }
+
+      function drawGround() {
+        noStroke();
+        for (let y = height * 0.7; y < height; y++) {
+          let c = lerpColor(
+            color(60, 160, 60),
+            color(30, 100, 50),
+            map(y, height * 0.7, height, 0, 1)
+          );
+          stroke(c);
+          line(0, y, width, y);
+        }
+      }
+
+      function drawSunlight() {
+        noStroke();
+        let t = millis() * 0.0003;
+        let alpha = 50 + 40 * sin(t);
+        fill(255, 255, 200, alpha);
+        ellipse(width * 0.8, height * 0.2, 100, 100);
+      }
+
+      class Blade {
+        constructor(x, h) {
+          this.x = x;
+          this.h = h;
+          this.offset = random(1000);
+        }
+
+        update() {
+          // マウスXで風の強さを制御
+          let windStrength = map(mouseX, 0, width, 0.5, 2.5);
+          this.angle = map(
+            noise(this.offset + frameCount * 0.01 * windStrength),
+            0,
+            1,
+            -PI / 6,
+            PI / 6
+          );
+        }
+
+        display() {
+          push();
+          translate(this.x, height * 0.7);
+          rotate(this.angle);
+
+          let brightness = map(
+            sin(frameCount * 0.02 + this.x * 0.1),
+            -1,
+            1,
+            -20,
+            20
+          );
+          stroke(70 + brightness, 160 + brightness, 70, 220);
+          strokeWeight(2);
+          line(0, 0, 0, -this.h);
+          pop();
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_004_grassland_square", "png");
+      }
+    </script>
+  </body>
+</html>

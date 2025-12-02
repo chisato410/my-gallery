@@ -22,9 +22,7 @@ export function GalleryList({ artworks, onSelectArt }) {
           </div>
           <div className="flex-1">
             <h3 className="font-semibold text-lg">{artwork.title}</h3>
-            <p className="text-sm text-gray-400">
-              {artwork.author} • {artwork.description}
-            </p>
+            <p className="text-sm text-gray-400">{artwork.author}</p>
           </div>
           <div className="flex items-center gap-3">
             <span className="text-xs bg-gray-800 px-3 py-1 rounded-full">

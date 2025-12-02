@@ -33,7 +33,6 @@ export function ArtworkModal({ artwork, onClose }) {
         <div className="text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <span className="text-sm text-gray-400">{artwork.tech}</span>
-            <span className="text-gray-600">•</span>
             <span className="text-sm text-gray-400">{artwork.author}</span>
           </div>
           <h2 className="text-4xl font-light mb-4">{artwork.title}</h2>
