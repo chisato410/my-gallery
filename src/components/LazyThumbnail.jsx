@@ -110,7 +110,7 @@ export function LazyThumbnail({ artwork, onSelect }) {
             {/* ローディング中のプレースホルダー */}
             {!isLoaded && (
               <div
-                className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 animate-pulse flex items-center justify-center"
+                className="absolute inset-0 bg-linear-to-br from-gray-800 to-gray-900 animate-pulse flex items-center justify-center"
                 style={{
                   position: "absolute",
                   top: 0,
@@ -155,7 +155,7 @@ export function LazyThumbnail({ artwork, onSelect }) {
         ) : (
           // 表示前のプレースホルダー
           <div
-            className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 opacity-70"
+            className="absolute inset-0 bg-linear-to-br from-gray-800 to-gray-900 opacity-70"
             style={{
               position: "absolute",
               top: 0,

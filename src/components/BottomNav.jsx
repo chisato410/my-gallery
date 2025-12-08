@@ -3,15 +3,20 @@ import React from "react";
 
 export function BottomNav() {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 bg-white text-black border-t border-gray-300 z-40">
-      <div className="grid grid-cols-3 h-16">
-        <button className="flex items-center justify-center hover:bg-gray-100 transition-colors font-medium">
+    <footer className="fixed bottom-0 left-0 right-0 z-40">
+      <div className="grid grid-cols-3 h-16 bg-[#f6e7e7] border-t border-gray-300 text-gray-800">
+        {/* MENU */}
+        <button className="flex items-center justify-center font-medium tracking-wide hover:bg-[#f1dede] transition-colors">
           MENU
         </button>
-        <button className="flex items-center justify-center hover:bg-gray-100 transition-colors border-x border-gray-300">
+
+        {/* 中央 △ ボタン（両サイドに縦線） */}
+        <button className="flex items-center justify-center border-x border-gray-300 font-medium tracking-wide hover:bg-[#f1dede] transition-colors">
           △
         </button>
-        <button className="flex items-center justify-center hover:bg-gray-100 transition-colors font-medium">
+
+        {/* OPTION */}
+        <button className="flex items-center justify-center font-medium tracking-wide hover:bg-[#f1dede] transition-colors">
           OPTION
         </button>
       </div>

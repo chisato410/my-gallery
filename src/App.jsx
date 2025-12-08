@@ -14,7 +14,6 @@ export default function App() {
 
   const { artworks, loading } = useArtworks(sortBy);
 
-  // フィルタリング
   const filteredArtworks =
     filter === "all" ? artworks : artworks.filter((art) => art.tech === filter);
 
@@ -28,34 +27,48 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="text-xl">Loading...</div>
+      <div className="min-h-screen bg-neutral-950 text-white flex items-center justify-center">
+        <div className="text-lg tracking-wide opacity-80 animate-pulse">
+          Loading...
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <Header />
+    <>
+      <div className="min-h-screen bg-neutral-950 text-white flex flex-col">
+        {/* ヘッダー */}
+        <Header />
 
-      <FilterBar
-        filter={filter}
-        setFilter={handleFilterChange}
-        sortBy={sortBy}
-        setSortBy={handleSortChange}
-        totalCount={filteredArtworks.length}
-      />
+        {/* フィルタバー */}
+        <div className="border-b border-neutral-800 bg-neutral-900/40 backdrop-blur-md sticky top-0 z-30">
+          <FilterBar
+            filter={filter}
+            setFilter={handleFilterChange}
+            sortBy={sortBy}
+            setSortBy={handleSortChange}
+            totalCount={filteredArtworks.length}
+          />
+        </div>
 
-      <main className="max-w-7xl mx-auto py-8 pb-32">
-        <GalleryGrid artworks={filteredArtworks} onSelectArt={setSelectedArt} />
-      </main>
+        {/* メイン */}
+        <main className="max-w-7xl mx-auto w-full px-4 py-8 pb-32">
+          <GalleryGrid
+            artworks={filteredArtworks}
+            onSelectArt={setSelectedArt}
+          />
+        </main>
 
-      <BottomNav />
+        {/* ボトムナビ */}
+        <BottomNav />
+      </div>
 
+      {/* モーダル */}
       <ArtworkModal
         artwork={selectedArt}
         onClose={() => setSelectedArt(null)}
       />
-    </div>
+    </>
   );
 }
