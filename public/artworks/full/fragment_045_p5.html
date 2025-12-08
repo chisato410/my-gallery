@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fragment #045 – Nyan Rain (Chaotic)</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(255, 200, 255, 0.15);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Nyan Rain (Chaotic)”</div>
+
+    <script>
+      // --- Nyan Rain (Chaotic) ---
+      const items = [];
+      const POOL = ["😺", "nyan", "ﾆｬﾝ"];
+      let spawnRate = 5; // フレームあたりの出現数（増やすほどカオス）
+      let gravity = 0.12;
+
+      function setup() {
+        createCanvas(500, 500);
+        textAlign(CENTER, CENTER);
+        colorMode(HSL);
+        noStroke();
+        // preload-like: try to ensure emoji display size works
+        textFont(
+          'Apple Color Emoji, "Segoe UI Emoji", "Noto Color Emoji", sans-serif'
+        );
+      }
+
+      function draw() {
+        // 背景は少し残像を残して重なり感を演出
+        background(0, 0, 0, 0.08);
+
+        // spawn
+        for (let i = 0; i < spawnRate; i++) {
+          spawnItem();
+        }
+
+        // update & draw
+        for (let i = items.length - 1; i >= 0; i--) {
+          const it = items[i];
+          // physics
+          it.vy += gravity * it.mass;
+          it.vx += sin((frameCount + it.off) * 0.02) * 0.05 * it.wobble;
+          it.x += it.vx;
+          it.y += it.vy;
+          it.rot += it.spin;
+
+          // life fade (after falling a bit)
+          it.life -= it.fade;
+          // draw with push/pop for rotation
+          push();
+          translate(it.x, it.y);
+          rotate(it.rot);
+          textSize(it.size);
+          // blend mode and subtle glow-ish by drawing twice
+          blendMode(ADD);
+          fill(it.hue, it.sat, it.light, 0.35);
+          text(it.ch, 0 + it.shiftX, 0 + it.shiftY);
+          fill(
+            it.hue,
+            it.sat,
+            it.light,
+            constrain(map(it.life, 0, it.maxLife, 0, 1), 0, 1)
+          );
+          text(it.ch, 0, 0);
+          blendMode(BLEND);
+          pop();
+
+          // remove when life over or way off screen
+          if (
+            it.life <= 0 ||
+            it.y > height + 200 ||
+            it.x < -300 ||
+            it.x > width + 300
+          ) {
+            items.splice(i, 1);
+          }
+        }
+
+        // slight noise overlay for extra texture
+        if (frameCount % 6 === 0) {
+          for (let k = 0; k < 3; k++) {
+            fill(280 + k * 10, 40, 90, 0.02);
+            rect(
+              random(-20, width),
+              random(-20, height),
+              random(60, 200),
+              random(10, 60)
+            );
+          }
+        }
+      }
+
+      function spawnItem() {
+        // random pick
+        let ch = random(POOL);
+        // create with randomized visual params
+        let sizeBase = ch === "😺" ? random(30, 80) : random(18, 44);
+        let it = {
+          ch: ch,
+          x: random(-50, width + 50),
+          y: -random(10, 120),
+          vx: random(-0.6, 0.6),
+          vy: random(0.6, 2.0),
+          mass: random(0.6, 1.5),
+          size: sizeBase,
+          hue: random(300, 20), // pastel/neon pinkish range (wraps)
+          sat: random(60, 95),
+          light: random(50, 90),
+          rot: random(-0.6, 0.6),
+          spin: random(-0.02, 0.05),
+          wobble: random(0.5, 1.6),
+          off: random(1000),
+          life: random(160, 380),
+          maxLife: 380,
+          fade: random(0.2, 1.3),
+          shiftX: random(-6, 6),
+          shiftY: random(-6, 6),
+        };
+        items.push(it);
+      }
+
+      // make chaotic faster on mouse press
+      function mousePressed() {
+        spawnRate = min(40, spawnRate + 6);
+      }
+      function mouseReleased() {
+        spawnRate = 6;
+      }
+
+      // reduce spawn if key '-' pressed, increase with '+'
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_045_nyan_rain", "png");
+        if (key === "+") spawnRate = min(60, spawnRate + 4);
+        if (key === "-") spawnRate = max(0, spawnRate - 2);
+        if (key === "c") items.length = 0;
+      }
+    </script>
+  </body>
+</html>

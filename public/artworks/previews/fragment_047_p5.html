@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #047 – Glitch Bloom</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #050005;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 200, 255, 0.08);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">
+      “Glitch Bloom”
+    <script>
+      let cols = 50,
+        rows = 50;
+      let noiseScale = 0.02;
+      let glitch = false;
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+        pixelDensity(1);
+      }
+      function draw() {
+        background(10, 10, 8);
+        let t = frameCount * 0.01;
+        loadPixels();
+        for (let y = 0; y < height; y += 2) {
+          for (let x = 0; x < width; x += 2) {
+            let n = noise(x * noiseScale, y * noiseScale, t);
+            let dx = sin((x + y + frameCount) * 0.02) * (glitch ? 8 : 2);
+            let hue = (200 + n * 160 + dx * 10) % 360;
+            let light = 30 + n * 50;
+            fill(hue, 80, light, 0.9);
+            rect(
+              x + (glitch ? sin(y * 0.1 + t) * 6 : 0),
+              y + (glitch ? cos(x * 0.1 + t) * 6 : 0),
+              3,
+              3
+            );
+          }
+        }
+        // flowing bands
+        for (let i = 0; i < 50; i++) {
+          fill((300 + i * 8) % 360, 90, 50, 0.06);
+          rect(0, (frameCount * 0.6 + i * 60) % height, width, 40);
+        }
+      }
+      function mousePressed() {
+        glitch = !glitch;
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_047_glitch_bloom", "png");
+        if (key === "c") background(10);
+      }
+    </script>
+  </body>
+</html>

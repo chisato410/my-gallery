@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fragment #043 – Dream Bubble</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Dream Bubble”</div>
+    <script>
+      let bubbles = [];
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+        for (let i = 0; i < 50; i++) {
+          bubbles.push({
+            x: random(width),
+            y: random(height),
+            r: random(20, 80),
+            col: color(random([180, 300]), 100, random(70, 90), 0.4),
+            spd: random(0.3, 1),
+          });
+        }
+      }
+
+      function draw() {
+        background(240, 40, 10, 0.2);
+        for (let b of bubbles) {
+          fill(b.col);
+          ellipse(b.x, b.y, b.r);
+          b.y -= b.spd;
+          if (b.y < -b.r) {
+            b.y = height + b.r;
+            b.x = random(width);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

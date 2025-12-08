@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #046 – Broken Language</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(200, 100, 255, 0.12);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Broken Language”</div>
+    <script>
+      let glyphs = [];
+      const POOL = [
+        "♡",
+        "☠︎",
+        "⚡︎",
+        "💫",
+        "🌈",
+        "🌀",
+        "nyan",
+        "ﾆｬﾝ",
+        "error",
+        "!",
+        "?",
+      ];
+      let density = 10;
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        textAlign(CENTER, CENTER);
+        textFont("monospace");
+        for (let i = 0; i < 200; i++) spawnGlyph();
+      }
+      function draw() {
+        background(0, 0, 0, 0.06);
+        for (let i = glyphs.length - 1; i >= 0; i--) {
+          let g = glyphs[i];
+          g.vy += 0.06 * g.mass;
+          g.x += g.vx + sin((frameCount + g.off) * 0.02) * 0.5;
+          g.y += g.vy;
+          g.rot += g.spin;
+          push();
+          translate(g.x, g.y);
+          rotate(g.rot);
+          fill(g.h, g.s, g.l, g.a);
+          textSize(g.sz);
+          text(g.ch, 0, 0);
+          pop();
+          g.a -= g.fade;
+          if (g.y > height + 80 || g.a <= 0) glyphs.splice(i, 1);
+        }
+        // spawn controlled by density
+        for (let i = 0; i < density; i++) spawnGlyph();
+      }
+      function spawnGlyph() {
+        glyphs.push({
+          ch: random(POOL),
+          x: random(-50, width + 50),
+          y: -random(10, 200),
+          vx: random(-1.2, 1.2),
+          vy: random(0.6, 2.2),
+          mass: random(0.6, 1.6),
+          sz: random(14, 48),
+          h: random(260, 340),
+          s: random(50, 95),
+          l: random(50, 90),
+          a: random(0.6, 1),
+          fade: random(0.002, 0.01),
+          rot: random(-0.8, 0.8),
+          spin: random(-0.04, 0.06),
+          off: random(1000),
+        });
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_046_broken_language", "png");
+        if (key === "+") density = min(100, density + 5);
+        if (key === "-") density = max(0, density - 3);
+        if (key === "c") glyphs.length = 0;
+      }
+    </script>
+  </body>
+</html>

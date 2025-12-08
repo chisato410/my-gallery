@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fragment #042 – Cotton Candy Dream</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(255, 200, 255, 0.7);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Cotton Candy Dream”</div>
+    <script>
+      let clouds = [];
+
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+        for (let i = 0; i < 50; i++) {
+          clouds.push({
+            x: random(width),
+            y: random(height),
+            s: random(30, 120),
+            col: color(random([310, 200]), 100, random(70, 90), 0.5),
+          });
+        }
+      }
+
+      function draw() {
+        background(280, 80, 15);
+        for (let c of clouds) {
+          fill(c.col);
+          ellipse(c.x, c.y + sin(frameCount * 0.01 + c.x * 0.02) * 10, c.s);
+        }
+        // ふわっとした光
+        fill(300, 100, 90, 0.15);
+        ellipse(width / 2, height / 2, 400);
+      }
+    </script>
+  </body>
+</html>

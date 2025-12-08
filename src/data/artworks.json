@@ -842,5 +842,157 @@
     "url": "/artworks/full/fragment_040_p5.html",
     "previewUrl": "/artworks/previews/fragment_040_p5.html",
     "filename": "fragment_040_p5.html"
+  },
+  {
+    "id": 42,
+    "title": "Heaven Noise",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "white-noise",
+      "luminous",
+      "soft-glow",
+      "subtle-randomness",
+      "pixel-shimmer",
+      "ambient",
+      "ethereal",
+      "light-grain"
+    ],
+    "url": "/artworks/full/fragment_041_p5.html",
+    "previewUrl": "/artworks/previews/fragment_041_p5.html",
+    "filename": "fragment_041_p5.html"
+  },
+  {
+    "id": 43,
+    "title": "Cotton Candy Dream",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "pastel-cloud",
+      "soft-motion",
+      "dreamy",
+      "floating-forms",
+      "cotton-fog",
+      "hsl-palette",
+      "soothing",
+      "pastel-vapor"
+    ],
+    "url": "/artworks/full/fragment_042_p5.html",
+    "previewUrl": "/artworks/previews/fragment_042_p5.html",
+    "filename": "fragment_042_p5.html"
+  },
+  {
+    "id": 44,
+    "title": "Dream Bubble",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "bubble-field",
+      "vertical-flow",
+      "soft-rise",
+      "translucent-layers",
+      "gentle-motion",
+      "color-float",
+      "dreamlike",
+      "hsl-glow"
+    ],
+    "url": "/artworks/full/fragment_043_p5.html",
+    "previewUrl": "/artworks/previews/fragment_043_p5.html",
+    "filename": "fragment_043_p5.html"
+  },
+  {
+    "id": 45,
+    "title": "Sweet Static",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "pink-noise",
+      "static-field",
+      "sugar-tone",
+      "pixel-random",
+      "heart-wave",
+      "cute-chaos",
+      "romantic-glitch",
+      "sweet-aesthetic"
+    ],
+    "url": "/artworks/full/fragment_044_p5.html",
+    "previewUrl": "/artworks/previews/fragment_044_p5.html",
+    "filename": "fragment_044_p5.html"
+  },
+  {
+    "id": 46,
+    "title": "Nyan Rain (Chaotic)",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "emoji-rain",
+      "falling-objects",
+      "chaotic-motion",
+      "emoji-chaos",
+      "rainfield",
+      "text-particles",
+      "wobble-physics",
+      "humor"
+    ],
+    "url": "/artworks/full/fragment_045_p5.html",
+    "previewUrl": "/artworks/previews/fragment_045_p5.html",
+    "filename": "fragment_045_p5.html"
+  },
+  {
+    "id": 47,
+    "title": "Broken Language",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "text-stream",
+      "glyph-fall",
+      "coded-chaos",
+      "fragmented-text",
+      "symbolic-rain",
+      "language-noise",
+      "glitch-cascade",
+      "syntax-drift"
+    ],
+    "url": "/artworks/full/fragment_046_p5.html",
+    "previewUrl": "/artworks/previews/fragment_046_p5.html",
+    "filename": "fragment_046_p5.html"
+  },
+  {
+    "id": 48,
+    "title": "Glitch Bloom",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "pixel-bloom",
+      "color-distortion",
+      "noise-grid",
+      "glitch-shift",
+      "distorted-field",
+      "grid-pixels",
+      "bloom-effect",
+      "visual-noise"
+    ],
+    "url": "/artworks/full/fragment_047_p5.html",
+    "previewUrl": "/artworks/previews/fragment_047_p5.html",
+    "filename": "fragment_047_p5.html"
+  },
+  {
+    "id": 49,
+    "title": "Emotional Overdrive",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "heart-burst",
+      "emotional-motion",
+      "burst-effect",
+      "symbolic-explosion",
+      "impulse-motion",
+      "hsl-heart",
+      "intense-glow",
+      "kinetic-expression"
+    ],
+    "url": "/artworks/full/fragment_048_p5.html",
+    "previewUrl": "/artworks/previews/fragment_048_p5.html",
+    "filename": "fragment_048_p5.html"
   }
 ]

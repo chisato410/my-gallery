@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #048 – Emotional Overdrive</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #080006;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(255, 40, 100, 0.12);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">"Emotional Overdrive”</div>
+    <script>
+      let hearts = [];
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+      }
+      function draw() {
+        background(10, 10, 8, 0.08);
+        for (let i = hearts.length - 1; i >= 0; i--) {
+          let h = hearts[i];
+          h.vy += 0.06;
+          h.x += h.vx;
+          h.y += h.vy;
+          h.life -= h.decay;
+          push();
+          translate(h.x, h.y);
+          rotate(h.rot);
+          scale(h.s);
+          fill(h.h, h.st, h.l, h.life / h.maxLife);
+          beginShape();
+          for (let a = 0; a < TWO_PI; a += 0.15) {
+            let px = 16 * pow(sin(a), 3);
+            let py = -(
+              13 * cos(a) -
+              5 * cos(2 * a) -
+              2 * cos(3 * a) -
+              cos(4 * a)
+            );
+            vertex(px, py);
+          }
+          endShape(CLOSE);
+          pop();
+          if (h.life <= 0) hearts.splice(i, 1);
+        }
+        // ambient tiny hearts
+        for (let i = 0; i < 50; i++) {
+          fill(330, 80, 70, 0.06);
+          ellipse(random(width), random(height), random(2, 8));
+        }
+      }
+      function mousePressed() {
+        for (let i = 0; i < 50; i++) {
+          hearts.push({
+            x: mouseX,
+            y: mouseY,
+            vx: random(-4, 4),
+            vy: random(-6, -1),
+            rot: random(-1, 1),
+            s: random(0.6, 1.6),
+            h: random(320, 350),
+            st: random(70, 95),
+            l: random(60, 85),
+            life: random(80, 200),
+            maxLife: 200,
+            decay: random(0.8, 3),
+          });
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_048_emotional_overdrive", "png");
+        if (key === "c") hearts.length = 0;
+      }
+    </script>
+  </body>
+</html>

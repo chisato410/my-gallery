@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fragment #041 – Heaven Noise</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Heaven Noise”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+      }
+
+      function draw() {
+        background(0, 0, 100, 0.05);
+        loadPixels();
+        for (let i = 0; i < pixels.length; i += 4 * 30) {
+          pixels[i] = 255;
+          pixels[i + 1] = 255 - random(20);
+          pixels[i + 2] = 255 - random(40);
+        }
+        updatePixels();
+
+        // 光の粒
+        for (let i = 0; i < 10; i++) {
+          fill(60, 100, 90, random(0.2, 0.8));
+          ellipse(random(width), random(height), random(5, 20));
+        }
+
+        // 中央の発光
+        let glow = sin(frameCount * 0.05) * 30 + 80;
+        fill(60, 100, 90, 0.2);
+        ellipse(width / 2, height / 2, glow * 3);
+      }
+    </script>
+  </body>
+</html>

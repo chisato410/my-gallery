@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fragment #044 – Sweet Static</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(255, 160, 200, 0.8);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Sweet Static”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+      }
+
+      function draw() {
+        background(300, 60, 20, 0.1);
+        loadPixels();
+        for (let i = 0; i < pixels.length; i += 4 * 20) {
+          pixels[i] = random(200, 255); // R
+          pixels[i + 1] = random(150, 220); // G
+          pixels[i + 2] = random(200, 255); // B
+        }
+        updatePixels();
+
+        // ゆらめくハート
+        let t = frameCount * 0.05;
+        translate(width / 2, height / 2);
+        fill(330, 100, 70, 0.5);
+        beginShape();
+        for (let a = 0; a < TWO_PI; a += 0.1) {
+          let r = 16 * pow(sin(a), 3);
+          let x = r * 10 * sin(a + t);
+          let y =
+            -(13 * cos(a) - 5 * cos(2 * a) - 2 * cos(3 * a) - cos(4 * a)) * 5;
+          vertex(x, y);
+        }
+        endShape(CLOSE);
+      }
+    </script>
+  </body>
+</html>
