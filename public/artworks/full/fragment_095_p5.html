@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #095 – Eclipse</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #030305;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 60px rgba(255, 255, 255, 0.08);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        color: rgba(255, 255, 255, 0.6);
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Eclipse”</div>
+    <script>
+      let cols;
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        cols = [
+          color(10, 90, 60),
+          color(40, 90, 60),
+          color(70, 90, 60),
+          color(140, 90, 50),
+          color(190, 90, 60),
+          color(250, 90, 60),
+        ];
+      }
+      function draw() {
+        background(6);
+        translate(width / 2, height / 2);
+        blendMode(BLEND);
+        // subtle rotating rings
+        for (let i = 0; i < 6; i++) {
+          let ang = frameCount * 0.4 + i * 10;
+          push();
+          rotate(radians(ang));
+          noFill();
+          stroke(cols[i]);
+          strokeWeight(3);
+          ellipse(0, 0, 120 + i * 30 + sin(frameCount * 0.02 + i) * 8);
+          pop();
+        }
+        // additive center burst
+        blendMode(ADD);
+        for (let i = 0; i < 12; i++) {
+          let a = frameCount * 0.02 + (i * PI) / 6;
+          let r = 30 + sin(frameCount * 0.06 + i) * 40;
+          fill(60 + i * 20, 90, 60, 0.08 + i * 0.01);
+          ellipse(cos(a) * r * 0.6, sin(a) * r * 0.6, 160 - i * 8);
+        }
+        // final white flash occasionally
+        if (frameCount % 300 > 280) {
+          fill(0, 0, 100, map(frameCount % 300, 280, 299, 0.8, 0.0));
+          ellipse(0, 0, 420);
+        }
+        blendMode(BLEND);
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_095_eclipse", "png");
+      }
+    </script>
+  </body>
+</html>

@@ -1733,5 +1733,175 @@
     "url": "/artworks/full/fragment_090_p5.html",
     "previewUrl": "/artworks/previews/fragment_090_p5.html",
     "filename": "fragment_090_p5.html"
+  },
+  {
+    "id": 92,
+    "title": "Spectrum Flow",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "prism-light",
+      "rainbow-lines",
+      "dynamic-wave",
+      "hsl-colors",
+      "central-focus",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_091_p5.html",
+    "previewUrl": "/artworks/previews/fragment_091_p5.html",
+    "filename": "fragment_091_p5.html"
+  },
+  {
+    "id": 93,
+    "title": "Time Echo",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "concentric-ripples",
+      "rotating-hands",
+      "time-motion",
+      "hsl-colors",
+      "interactive-pattern",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_092_p5.html",
+    "previewUrl": "/artworks/previews/fragment_092_p5.html",
+    "filename": "fragment_092_p5.html"
+  },
+  {
+    "id": 94,
+    "title": "Breathe",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "pulsing-glow",
+      "soft-rings",
+      "gentle-motion",
+      "hsl-colors",
+      "ambient-pattern",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_093_p5.html",
+    "previewUrl": "/artworks/previews/fragment_093_p5.html",
+    "filename": "fragment_093_p5.html"
+  },
+  {
+    "id": 95,
+    "title": "Division",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "mirrored-shapes",
+      "bezier-profiles",
+      "dynamic-noise",
+      "hsl-colors",
+      "abstract-pattern",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_094_p5.html",
+    "previewUrl": "/artworks/previews/fragment_094_p5.html",
+    "filename": "fragment_094_p5.html"
+  },
+  {
+    "id": 96,
+    "title": "Eclipse",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "rotating-rings",
+      "additive-burst",
+      "color-harmony",
+      "hsl-colors",
+      "celestial-pattern",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_095_p5.html",
+    "previewUrl": "/artworks/previews/fragment_095_p5.html",
+    "filename": "fragment_095_p5.html"
+  },
+  {
+    "id": 97,
+    "title": "The Wall",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "grid",
+      "falling-blocks",
+      "wobble-animation",
+      "dynamic-collapse",
+      "abstract-geometry",
+      "light-leak"
+    ],
+    "url": "/artworks/full/fragment_096_p5.html",
+    "previewUrl": "/artworks/previews/fragment_096_p5.html",
+    "filename": "fragment_096_p5.html"
+  },
+  {
+    "id": 98,
+    "title": "Spectrum Flow (Refined)",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "prism",
+      "rainbow",
+      "refracted-light",
+      "wave-motion",
+      "glow",
+      "abstract-light"
+    ],
+    "url": "/artworks/full/fragment_097_p5.html",
+    "previewUrl": "/artworks/previews/fragment_097_p5.html",
+    "filename": "fragment_097_p5.html"
+  },
+  {
+    "id": 99,
+    "title": "Dreaming Dog",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "dog",
+      "dream",
+      "floating-objects",
+      "bones-stars-moon",
+      "night-sky",
+      "soft-glow"
+    ],
+    "url": "/artworks/full/fragment_098_p5.html",
+    "previewUrl": "/artworks/previews/fragment_098_p5.html",
+    "filename": "fragment_098_p5.html"
+  },
+  {
+    "id": 100,
+    "title": "Playground",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "dog",
+      "playground",
+      "trail-animation",
+      "interactive",
+      "mouse-follow",
+      "balls"
+    ],
+    "url": "/artworks/full/fragment_099_p5.html",
+    "previewUrl": "/artworks/previews/fragment_099_p5.html",
+    "filename": "fragment_099_p5.html"
+  },
+  {
+    "id": 101,
+    "title": "Dog's Breath",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "dog",
+      "breath",
+      "fog",
+      "click-interaction",
+      "winter-morning",
+      "soft-animation"
+    ],
+    "url": "/artworks/full/fragment_100_p5.html",
+    "previewUrl": "/artworks/previews/fragment_100_p5.html",
+    "filename": "fragment_100_p5.html"
   }
 ]

@@ -1460,5 +1460,145 @@
       "animated-pattern",
       "cosmic-fragment"
     ]
+  },
+  {
+    "filename": "fragment_091_p5.html",
+    "title": "Spectrum Flow",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "prism-light",
+      "rainbow-lines",
+      "dynamic-wave",
+      "hsl-colors",
+      "central-focus",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_092_p5.html",
+    "title": "Time Echo",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "concentric-ripples",
+      "rotating-hands",
+      "time-motion",
+      "hsl-colors",
+      "interactive-pattern",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_093_p5.html",
+    "title": "Breathe",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "pulsing-glow",
+      "soft-rings",
+      "gentle-motion",
+      "hsl-colors",
+      "ambient-pattern",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_094_p5.html",
+    "title": "Division",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "mirrored-shapes",
+      "bezier-profiles",
+      "dynamic-noise",
+      "hsl-colors",
+      "abstract-pattern",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_095_p5.html",
+    "title": "Eclipse",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "rotating-rings",
+      "additive-burst",
+      "color-harmony",
+      "hsl-colors",
+      "celestial-pattern",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_096_p5.html",
+    "title": "The Wall",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "grid",
+      "falling-blocks",
+      "wobble-animation",
+      "dynamic-collapse",
+      "abstract-geometry",
+      "light-leak"
+    ]
+  },
+  {
+    "filename": "fragment_097_p5.html",
+    "title": "Spectrum Flow (Refined)",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "prism",
+      "rainbow",
+      "refracted-light",
+      "wave-motion",
+      "glow",
+      "abstract-light"
+    ]
+  },
+  {
+    "filename": "fragment_098_p5.html",
+    "title": "Dreaming Dog",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "dog",
+      "dream",
+      "floating-objects",
+      "bones-stars-moon",
+      "night-sky",
+      "soft-glow"
+    ]
+  },
+  {
+    "filename": "fragment_099_p5.html",
+    "title": "Playground",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "dog",
+      "playground",
+      "trail-animation",
+      "interactive",
+      "mouse-follow",
+      "balls"
+    ]
+  },
+  {
+    "filename": "fragment_100_p5.html",
+    "title": "Dog's Breath",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "dog",
+      "breath",
+      "fog",
+      "click-interaction",
+      "winter-morning",
+      "soft-animation"
+    ]
   }
 ]

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #094 – Division</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #05050b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        color: rgba(255, 255, 255, 0.65);
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Division”</div>
+    <script>
+      let tOff = 0;
+      function setup() {
+        createCanvas(500, 500);
+        noFill();
+        strokeWeight(1.5);
+        colorMode(HSL);
+      }
+      function draw() {
+        background(6);
+        translate(width / 2, height / 2);
+        tOff += 0.01;
+
+        // mirrored abstract "profiles" using bezier-like shapes
+        for (let side = -1; side <= 1; side += 2) {
+          push();
+          scale(side, 1);
+          beginShape();
+          stroke(210, 10, 95, 0.9);
+          vertex(-160, -40);
+          bezierVertex(
+            -60 + sin(frameCount * 0.02) * 20,
+            -120,
+            40 + cos(frameCount * 0.015) * 40,
+            -120,
+            160,
+            -40
+          );
+          bezierVertex(80, 20, 40, 80, -20, 90);
+          endShape();
+          pop();
+        }
+
+        // noisy interference in center
+        for (let i = 0; i < 50; i += 6) {
+          let x = map(i, 0, 160, -80, 80);
+          let y = noise(i * 0.01, frameCount * 0.01) * 80 - 40;
+          stroke(
+            280,
+            20,
+            60,
+            0.12 + abs(sin(frameCount * 0.02 + i * 0.01)) * 0.08
+          );
+          line(x, y, x, y + 6);
+        }
+
+        // connecting line pulse occasionally
+        if (frameCount % 180 < 30) {
+          stroke(45, 80, 60, 0.9 - (frameCount % 30) / 30);
+          strokeWeight(3);
+          line(-40, 0, 40, 0);
+          strokeWeight(1.5);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_094_division", "png");
+      }
+    </script>
+  </body>
+</html>

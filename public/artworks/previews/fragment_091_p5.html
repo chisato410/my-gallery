@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #091 – Spectrum Flow</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle at center, #000 80%, #050505 100%);
+      }
+
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+        display: block;
+      }
+
+      .caption {
+        position: absolute;
+        bottom: 20px;
+        left: 24px;
+        font-family: "Helvetica Neue", "Arial", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.65);
+        letter-spacing: 0.05em;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Spectrum Flow”</div>
+
+    <script>
+      let colors;
+
+      function setup() {
+        createCanvas(500, 500);
+        noFill();
+        strokeWeight(2);
+        colors = [
+          color(255, 0, 0),
+          color(255, 127, 0),
+          color(255, 255, 0),
+          color(0, 255, 0),
+          color(0, 255, 255),
+          color(0, 0, 255),
+          color(255, 0, 255),
+        ];
+      }
+
+      function draw() {
+        background(0);
+
+        // --- 中央基準に調整 ---
+        translate(width / 2, height / 2);
+
+        // --- 三角形（プリズム） ---
+        stroke(255);
+        beginShape();
+        vertex(-70, 60);
+        vertex(0, -60);
+        vertex(70, 60);
+        endShape(CLOSE);
+
+        // --- 白い入射光 ---
+        stroke(255);
+        line(-200, -10, -50, -10);
+
+        // --- 虹（屈折光） ---
+        let baseAngle = radians(10);
+        let time = frameCount * 0.03;
+
+        for (let i = 0; i < colors.length; i++) {
+          stroke(
+            colors[i]._getRed(),
+            colors[i]._getGreen(),
+            colors[i]._getBlue(),
+            230
+          );
+
+          // 揺らぎ（波のような動き）
+          let wave = sin(time + i * 0.6) * 5;
+          let offset = i * 4 - 12 + wave;
+
+          let startX = 0;
+          let startY = offset * 0.2;
+          let endX = 250;
+          let endY = tan(baseAngle) * endX + offset;
+
+          line(startX, startY, endX, endY);
+        }
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_091_spectrum_flow", "png");
+      }
+    </script>
+  </body>
+</html>

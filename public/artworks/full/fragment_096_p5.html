@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #096 – The Wall</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #0b0b0b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        color: rgba(255, 255, 255, 0.7);
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Fragment Memory”</div>
+    <script>
+      let cols = 8;
+      let rows = 8;
+      let grid = [];
+      function setup() {
+        createCanvas(500, 500);
+        rectMode(CENTER);
+        for (let y = 0; y < rows; y++) {
+          grid[y] = [];
+          for (let x = 0; x < cols; x++) {
+            grid[y][x] = {
+              h: (y + 1) * (height / rows) * 0.9,
+              offset: random(1000),
+              collapsed: false,
+            };
+          }
+        }
+      }
+      function draw() {
+        background(12);
+        translate(
+          width / 2 - (cols * 40) / 2,
+          height / 2 - (rows * 40) / 2 + 20
+        );
+        // stacked blocks
+        for (let y = 0; y < rows; y++) {
+          for (let x = 0; x < cols; x++) {
+            push();
+            let b = grid[y][x];
+            let bx = x * 50 + 25;
+            let by = y * 50 + 25;
+            // wobble
+            let wob = sin(frameCount * 0.02 + b.offset) * 2;
+            translate(bx, by + wob);
+            // if collapsed, move down gradually
+            if (frameCount > 600 + y * 10 + x * 5 && !b.collapsed) {
+              b.collapsed = true;
+            }
+            if (b.collapsed) {
+              translate(0, (frameCount - (600 + y * 10 + x * 5)) * 0.9);
+            }
+            // block draw
+            fill(20 + y * 6, 20 + x * 3, 20 + y * 3);
+            noStroke();
+            rect(0, 0, 44, 34, 2);
+            // light leaks through gaps after many frames
+            if (frameCount > 900) {
+              fill(60, 80, 80, 0.5);
+              rect(0, 0, 10, 5);
+            }
+            pop();
+          }
+        }
+        // final bright overlay when many collapsed
+        if (frameCount > 1100) {
+          fill(0, 0, 100, map(frameCount, 1100, 1300, 0, 0.9));
+          rect(width / 2 - (cols * 40) / 2 + cols * 25, height / 2, 2000, 2000);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_096_fragment_memory", "png");
+      }
+    </script>
+  </body>
+</html>

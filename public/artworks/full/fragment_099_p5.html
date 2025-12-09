@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #099 – “Playground”</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #dff3d8;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #153724;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Playground”</div>
+    <script>
+      let trail = [];
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+      }
+      function draw() {
+        // grass background
+        background(140, 80, 95);
+        fill(85, 60, 55);
+        rect(0, height * 0.6, width, height * 0.4);
+        // trails from mouse (simulate dog path)
+        trail.push(createVector(mouseX, mouseY));
+        if (trail.length > 120) trail.shift();
+
+        // draw trail with diminishing width
+        noStroke();
+        for (let i = 0; i < trail.length; i++) {
+          let p = trail[i];
+          let a = i / trail.length;
+          fill(40, 90, 60, 0.6 * (1 - a));
+          ellipse(p.x, p.y, 18 * (1 - a) + 2, 8 * (1 - a) + 2);
+        }
+
+        // dog body follows smoothed mouse (lag)
+        let follow =
+          trail.length > 0
+            ? trail[trail.length - 1]
+            : createVector(width / 2, height * 0.6);
+        drawRunningDog(follow.x, follow.y);
+
+        // playful balls
+        for (let b = 0; b < 6; b++) {
+          let x = (b * 83 + frameCount * 0.7) % width;
+          fill(30, 80, 60);
+          ellipse(x, height * 0.75, 18, 18);
+        }
+      }
+
+      function drawRunningDog(x, y) {
+        push();
+        translate(x, y);
+        rotate(sin(frameCount * 0.2) * 0.15);
+        noStroke();
+        fill(20, 80, 30);
+        ellipse(0, 0, 80, 40); // body
+        ellipse(-30, -10, 34, 28); // head
+        // legs
+        fill(20, 80, 20);
+        rect(-10, 18, 6, 20, 3);
+        rect(10, 18, 6, 20, 3);
+        // tail with glow
+        stroke(50, 80, 60, 0.9);
+        strokeWeight(3);
+        noFill();
+        arc(40, -6, 40, 18, PI * 0.6, PI * 1.5);
+        pop();
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("Fragment #099 – “Playground”", "png");
+      }
+    </script>
+  </body>
+</html>

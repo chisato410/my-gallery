@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #092 – Time Echo</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #020202;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        color: rgba(255, 255, 255, 0.65);
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Time Echo”</div>
+    <script>
+      let rings = [];
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        angleMode(DEGREES);
+        for (let i = 0; i < 6; i++) rings.push({ r: 20 + i * 18, alpha: 0 });
+      }
+      function draw() {
+        background(6, 6, 6);
+        translate(width / 2, height / 2);
+        // tick: every N frames create a ripple
+        if (frameCount % 60 === 0) {
+          rings.forEach((r) => (r.alpha = 180));
+        }
+        // draw concentric ripples
+        noFill();
+        for (let i = 0; i < rings.length; i++) {
+          stroke(210, 10, 90, rings[i].alpha / 255);
+          strokeWeight(map(i, 0, rings.length - 1, 2, 1));
+          ellipse(0, 0, rings[i].r + (frameCount % 60) * 2 + i * 6);
+          rings[i].alpha *= 0.94;
+        }
+
+        // central rotating gears / clock hands
+        push();
+        rotate(frameCount * 0.8);
+        stroke(40, 80, 60, 0.9);
+        strokeWeight(3);
+        line(0, 0, 70, 0); // long hand
+        rotate(frameCount * 6);
+        stroke(0, 0, 100, 0.9);
+        strokeWeight(1.6);
+        line(0, 0, 40, 0); // second hand
+        pop();
+
+        // subtle background dots (time dust)
+        for (let i = 0; i < 40; i++) {
+          let a = i * 9 + frameCount * 0.2;
+          let rr = 220 + sin((frameCount * 0.5 + i) * 0.03) * 6;
+          stroke(210, 10, 20, 0.06);
+          point(cos(a) * rr * 0.9, sin(a) * rr * 0.9);
+        }
+      }
+
+      // save: s
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_092_time_echo", "png");
+      }
+    </script>
+  </body>
+</html>

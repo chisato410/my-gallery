@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #097 – Spectrum Flow (Refined)</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(255, 255, 255, 0.08);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        color: rgba(255, 255, 255, 0.7);
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Spectrum Flow (Refined)”</div>
+    <script>
+      let c;
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(RGB);
+        noFill();
+      }
+      function draw() {
+        background(2);
+        translate(width / 2, height / 2);
+        // prism
+        stroke(255);
+        strokeWeight(2);
+        triangle(-60, 60, 0, -70, 60, 60);
+        // input beam
+        stroke(255);
+        strokeWeight(3);
+        line(-220, 0, -60, 0);
+        // refracted rainbow bands
+        let cols = [
+          [255, 40, 40],
+          [255, 150, 40],
+          [255, 240, 60],
+          [40, 200, 60],
+          [40, 220, 200],
+          [40, 100, 240],
+          [200, 40, 220],
+        ];
+        let t = frameCount * 0.03;
+        let baseAngle = 0.45; // radians
+        for (let i = 0; i < cols.length; i++) {
+          stroke(cols[i][0], cols[i][1], cols[i][2], 220);
+          let wave = sin(t + i * 0.6) * 6;
+          let startX = -20;
+          let startY = -10 + i * 4 + wave * 0.2;
+          let endX = 260;
+          let endY = startY + tan(baseAngle) * (endX - startX) + i * 1.5;
+          strokeWeight(2.5);
+          line(startX, startY, endX, endY);
+        }
+        // soft glow near prism
+        noStroke();
+        for (let r = 0; r < 50; r++) {
+          fill(255, 255, 255, 12 - r);
+          ellipse(-60, 0, 60 + r * 10, 24 + r * 6);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_097_spectrum_refined", "png");
+      }
+    </script>
+  </body>
+</html>

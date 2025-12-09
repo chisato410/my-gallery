@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #093 – Breathe</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #f3f7ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+      }
+      .caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        color: rgba(10, 20, 40, 0.8);
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Breathe”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+      }
+      function draw() {
+        // gentle sky gradient
+        for (let y = 0; y < height; y++) {
+          let inter = map(y, 0, height, 0, 1);
+          let c = lerpColor(color(210, 30, 98), color(200, 40, 96), inter);
+          stroke(c);
+          line(0, y, width, y);
+        }
+        translate(width / 2, height / 2);
+
+        let t = frameCount * 0.02;
+        // center glow pulsing
+        let pulse = 1 + sin(t) * 0.15;
+        for (let i = 6; i > 0; i--) {
+          fill(50, 80, 60, map(i, 6, 1, 0.06, 0.2) * pulse);
+          ellipse(0, 0, i * 80 * pulse, i * 80 * pulse * 0.6);
+        }
+
+        // soft expanding rings like respiration
+        noFill();
+        stroke(150, 30, 80, 0.12);
+        strokeWeight(2);
+        for (let k = 0; k < 5; k++) {
+          let r = 40 + ((frameCount * 0.6 + k * 30) % 200);
+          ellipse(0, 0, r * pulse, r * pulse * 0.6);
+        }
+
+        // small drifting motes
+        for (let i = 0; i < 30; i++) {
+          let a = i * 12 + frameCount * 0.3;
+          let r = 120 + sin(frameCount * 0.01 + i) * 30;
+          fill(190, 80, 80, 0.06);
+          ellipse(cos(a) * r * 0.6, sin(a) * r * 0.6, 4);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_093_breathe", "png");
+      }
+    </script>
+  </body>
+</html>

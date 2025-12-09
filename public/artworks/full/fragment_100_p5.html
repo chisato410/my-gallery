@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #100 – “Dog's Breath”</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(180deg, #f7fbff, #dfefff);
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(100, 120, 150, 0.2);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #234;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Dog's Breath”(click to puff)</div>
+    <script>
+      let breaths = [];
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+      }
+      function draw() {
+        background(210, 40, 96);
+        // ground
+        noStroke();
+        fill(200, 30, 85);
+        rect(0, height * 0.7, width, height * 0.3);
+        // dog sitting
+        drawSittingDog(width * 0.5, height * 0.68);
+
+        // draw breaths (fog)
+        for (let i = breaths.length - 1; i >= 0; i--) {
+          let b = breaths[i];
+          fill(200, 20, 95, b.alpha);
+          ellipse(
+            b.x + sin(b.off + frameCount * 0.01) * 10,
+            b.y - frameCount * 0.3 + b.age * 0.2,
+            b.size + b.age * 0.6,
+            b.size * 0.6 + b.age * 0.3
+          );
+          b.age++;
+          b.alpha *= 0.995;
+          if (b.age > 200 || b.alpha < 0.01) breaths.splice(i, 1);
+        }
+
+        // hint text
+        noStroke();
+        fill(210, 60, 30, 0.5);
+        textSize(12);
+        textAlign(CENTER);
+        text("click to exhale", width / 2, 30);
+      }
+
+      function mousePressed() {
+        // create a breath puff at dog's nose
+        breaths.push({
+          x: width * 0.56,
+          y: height * 0.63,
+          size: random(18, 36),
+          age: 0,
+          alpha: 0.85,
+          off: random(10),
+        });
+      }
+
+      function drawSittingDog(x, y) {
+        push();
+        translate(x, y);
+        noStroke();
+        fill(30, 80, 25);
+        ellipse(0, 0, 140, 80); // body
+        ellipse(-50, -20, 60, 54); // head
+        ellipse(-68, -36, 12, 18); // ear
+        // nose
+        fill(0);
+        ellipse(-30, -18, 8, 6);
+        // breath line (static)
+        pop();
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("Fragment #100 – “Dog's Breath”", "png");
+      }
+    </script>
+  </body>
+</html>
