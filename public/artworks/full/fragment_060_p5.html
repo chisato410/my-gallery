@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #060 – Leaf Pulse</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #e9fff4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 30px rgba(120, 200, 160, 0.3);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #40875f;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Leaf Pulse”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+      }
+      function draw() {
+        background(150, 40, 95);
+        translate(width / 2, height / 2);
+        for (let i = 0; i < 8; i++) {
+          rotate(TWO_PI / 8);
+          let len = 180 + sin(frameCount * 0.03 + i) * 10;
+          fill(130, 50, 60, 0.7);
+          beginShape();
+          vertex(0, 0);
+          bezierVertex(30, -len / 2, 60, -len, 0, -len);
+          bezierVertex(-60, -len, -30, -len / 2, 0, 0);
+          endShape(CLOSE);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_060_leaf_pulse", "png");
+      }
+    </script>
+  </body>
+</html>

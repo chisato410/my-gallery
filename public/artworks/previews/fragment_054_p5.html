@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #054 – Deep Abyss</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #000812;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Deep Abyss”</div>
+    <script>
+      let particles = [];
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+        for (let i = 0; i < 50; i++) addP();
+      }
+      function draw() {
+        background(210, 70, 2, 0.2);
+        translate(width / 2, height / 2);
+        for (let p of particles) {
+          fill(p.h, p.s, p.l, p.a);
+          ellipse(p.x, p.y, p.sz);
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.01 * sin(frameCount * 0.01 + p.x);
+          if (p.y > 250) Object.assign(p, randomP());
+        }
+      }
+      function addP() {
+        particles.push(randomP());
+      }
+      function randomP() {
+        let ang = random(TWO_PI);
+        return {
+          x: cos(ang) * random(100),
+          y: sin(ang) * random(200),
+          vx: random(-0.5, 0.5),
+          vy: random(0.2, 0.8),
+          sz: random(2, 8),
+          h: random(190, 240),
+          s: random(60, 100),
+          l: random(60, 95),
+          a: random(0.4, 0.9),
+        };
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_054_deep_abyss", "png");
+      }
+    </script>
+  </body>
+</html>

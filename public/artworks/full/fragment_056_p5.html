@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #056 – Tide Mirror</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #001020;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 100, 200, 0.2);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Tide Mirror”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+      }
+      function draw() {
+        background(210, 60, 6);
+        for (let y = 0; y < height / 2; y++) {
+          let inter = map(y, 0, height / 2, 0, 1);
+          let c = color(210, 70, 10 + inter * 30);
+          stroke(c);
+          line(0, y, width, y);
+        }
+        push();
+        translate(0, height / 2);
+        for (let y = 0; y < height / 2; y++) {
+          let inter = map(y, 0, height / 2, 0, 1);
+          let c = color(200, 80, 20 + inter * 10);
+          stroke(c);
+          line(0, y, width, y);
+        }
+        pop();
+        let t = frameCount * 0.02;
+        fill(60, 90, 80);
+        ellipse(width / 2, height / 2 - 100 * sin(t), 60);
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_056_tide_mirror", "png");
+      }
+    </script>
+  </body>
+</html>

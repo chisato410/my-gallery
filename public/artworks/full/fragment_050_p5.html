@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #050 – Dream Debris</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #02000a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(200, 160, 255, 0.08);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Dream Debris”</div>
+    <script>
+      let pieces = [];
+      const SHAPES = ["cat", "star", "heart", "nyan", "ﾆｬﾝ"];
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        textAlign(CENTER, CENTER);
+        for (let i = 0; i < 80; i++) addPiece();
+      }
+      function draw() {
+        background(10, 5, 6, 0.06);
+        for (let i = pieces.length - 1; i >= 0; i--) {
+          let p = pieces[i];
+          p.y += p.vy;
+          p.x += sin(frameCount * 0.01 + p.off) * p.wob;
+          p.rot += p.spin;
+          push();
+          translate(p.x, p.y);
+          rotate(p.rot);
+          fill(p.h, p.s, p.l, p.a);
+          textSize(p.sz);
+          text(p.ch, 0, 0);
+          pop();
+          // loop
+          if (p.y > height + 50) {
+            pieces.splice(i, 1);
+            addPiece();
+          }
+        }
+        if (frameCount % 90 === 0) addPiece();
+      }
+      function addPiece() {
+        pieces.push({
+          ch:
+            random(SHAPES) === "cat" ? "😺" : random(["★", "♡", "nyan", "ﾆｬﾝ"]),
+          x: random(width),
+          y: -random(20, 200),
+          vy: random(0.3, 1.2),
+          vx: 0,
+          sz: random(12, 46),
+          h: random(260, 340),
+          s: random(60, 95),
+          l: random(60, 90),
+          rot: random(-0.6, 0.6),
+          spin: random(-0.02, 0.03),
+          off: random(1000),
+          wob: random(0.4, 1.8),
+          a: random(0.6, 1),
+        });
+      }
+      function mousePressed() {
+        // quick glitch: shuffle positions
+        for (let p of pieces) {
+          p.x += random(-80, 80);
+          p.y += random(-40, 40);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_050_dream_debris", "png");
+        if (key === "c") pieces.length = 0;
+      }
+    </script>
+  </body>
+</html>

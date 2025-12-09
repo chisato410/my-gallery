@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #058 – Spring Field</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #e4fbe2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 30px rgba(120, 220, 150, 0.3);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #356b37;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Spring Field”</div>
+    <script>
+      let blades = [];
+      function setup() {
+        createCanvas(500, 500);
+        for (let i = 0; i < 300; i++) {
+          blades.push({
+            x: random(width),
+            h: random(60, 120),
+            off: random(1000),
+          });
+        }
+      }
+      function draw() {
+        background(140, 230, 150);
+        noStroke();
+        fill(60, 200, 120);
+        for (let b of blades) {
+          let sway = sin(frameCount * 0.03 + b.off) * 4;
+          rect(b.x, height - 100, 2, -b.h + sway);
+        }
+        fill(120, 180, 255, 120);
+        ellipse(width / 2, 120, 200 + sin(frameCount * 0.03) * 20);
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_058_spring_field", "png");
+      }
+    </script>
+  </body>
+</html>

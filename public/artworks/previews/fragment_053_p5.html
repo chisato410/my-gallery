@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #053 – Bubble Drift</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #002030;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(80, 160, 255, 0.1);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Bubble Drift”</div>
+    <script>
+      let bubbles = [];
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+        for (let i = 0; i < 50; i++) spawn();
+      }
+      function draw() {
+        background(200, 60, 10, 0.15);
+        for (let b of bubbles) {
+          fill(b.h, b.s, b.l, b.a);
+          ellipse(b.x, b.y, b.r);
+          b.y -= b.v;
+          b.x += sin(frameCount * 0.01 + b.off) * 0.4;
+          if (b.y < -20) {
+            Object.assign(b, randomBubble());
+          }
+        }
+      }
+      function spawn() {
+        bubbles.push(randomBubble());
+      }
+      function randomBubble() {
+        return {
+          x: random(width),
+          y: random(height),
+          r: random(6, 26),
+          v: random(0.4, 1.2),
+          h: random(180, 220),
+          s: random(40, 80),
+          l: random(70, 95),
+          a: random(0.3, 0.9),
+          off: random(1000),
+        };
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_053_bubble_drift", "png");
+      }
+    </script>
+  </body>
+</html>

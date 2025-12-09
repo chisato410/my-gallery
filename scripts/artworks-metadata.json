@@ -863,5 +863,182 @@
       "ring-evolution",
       "interactive-chaos"
     ]
+  },
+  {
+    "filename": "fragment_050_p5.html",
+    "title": "Dream Debris",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "floating-fragments",
+      "emoji-particles",
+      "hsl-glow",
+      "soft-trails",
+      "wobble-motion",
+      "rotational-drift",
+      "glitch-interaction",
+      "dreamlike-fall",
+      "time-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_051_p5.html",
+    "title": "Meltdown Cat",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "noise-mosaic",
+      "emoji-fragments",
+      "melt-distortion",
+      "slice-smear",
+      "vertical-warp",
+      "glitch-overlay",
+      "hsl-texture",
+      "interactive-melt"
+    ]
+  },
+  {
+    "filename": "fragment_052_p5.html",
+    "title": "Blue Current",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "wave-lines",
+      "hsl-gradient",
+      "oscillating-flow",
+      "sinusoidal-bands",
+      "blue-spectrum",
+      "minimal-motion",
+      "line-field",
+      "liquid-motion"
+    ]
+  },
+  {
+    "filename": "fragment_053_p5.html",
+    "title": "Bubble Drift",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "bubble-system",
+      "floating-orbs",
+      "hsl-soft",
+      "vertical-drift",
+      "water-atmosphere",
+      "sway-motion",
+      "particle-loop",
+      "ambient-floating"
+    ]
+  },
+  {
+    "filename": "fragment_054_p5.html",
+    "title": "Deep Abyss",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "abyss-particles",
+      "vertical-gravity",
+      "dark-ocean",
+      "hsl-blue",
+      "sin-acceleration",
+      "depth-field",
+      "radial-origin",
+      "slow-sink"
+    ]
+  },
+  {
+    "filename": "fragment_055_p5.html",
+    "title": "Coral Bloom",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "coral-rings",
+      "noise-radius",
+      "organic-expansion",
+      "vibrating-shapes",
+      "hsl-coral",
+      "radial-bloom",
+      "wave-perturbation",
+      "circular-evolution"
+    ]
+  },
+  {
+    "filename": "fragment_056_p5.html",
+    "title": "Tide Mirror",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "split-gradient",
+      "mirror-ocean",
+      "horizontal-lines",
+      "tide-motion",
+      "sun-bob",
+      "blue-horizon",
+      "layered-water",
+      "minimal-seascape"
+    ]
+  },
+  {
+    "filename": "fragment_057_p5.html",
+    "title": "Whale Dream",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "whale-sprites",
+      "ocean-drift",
+      "sin-wave-body",
+      "dream-motion",
+      "soft-blue",
+      "side-scrolling",
+      "hsl-sea",
+      "gentle-animals"
+    ]
+  },
+  {
+    "filename": "fragment_058_p5.html",
+    "title": "Spring Field",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "grass-blades",
+      "wind-sway",
+      "soft-green",
+      "field-motion",
+      "nature-simulation",
+      "morning-light",
+      "layered-sway",
+      "spring-atmosphere"
+    ]
+  },
+  {
+    "filename": "fragment_059_p5.html",
+    "title": "Sun Bloom",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "rotating-petals",
+      "sunburst",
+      "hsl-yellow",
+      "flower-wheel",
+      "oscillating-radius",
+      "geometric-flower",
+      "circular-bloom",
+      "bright-aura"
+    ]
+  },
+  {
+    "filename": "fragment_060_p5.html",
+    "title": "Leaf Pulse",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "radial-leaves",
+      "organic-bezier",
+      "pulsing-petals",
+      "hsl-green",
+      "nature-rhythm",
+      "symmetry-wheel",
+      "breathing-motion",
+      "soft-growth"
+    ]
   }
 ]

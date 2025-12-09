@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #057 – Whale Dream</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #001018;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(100, 180, 255, 0.2);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Whale Dream”</div>
+    <script>
+      let whales = [];
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        for (let i = 0; i < 3; i++) whales.push(new Whale(random(width)));
+      }
+      function draw() {
+        background(210, 80, 6, 0.12);
+        for (let w of whales) {
+          w.update();
+          w.show();
+        }
+      }
+      class Whale {
+        constructor(x) {
+          this.x = x;
+          this.y = random(height);
+          this.speed = random(0.5, 1.2);
+          this.off = random(1000);
+        }
+        update() {
+          this.x -= this.speed;
+          this.y += sin(frameCount * 0.02 + this.off) * 0.6;
+          if (this.x < -100) {
+            this.x = width + 100;
+            this.y = random(100, 400);
+          }
+        }
+        show() {
+          push();
+          translate(this.x, this.y);
+          fill(210, 40, 60, 0.8);
+          noStroke();
+          ellipse(0, 0, 80, 30);
+          triangle(40, 0, 60, 10, 60, -10);
+          fill(200, 60, 80, 0.3);
+          ellipse(-20, -4, 8, 8);
+          pop();
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_057_whale_dream", "png");
+      }
+    </script>
+  </body>
+</html>

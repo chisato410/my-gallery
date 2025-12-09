@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #051 – Meltdown Cat</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #060006;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 60px rgba(255, 160, 80, 0.12);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Meltdown Cat”</div>
+    <script>
+      let melt = false;
+      let buf;
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+        buf = createGraphics(500, 500);
+        buf.colorMode(HSL);
+      }
+      function draw() {
+        background(5, 5, 6, 0.06);
+        // base cat mosaic
+        buf.clear();
+        buf.noStroke();
+        for (let y = 0; y < 500; y += 12) {
+          for (let x = 0; x < 500; x += 12) {
+            let n = noise(x * 0.01, y * 0.01, frameCount * 0.003);
+            buf.fill(320 + n * 80, 70, 60 + n * 20, 0.9);
+            buf.rect(x, y, 12, 12);
+          }
+        }
+        // draw some emoji fragments
+        buf.textAlign(CENTER, CENTER);
+        buf.textSize(48);
+        for (let i = 0; i < 6; i++) {
+          buf.fill(60, 100, 90, 0.6);
+          buf.text(
+            random(["😺", "nyan", "ﾆｬﾝ"]),
+            100 + i * 60 + sin(frameCount * 0.02 + i) * 8,
+            200 + cos(frameCount * 0.015 + i) * 12
+          );
+        }
+        // melt effect
+        if (!melt) {
+          image(buf, 0, 0);
+        } else {
+          // smear vertically using slice offsets
+          for (let y = 0; y < height; y += 4) {
+            let sx = 0;
+            let sy = y;
+            let sw = width;
+            let sh = 4;
+            let dx = sin(frameCount * 0.02 + y * 0.03) * 20;
+            copy(buf, sx, sy, sw, sh, dx, sy, sw, sh);
+          }
+        }
+        // glitch chars overlay
+        fill(340, 80, 70, 0.12);
+        textSize(120);
+        textAlign(CENTER, CENTER);
+        text(
+          "404",
+          width / 2 + sin(frameCount * 0.04) * 6,
+          height / 2 + cos(frameCount * 0.03) * 6
+        );
+      }
+      function keyPressed() {
+        if (key === "m") melt = !melt;
+        if (key === "s") saveCanvas("fragment_051_meltdown_cat", "png");
+        if (key === "c") background(5);
+      }
+    </script>
+  </body>
+</html>
