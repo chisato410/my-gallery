@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #068 – Solar Pulse</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(255, 200, 100, 0.4);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #ffd966;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Solar Pulse”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+        strokeWeight(3);
+      }
+      function draw() {
+        background(10);
+        translate(width / 2, height / 2);
+        for (let i = 0; i < 10; i++) {
+          let r = sin(frameCount * 0.02 + i) * 100 + i * 20;
+          stroke((40 + i * 5) % 360, 100, 60);
+          ellipse(0, 0, abs(r * 2));
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_068_solar_pulse", "png");
+      }
+    </script>
+  </body>
+</html>

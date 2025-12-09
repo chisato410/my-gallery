@@ -134,9 +134,9 @@ export function LazyThumbnail({ artwork, onSelect }) {
                 bottom: 0,
               }}
             >
-              <h3 className="font-semibold text-lg mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              {/* <h3 className="font-semibold text-lg mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 {artwork.title}
-              </h3>
+              </h3> */}
               {/* <p className="text-xs mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 {artwork.tech}
               </p>

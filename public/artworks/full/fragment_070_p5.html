@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #070 – Solar Orbit</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #001018;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(255, 255, 150, 0.4);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #ffff90;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Solar Orbit”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+      }
+      function draw() {
+        background(5, 50, 10);
+        translate(width / 2, height / 2);
+        fill(50, 100, 60);
+        ellipse(0, 0, 60);
+        for (let i = 1; i < 6; i++) {
+          let r = i * 50 + sin(frameCount * 0.01 + i) * 5;
+          let a = frameCount * 0.01 * i;
+          let x = cos(a) * r;
+          let y = sin(a) * r;
+          fill((40 + i * 20) % 360, 90, 50);
+          ellipse(x, y, 15);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_070_solar_orbit", "png");
+      }
+    </script>
+  </body>
+</html>

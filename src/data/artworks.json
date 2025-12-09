@@ -1223,5 +1223,175 @@
     "url": "/artworks/full/fragment_060_p5.html",
     "previewUrl": "/artworks/previews/fragment_060_p5.html",
     "filename": "fragment_060_p5.html"
+  },
+  {
+    "id": 62,
+    "title": "Rain Memory",
+    "tech": "p5.js",
+    "createdAt": "2025-11-21",
+    "tags": [
+      "rainfall-simulation",
+      "minimal-motion",
+      "vertical-flow",
+      "memory-fragment",
+      "seasonal-atmosphere",
+      "cool-palette"
+    ],
+    "url": "/artworks/full/fragment_061_p5.html",
+    "previewUrl": "/artworks/previews/fragment_061_p5.html",
+    "filename": "fragment_061_p5.html"
+  },
+  {
+    "id": 63,
+    "title": "Mountain Breath",
+    "tech": "p5.js",
+    "createdAt": "2025-11-21",
+    "tags": [
+      "layered-noise",
+      "terrain-waves",
+      "breathing-landscape",
+      "organic-motion",
+      "calm-horizon",
+      "nature-fragment"
+    ],
+    "url": "/artworks/full/fragment_062_p5.html",
+    "previewUrl": "/artworks/previews/fragment_062_p5.html",
+    "filename": "fragment_062_p5.html"
+  },
+  {
+    "id": 64,
+    "title": "Aurora Mist",
+    "tech": "p5.js",
+    "createdAt": "2025-11-21",
+    "tags": [
+      "aurora-effect",
+      "soft-blending",
+      "elliptic-waves",
+      "hsl-glow",
+      "mist-motion",
+      "ethereal-fragment"
+    ],
+    "url": "/artworks/full/fragment_063_p5.html",
+    "previewUrl": "/artworks/previews/fragment_063_p5.html",
+    "filename": "fragment_063_p5.html"
+  },
+  {
+    "id": 65,
+    "title": "Spring Whisper",
+    "tech": "p5.js",
+    "createdAt": "2025-11-21",
+    "tags": [
+      "petal-fall",
+      "seasonal-breeze",
+      "soft-motion",
+      "spring-fragment",
+      "pink-aesthetic",
+      "oscillation-flow"
+    ],
+    "url": "/artworks/full/fragment_064_p5.html",
+    "previewUrl": "/artworks/previews/fragment_064_p5.html",
+    "filename": "fragment_064_p5.html"
+  },
+  {
+    "id": 66,
+    "title": "Summer Radiance",
+    "tech": "p5.js",
+    "createdAt": "2025-11-21",
+    "tags": [
+      "bubble-field",
+      "summer-glow",
+      "hsl-light",
+      "floating-motion",
+      "inner-sun",
+      "seasonal-fragment"
+    ],
+    "url": "/artworks/full/fragment_065_p5.html",
+    "previewUrl": "/artworks/previews/fragment_065_p5.html",
+    "filename": "fragment_065_p5.html"
+  },
+  {
+    "id": 67,
+    "title": "Autumn Veil",
+    "tech": "p5.js",
+    "createdAt": "2025-11-21",
+    "tags": [
+      "falling-leaves",
+      "autumn-palette",
+      "seasonal-motion",
+      "warm-tone",
+      "light-rotation",
+      "veil-layer"
+    ],
+    "url": "/artworks/full/fragment_066_p5.html",
+    "previewUrl": "/artworks/previews/fragment_066_p5.html",
+    "filename": "fragment_066_p5.html"
+  },
+  {
+    "id": 68,
+    "title": "Winter Silence",
+    "tech": "p5.js",
+    "createdAt": "2025-11-21",
+    "tags": [
+      "snowfall-simulation",
+      "winter-fragment",
+      "soft-random-walk",
+      "quiet-motion",
+      "cool-white",
+      "seasonal-calm"
+    ],
+    "url": "/artworks/full/fragment_067_p5.html",
+    "previewUrl": "/artworks/previews/fragment_067_p5.html",
+    "filename": "fragment_067_p5.html"
+  },
+  {
+    "id": 69,
+    "title": "Solar Pulse",
+    "tech": "p5.js",
+    "createdAt": "2025-11-21",
+    "tags": [
+      "circular-waves",
+      "solar-resonance",
+      "pulse-motion",
+      "hsl-orbit",
+      "cosmic-fragment",
+      "dark-background"
+    ],
+    "url": "/artworks/full/fragment_068_p5.html",
+    "previewUrl": "/artworks/previews/fragment_068_p5.html",
+    "filename": "fragment_068_p5.html"
+  },
+  {
+    "id": 70,
+    "title": "Burning Halo",
+    "tech": "p5.js",
+    "createdAt": "2025-11-21",
+    "tags": [
+      "particle-ring",
+      "fire-aura",
+      "chaotic-radiance",
+      "halo-flare",
+      "high-energy",
+      "cosmic-fire"
+    ],
+    "url": "/artworks/full/fragment_069_p5.html",
+    "previewUrl": "/artworks/previews/fragment_069_p5.html",
+    "filename": "fragment_069_p5.html"
+  },
+  {
+    "id": 71,
+    "title": "Solar Orbit",
+    "tech": "p5.js",
+    "createdAt": "2025-11-21",
+    "tags": [
+      "planetary-motion",
+      "orbital-system",
+      "hsl-sun",
+      "celestial-animation",
+      "multi-orbit",
+      "space-fragment"
+    ],
+    "url": "/artworks/full/fragment_070_p5.html",
+    "previewUrl": "/artworks/previews/fragment_070_p5.html",
+    "filename": "fragment_070_p5.html"
   }
 ]

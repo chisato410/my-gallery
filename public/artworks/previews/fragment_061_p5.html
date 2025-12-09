@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #061 – Rain Memory</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #f0faff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 30px rgba(100, 160, 255, 0.2);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #3b6f9c;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Rain Memory”</div>
+    <script>
+      let drops = [];
+      function setup() {
+        createCanvas(500, 500);
+        for (let i = 0; i < 50; i++) {
+          drops.push({
+            x: random(width),
+            y: random(-500, 0),
+            s: random(4, 10),
+            v: random(2, 5),
+          });
+        }
+      }
+      function draw() {
+        background(210, 220, 250);
+        stroke(120, 140, 255, 100);
+        for (let d of drops) {
+          line(d.x, d.y, d.x, d.y + d.s);
+          d.y += d.v;
+          if (d.y > height) {
+            d.y = random(-200, 0);
+          }
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_061_rain_memory", "png");
+      }
+    </script>
+  </body>
+</html>

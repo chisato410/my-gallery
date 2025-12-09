@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #066 – Autumn Veil</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #fff3e0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 30px rgba(255, 160, 60, 0.3);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #a05b00;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Autumn Veil”</div>
+    <script>
+      let leaves = [];
+      function setup() {
+        createCanvas(500, 500);
+        for (let i = 0; i < 50; i++) {
+          leaves.push({
+            x: random(width),
+            y: random(height),
+            s: random(10, 15),
+            col: color(random(200, 255), random(100, 50), 0),
+          });
+        }
+      }
+      function draw() {
+        background(255, 230, 200);
+        noStroke();
+        for (let l of leaves) {
+          fill(l.col);
+          push();
+          translate(l.x, l.y);
+          rotate((sin(frameCount * 0.03 + l.x) * PI) / 8);
+          ellipse(0, 0, l.s, l.s / 2);
+          pop();
+          l.y += 1.2;
+          if (l.y > height + 10) {
+            l.y = -10;
+            l.x = random(width);
+          }
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_066_autumn_veil", "png");
+      }
+    </script>
+  </body>
+</html>

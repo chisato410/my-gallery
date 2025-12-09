@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #069 – Burning Halo</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #150000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(255, 80, 0, 0.5);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #ff4000;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Burning Halo”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+      }
+      function draw() {
+        background(10);
+        translate(width / 2, height / 2);
+        for (let i = 0; i < 50; i++) {
+          let a = random(TWO_PI);
+          let r = 200 + sin(frameCount * 0.02 + i) * 40;
+          let x = cos(a) * r;
+          let y = sin(a) * r;
+          fill((40 + random(-10, 10)) % 360, 100, random(40, 60), 0.4);
+          ellipse(x, y, random(2, 8));
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_069_burning_halo", "png");
+      }
+    </script>
+  </body>
+</html>

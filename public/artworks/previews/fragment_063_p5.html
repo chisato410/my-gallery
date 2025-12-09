@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #063 – Aurora Mist</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #f7f1ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(200, 150, 255, 0.3);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #7454a8;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Aurora Mist”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+      }
+      function draw() {
+        background(290, 50, 95);
+        for (let i = 0; i < 50; i++) {
+          fill((260 + i * 3) % 360, 70, 70, 0.1);
+          ellipse(
+            width / 2 + sin(frameCount * 0.02 + i) * 200,
+            height / 2 + cos(frameCount * 0.015 + i) * 100,
+            300,
+            200
+          );
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_063_aurora_mist", "png");
+      }
+    </script>
+  </body>
+</html>
