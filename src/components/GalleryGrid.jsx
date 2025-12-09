@@ -41,7 +41,7 @@ const GridComponents = {
 export function GalleryGrid({ artworks, onSelectArt }) {
   return (
     <VirtuosoGrid
-      style={{ height: "calc(100vh - 320px)" }}
+      style={{ height: "calc(100vh - 120px)" }}
       overscan={1000}
       totalCount={artworks.length}
       components={GridComponents}

@@ -847,5 +847,21 @@
       "intense-glow",
       "kinetic-expression"
     ]
+  },
+  {
+    "filename": "fragment_049_p5.html",
+    "title": "Orbiting Distortions",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "orbital-waves",
+      "perlin-warp",
+      "chaotic-rotation",
+      "time-fragment",
+      "glitch-aura",
+      "hsl-spectrum",
+      "ring-evolution",
+      "interactive-chaos"
+    ]
   }
 ]

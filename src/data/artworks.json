@@ -994,5 +994,24 @@
     "url": "/artworks/full/fragment_048_p5.html",
     "previewUrl": "/artworks/previews/fragment_048_p5.html",
     "filename": "fragment_048_p5.html"
+  },
+  {
+    "id": 50,
+    "title": "Orbiting Distortions",
+    "tech": "p5.js",
+    "createdAt": "2025-11-10",
+    "tags": [
+      "orbital-waves",
+      "perlin-warp",
+      "chaotic-rotation",
+      "time-fragment",
+      "glitch-aura",
+      "hsl-spectrum",
+      "ring-evolution",
+      "interactive-chaos"
+    ],
+    "url": "/artworks/full/fragment_049_p5.html",
+    "previewUrl": "/artworks/previews/fragment_049_p5.html",
+    "filename": "fragment_049_p5.html"
   }
 ]

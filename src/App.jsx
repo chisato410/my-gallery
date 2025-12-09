@@ -6,6 +6,7 @@ import { GalleryGrid } from "./components/GalleryGrid";
 import { ArtworkModal } from "./components/ArtworkModal";
 import { BottomNav } from "./components/BottomNav";
 import { useArtworks } from "./hooks/useArtworks";
+import "./index.css";
 
 export default function App() {
   const [filter, setFilter] = useState("all");

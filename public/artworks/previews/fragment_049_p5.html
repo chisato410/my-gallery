@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #049 – Temporal Noise</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #05020a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(255, 80, 80, 0.08);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">
+      Fragment #049 – “Temporal Noise” — space toggles chaos, s save
+    </div>
+    <script>
+      let chaos = false;
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        angleMode(DEGREES);
+        textAlign(CENTER, CENTER);
+        textSize(18);
+      }
+      function draw() {
+        background(5, 5, 6, 0.06);
+        translate(width / 2, height / 2);
+        let t = frameCount * 0.5;
+        // hour rings
+        for (let r = 60; r <= 220; r += 40) {
+          push();
+          rotate(t * (1 + (r / 120) * (chaos ? random(5) : 0.02)));
+          stroke((200 + r) % 360, 80, 60, 0.8);
+          noFill();
+          beginShape();
+          for (let a = 0; a < 72; a += 6) {
+            let rad = r + sin(a * (0.5 + r / 120)) * (chaos ? random(12) : 6);
+            let x = cos(a) * rad;
+            let y = sin(a) * rad;
+            vertex(
+              x + noise(a * 0.01, t * 0.01) * (chaos ? 40 : 6),
+              y + noise(a * 0.02, t * 0.02) * (chaos ? 40 : 6)
+            );
+          }
+          endShape(CLOSE);
+          pop();
+        }
+        // rotating numbers
+        for (let i = 0; i < 50; i++) {
+          push();
+          rotate(
+            -t * 0.6 + i * 30 + (chaos ? sin(frameCount * 0.3 + i) * 10 : 0)
+          );
+          fill(340, 90, 70, 0.95);
+          noStroke();
+          text(
+            (i + 1) % 12 || 12,
+            0,
+            -260 + sin(frameCount * 0.02 + i) * (chaos ? 40 : 8)
+          );
+          pop();
+        }
+        // center glitch label
+        fill(280, 80, 70, 0.12);
+        textSize(42);
+        text(chaos ? "TIME?" : "12:00", 0, 0);
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_049_temporal_noise", "png");
+        if (key === " ") chaos = !chaos;
+        if (key === "c") background(5);
+      }
+    </script>
+  </body>
+</html>
