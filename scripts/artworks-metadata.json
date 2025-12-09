@@ -1311,7 +1311,7 @@
     "filename": "fragment_080_p5.html",
     "title": "Symmetry Pulse",
     "tech": "p5.js",
-    "createdAt": "2025-12-10",
+    "createdAt": "2025-11-22",
     "tags": [
       "wave-symmetry",
       "pulse-deformation",
@@ -1319,6 +1319,146 @@
       "line-field",
       "energy-pattern",
       "abstract-vibration"
+    ]
+  },
+  {
+    "filename": "fragment_081_p5.html",
+    "title": "Mirror Mind",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "mirror-pattern",
+      "symmetric-ellipses",
+      "dynamic-radius",
+      "hsl-colors",
+      "centered-design",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_082_p5.html",
+    "title": "Split Light",
+    "tech": "p5.js",
+    "createdAt": "2025-11-™23",
+    "tags": [
+      "split-gradient",
+      "color-hue",
+      "vertical-divide",
+      "hsl-colors",
+      "minimalist",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_083_p5.html",
+    "title": "Echo Self",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "mouse-trail",
+      "fading-ellipse",
+      "motion-echo",
+      "hsl-colors",
+      "interactive",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_084_p5.html",
+    "title": "Inverted Soul",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "vertical-symmetry",
+      "wave-ellipses",
+      "inverted-pattern",
+      "hsl-colors",
+      "animated-oscillation",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_085_p5.html",
+    "title": "Whisper Wind",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "noise-wave",
+      "horizontal-lines",
+      "gentle-motion",
+      "hsl-colors",
+      "flowing-pattern",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_086_p5.html",
+    "title": "Gale Form",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "rotating-waves",
+      "multi-layered-shape",
+      "dynamic-radius",
+      "hsl-colors",
+      "circular-motion",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_087_p5.html",
+    "title": "Breeze Lines",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "particle-noise",
+      "drifting-points",
+      "wind-effect",
+      "hsl-colors",
+      "animated-scatter",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_088_p5.html",
+    "title": "Cyclone Loop",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "rotating-cyclone",
+      "wave-radius",
+      "circular-motion",
+      "hsl-colors",
+      "multi-layered-loop",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_089_p5.html",
+    "title": "Wind Memory",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "mouse-trail",
+      "fading-ellipse",
+      "wind-effect",
+      "hsl-colors",
+      "interactive",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_090_p5.html",
+    "title": "Invisible Dance",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "radiating-lines",
+      "dynamic-angle",
+      "central-motion",
+      "hsl-colors",
+      "animated-pattern",
+      "cosmic-fragment"
     ]
   }
 ]

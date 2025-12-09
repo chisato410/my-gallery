@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #084 – Inverted Soul</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #070709;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #ddd;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Inverted Soul”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+      }
+      function draw() {
+        background(0);
+        translate(width / 2, height / 2);
+        for (let i = 0; i < 50; i++) {
+          let a = frameCount * 0.03 + i;
+          stroke((180 + i * 10) % 360, 70, 50, 0.4);
+          let y = sin(a) * 100;
+          ellipse(0, y, 100 + i * 10);
+          stroke((180 + i * 10) % 360, 70, 80, 0.4);
+          ellipse(0, -y, 100 + i * 10);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_084_inverted_soul", "png");
+      }
+    </script>
+  </body>
+</html>

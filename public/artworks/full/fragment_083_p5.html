@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #083 – Echo Self</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 60px rgba(255, 255, 255, 0.5);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #ccc;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Echo Self”</div>
+    <script>
+      let trace = [];
+      function setup() {
+        createCanvas(500, 500);
+        noFill();
+        strokeWeight(2);
+        colorMode(HSL);
+      }
+      function draw() {
+        background(0, 0, 0, 0.1);
+        trace.push(createVector(mouseX, mouseY));
+        if (trace.length > 60) trace.shift();
+        for (let i = 0; i < trace.length; i++) {
+          let p = trace[i];
+          stroke(200, 60, 60, 1 - i / trace.length);
+          ellipse(p.x - 250, p.y - 250, i * 2);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_083_echo_self", "png");
+      }
+    </script>
+  </body>
+</html>

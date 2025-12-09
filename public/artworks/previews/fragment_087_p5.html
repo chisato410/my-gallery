@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #087 – Breeze Lines</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #f7fbff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(150, 200, 255, 0.4);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #557;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Breeze Lines”</div>
+    <script>
+      let lines = [];
+      function setup() {
+        createCanvas(500, 500);
+        strokeWeight(1);
+        colorMode(HSL);
+        for (let i = 0; i < 50; i++) {
+          lines.push({
+            x: random(width),
+            y: random(height),
+            a: random(TWO_PI),
+          });
+        }
+      }
+      function draw() {
+        background(210, 60, 95, 0.2);
+        stroke(200, 60, 50, 0.3);
+        for (let p of lines) {
+          let nx = noise(p.x * 0.005, p.y * 0.005, frameCount * 0.01) - 0.5;
+          p.x += nx * 3;
+          p.y += cos(p.a) * 1.2;
+          point(p.x, p.y);
+          if (p.y > height) p.y = 0;
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_087_breeze_lines", "png");
+      }
+    </script>
+  </body>
+</html>

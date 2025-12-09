@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #088 – Cyclone Loop</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #e8f9ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(100, 180, 255, 0.5);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #335;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Cyclone Loop”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+      }
+      function draw() {
+        background(190, 80, 95);
+        translate(width / 2, height / 2);
+        rotate(frameCount * 0.01);
+        for (let i = 0; i < 10; i++) {
+          stroke((190 + i * 8) % 360, 70, 40, 0.6);
+          beginShape();
+          for (let a = 0; a < TWO_PI; a += 0.2) {
+            let r = 100 + sin(a * 4 + i + frameCount * 0.03) * 40;
+            vertex(cos(a) * r, sin(a) * r);
+          }
+          endShape();
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_088_cyclone_loop", "png");
+      }
+    </script>
+  </body>
+</html>

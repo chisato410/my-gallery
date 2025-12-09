@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #085 – Whisper Wind</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #f0faff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 30px rgba(180, 220, 255, 0.5);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #668;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Whisper Wind”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+      }
+      function draw() {
+        background(210, 60, 95);
+        translate(0, height / 2);
+        stroke(210, 70, 40, 0.4);
+        for (let i = 0; i < 20; i++) {
+          beginShape();
+          for (let x = 0; x < width; x += 10) {
+            let y = noise(x * 0.01, i * 0.2, frameCount * 0.01) * 100 - 50;
+            vertex(x, y);
+          }
+          endShape();
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_085_whisper_wind", "png");
+      }
+    </script>
+  </body>
+</html>

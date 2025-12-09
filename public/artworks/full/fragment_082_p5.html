@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #082 – Split Light</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #010101;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #eee;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Split Light”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+      }
+      function draw() {
+        background(0);
+        for (let x = 0; x < width; x++) {
+          let h = map(x, 0, width, 0, 360);
+          stroke(h, 80, 50);
+          line(x, 0, x, height);
+        }
+        fill(0);
+        rect(width / 2, 0, width / 2, height);
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_082_split_light", "png");
+      }
+    </script>
+  </body>
+</html>

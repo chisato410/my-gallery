@@ -1551,7 +1551,7 @@
     "id": 81,
     "title": "Symmetry Pulse",
     "tech": "p5.js",
-    "createdAt": "2025-12-10",
+    "createdAt": "2025-11-22",
     "tags": [
       "wave-symmetry",
       "pulse-deformation",
@@ -1563,5 +1563,175 @@
     "url": "/artworks/full/fragment_080_p5.html",
     "previewUrl": "/artworks/previews/fragment_080_p5.html",
     "filename": "fragment_080_p5.html"
+  },
+  {
+    "id": 82,
+    "title": "Mirror Mind",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "mirror-pattern",
+      "symmetric-ellipses",
+      "dynamic-radius",
+      "hsl-colors",
+      "centered-design",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_081_p5.html",
+    "previewUrl": "/artworks/previews/fragment_081_p5.html",
+    "filename": "fragment_081_p5.html"
+  },
+  {
+    "id": 83,
+    "title": "Split Light",
+    "tech": "p5.js",
+    "createdAt": "2025-11-™23",
+    "tags": [
+      "split-gradient",
+      "color-hue",
+      "vertical-divide",
+      "hsl-colors",
+      "minimalist",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_082_p5.html",
+    "previewUrl": "/artworks/previews/fragment_082_p5.html",
+    "filename": "fragment_082_p5.html"
+  },
+  {
+    "id": 84,
+    "title": "Echo Self",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "mouse-trail",
+      "fading-ellipse",
+      "motion-echo",
+      "hsl-colors",
+      "interactive",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_083_p5.html",
+    "previewUrl": "/artworks/previews/fragment_083_p5.html",
+    "filename": "fragment_083_p5.html"
+  },
+  {
+    "id": 85,
+    "title": "Inverted Soul",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "vertical-symmetry",
+      "wave-ellipses",
+      "inverted-pattern",
+      "hsl-colors",
+      "animated-oscillation",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_084_p5.html",
+    "previewUrl": "/artworks/previews/fragment_084_p5.html",
+    "filename": "fragment_084_p5.html"
+  },
+  {
+    "id": 86,
+    "title": "Whisper Wind",
+    "tech": "p5.js",
+    "createdAt": "2025-11-23",
+    "tags": [
+      "noise-wave",
+      "horizontal-lines",
+      "gentle-motion",
+      "hsl-colors",
+      "flowing-pattern",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_085_p5.html",
+    "previewUrl": "/artworks/previews/fragment_085_p5.html",
+    "filename": "fragment_085_p5.html"
+  },
+  {
+    "id": 87,
+    "title": "Gale Form",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "rotating-waves",
+      "multi-layered-shape",
+      "dynamic-radius",
+      "hsl-colors",
+      "circular-motion",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_086_p5.html",
+    "previewUrl": "/artworks/previews/fragment_086_p5.html",
+    "filename": "fragment_086_p5.html"
+  },
+  {
+    "id": 88,
+    "title": "Breeze Lines",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "particle-noise",
+      "drifting-points",
+      "wind-effect",
+      "hsl-colors",
+      "animated-scatter",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_087_p5.html",
+    "previewUrl": "/artworks/previews/fragment_087_p5.html",
+    "filename": "fragment_087_p5.html"
+  },
+  {
+    "id": 89,
+    "title": "Cyclone Loop",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "rotating-cyclone",
+      "wave-radius",
+      "circular-motion",
+      "hsl-colors",
+      "multi-layered-loop",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_088_p5.html",
+    "previewUrl": "/artworks/previews/fragment_088_p5.html",
+    "filename": "fragment_088_p5.html"
+  },
+  {
+    "id": 90,
+    "title": "Wind Memory",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "mouse-trail",
+      "fading-ellipse",
+      "wind-effect",
+      "hsl-colors",
+      "interactive",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_089_p5.html",
+    "previewUrl": "/artworks/previews/fragment_089_p5.html",
+    "filename": "fragment_089_p5.html"
+  },
+  {
+    "id": 91,
+    "title": "Invisible Dance",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "radiating-lines",
+      "dynamic-angle",
+      "central-motion",
+      "hsl-colors",
+      "animated-pattern",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_090_p5.html",
+    "previewUrl": "/artworks/previews/fragment_090_p5.html",
+    "filename": "fragment_090_p5.html"
   }
 ]

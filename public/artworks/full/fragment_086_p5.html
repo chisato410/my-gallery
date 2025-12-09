@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #086 – Gale Form</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #dff5ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(120, 200, 255, 0.6);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #447;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Gale Form”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+      }
+      function draw() {
+        background(200, 70, 95);
+        translate(width / 2, height / 2);
+        for (let i = 0; i < 20; i++) {
+          stroke((200 + i * 2) % 360, 80, 40, 0.5);
+          beginShape();
+          for (let a = 0; a < TWO_PI; a += 0.1) {
+            let r = 150 + sin(a * 5 + i + frameCount * 0.05) * 40;
+            vertex(cos(a) * r, sin(a) * r);
+          }
+          endShape(CLOSE);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_086_gale_form", "png");
+      }
+    </script>
+  </body>
+</html>

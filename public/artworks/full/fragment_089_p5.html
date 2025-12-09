@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #089 – Wind Memory</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #f4fcff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 30px rgba(180, 220, 255, 0.4);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #446;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Wind Memory”</div>
+    <script>
+      let trails = [];
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+      }
+      function draw() {
+        background(210, 50, 95, 0.2);
+        trails.push({ x: mouseX, y: mouseY });
+        if (trails.length > 80) trails.shift();
+        for (let i = 0; i < trails.length; i++) {
+          let p = trails[i];
+          stroke(200, 70, 50, 1 - i / trails.length);
+          ellipse(p.x - 250, p.y - 250, i);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_089_wind_memory", "png");
+      }
+    </script>
+  </body>
+</html>
