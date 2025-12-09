@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #109 – “Fractal Noise Line”</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/noisejs@2.1.0/index.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: #000;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      canvas {
+        display: block;
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">“Fractal Noise Line”</div>
+
+    <script>
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.z = 4;
+
+      const renderer = new THREE.WebGLRenderer({ antialias: false });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1);
+      document.body.appendChild(renderer.domElement);
+
+      const noise = new Noise(Math.random());
+
+      const points = [];
+      const length = 800; // 点の数
+
+      for (let i = 0; i < length; i++) {
+        const t = i * 0.02;
+
+        const x = noise.perlin3(t, 0, 0) * 1.5;
+        const y = noise.perlin3(0, t, 0) * 1.5;
+        const z = noise.perlin3(0, 0, t) * 1.5;
+
+        points.push(new THREE.Vector3(x, y, z));
+      }
+
+      const curve = new THREE.CatmullRomCurve3(points);
+      const geometry = new THREE.BufferGeometry().setFromPoints(
+        curve.getPoints(2000)
+      );
+
+      const material = new THREE.LineBasicMaterial({
+        color: 0x66ccff,
+        transparent: true,
+        opacity: 0.9,
+      });
+
+      const line = new THREE.Line(geometry, material);
+      scene.add(line);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        line.rotation.y += 0.002;
+        line.rotation.x += 0.001;
+
+        camera.position.x = Math.sin(Date.now() * 0.0002) * 0.5;
+        camera.position.y = Math.cos(Date.now() * 0.00015) * 0.4;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

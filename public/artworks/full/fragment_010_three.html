@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #113 – 3D Line Sculpture</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: #000;
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.75);
+        z-index: 10;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"3D Line Sculpture"</div>
+
+    <script>
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x000000, 5, 25);
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 0, 12);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.body.appendChild(renderer.domElement);
+
+      // 複数の曲線を作成
+      const curves = [];
+      const numCurves = 12;
+
+      for (let i = 0; i < numCurves; i++) {
+        const points = [];
+        const segments = 100;
+        const radius = 3 + Math.random() * 2;
+        const height = 8;
+        const twist = Math.random() * Math.PI * 2;
+        const phase = (i / numCurves) * Math.PI * 2;
+
+        for (let j = 0; j <= segments; j++) {
+          const t = j / segments;
+          const angle = t * Math.PI * 4 + phase;
+
+          const x = Math.cos(angle + twist * t) * radius * (1 - t * 0.3);
+          const y = (t - 0.5) * height + Math.sin(t * Math.PI * 3) * 0.5;
+          const z = Math.sin(angle + twist * t) * radius * (1 - t * 0.3);
+
+          points.push(new THREE.Vector3(x, y, z));
+        }
+
+        const curve = new THREE.CatmullRomCurve3(points);
+        const tubeGeometry = new THREE.TubeGeometry(
+          curve,
+          segments,
+          0.03,
+          8,
+          false
+        );
+
+        // グラデーションカラー
+        const hue = i / numCurves;
+        const color = new THREE.Color().setHSL(hue, 0.8, 0.6);
+
+        const material = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.7,
+          side: THREE.DoubleSide,
+        });
+
+        // 発光効果を追加
+        const glowMaterial = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.3,
+          side: THREE.DoubleSide,
+        });
+
+        const tube = new THREE.Mesh(tubeGeometry, material);
+        const glow = new THREE.Mesh(
+          new THREE.TubeGeometry(curve, segments, 0.15, 8, false),
+          glowMaterial
+        );
+
+        const group = new THREE.Group();
+        group.add(tube);
+        group.add(glow);
+
+        scene.add(group);
+        curves.push({ group, curve, phase: Math.random() * Math.PI * 2 });
+      }
+
+      // パーティクルエフェクト（光の粒子）
+      const particlesGeometry = new THREE.BufferGeometry();
+      const particlesCount = 200;
+      const positions = new Float32Array(particlesCount * 3);
+      const colors = new Float32Array(particlesCount * 3);
+
+      for (let i = 0; i < particlesCount; i++) {
+        const i3 = i * 3;
+        const angle = Math.random() * Math.PI * 2;
+        const radius = Math.random() * 8;
+
+        positions[i3] = Math.cos(angle) * radius;
+        positions[i3 + 1] = (Math.random() - 0.5) * 10;
+        positions[i3 + 2] = Math.sin(angle) * radius;
+
+        const color = new THREE.Color().setHSL(Math.random(), 0.8, 0.7);
+        colors[i3] = color.r;
+        colors[i3 + 1] = color.g;
+        colors[i3 + 2] = color.b;
+      }
+
+      particlesGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positions, 3)
+      );
+      particlesGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(colors, 3)
+      );
+
+      const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.1,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+      scene.add(particles);
+
+      function animate() {
+        requestAnimationFrame(animate);
+        const t = performance.now() * 0.0005;
+
+        // 曲線を回転
+        curves.forEach((item, i) => {
+          item.group.rotation.y = t * 0.3 + item.phase;
+          item.group.rotation.x = Math.sin(t * 0.5 + item.phase) * 0.2;
+
+          // 上下に移動
+          item.group.position.y = Math.sin(t + item.phase) * 0.5;
+        });
+
+        // パーティクルを回転
+        particles.rotation.y = t * 0.2;
+
+        // カメラを少し動かす
+        camera.position.x = Math.sin(t * 0.3) * 2;
+        camera.position.y = Math.cos(t * 0.2) * 1;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #111 – Metaballs</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: #000;
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.75);
+        z-index: 10;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Metaballs / Liquid"</div>
+
+    <script>
+      // シンプルなメタボール実装（Marching Cubesの代替）
+      class SimpleMetaballs {
+        constructor(resolution) {
+          this.resolution = resolution;
+          this.size = 2;
+          this.threshold = 0.5;
+          this.blobs = [];
+
+          const geometry = new THREE.SphereGeometry(1, 8, 8);
+          this.material = new THREE.MeshPhongMaterial({
+            color: 0x44aaff,
+            shininess: 80,
+            specular: 0x4488ff,
+          });
+
+          this.group = new THREE.Group();
+        }
+
+        reset() {
+          this.blobs = [];
+        }
+
+        addBall(x, y, z, strength, subtract) {
+          this.blobs.push({ x, y, z, strength });
+        }
+
+        update() {
+          // 既存のメッシュをクリア
+          while (this.group.children.length > 0) {
+            this.group.remove(this.group.children[0]);
+          }
+
+          // 各ブロブをスフィアで表現
+          this.blobs.forEach((blob, i) => {
+            const sphere = new THREE.Mesh(
+              new THREE.SphereGeometry(blob.strength * 2, 8, 8),
+              this.material.clone()
+            );
+
+            // 座標を-1から1の範囲に変換
+            sphere.position.set(
+              (blob.x - 0.5) * 2,
+              (blob.y - 0.5) * 2,
+              (blob.z - 0.5) * 2
+            );
+
+            // 色のバリエーション
+            const hue = (i / this.blobs.length) * 0.3 + 0.5;
+            sphere.material.color.setHSL(hue, 0.7, 0.6);
+
+            this.group.add(sphere);
+          });
+
+          // ブロブ間の接続を表現（オプション）
+          if (this.blobs.length > 1) {
+            for (let i = 0; i < this.blobs.length - 1; i++) {
+              const b1 = this.blobs[i];
+              const b2 = this.blobs[i + 1];
+
+              const p1 = new THREE.Vector3(
+                (b1.x - 0.5) * 2,
+                (b1.y - 0.5) * 2,
+                (b1.z - 0.5) * 2
+              );
+              const p2 = new THREE.Vector3(
+                (b2.x - 0.5) * 2,
+                (b2.y - 0.5) * 2,
+                (b2.z - 0.5) * 2
+              );
+
+              const distance = p1.distanceTo(p2);
+
+              if (distance < 1.5) {
+                const dir = new THREE.Vector3().subVectors(p2, p1);
+                const cylinder = new THREE.Mesh(
+                  new THREE.CylinderGeometry(0.1, 0.1, distance, 8),
+                  this.material.clone()
+                );
+
+                cylinder.position.copy(p1).add(dir.multiplyScalar(0.5));
+                cylinder.lookAt(p2);
+                cylinder.rotateX(Math.PI / 2);
+
+                cylinder.material.color.setHSL(0.55, 0.7, 0.5);
+                cylinder.material.opacity = 0.6;
+                cylinder.material.transparent = true;
+
+                this.group.add(cylinder);
+              }
+            }
+          }
+        }
+      }
+
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x000000, 3, 10);
+
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 0, 5);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: false });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      document.body.appendChild(renderer.domElement);
+
+      // ライティング
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+      scene.add(ambientLight);
+
+      const light1 = new THREE.PointLight(0x4488ff, 1, 50);
+      light1.position.set(5, 5, 5);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0xff4488, 0.8, 50);
+      light2.position.set(-5, -5, 5);
+      scene.add(light2);
+
+      const resolution = 60;
+      const effect = new SimpleMetaballs(resolution);
+      effect.group.scale.set(1.5, 1.5, 1.5);
+      scene.add(effect.group);
+
+      const numBlobs = 8;
+
+      function updateMetaballs(time) {
+        effect.reset();
+
+        for (let i = 0; i < numBlobs; i++) {
+          const x = Math.sin(time * 0.6 + i * 1.3) * 0.5 + 0.5;
+          const y = Math.sin(time * 0.7 + i * 2.1) * 0.5 + 0.5;
+          const z = Math.sin(time * 0.5 + i * 3.3) * 0.5 + 0.5;
+
+          effect.addBall(x, y, z, 0.2, 12);
+        }
+
+        effect.update();
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        const t = performance.now() * 0.001;
+
+        updateMetaballs(t);
+
+        effect.group.rotation.x = t * 0.15;
+        effect.group.rotation.y = t * 0.25;
+
+        // ライトも動かす
+        light1.position.x = Math.sin(t * 0.7) * 5;
+        light1.position.z = Math.cos(t * 0.7) * 5;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

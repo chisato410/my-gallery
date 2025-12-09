@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #106 – "Noise Wave Surface"</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: #000;
+        height: 100vh;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      }
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Noise Wave Surface"</div>
+
+    <script>
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        2000
+      );
+      camera.position.set(0, 30, 120);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      const size = 200;
+      const segments = 200;
+
+      const geometry = new THREE.PlaneGeometry(size, size, segments, segments);
+      const material = new THREE.MeshStandardMaterial({
+        color: 0x2266ff,
+        emissive: 0x001133,
+        wireframe: true,
+      });
+      const plane = new THREE.Mesh(geometry, material);
+      plane.rotation.x = -Math.PI / 2;
+      scene.add(plane);
+
+      const light = new THREE.PointLight(0xffffff, 2, 1000);
+      light.position.set(0, 100, 50);
+      scene.add(light);
+
+      const simplex = new SimplexNoise();
+      let t = 0;
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        t += 0.005;
+        const pos = geometry.attributes.position;
+
+        for (let i = 0; i < pos.count; i++) {
+          const x = pos.getX(i);
+          const y = pos.getY(i);
+          const noise = simplex.noise3D(x * 0.05, y * 0.05, t);
+          pos.setZ(i, noise * 8);
+        }
+        pos.needsUpdate = true;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

@@ -1954,5 +1954,208 @@
     "url": "/artworks/full/fragment_103_p5.html",
     "previewUrl": "/artworks/previews/fragment_103_p5.html",
     "filename": "fragment_103_p5.html"
+  },
+  {
+    "id": 105,
+    "title": "Three.js template",
+    "tech": "Three.js",
+    "createdAt": "2025-11-25",
+    "tags": [
+      "webgl",
+      "geometry",
+      "torus-knot",
+      "mesh",
+      "rotation",
+      "3d-shape",
+      "interactive-canvas"
+    ],
+    "url": "/artworks/full/fragment_000_three.html",
+    "previewUrl": "/artworks/previews/fragment_000_three.html",
+    "filename": "fragment_000_three.html"
+  },
+  {
+    "id": 106,
+    "title": "Particle Field",
+    "tech": "Three.js",
+    "createdAt": "2025-11-25",
+    "tags": [
+      "webgl",
+      "particles",
+      "buffer-geometry",
+      "points",
+      "rotation",
+      "3d-space",
+      "starfield"
+    ],
+    "url": "/artworks/full/fragment_001_three.html",
+    "previewUrl": "/artworks/previews/fragment_001_three.html",
+    "filename": "fragment_001_three.html"
+  },
+  {
+    "id": 107,
+    "title": "Noise Wave Surface",
+    "tech": "Three.js",
+    "createdAt": "2025-11-25",
+    "tags": [
+      "webgl",
+      "plane-geometry",
+      "mesh-standard-material",
+      "wireframe",
+      "simplex-noise",
+      "animated-surface",
+      "lighting"
+    ],
+    "url": "/artworks/full/fragment_002_three.html",
+    "previewUrl": "/artworks/previews/fragment_002_three.html",
+    "filename": "fragment_002_three.html"
+  },
+  {
+    "id": 108,
+    "title": "Fractal Sphere",
+    "tech": "Three.js",
+    "createdAt": "2025-11-25",
+    "tags": [
+      "webgl",
+      "sphere-geometry",
+      "mesh-normal-material",
+      "flat-shading",
+      "simplex-noise",
+      "animated-deformation",
+      "rotation"
+    ],
+    "url": "/artworks/full/fragment_003_three.html",
+    "previewUrl": "/artworks/previews/fragment_003_three.html",
+    "filename": "fragment_003_three.html"
+  },
+  {
+    "id": 109,
+    "title": "Noise Cloud Particles",
+    "tech": "three.js",
+    "createdAt": "2025-11-25",
+    "tags": [
+      "webgl",
+      "particles",
+      "buffer-geometry",
+      "points-material",
+      "simplex-noise",
+      "cloud-effect",
+      "3d-animation"
+    ],
+    "url": "/artworks/full/fragment_004_three.html",
+    "previewUrl": "/artworks/previews/fragment_004_three.html",
+    "filename": "fragment_004_three.html"
+  },
+  {
+    "id": 110,
+    "title": "Noise Cloud Particles",
+    "tech": "Three.js",
+    "createdAt": "2025-11-26",
+    "tags": [
+      "webgl",
+      "particles",
+      "simplex-noise",
+      "buffer-geometry",
+      "points-material",
+      "cloud-effect",
+      "rotation",
+      "3d-animation"
+    ],
+    "url": "/artworks/full/fragment_005_three.html",
+    "previewUrl": "/artworks/previews/fragment_005_three.html",
+    "filename": "fragment_005_three.html"
+  },
+  {
+    "id": 111,
+    "title": "Fractal Noise Line",
+    "tech": "Three.js",
+    "createdAt": "2025-11-26",
+    "tags": [
+      "webgl",
+      "perlin-noise",
+      "curves",
+      "catmull-rom",
+      "line-geometry",
+      "orbiting-motion",
+      "camera-animation",
+      "3d-line-art"
+    ],
+    "url": "/artworks/full/fragment_006_three.html",
+    "previewUrl": "/artworks/previews/fragment_006_three.html",
+    "filename": "fragment_006_three.html"
+  },
+  {
+    "id": 112,
+    "title": "Noise Terrain",
+    "tech": "Three.js",
+    "createdAt": "2025-11-26",
+    "tags": [
+      "webgl",
+      "perlin-noise",
+      "plane-geometry",
+      "wireframe",
+      "terrain-deformation",
+      "dynamic-surface",
+      "point-light",
+      "camera-orbit"
+    ],
+    "url": "/artworks/full/fragment_007_three.html",
+    "previewUrl": "/artworks/previews/fragment_007_three.html",
+    "filename": "fragment_007_three.html"
+  },
+  {
+    "id": 113,
+    "title": "Metaballs / Liquid",
+    "tech": "Three.js",
+    "createdAt": "2025-11-26",
+    "tags": [
+      "webgl",
+      "metaballs",
+      "sphere-geometry",
+      "liquid-effect",
+      "phong-material",
+      "multiple-lights",
+      "group-animation",
+      "dynamic-blobs"
+    ],
+    "url": "/artworks/full/fragment_008_three.html",
+    "previewUrl": "/artworks/previews/fragment_008_three.html",
+    "filename": "fragment_008_three.html"
+  },
+  {
+    "id": 114,
+    "title": "Geometric Art",
+    "tech": "Three.js",
+    "createdAt": "2025-11-26",
+    "tags": [
+      "webgl",
+      "line-geometry",
+      "circular-patterns",
+      "geometric-motion",
+      "group-rotation",
+      "abstract-art",
+      "3d-geometry"
+    ],
+    "url": "/artworks/full/fragment_009_three.html",
+    "previewUrl": "/artworks/previews/fragment_009_three.html",
+    "filename": "fragment_009_three.html"
+  },
+  {
+    "id": 115,
+    "title": "3D Line Sculpture",
+    "tech": "Three.js",
+    "createdAt": "2025-11-26",
+    "tags": [
+      "webgl",
+      "tube-geometry",
+      "catmull-rom",
+      "gradient-colors",
+      "glow-effect",
+      "3d-sculpture",
+      "particles",
+      "camera-motion"
+    ],
+    "url": "/artworks/full/fragment_010_three.html",
+    "previewUrl": "/artworks/previews/fragment_010_three.html",
+    "filename": "fragment_010_three.html"
   }
 ]

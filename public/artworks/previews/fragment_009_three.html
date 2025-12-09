@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #112 – “Geometric Art”</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: #000;
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      canvas {
+        display: block;
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">“Geometric Art”</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 0, 5);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: false });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1);
+      document.body.appendChild(renderer.domElement);
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      const lineMaterial = new THREE.LineBasicMaterial({
+        color: 0x55ccff,
+        transparent: true,
+        opacity: 0.9,
+      });
+
+      const lineCount = 20;
+      for (let i = 0; i < lineCount; i++) {
+        const geom = new THREE.BufferGeometry();
+        const points = [];
+
+        const radius = 1.2;
+        const segments = 60;
+
+        for (let j = 0; j <= segments; j++) {
+          const angle = (Math.PI * 2 * j) / segments;
+          const x = Math.cos(angle) * (radius + Math.sin(i * 0.3) * 0.3);
+          const y = Math.sin(angle) * (radius + Math.cos(i * 0.3) * 0.3);
+          points.push(new THREE.Vector3(x, y, Math.sin(j * 0.2 + i) * 0.1));
+        }
+
+        geom.setFromPoints(points);
+
+        const line = new THREE.Line(geom, lineMaterial);
+        line.rotation.z = (Math.PI * 2 * i) / lineCount;
+        group.add(line);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        const t = performance.now() * 0.0004;
+
+        group.rotation.x = Math.sin(t * 0.7) * 0.3;
+        group.rotation.y = Math.cos(t * 0.6) * 0.3;
+        group.rotation.z += 0.005;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>
