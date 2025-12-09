@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #072 – Sunburst Geometry</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(255, 200, 0, 0.5);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #ffd54f;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Sunburst Geometry”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        strokeWeight(3);
+      }
+      function draw() {
+        background(0, 0, 10);
+        translate(width / 2, height / 2);
+        for (let i = 0; i < 60; i++) {
+          let a = (TWO_PI / 60) * i;
+          let len = map(sin(frameCount * 0.05 + i), -1, 1, 100, 220);
+          stroke((50 + i * 3) % 360, 100, 60);
+          line(0, 0, cos(a) * len, sin(a) * len);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_072_sunburst_geometry", "png");
+      }
+    </script>
+  </body>
+</html>

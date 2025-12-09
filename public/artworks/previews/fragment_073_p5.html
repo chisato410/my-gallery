@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #073 – Lunar Drift</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #01030a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(180, 200, 255, 0.4);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #b0c4ff;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Lunar Drift”</div>
+    <script>
+      let stars = [];
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        for (let i = 0; i < 50; i++) {
+          stars.push({
+            x: random(width),
+            y: random(height),
+            s: random(0.5, 2),
+            t: random(TWO_PI),
+          });
+        }
+      }
+      function draw() {
+        background(230, 60, 5);
+        fill(60, 10, 90, 0.1);
+        noStroke();
+        ellipse(width / 2, height / 2, 150 + sin(frameCount * 0.02) * 5);
+        for (let s of stars) {
+          s.t += 0.02;
+          let b = map(sin(s.t), -1, 1, 40, 90);
+          fill(230, 50, b);
+          ellipse(s.x, s.y, s.s);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_073_lunar_drift", "png");
+      }
+    </script>
+  </body>
+</html>

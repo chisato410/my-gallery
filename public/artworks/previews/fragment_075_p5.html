@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #075 – Silver Veil</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #070812;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(160, 180, 255, 0.5);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #c7d3ff;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Silver Veil”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        strokeWeight(1.5);
+        noFill();
+      }
+      function draw() {
+        background(230, 30, 10);
+        translate(width / 2, height / 2);
+        for (let i = 0; i < 50; i++) {
+          let a = frameCount * 0.02 + i;
+          stroke((230 + i * 2) % 360, 20, 70, 0.4);
+          beginShape();
+          for (let t = 0; t < TWO_PI; t += 0.1) {
+            let r = 200 * sin(a + t * 2) * 0.3 + 150;
+            vertex(cos(t) * r, sin(t) * r);
+          }
+          endShape(CLOSE);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_075_silver_veil", "png");
+      }
+    </script>
+  </body>
+</html>

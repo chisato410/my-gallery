@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #077 – Wax and Wane</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(180, 180, 180, 0.4);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #bbb;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Wax and Wane”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        noStroke();
+        colorMode(HSL);
+      }
+      function draw() {
+        background(0);
+        translate(width / 2, height / 2);
+        fill(230, 30, 90);
+        ellipse(0, 0, 180);
+        fill(0);
+        let p = sin(frameCount * 0.02);
+        rectMode(CENTER);
+        rect(0, 0, 180 * abs(p), 180);
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_077_wax_and_wane", "png");
+      }
+    </script>
+  </body>
+</html>

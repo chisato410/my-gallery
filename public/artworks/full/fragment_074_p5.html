@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #074 – Shadow Orbit</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 40px rgba(80, 80, 80, 0.4);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #777;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Shadow Orbit”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+      }
+      function draw() {
+        background(0);
+        translate(width / 2, height / 2);
+        stroke(220, 10, 60, 0.3);
+        ellipse(0, 0, 300);
+        for (let i = 0; i < 12; i++) {
+          let a = frameCount * 0.01 + (i * TWO_PI) / 12;
+          let x = cos(a) * 150;
+          let y = sin(a) * 150;
+          stroke(240, 10, 80);
+          ellipse(x, y, 8);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_074_shadow_orbit", "png");
+      }
+    </script>
+  </body>
+</html>

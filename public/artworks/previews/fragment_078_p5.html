@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #078 – Lunar Bloom</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #080818;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 60px rgba(200, 220, 255, 0.5);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #e0e8ff;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Lunar Bloom”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+      }
+      function draw() {
+        background(230, 30, 5);
+        translate(width / 2, height / 2);
+        let pulse = sin(frameCount * 0.03) * 40 + 120;
+        for (let i = 0; i < 50; i++) {
+          stroke((230 + i * 5) % 360, 50, 80, 0.3);
+          ellipse(0, 0, pulse + i * 8);
+        }
+        fill(230, 40, 90, 0.1);
+        noStroke();
+        ellipse(0, 0, pulse * 0.5);
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_078_lunar_bloom", "png");
+      }
+    </script>
+  </body>
+</html>

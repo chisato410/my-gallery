@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #076 – Tidal Reflection</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        background: #021726;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(180, 220, 255, 0.5);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #bde0ff;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Tidal Reflection”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noFill();
+      }
+      function draw() {
+        background(200, 60, 5);
+        translate(width / 2, height / 2);
+        stroke(200, 30, 80);
+        ellipse(0, -80, 120);
+        for (let i = 0; i < 12; i++) {
+          let r = i * 20 + sin(frameCount * 0.05 + i) * 5;
+          stroke(200, 40, 70, 0.3);
+          ellipse(0, 80, r * 2);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("fragment_076_tidal_reflection", "png");
+      }
+    </script>
+  </body>
+</html>

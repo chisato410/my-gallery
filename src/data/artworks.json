@@ -1393,5 +1393,175 @@
     "url": "/artworks/full/fragment_070_p5.html",
     "previewUrl": "/artworks/previews/fragment_070_p5.html",
     "filename": "fragment_070_p5.html"
+  },
+  {
+    "id": 72,
+    "title": "Dawn Spiral",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "spiral-motion",
+      "radiant-points",
+      "dawn-colors",
+      "rotational-flow",
+      "hsl-spectrum",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_071_p5.html",
+    "previewUrl": "/artworks/previews/fragment_071_p5.html",
+    "filename": "fragment_071_p5.html"
+  },
+  {
+    "id": 73,
+    "title": "Sunburst Geometry",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "radial-lines",
+      "geometric-sunburst",
+      "dynamic-length",
+      "wave-oscillation",
+      "bright-core",
+      "solar-fragment"
+    ],
+    "url": "/artworks/full/fragment_072_p5.html",
+    "previewUrl": "/artworks/previews/fragment_072_p5.html",
+    "filename": "fragment_072_p5.html"
+  },
+  {
+    "id": 74,
+    "title": "Lunar Drift",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "starfield-animation",
+      "lunar-pulse",
+      "soft-flicker",
+      "night-atmosphere",
+      "celestial-fragment",
+      "hsl-lights"
+    ],
+    "url": "/artworks/full/fragment_073_p5.html",
+    "previewUrl": "/artworks/previews/fragment_073_p5.html",
+    "filename": "fragment_073_p5.html"
+  },
+  {
+    "id": 75,
+    "title": "Shadow Orbit",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "dark-orbit",
+      "minimal-geometry",
+      "ring-motion",
+      "shadow-core",
+      "orbital-path",
+      "monochrome-space"
+    ],
+    "url": "/artworks/full/fragment_074_p5.html",
+    "previewUrl": "/artworks/previews/fragment_074_p5.html",
+    "filename": "fragment_074_p5.html"
+  },
+  {
+    "id": 76,
+    "title": "Silver Veil",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "wave-contours",
+      "silver-motion",
+      "veil-pattern",
+      "circular-warp",
+      "layered-oscillation",
+      "elegant-flow"
+    ],
+    "url": "/artworks/full/fragment_075_p5.html",
+    "previewUrl": "/artworks/previews/fragment_075_p5.html",
+    "filename": "fragment_075_p5.html"
+  },
+  {
+    "id": 77,
+    "title": "Tidal Reflection",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "tidal-waves",
+      "reflection-ring",
+      "upper-lower-duality",
+      "ocean-motion",
+      "hsl-water",
+      "calm-fragment"
+    ],
+    "url": "/artworks/full/fragment_076_p5.html",
+    "previewUrl": "/artworks/previews/fragment_076_p5.html",
+    "filename": "fragment_076_p5.html"
+  },
+  {
+    "id": 78,
+    "title": "Wax and Wane",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "moon-phase",
+      "dynamic-eclipse",
+      "blackout-motion",
+      "celestial-cycle",
+      "lunar-fragment",
+      "minimal-contrast"
+    ],
+    "url": "/artworks/full/fragment_077_p5.html",
+    "previewUrl": "/artworks/previews/fragment_077_p5.html",
+    "filename": "fragment_077_p5.html"
+  },
+  {
+    "id": 79,
+    "title": "Lunar Bloom",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "pulsing-rings",
+      "moon-bloom",
+      "soft-expansion",
+      "hsl-luminescence",
+      "radial-growth",
+      "night-fragment"
+    ],
+    "url": "/artworks/full/fragment_078_p5.html",
+    "previewUrl": "/artworks/previews/fragment_078_p5.html",
+    "filename": "fragment_078_p5.html"
+  },
+  {
+    "id": 80,
+    "title": "Dual Flow",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "dual-waves",
+      "horizontal-flow",
+      "mirror-motion",
+      "line-oscillation",
+      "structured-rhythm",
+      "monochrome-energy"
+    ],
+    "url": "/artworks/full/fragment_079_p5.html",
+    "previewUrl": "/artworks/previews/fragment_079_p5.html",
+    "filename": "fragment_079_p5.html"
+  },
+  {
+    "id": 81,
+    "title": "Symmetry Pulse",
+    "tech": "p5.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "wave-symmetry",
+      "pulse-deformation",
+      "mirror-waves",
+      "line-field",
+      "energy-pattern",
+      "abstract-vibration"
+    ],
+    "url": "/artworks/full/fragment_080_p5.html",
+    "previewUrl": "/artworks/previews/fragment_080_p5.html",
+    "filename": "fragment_080_p5.html"
   }
 ]

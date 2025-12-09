@@ -1180,5 +1180,145 @@
       "multi-orbit",
       "space-fragment"
     ]
+  },
+  {
+    "filename": "fragment_071_p5.html",
+    "title": "Dawn Spiral",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "spiral-motion",
+      "radiant-points",
+      "dawn-colors",
+      "rotational-flow",
+      "hsl-spectrum",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_072_p5.html",
+    "title": "Sunburst Geometry",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "radial-lines",
+      "geometric-sunburst",
+      "dynamic-length",
+      "wave-oscillation",
+      "bright-core",
+      "solar-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_073_p5.html",
+    "title": "Lunar Drift",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "starfield-animation",
+      "lunar-pulse",
+      "soft-flicker",
+      "night-atmosphere",
+      "celestial-fragment",
+      "hsl-lights"
+    ]
+  },
+  {
+    "filename": "fragment_074_p5.html",
+    "title": "Shadow Orbit",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "dark-orbit",
+      "minimal-geometry",
+      "ring-motion",
+      "shadow-core",
+      "orbital-path",
+      "monochrome-space"
+    ]
+  },
+  {
+    "filename": "fragment_075_p5.html",
+    "title": "Silver Veil",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "wave-contours",
+      "silver-motion",
+      "veil-pattern",
+      "circular-warp",
+      "layered-oscillation",
+      "elegant-flow"
+    ]
+  },
+  {
+    "filename": "fragment_076_p5.html",
+    "title": "Tidal Reflection",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "tidal-waves",
+      "reflection-ring",
+      "upper-lower-duality",
+      "ocean-motion",
+      "hsl-water",
+      "calm-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_077_p5.html",
+    "title": "Wax and Wane",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "moon-phase",
+      "dynamic-eclipse",
+      "blackout-motion",
+      "celestial-cycle",
+      "lunar-fragment",
+      "minimal-contrast"
+    ]
+  },
+  {
+    "filename": "fragment_078_p5.html",
+    "title": "Lunar Bloom",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "pulsing-rings",
+      "moon-bloom",
+      "soft-expansion",
+      "hsl-luminescence",
+      "radial-growth",
+      "night-fragment"
+    ]
+  },
+  {
+    "filename": "fragment_079_p5.html",
+    "title": "Dual Flow",
+    "tech": "p5.js",
+    "createdAt": "2025-11-22",
+    "tags": [
+      "dual-waves",
+      "horizontal-flow",
+      "mirror-motion",
+      "line-oscillation",
+      "structured-rhythm",
+      "monochrome-energy"
+    ]
+  },
+  {
+    "filename": "fragment_080_p5.html",
+    "title": "Symmetry Pulse",
+    "tech": "p5.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "wave-symmetry",
+      "pulse-deformation",
+      "mirror-waves",
+      "line-field",
+      "energy-pattern",
+      "abstract-vibration"
+    ]
   }
 ]
