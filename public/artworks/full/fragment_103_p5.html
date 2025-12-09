@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #102 – “Shadow of Dog”</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fbf6ef;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">Fragment #102 – “Shadow of Dog”</div>
+    <script>
+      let angle = 0;
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+      }
+      function draw() {
+        background(50, 20, 98);
+        // ground plane
+        fill(40, 30, 95);
+        rect(0, height * 0.7, width, height * 0.3);
+
+        // moving light source rotates slowly (auto), also responds to mouse X
+        angle = frameCount * 0.008 + map(mouseX, 0, width, -0.6, 0.6);
+        let lx = width / 2 + cos(angle) * 220;
+        let ly = height * 0.2 + sin(angle) * 40;
+
+        // draw light
+        noStroke();
+        fill(55, 80, 90, 0.8);
+        ellipse(lx, ly, 40);
+
+        // dog base shape (standing)
+        let dogX = width / 2;
+        let dogY = height * 0.68;
+        // compute simple shadow by projecting vertices away from light
+        push();
+        translate(dogX, dogY);
+        // define simple silhouette points relative to center
+        let silhouette = [
+          { x: -60, y: -10 },
+          { x: -30, y: -30 },
+          { x: 0, y: -20 },
+          { x: 40, y: -10 },
+          { x: 60, y: 10 },
+          { x: 30, y: 30 },
+          { x: -40, y: 30 },
+        ];
+        // draw shadow polygon
+        fill(0, 0, 10, 0.35);
+        beginShape();
+        for (let p of silhouette) {
+          // vector from light to point (in canvas coords)
+          let px = dogX + p.x,
+            py = dogY + p.y;
+          let vx = px - lx,
+            vy = py - ly;
+          // project further to create long shadow
+          let proj = 1.8;
+          vertex(p.x + vx * proj, p.y + vy * proj);
+        }
+        endShape(CLOSE);
+
+        // draw dog silhouette on top
+        fill(40, 80, 30);
+        beginShape();
+        for (let p of silhouette) vertex(p.x, p.y);
+        endShape(CLOSE);
+
+        // tiny highlight where light hits
+        let hd = map(sin(frameCount * 0.02), -1, 1, 0.6, 1.0);
+        fill(55, 80, 50, 0.12);
+        ellipse(-20, -5, 40 * hd, 20 * hd);
+
+        pop();
+
+        // UI hint
+        fill(40, 60, 40, 0.4);
+        textAlign(CENTER);
+        textSize(12);
+        text("move mouse to change light", width / 2, 28);
+      }
+
+      function keyPressed() {
+        if (key === "s") saveCanvas("Fragment #102 – “Shadow of Dog”", "png");
+      }
+    </script>
+  </body>
+</html>

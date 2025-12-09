@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fragment #102 – “Bubble Pup”</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(180deg, #fff0ff, #e8f7ff);
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #334;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Bubble Pup”</div>
+    <script>
+      let bubbles = [];
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        for (let i = 0; i < 50; i++) spawnBubble();
+      }
+      function draw() {
+        background(210, 60, 98);
+        // gentle gradient
+        noStroke();
+        for (let y = 0; y < height; y++) {
+          let c = lerpColor(color(330, 80, 98), color(200, 10, 98), y / height);
+          stroke(c);
+          line(0, y, width, y);
+        }
+        // update bubbles
+        for (let i = bubbles.length - 1; i >= 0; i--) {
+          let b = bubbles[i];
+          b.y -= b.v;
+          b.x += sin(frameCount * 0.01 + b.off) * 0.6;
+          // sheen
+          noFill();
+          stroke(200, 40, 95, 0.6);
+          strokeWeight(1.2);
+          ellipse(b.x, b.y, b.r * 2);
+          // inner rainbow-ish tiny reflection
+          noStroke();
+          fill(200 + sin(frameCount * 0.02 + b.off) * 60, 80, 90, 0.12);
+          ellipse(b.x - b.r * 0.25, b.y - b.r * 0.25, b.r * 0.9);
+          if (b.y < -50) {
+            bubbles.splice(i, 1);
+            spawnBubble();
+          }
+        }
+        // dog cartoon center
+        drawCuteDog(width / 2, height * 0.7);
+      }
+      function spawnBubble() {
+        bubbles.push({
+          x: random(width),
+          y: height + random(20, 200),
+          r: random(10, 36),
+          v: random(0.5, 1.6),
+          off: random(1000),
+        });
+      }
+      function mousePressed() {
+        // pop bubble nearest mouse
+        for (let i = bubbles.length - 1; i >= 0; i--) {
+          let b = bubbles[i];
+          if (dist(mouseX, mouseY, b.x, b.y) < b.r) {
+            // pop effect: small burst particles
+            for (let p = 0; p < 50; p++) {
+              let ang = random(TWO_PI);
+              let spd = random(1, 4);
+              spawnParticle(b.x, b.y, cos(ang) * spd, sin(ang) * spd);
+            }
+            bubbles.splice(i, 1);
+            spawnBubble();
+            break;
+          }
+        }
+      }
+      let particles = [];
+      function spawnParticle(x, y, vx, vy) {
+        particles.push({ x, y, vx, vy, life: 60 });
+      }
+      function drawCuteDog(x, y) {
+        push();
+        translate(x, y);
+        noStroke();
+        fill(30, 80, 30);
+        ellipse(0, 0, 160, 80);
+        fill(30, 80, 22);
+        ellipse(-50, -10, 60, 54);
+        fill(0);
+        ellipse(-30, -18, 8, 6);
+        pop();
+        // particles
+        for (let i = particles.length - 1; i >= 0; i--) {
+          let p = particles[i];
+          fill(40, 80, 70, p.life / 90);
+          ellipse(p.x, p.y, 4);
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life--;
+          if (p.life <= 0) particles.splice(i, 1);
+        }
+      }
+      function keyPressed() {
+        if (key === "s") saveCanvas("Fragment #102 – “Bubble Pup”", "png");
+      }
+    </script>
+  </body>
+</html>

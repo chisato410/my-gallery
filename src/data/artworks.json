@@ -1903,5 +1903,56 @@
     "url": "/artworks/full/fragment_100_p5.html",
     "previewUrl": "/artworks/previews/fragment_100_p5.html",
     "filename": "fragment_100_p5.html"
+  },
+  {
+    "id": 102,
+    "title": "Cosmic Dog",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "dog-silhouette",
+      "starfield",
+      "cosmic",
+      "tail-meteor",
+      "gradient-background",
+      "animated-light"
+    ],
+    "url": "/artworks/full/fragment_101_p5.html",
+    "previewUrl": "/artworks/previews/fragment_101_p5.html",
+    "filename": "fragment_101_p5.html"
+  },
+  {
+    "id": 103,
+    "title": "Bubble Pup",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "dog",
+      "bubbles",
+      "floating-particles",
+      "interactive",
+      "rainbow-reflection",
+      "soft-gradient"
+    ],
+    "url": "/artworks/full/fragment_102_p5.html",
+    "previewUrl": "/artworks/previews/fragment_102_p5.html",
+    "filename": "fragment_102_p5.html"
+  },
+  {
+    "id": 104,
+    "title": "Shadow of Dog",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "dog",
+      "shadow-casting",
+      "dynamic-light",
+      "standing-silhouette",
+      "soft-highlights",
+      "interactive-light"
+    ],
+    "url": "/artworks/full/fragment_103_p5.html",
+    "previewUrl": "/artworks/previews/fragment_103_p5.html",
+    "filename": "fragment_103_p5.html"
   }
 ]

@@ -1600,5 +1600,47 @@
       "winter-morning",
       "soft-animation"
     ]
+  },
+  {
+    "filename": "fragment_101_p5.html",
+    "title": "Cosmic Dog",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "dog-silhouette",
+      "starfield",
+      "cosmic",
+      "tail-meteor",
+      "gradient-background",
+      "animated-light"
+    ]
+  },
+  {
+    "filename": "fragment_102_p5.html",
+    "title": "Bubble Pup",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "dog",
+      "bubbles",
+      "floating-particles",
+      "interactive",
+      "rainbow-reflection",
+      "soft-gradient"
+    ]
+  },
+  {
+    "filename": "fragment_103_p5.html",
+    "title": "Shadow of Dog",
+    "tech": "p5.js",
+    "createdAt": "2025-11-24",
+    "tags": [
+      "dog",
+      "shadow-casting",
+      "dynamic-light",
+      "standing-silhouette",
+      "soft-highlights",
+      "interactive-light"
+    ]
   }
 ]
