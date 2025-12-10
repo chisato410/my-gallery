@@ -1,0 +1,522 @@
+<!-- fragment_014_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #115 – Dream World</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #ffd6e7 0%,
+          #ffe8f0 25%,
+          #e6f2ff 50%,
+          #f0e6ff 75%,
+          #ffe6f5 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(180, 100, 200, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Dream World" 💭</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        300
+      );
+      camera.position.set(0, 10, 40);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      document.body.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+      scene.add(ambientLight);
+
+      const light1 = new THREE.PointLight(0xffb3d9, 1.5, 80);
+      light1.position.set(20, 15, 10);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0xb3d9ff, 1.5, 80);
+      light2.position.set(-20, 15, -10);
+      scene.add(light2);
+
+      // 浮遊する島を作成
+      function createFloatingIsland(size) {
+        const island = new THREE.Group();
+
+        // 島の本体
+        const islandGeometry = new THREE.SphereGeometry(
+          size,
+          32,
+          32,
+          0,
+          Math.PI * 2,
+          0,
+          Math.PI / 2
+        );
+        const islandMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffccee,
+          shininess: 30,
+        });
+        const islandMesh = new THREE.Mesh(islandGeometry, islandMaterial);
+        island.add(islandMesh);
+
+        // 草
+        const grassGeometry = new THREE.CylinderGeometry(
+          0,
+          size * 1.1,
+          size * 0.3,
+          32
+        );
+        const grassMaterial = new THREE.MeshPhongMaterial({
+          color: 0xccffcc,
+          shininess: 20,
+        });
+        const grass = new THREE.Mesh(grassGeometry, grassMaterial);
+        grass.position.y = size * 0.15;
+        island.add(grass);
+
+        return island;
+      }
+
+      // 夢の建物を作成（不思議な形）
+      function createDreamBuilding(type) {
+        const building = new THREE.Group();
+
+        if (type === "tower") {
+          // らせん状の塔
+          for (let i = 0; i < 50; i++) {
+            const segmentGeometry = new THREE.BoxGeometry(1.5, 2, 1.5);
+            const segmentMaterial = new THREE.MeshPhongMaterial({
+              color: [0xffb3d9, 0xb3d9ff, 0xd9b3ff, 0xffd9b3][i % 4],
+              shininess: 60,
+            });
+            const segment = new THREE.Mesh(segmentGeometry, segmentMaterial);
+
+            const angle = (i / 10) * Math.PI * 2;
+            segment.position.x = Math.cos(angle) * 1;
+            segment.position.y = i * 2;
+            segment.position.z = Math.sin(angle) * 1;
+            segment.rotation.y = angle;
+
+            building.add(segment);
+          }
+        } else if (type === "floating") {
+          // 逆さの建物
+          const baseGeometry = new THREE.ConeGeometry(2, 5, 4);
+          const baseMaterial = new THREE.MeshPhongMaterial({
+            color: 0xffb3d9,
+            shininess: 60,
+          });
+          const base = new THREE.Mesh(baseGeometry, baseMaterial);
+          base.position.y = 2.5;
+          building.add(base);
+
+          const topGeometry = new THREE.ConeGeometry(3, 6, 4);
+          const topMaterial = new THREE.MeshPhongMaterial({
+            color: 0xb3d9ff,
+            shininess: 60,
+          });
+          const top = new THREE.Mesh(topGeometry, topMaterial);
+          top.position.y = -3;
+          top.rotation.z = Math.PI;
+          building.add(top);
+        } else if (type === "sphere") {
+          // 球体の建物
+          const sphereGeometry = new THREE.SphereGeometry(2, 8, 8);
+          const sphereMaterial = new THREE.MeshPhongMaterial({
+            color: 0xd9b3ff,
+            shininess: 80,
+            transparent: true,
+            opacity: 0.8,
+          });
+          const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+          building.add(sphere);
+
+          // リング
+          for (let i = 0; i < 50; i++) {
+            const ringGeometry = new THREE.TorusGeometry(
+              2.5 + i * 0.5,
+              0.1,
+              16,
+              32
+            );
+            const ringMaterial = new THREE.MeshPhongMaterial({
+              color: 0xffffff,
+              shininess: 100,
+            });
+            const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+            ring.rotation.x = Math.PI / 2 + (i * Math.PI) / 6;
+            building.add(ring);
+          }
+        }
+
+        return building;
+      }
+
+      // 浮遊する島々
+      const islands = [];
+      const islandPositions = [
+        { x: 0, y: 0, z: 0, size: 8 },
+        { x: 20, y: -5, z: -15, size: 5 },
+        { x: -25, y: 3, z: -10, size: 6 },
+        { x: 15, y: 8, z: 20, size: 4 },
+        { x: -18, y: -8, z: 15, size: 5 },
+      ];
+
+      islandPositions.forEach((pos, index) => {
+        const island = createFloatingIsland(pos.size);
+        island.position.set(pos.x, pos.y, pos.z);
+
+        island.userData = {
+          floatSpeed: 0.3 + Math.random() * 0.3,
+          floatAmount: 0.5 + Math.random() * 0.5,
+          floatOffset: Math.random() * Math.PI * 2,
+          rotateSpeed: 0.05 + Math.random() * 0.05,
+        };
+
+        scene.add(island);
+        islands.push(island);
+
+        // 島の上に建物を配置
+        if (index === 0) {
+          const tower = createDreamBuilding("tower");
+          tower.position.y = pos.size * 0.3;
+          island.add(tower);
+
+          const sphere = createDreamBuilding("sphere");
+          sphere.position.set(5, pos.size * 0.3, 0);
+          island.add(sphere);
+        } else {
+          const types = ["tower", "floating", "sphere"];
+          const building = createDreamBuilding(types[index % 3]);
+          building.position.y = pos.size * 0.3;
+          island.add(building);
+        }
+      });
+
+      // 橋を作成
+      function createBridge(start, end) {
+        const direction = new THREE.Vector3().subVectors(end, start);
+        const length = direction.length();
+        const midPoint = new THREE.Vector3()
+          .addVectors(start, end)
+          .multiplyScalar(0.5);
+
+        const bridge = new THREE.Group();
+
+        // アーチ状の橋
+        const segments = 20;
+        for (let i = 0; i < segments; i++) {
+          const t = i / segments;
+          const x = start.x + direction.x * t;
+          const y = start.y + direction.y * t + Math.sin(t * Math.PI) * 5;
+          const z = start.z + direction.z * t;
+
+          const segmentGeometry = new THREE.BoxGeometry(
+            0.8,
+            0.3,
+            length / segments + 0.2
+          );
+          const segmentMaterial = new THREE.MeshPhongMaterial({
+            color: 0xffd9b3,
+            shininess: 40,
+          });
+          const segment = new THREE.Mesh(segmentGeometry, segmentMaterial);
+          segment.position.set(x, y, z);
+          segment.lookAt(end);
+
+          bridge.add(segment);
+        }
+
+        return bridge;
+      }
+
+      // いくつかの橋を作成
+      const bridge1 = createBridge(
+        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(20, -5, -15)
+      );
+      scene.add(bridge1);
+
+      const bridge2 = createBridge(
+        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(-25, 3, -10)
+      );
+      scene.add(bridge2);
+
+      // 雲のような形状
+      function createCloud(size) {
+        const cloud = new THREE.Group();
+
+        for (let i = 0; i < 50; i++) {
+          const puffGeometry = new THREE.SphereGeometry(size, 8, 8);
+          const puffMaterial = new THREE.MeshPhongMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.6,
+            shininess: 30,
+          });
+          const puff = new THREE.Mesh(puffGeometry, puffMaterial);
+
+          puff.position.x = (Math.random() - 0.5) * size * 2;
+          puff.position.y = (Math.random() - 0.5) * size;
+          puff.position.z = (Math.random() - 0.5) * size * 2;
+          puff.scale.setScalar(0.8 + Math.random() * 0.4);
+
+          cloud.add(puff);
+        }
+
+        return cloud;
+      }
+
+      // 雲
+      const clouds = [];
+      for (let i = 0; i < 50; i++) {
+        const size = 2 + Math.random() * 3;
+        const cloud = createCloud(size);
+
+        cloud.position.x = (Math.random() - 0.5) * 100;
+        cloud.position.y = 10 + Math.random() * 30;
+        cloud.position.z = (Math.random() - 0.5) * 100;
+
+        cloud.userData = {
+          driftSpeed: 0.01 + Math.random() * 0.02,
+          floatSpeed: 0.2 + Math.random() * 0.3,
+          floatAmount: 0.5 + Math.random() * 0.5,
+          floatOffset: Math.random() * Math.PI * 2,
+        };
+
+        scene.add(cloud);
+        clouds.push(cloud);
+      }
+
+      // 夢の中の生き物（蝶のような）
+      function createDreamCreature() {
+        const creature = new THREE.Group();
+
+        // 体
+        const bodyGeometry = new THREE.SphereGeometry(0.3, 8, 8);
+        bodyGeometry.scale(1, 1, 2);
+        const bodyMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffb3d9,
+          shininess: 60,
+        });
+        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        creature.add(body);
+
+        // 翼
+        const wingGeometry = new THREE.CircleGeometry(1, 8);
+        const wingMaterial = new THREE.MeshPhongMaterial({
+          color: 0xb3d9ff,
+          transparent: true,
+          opacity: 0.7,
+          side: THREE.DoubleSide,
+          shininess: 80,
+        });
+
+        const leftWing = new THREE.Mesh(wingGeometry, wingMaterial);
+        leftWing.position.set(-0.5, 0, 0);
+        leftWing.rotation.y = Math.PI / 6;
+        creature.add(leftWing);
+
+        const rightWing = new THREE.Mesh(wingGeometry, wingMaterial);
+        rightWing.position.set(0.5, 0, 0);
+        rightWing.rotation.y = -Math.PI / 6;
+        creature.add(rightWing);
+
+        return creature;
+      }
+
+      // 生き物たち
+      const creatures = [];
+      for (let i = 0; i < 50; i++) {
+        const creature = createDreamCreature();
+
+        creature.position.x = (Math.random() - 0.5) * 60;
+        creature.position.y = Math.random() * 20 + 5;
+        creature.position.z = (Math.random() - 0.5) * 60;
+
+        creature.userData = {
+          angle: Math.random() * Math.PI * 2,
+          radius: 10 + Math.random() * 15,
+          speed: 0.3 + Math.random() * 0.5,
+          height: creature.position.y,
+          wingSpeed: 5 + Math.random() * 5,
+        };
+
+        scene.add(creature);
+        creatures.push(creature);
+      }
+
+      // キラキラの粒子
+      const particleGeometry = new THREE.BufferGeometry();
+      const particleCount = 500;
+      const particlePositions = new Float32Array(particleCount * 3);
+      const particleColors = new Float32Array(particleCount * 3);
+
+      for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3;
+
+        particlePositions[i3] = (Math.random() - 0.5) * 150;
+        particlePositions[i3 + 1] = Math.random() * 60;
+        particlePositions[i3 + 2] = (Math.random() - 0.5) * 150;
+
+        const colors = [0xffb3d9, 0xb3d9ff, 0xd9b3ff, 0xffd9b3, 0xffffff];
+        const color = new THREE.Color(
+          colors[Math.floor(Math.random() * colors.length)]
+        );
+        particleColors[i3] = color.r;
+        particleColors[i3 + 1] = color.g;
+        particleColors[i3 + 2] = color.b;
+      }
+
+      particleGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(particlePositions, 3)
+      );
+      particleGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(particleColors, 3)
+      );
+
+      const particleMaterial = new THREE.PointsMaterial({
+        size: 0.3,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.7,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const particles = new THREE.Points(particleGeometry, particleMaterial);
+      scene.add(particles);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 島の動き
+        islands.forEach((island) => {
+          const data = island.userData;
+          const float =
+            Math.sin(t * data.floatSpeed + data.floatOffset) * data.floatAmount;
+          island.position.y += float * 0.02;
+          island.rotation.y += data.rotateSpeed * 0.01;
+        });
+
+        // 雲の動き
+        clouds.forEach((cloud) => {
+          const data = cloud.userData;
+          cloud.position.x += data.driftSpeed;
+
+          const float =
+            Math.sin(t * data.floatSpeed + data.floatOffset) * data.floatAmount;
+          cloud.position.y += float * 0.01;
+
+          if (cloud.position.x > 60) {
+            cloud.position.x = -60;
+          }
+        });
+
+        // 生き物の動き
+        creatures.forEach((creature) => {
+          const data = creature.userData;
+          data.angle += data.speed * 0.01;
+
+          creature.position.x = Math.cos(data.angle) * data.radius;
+          creature.position.z = Math.sin(data.angle) * data.radius;
+          creature.position.y =
+            data.height + Math.sin(t * 0.5 + data.angle) * 2;
+
+          creature.lookAt(
+            Math.cos(data.angle + 0.1) * data.radius,
+            creature.position.y,
+            Math.sin(data.angle + 0.1) * data.radius
+          );
+
+          // 翼の羽ばたき
+          if (creature.children[1] && creature.children[2]) {
+            const flap = Math.sin(t * data.wingSpeed) * 0.5;
+            creature.children[1].rotation.y = Math.PI / 6 + flap;
+            creature.children[2].rotation.y = -Math.PI / 6 - flap;
+          }
+        });
+
+        // 粒子の動き
+        const particlePos = particleGeometry.attributes.position.array;
+        for (let i = 0; i < particleCount; i++) {
+          const i3 = i * 3;
+
+          particlePos[i3] += Math.sin(t + i * 0.1) * 0.03;
+          particlePos[i3 + 1] += Math.cos(t * 0.7 + i * 0.2) * 0.02;
+          particlePos[i3 + 2] += Math.cos(t + i * 0.15) * 0.03;
+
+          // リセット
+          if (
+            Math.abs(particlePos[i3]) > 80 ||
+            particlePos[i3 + 1] > 70 ||
+            particlePos[i3 + 1] < 0 ||
+            Math.abs(particlePos[i3 + 2]) > 80
+          ) {
+            particlePos[i3] = (Math.random() - 0.5) * 150;
+            particlePos[i3 + 1] = Math.random() * 60;
+            particlePos[i3 + 2] = (Math.random() - 0.5) * 150;
+          }
+        }
+        particleGeometry.attributes.position.needsUpdate = true;
+
+        // ライトの動き
+        light1.position.x = Math.cos(t * 0.3) * 25;
+        light1.position.z = Math.sin(t * 0.3) * 25;
+
+        light2.position.x = Math.cos(t * 0.35 + Math.PI) * 25;
+        light2.position.z = Math.sin(t * 0.35 + Math.PI) * 25;
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.08) * 45;
+        camera.position.z = 40 + Math.cos(t * 0.08) * 20;
+        camera.position.y = 10 + Math.sin(t * 0.1) * 8;
+        camera.lookAt(0, 5, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

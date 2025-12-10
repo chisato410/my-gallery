@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #114 – Abstract Object</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.75);
+        z-index: 10;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Abstract Object"</div>
+
+    <script>
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x0a0a0a, 10, 30);
+
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 2, 8);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      renderer.shadowMap.enabled = false;
+      document.body.appendChild(renderer.domElement);
+
+      // ライティング
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+      scene.add(ambientLight);
+
+      const light1 = new THREE.PointLight(0xff3366, 2, 30);
+      light1.position.set(5, 5, 5);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0x3366ff, 2, 30);
+      light2.position.set(-5, 3, -5);
+      scene.add(light2);
+
+      const light3 = new THREE.PointLight(0x33ff66, 1.5, 30);
+      light3.position.set(0, -5, 5);
+      scene.add(light3);
+
+      const abstractGroup = new THREE.Group();
+
+      const mainGeometry = new THREE.IcosahedronGeometry(1.5, 2);
+      const mainMaterial = new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        metalness: 0.9,
+        roughness: 0.1,
+        emissive: 0x222244,
+        emissiveIntensity: 0.3,
+      });
+      const mainSphere = new THREE.Mesh(mainGeometry, mainMaterial);
+      abstractGroup.add(mainSphere);
+
+      const rings = [];
+      for (let i = 0; i < 50; i++) {
+        const ringGeometry = new THREE.TorusGeometry(2 + i * 0.5, 0.08, 16, 50);
+        const ringMaterial = new THREE.MeshStandardMaterial({
+          color: new THREE.Color().setHSL(i * 0.3, 0.8, 0.5),
+          metalness: 0.8,
+          roughness: 0.2,
+          emissive: new THREE.Color().setHSL(i * 0.3, 0.8, 0.3),
+          emissiveIntensity: 0.5,
+          transparent: true,
+          opacity: 0.7,
+        });
+        const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+        ring.rotation.x = Math.PI / 2 + (i * Math.PI) / 6;
+        ring.rotation.y = (i * Math.PI) / 3;
+        abstractGroup.add(ring);
+        rings.push(ring);
+      }
+
+      const smallSpheres = [];
+      for (let i = 0; i < 50; i++) {
+        const size = 0.1 + Math.random() * 0.15;
+        const smallGeometry = new THREE.SphereGeometry(size, 8, 8);
+        const smallMaterial = new THREE.MeshStandardMaterial({
+          color: new THREE.Color().setHSL(Math.random(), 0.9, 0.6),
+          metalness: 0.7,
+          roughness: 0.3,
+          emissive: new THREE.Color().setHSL(Math.random(), 0.9, 0.4),
+          emissiveIntensity: 0.8,
+        });
+        const smallSphere = new THREE.Mesh(smallGeometry, smallMaterial);
+
+        const angle = (i / 8) * Math.PI * 2;
+        const radius = 3 + Math.random() * 1;
+        smallSphere.userData = {
+          angle: angle,
+          radius: radius,
+          speed: 0.5 + Math.random() * 0.5,
+          heightOffset: Math.random() * Math.PI * 2,
+          heightAmp: 0.5 + Math.random() * 1,
+        };
+
+        abstractGroup.add(smallSphere);
+        smallSpheres.push(smallSphere);
+      }
+
+      const connections = [];
+      for (let i = 0; i < 50; i++) {
+        const points = [];
+        for (let j = 0; j < 50; j++) {
+          const angle = Math.random() * Math.PI * 2;
+          const radius = 1 + Math.random() * 3;
+          points.push(
+            new THREE.Vector3(
+              Math.cos(angle) * radius,
+              (Math.random() - 0.5) * 3,
+              Math.sin(angle) * radius
+            )
+          );
+        }
+
+        const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+        const lineMaterial = new THREE.LineBasicMaterial({
+          color: new THREE.Color().setHSL(Math.random(), 0.7, 0.6),
+          transparent: true,
+          opacity: 0.4,
+        });
+        const line = new THREE.Line(lineGeometry, lineMaterial);
+        abstractGroup.add(line);
+        connections.push({ line, points });
+      }
+
+      scene.add(abstractGroup);
+
+      const particlesGeometry = new THREE.BufferGeometry();
+      const particlesCount = 300;
+      const positions = new Float32Array(particlesCount * 3);
+      const colors = new Float32Array(particlesCount * 3);
+
+      for (let i = 0; i < particlesCount; i++) {
+        const i3 = i * 3;
+        const radius = 5 + Math.random() * 10;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.random() * Math.PI;
+
+        positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
+        positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+        positions[i3 + 2] = radius * Math.cos(phi);
+
+        const color = new THREE.Color().setHSL(Math.random(), 0.8, 0.6);
+        colors[i3] = color.r;
+        colors[i3 + 1] = color.g;
+        colors[i3 + 2] = color.b;
+      }
+
+      particlesGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positions, 3)
+      );
+      particlesGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(colors, 3)
+      );
+
+      const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.05,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+      scene.add(particles);
+
+      function animate() {
+        requestAnimationFrame(animate);
+        const t = performance.now() * 0.0005;
+
+        const positions = mainGeometry.attributes.position;
+        for (let i = 0; i < positions.count; i++) {
+          const x = positions.getX(i);
+          const y = positions.getY(i);
+          const z = positions.getZ(i);
+
+          const distance = Math.sqrt(x * x + y * y + z * z);
+          const wave = Math.sin(t * 2 + distance * 3) * 0.1;
+
+          positions.setXYZ(i, x * (1 + wave), y * (1 + wave), z * (1 + wave));
+        }
+        positions.needsUpdate = true;
+        mainGeometry.computeVertexNormals();
+
+        rings.forEach((ring, i) => {
+          ring.rotation.z = t * (0.5 + i * 0.2);
+        });
+
+        smallSpheres.forEach((sphere) => {
+          const data = sphere.userData;
+          const angle = data.angle + t * data.speed;
+
+          sphere.position.x = Math.cos(angle) * data.radius;
+          sphere.position.z = Math.sin(angle) * data.radius;
+          sphere.position.y =
+            Math.sin(t * 2 + data.heightOffset) * data.heightAmp;
+        });
+
+        abstractGroup.rotation.y = t * 0.3;
+        abstractGroup.rotation.x = Math.sin(t * 0.5) * 0.2;
+
+        light1.position.x = Math.cos(t) * 7;
+        light1.position.z = Math.sin(t) * 7;
+
+        light2.position.x = Math.cos(t + Math.PI) * 7;
+        light2.position.z = Math.sin(t + Math.PI) * 7;
+
+        particles.rotation.y = t * 0.1;
+
+        camera.position.x = Math.sin(t * 0.3) * 1;
+        camera.position.y = 2 + Math.cos(t * 0.2) * 0.5;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

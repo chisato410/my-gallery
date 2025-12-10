@@ -2157,5 +2157,195 @@
     "url": "/artworks/full/fragment_010_three.html",
     "previewUrl": "/artworks/previews/fragment_010_three.html",
     "filename": "fragment_010_three.html"
+  },
+  {
+    "id": 116,
+    "title": "Abstract Object",
+    "tech": "Three.js",
+    "createdAt": "2025-11-27",
+    "tags": [
+      "webgl",
+      "icosahedron",
+      "metallic-material",
+      "torus-rings",
+      "emissive-light",
+      "orbital-motion",
+      "connections-line",
+      "abstract-art",
+      "particles",
+      "dynamic-geometry"
+    ],
+    "url": "/artworks/full/fragment_011_three.html",
+    "previewUrl": "/artworks/previews/fragment_011_three.html",
+    "filename": "fragment_011_three.html"
+  },
+  {
+    "id": 117,
+    "title": "GLSL Shader Art",
+    "tech": "Three.js",
+    "createdAt": "2025-11-27",
+    "tags": [
+      "webgl",
+      "glsl",
+      "shader-art",
+      "fractal",
+      "voronoi",
+      "ripple",
+      "sdf",
+      "color-blend",
+      "vignette",
+      "glow-effect"
+    ],
+    "url": "/artworks/full/fragment_012_three.html",
+    "previewUrl": "/artworks/previews/fragment_012_three.html",
+    "filename": "fragment_012_three.html"
+  },
+  {
+    "id": 118,
+    "title": "Light Trails",
+    "tech": "Three.js",
+    "createdAt": "2025-11-27",
+    "tags": [
+      "webgl",
+      "light-trails",
+      "additive-blending",
+      "motion-path",
+      "helix",
+      "spiral",
+      "torus-path",
+      "lissajous",
+      "particles",
+      "glow-effect"
+    ],
+    "url": "/artworks/full/fragment_013_three.html",
+    "previewUrl": "/artworks/previews/fragment_013_three.html",
+    "filename": "fragment_013_three.html"
+  },
+  {
+    "id": 119,
+    "title": "Dream World",
+    "tech": "Three.js",
+    "createdAt": "2025-11-27",
+    "tags": [
+      "webgl",
+      "floating-islands",
+      "dreamscape",
+      "fantasy-world",
+      "particles",
+      "glow-effect",
+      "creatures",
+      "clouds",
+      "ambient-animation",
+      "bridges",
+      "procedural-geometry"
+    ],
+    "url": "/artworks/full/fragment_014_three.html",
+    "previewUrl": "/artworks/previews/fragment_014_three.html",
+    "filename": "fragment_014_three.html"
+  },
+  {
+    "id": 120,
+    "title": "Möbius Strip",
+    "tech": "Three.js",
+    "createdAt": "2025-11-27",
+    "tags": [
+      "webgl",
+      "mobius-strip",
+      "parametric-geometry",
+      "mathematical-surface",
+      "vertex-colors",
+      "wireframe",
+      "particles",
+      "color-animation",
+      "fog",
+      "additive-blending"
+    ],
+    "url": "/artworks/full/fragment_016_three.html",
+    "previewUrl": "/artworks/previews/fragment_016_three.html",
+    "filename": "fragment_016_three.html"
+  },
+  {
+    "id": 121,
+    "title": "Boy Surface",
+    "tech": "Three.js",
+    "createdAt": "2025-11-27",
+    "tags": [
+      "webgl",
+      "boy-surface",
+      "parametric-geometry",
+      "mathematical-surface",
+      "vertex-colors",
+      "wireframe",
+      "particles",
+      "color-animation",
+      "fog",
+      "additive-blending"
+    ],
+    "url": "/artworks/full/fragment_017_three.html",
+    "previewUrl": "/artworks/previews/fragment_017_three.html",
+    "filename": "fragment_017_three.html"
+  },
+  {
+    "id": 122,
+    "title": "Torus Knot",
+    "tech": "Three.js",
+    "createdAt": "2025-11-27",
+    "tags": [
+      "webgl",
+      "torus-knot",
+      "parametric-geometry",
+      "mathematical-surface",
+      "vertex-colors",
+      "wireframe",
+      "particles",
+      "color-animation",
+      "fog",
+      "additive-blending"
+    ],
+    "url": "/artworks/full/fragment_018_three.html",
+    "previewUrl": "/artworks/previews/fragment_018_three.html",
+    "filename": "fragment_018_three.html"
+  },
+  {
+    "id": 123,
+    "title": "Shell Surface",
+    "tech": "Three.js",
+    "createdAt": "2025-11-27",
+    "tags": [
+      "webgl",
+      "shell-surface",
+      "parametric-geometry",
+      "mathematical-surface",
+      "vertex-colors",
+      "wireframe",
+      "particles",
+      "color-animation",
+      "fog",
+      "additive-blending"
+    ],
+    "url": "/artworks/full/fragment_019_three.html",
+    "previewUrl": "/artworks/previews/fragment_019_three.html",
+    "filename": "fragment_019_three.html"
+  },
+  {
+    "id": 124,
+    "title": "Dini Surface",
+    "tech": "Three.js",
+    "createdAt": "2025-11-27",
+    "tags": [
+      "webgl",
+      "dini-surface",
+      "parametric-geometry",
+      "mathematical-surface",
+      "vertex-colors",
+      "wireframe",
+      "particles",
+      "color-animation",
+      "fog",
+      "additive-blending"
+    ],
+    "url": "/artworks/full/fragment_020_three.html",
+    "previewUrl": "/artworks/previews/fragment_020_three.html",
+    "filename": "fragment_020_three.html"
   }
 ]
