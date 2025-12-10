@@ -1,0 +1,311 @@
+<!-- fragment_039_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #140 – Kaleidoscope</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: #000000;
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 8px rgba(255, 0, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Kaleidoscope" 🔮</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 0, 30);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      document.body.appendChild(renderer.domElement);
+
+      // 万華鏡のパターンを作成
+      const kaleidoscope = new THREE.Group();
+
+      // 幾何学的な形状を作成
+      function createKaleidoscopePattern(segments) {
+        const pattern = new THREE.Group();
+
+        for (let s = 0; s < segments; s++) {
+          const segmentAngle = (Math.PI * 2) / segments;
+          const segment = new THREE.Group();
+
+          // ランダムな形状
+          const shapeTypes = ["box", "sphere", "cone", "torus"];
+
+          for (let i = 0; i < 50; i++) {
+            const shapeType =
+              shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
+            let geometry;
+
+            switch (shapeType) {
+              case "box":
+                geometry = new THREE.BoxGeometry(
+                  0.5 + Math.random() * 1,
+                  0.5 + Math.random() * 1,
+                  0.5 + Math.random() * 1
+                );
+                break;
+              case "sphere":
+                geometry = new THREE.SphereGeometry(0.3 + Math.random() * 0.5, 8, 8);
+                break;
+              case "cone":
+                geometry = new THREE.ConeGeometry(
+                  0.3 + Math.random() * 0.5,
+                  1,
+                  8
+                );
+                break;
+              case "torus":
+                geometry = new THREE.TorusGeometry(0.4, 0.15, 8, 16);
+                break;
+            }
+
+            const hue = (s / segments + i / 8 + Math.random() * 0.1) % 1;
+            const color = new THREE.Color().setHSL(hue, 1, 0.5);
+
+            const material = new THREE.MeshPhongMaterial({
+              color: color,
+              emissive: color,
+              emissiveIntensity: 0.5,
+              shininess: 100,
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+
+            const distance = 2 + i * 2;
+            const angle = (i / 8) * segmentAngle;
+            mesh.position.x = Math.cos(angle) * distance;
+            mesh.position.y = Math.sin(angle) * distance;
+            mesh.rotation.z = Math.random() * Math.PI * 2;
+
+            mesh.userData = {
+              rotateSpeedX: (Math.random() - 0.5) * 0.1,
+              rotateSpeedY: (Math.random() - 0.5) * 0.1,
+              rotateSpeedZ: (Math.random() - 0.5) * 0.1,
+              pulseSpeed: 1 + Math.random() * 2,
+              pulseOffset: Math.random() * Math.PI * 2,
+            };
+
+            segment.add(mesh);
+          }
+
+          segment.rotation.z = s * segmentAngle;
+          pattern.add(segment);
+        }
+
+        return pattern;
+      }
+
+      // 複数のレイヤー
+      const layers = [];
+      for (let layer = 0; layer < 50; layer++) {
+        const segments = 6 + layer * 2;
+        const pattern = createKaleidoscopePattern(segments);
+        pattern.position.z = -layer * 3;
+
+        pattern.userData = {
+          rotateSpeed: 0.5 + layer * 0.2,
+          scaleSpeed: 0.3 + layer * 0.1,
+          baseScale: 1 - layer * 0.15,
+        };
+
+        kaleidoscope.add(pattern);
+        layers.push(pattern);
+      }
+
+      scene.add(kaleidoscope);
+
+      // 光の粒子
+      const particleGeometry = new THREE.BufferGeometry();
+      const particleCount = 1000;
+      const particlePositions = new Float32Array(particleCount * 3);
+      const particleColors = new Float32Array(particleCount * 3);
+      const particleSizes = new Float32Array(particleCount);
+
+      for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3;
+
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.random() * Math.PI * 2;
+        const radius = Math.random() * 25;
+
+        particlePositions[i3] = Math.cos(theta) * Math.cos(phi) * radius;
+        particlePositions[i3 + 1] = Math.sin(theta) * Math.cos(phi) * radius;
+        particlePositions[i3 + 2] = Math.sin(phi) * radius;
+
+        const hue = Math.random();
+        const color = new THREE.Color().setHSL(hue, 1, 0.5);
+        particleColors[i3] = color.r;
+        particleColors[i3 + 1] = color.g;
+        particleColors[i3 + 2] = color.b;
+
+        particleSizes[i] = Math.random() * 0.5 + 0.1;
+      }
+
+      particleGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(particlePositions, 3)
+      );
+      particleGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(particleColors, 3)
+      );
+      particleGeometry.setAttribute(
+        "size",
+        new THREE.BufferAttribute(particleSizes, 1)
+      );
+
+      const particleMaterial = new THREE.PointsMaterial({
+        size: 0.3,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending,
+        sizeAttenuation: true,
+      });
+
+      const particles = new THREE.Points(particleGeometry, particleMaterial);
+      scene.add(particles);
+
+      // ライト
+      const lights = [];
+      for (let i = 0; i < 50; i++) {
+        const hue = i / 6;
+        const color = new THREE.Color().setHSL(hue, 1, 0.5);
+        const light = new THREE.PointLight(color, 2, 50);
+
+        const angle = (i / 6) * Math.PI * 2;
+        light.position.x = Math.cos(angle) * 15;
+        light.position.y = Math.sin(angle) * 15;
+        light.position.z = 10;
+
+        scene.add(light);
+        lights.push(light);
+      }
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+      scene.add(ambientLight);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 万華鏡全体の回転
+        kaleidoscope.rotation.z = t * 0.3;
+
+        // 各レイヤーの動き
+        layers.forEach((layer, index) => {
+          const data = layer.userData;
+
+          layer.rotation.z = t * data.rotateSpeed * (index % 2 === 0 ? 1 : -1);
+
+          const scale = data.baseScale + Math.sin(t * data.scaleSpeed) * 0.1;
+          layer.scale.setScalar(scale);
+
+          // 各セグメントの形状を回転
+          layer.children.forEach((segment) => {
+            segment.children.forEach((mesh) => {
+              const meshData = mesh.userData;
+              mesh.rotation.x += meshData.rotateSpeedX;
+              mesh.rotation.y += meshData.rotateSpeedY;
+              mesh.rotation.z += meshData.rotateSpeedZ;
+
+              // 脈動
+              const pulse =
+                Math.sin(t * meshData.pulseSpeed + meshData.pulseOffset) * 0.5 +
+                0.5;
+              const scale = 1 + pulse * 0.3;
+              mesh.scale.setScalar(scale);
+
+              // 色の変化
+              const hue = (t * 0.1 + meshData.pulseOffset) % 1;
+              const color = new THREE.Color().setHSL(hue, 1, 0.5);
+              mesh.material.color.copy(color);
+              mesh.material.emissive.copy(color);
+              mesh.material.emissiveIntensity = 0.3 + pulse * 0.4;
+            });
+          });
+        });
+
+        // 粒子の回転
+        particles.rotation.x = t * 0.05;
+        particles.rotation.y = t * 0.08;
+
+        const particlePos = particleGeometry.attributes.position.array;
+        const particleCol = particleGeometry.attributes.color.array;
+
+        for (let i = 0; i < particleCount; i++) {
+          const i3 = i * 3;
+
+          // 色の変化
+          const hue = (t * 0.2 + i * 0.01) % 1;
+          const color = new THREE.Color().setHSL(hue, 1, 0.5);
+          particleCol[i3] = color.r;
+          particleCol[i3 + 1] = color.g;
+          particleCol[i3 + 2] = color.b;
+        }
+        particleGeometry.attributes.color.needsUpdate = true;
+
+        // ライトの動き
+        lights.forEach((light, index) => {
+          const angle = (index / lights.length) * Math.PI * 2 + t * 0.5;
+          light.position.x = Math.cos(angle) * 15;
+          light.position.y = Math.sin(angle) * 15;
+          light.position.z = 10 + Math.sin(t + index) * 5;
+
+          const hue = (t * 0.1 + index / lights.length) % 1;
+          light.color.setHSL(hue, 1, 0.5);
+        });
+
+        // カメラの動き
+        camera.position.z = 30 + Math.sin(t * 0.3) * 5;
+        camera.position.x = Math.sin(t * 0.15) * 3;
+        camera.position.y = Math.cos(t * 0.2) * 3;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

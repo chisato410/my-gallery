@@ -1,0 +1,462 @@
+<!-- fragment_033_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #134 – Moonlight Forest</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #0a1128 0%,
+          #1a1f3a 30%,
+          #2a2f4a 60%,
+          #1a1f3a 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(180, 200, 255, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 8px rgba(100, 150, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Moonlight Forest" 🌙</div>
+
+    <script>
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x1a1f3a, 0.05);
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 3, 15);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.body.appendChild(renderer.domElement);
+
+      // 月明かり
+      const moonLight = new THREE.DirectionalLight(0xaaccff, 0.8);
+      moonLight.position.set(0, 20, -20);
+      scene.add(moonLight);
+
+      const ambientLight = new THREE.AmbientLight(0x4466aa, 0.3);
+      scene.add(ambientLight);
+
+      // 月
+      const moonGeometry = new THREE.SphereGeometry(5, 32, 32);
+      const moonMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.95,
+      });
+      const moon = new THREE.Mesh(moonGeometry, moonMaterial);
+      moon.position.set(0, 15, -40);
+      scene.add(moon);
+
+      // 月のグロー
+      const moonGlowGeometry = new THREE.SphereGeometry(6.5, 32, 32);
+      const moonGlowMaterial = new THREE.MeshBasicMaterial({
+        color: 0xaaccff,
+        transparent: true,
+        opacity: 0.3,
+        blending: THREE.AdditiveBlending,
+      });
+      const moonGlow = new THREE.Mesh(moonGlowGeometry, moonGlowMaterial);
+      moon.add(moonGlow);
+
+      // 地面
+      const groundGeometry = new THREE.PlaneGeometry(60, 60);
+      const groundMaterial = new THREE.MeshPhongMaterial({
+        color: 0x1a2f3a,
+        shininess: 10,
+      });
+      const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+      ground.rotation.x = -Math.PI / 2;
+      ground.position.y = -0.1;
+      scene.add(ground);
+
+      // 発光キノコを作成
+      function createMushroom(size, stemColor, capColor) {
+        const mushroom = new THREE.Group();
+
+        // 茎
+        const stemGeometry = new THREE.CylinderGeometry(
+          size * 0.3,
+          size * 0.4,
+          size * 2,
+          16
+        );
+        const stemMaterial = new THREE.MeshPhongMaterial({
+          color: stemColor,
+          emissive: stemColor,
+          emissiveIntensity: 0.3,
+          shininess: 40,
+        });
+        const stem = new THREE.Mesh(stemGeometry, stemMaterial);
+        stem.position.y = size;
+        mushroom.add(stem);
+
+        // 傘
+        const capGeometry = new THREE.SphereGeometry(size, 16, 16);
+        capGeometry.scale(1.5, 0.8, 1.5);
+        const capMaterial = new THREE.MeshPhongMaterial({
+          color: capColor,
+          emissive: capColor,
+          emissiveIntensity: 0.6,
+          shininess: 60,
+        });
+        const cap = new THREE.Mesh(capGeometry, capMaterial);
+        cap.position.y = size * 2.2;
+        mushroom.add(cap);
+
+        // 下面の襞
+        const gillsGeometry = new THREE.CylinderGeometry(
+          size * 1.3,
+          size * 1.5,
+          size * 0.3,
+          16
+        );
+        const gillsMaterial = new THREE.MeshPhongMaterial({
+          color: capColor,
+          emissive: capColor,
+          emissiveIntensity: 0.5,
+          shininess: 40,
+        });
+        const gills = new THREE.Mesh(gillsGeometry, gillsMaterial);
+        gills.position.y = size * 2;
+        mushroom.add(gills);
+
+        // 光源
+        const light = new THREE.PointLight(capColor, 1.5, size * 10);
+        light.position.y = size * 2;
+        mushroom.add(light);
+
+        // グロー
+        const glowGeometry = new THREE.SphereGeometry(size * 1.8, 16, 16);
+        const glowMaterial = new THREE.MeshBasicMaterial({
+          color: capColor,
+          transparent: true,
+          opacity: 0.25,
+          blending: THREE.AdditiveBlending,
+        });
+        const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+        glow.position.y = size * 2;
+        mushroom.add(glow);
+
+        return mushroom;
+      }
+
+      // 発光植物を作成
+      function createGlowPlant(height) {
+        const plant = new THREE.Group();
+
+        // 茎
+        const stemGeometry = new THREE.CylinderGeometry(0.05, 0.08, height, 8);
+        const stemMaterial = new THREE.MeshPhongMaterial({
+          color: 0x336655,
+          emissive: 0x224433,
+          emissiveIntensity: 0.3,
+        });
+        const stem = new THREE.Mesh(stemGeometry, stemMaterial);
+        stem.position.y = height / 2;
+        plant.add(stem);
+
+        // 発光する花/葉
+        const bulbCount = 3 + Math.floor(Math.random() * 3);
+        for (let i = 0; i < bulbCount; i++) {
+          const bulbGeometry = new THREE.SphereGeometry(0.15, 8, 8);
+          const colors = [0x66ffcc, 0x66ccff, 0xcc66ff, 0xffcc66];
+          const bulbColor = colors[Math.floor(Math.random() * colors.length)];
+          const bulbMaterial = new THREE.MeshPhongMaterial({
+            color: bulbColor,
+            emissive: bulbColor,
+            emissiveIntensity: 0.7,
+            shininess: 80,
+          });
+          const bulb = new THREE.Mesh(bulbGeometry, bulbMaterial);
+
+          const angle = (i / bulbCount) * Math.PI * 2;
+          const bulbHeight = height * 0.6 + i * (height * 0.15);
+          bulb.position.x = Math.cos(angle) * 0.3;
+          bulb.position.y = bulbHeight;
+          bulb.position.z = Math.sin(angle) * 0.3;
+
+          // 小さなグロー
+          const bulbGlowGeometry = new THREE.SphereGeometry(0.25, 8, 8);
+          const bulbGlowMaterial = new THREE.MeshBasicMaterial({
+            color: bulbColor,
+            transparent: true,
+            opacity: 0.3,
+            blending: THREE.AdditiveBlending,
+          });
+          const bulbGlow = new THREE.Mesh(bulbGlowGeometry, bulbGlowMaterial);
+          bulb.add(bulbGlow);
+
+          plant.add(bulb);
+        }
+
+        return plant;
+      }
+
+      // 木を作成
+      function createTree(height) {
+        const tree = new THREE.Group();
+
+        // 幹
+        const trunkGeometry = new THREE.CylinderGeometry(
+          height * 0.08,
+          height * 0.12,
+          height,
+          8
+        );
+        const trunkMaterial = new THREE.MeshPhongMaterial({
+          color: 0x2a3f4a,
+          shininess: 20,
+        });
+        const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
+        trunk.position.y = height / 2;
+        tree.add(trunk);
+
+        // 葉
+        const foliageGeometry = new THREE.SphereGeometry(height * 0.4, 8, 8);
+        const foliageMaterial = new THREE.MeshPhongMaterial({
+          color: 0x335566,
+          emissive: 0x224455,
+          emissiveIntensity: 0.2,
+          shininess: 30,
+        });
+
+        for (let i = 0; i < 3; i++) {
+          const foliage = new THREE.Mesh(foliageGeometry, foliageMaterial);
+          foliage.position.y = height * 0.7 + i * height * 0.15;
+          foliage.position.x = (Math.random() - 0.5) * height * 0.2;
+          foliage.position.z = (Math.random() - 0.5) * height * 0.2;
+          foliage.scale.setScalar(0.8 + Math.random() * 0.4);
+          tree.add(foliage);
+        }
+
+        return tree;
+      }
+
+      // 森の配置
+      const mushrooms = [];
+      const plants = [];
+      const trees = [];
+
+      // キノコ
+      for (let i = 0; i < 30; i++) {
+        const size = 0.3 + Math.random() * 0.5;
+        const stemColors = [0x88aacc, 0x99bbaa, 0xaa99bb];
+        const capColors = [0x66ffcc, 0x66ccff, 0xcc66ff, 0xffcc66, 0xff88cc];
+
+        const stemColor =
+          stemColors[Math.floor(Math.random() * stemColors.length)];
+        const capColor =
+          capColors[Math.floor(Math.random() * capColors.length)];
+
+        const mushroom = createMushroom(size, stemColor, capColor);
+
+        mushroom.position.x = (Math.random() - 0.5) * 25;
+        mushroom.position.z = (Math.random() - 0.5) * 25;
+        mushroom.rotation.y = Math.random() * Math.PI * 2;
+
+        mushroom.userData = {
+          glowSpeed: 0.5 + Math.random() * 1,
+          glowOffset: Math.random() * Math.PI * 2,
+          bobSpeed: 0.3 + Math.random() * 0.3,
+          bobAmount: 0.05 + Math.random() * 0.05,
+        };
+
+        scene.add(mushroom);
+        mushrooms.push(mushroom);
+      }
+
+      // 発光植物
+      for (let i = 0; i < 40; i++) {
+        const height = 1 + Math.random() * 2;
+        const plant = createGlowPlant(height);
+
+        plant.position.x = (Math.random() - 0.5) * 28;
+        plant.position.z = (Math.random() - 0.5) * 28;
+
+        plant.userData = {
+          swaySpeed: 0.5 + Math.random() * 0.5,
+          swayAmount: 0.1 + Math.random() * 0.1,
+          swayOffset: Math.random() * Math.PI * 2,
+        };
+
+        scene.add(plant);
+        plants.push(plant);
+      }
+
+      // 木
+      for (let i = 0; i < 15; i++) {
+        const height = 4 + Math.random() * 4;
+        const tree = createTree(height);
+
+        tree.position.x = (Math.random() - 0.5) * 30;
+        tree.position.z = (Math.random() - 0.5) * 30;
+
+        scene.add(tree);
+        trees.push(tree);
+      }
+
+      // 妖精（光の粒子）
+      const fairyGeometry = new THREE.BufferGeometry();
+      const fairyCount = 50;
+      const fairyPositions = new Float32Array(fairyCount * 3);
+      const fairyColors = new Float32Array(fairyCount * 3);
+
+      for (let i = 0; i < fairyCount; i++) {
+        const i3 = i * 3;
+
+        fairyPositions[i3] = (Math.random() - 0.5) * 30;
+        fairyPositions[i3 + 1] = Math.random() * 8;
+        fairyPositions[i3 + 2] = (Math.random() - 0.5) * 30;
+
+        const colors = [0xffffff, 0xaaeeff, 0xffaaee, 0xffffaa];
+        const color = new THREE.Color(
+          colors[Math.floor(Math.random() * colors.length)]
+        );
+        fairyColors[i3] = color.r;
+        fairyColors[i3 + 1] = color.g;
+        fairyColors[i3 + 2] = color.b;
+      }
+
+      fairyGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(fairyPositions, 3)
+      );
+      fairyGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(fairyColors, 3)
+      );
+
+      const fairyMaterial = new THREE.PointsMaterial({
+        size: 0.3,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.9,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const fairies = new THREE.Points(fairyGeometry, fairyMaterial);
+      scene.add(fairies);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 月の脈動
+        const moonPulse = Math.sin(t * 0.5) * 0.5 + 0.5;
+        moonGlow.material.opacity = 0.2 + moonPulse * 0.15;
+        moonGlow.scale.setScalar(1 + moonPulse * 0.1);
+
+        // キノコの動き
+        mushrooms.forEach((mushroom, index) => {
+          const data = mushroom.userData;
+
+          // グローの脈動
+          const glow =
+            Math.sin(t * data.glowSpeed + data.glowOffset) * 0.5 + 0.5;
+          if (mushroom.children[4]) {
+            mushroom.children[4].material.opacity = 0.15 + glow * 0.2;
+            const scale = 1 + glow * 0.15;
+            mushroom.children[4].scale.setScalar(scale);
+          }
+
+          // 光源の強度
+          if (mushroom.children[3]) {
+            mushroom.children[3].intensity = 1 + glow * 0.8;
+          }
+
+          // わずかな揺れ
+          const bob = Math.sin(t * data.bobSpeed + index) * data.bobAmount;
+          mushroom.position.y = bob;
+        });
+
+        // 植物の揺れ
+        plants.forEach((plant, index) => {
+          const data = plant.userData;
+          const sway =
+            Math.sin(t * data.swaySpeed + data.swayOffset) * data.swayAmount;
+          plant.rotation.z = sway;
+
+          // 発光する球体のきらめき
+          for (let i = 1; i < plant.children.length; i++) {
+            const bulb = plant.children[i];
+            const twinkle = Math.sin(t * 2 + index + i) * 0.5 + 0.5;
+            bulb.material.emissiveIntensity = 0.5 + twinkle * 0.4;
+
+            if (bulb.children[0]) {
+              bulb.children[0].material.opacity = 0.2 + twinkle * 0.2;
+            }
+          }
+        });
+
+        // 妖精の動き
+        const fairyPos = fairyGeometry.attributes.position.array;
+        for (let i = 0; i < fairyCount; i++) {
+          const i3 = i * 3;
+
+          fairyPos[i3] += Math.sin(t + i * 0.5) * 0.03;
+          fairyPos[i3 + 1] += Math.cos(t * 0.8 + i * 0.3) * 0.02;
+          fairyPos[i3 + 2] += Math.cos(t + i * 0.7) * 0.03;
+
+          // 範囲外に出たらリセット
+          if (
+            Math.abs(fairyPos[i3]) > 20 ||
+            fairyPos[i3 + 1] > 10 ||
+            fairyPos[i3 + 1] < 0 ||
+            Math.abs(fairyPos[i3 + 2]) > 20
+          ) {
+            fairyPos[i3] = (Math.random() - 0.5) * 30;
+            fairyPos[i3 + 1] = Math.random() * 8;
+            fairyPos[i3 + 2] = (Math.random() - 0.5) * 30;
+          }
+        }
+        fairyGeometry.attributes.position.needsUpdate = true;
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.08) * 12;
+        camera.position.z = 15 + Math.cos(t * 0.08) * 5;
+        camera.position.y = 3 + Math.sin(t * 0.1) * 1;
+        camera.lookAt(0, 1, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

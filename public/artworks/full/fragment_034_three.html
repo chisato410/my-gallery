@@ -1,0 +1,439 @@
+<!-- fragment_034_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #135 – Time Bubbles</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #1a1a2e 0%,
+          #16213e 30%,
+          #0f3460 60%,
+          #1a1a2e 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(180, 220, 255, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 8px rgba(100, 180, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Time Bubbles" ⏰</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        200
+      );
+      camera.position.set(0, 0, 30);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.body.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0x6688aa, 0.4);
+      scene.add(ambientLight);
+
+      const light1 = new THREE.PointLight(0x88ccff, 2, 60);
+      light1.position.set(20, 15, 15);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0xffaacc, 2, 60);
+      light2.position.set(-20, -15, 15);
+      scene.add(light2);
+
+      // 時計の針を作成
+      function createClockHands(size) {
+        const hands = new THREE.Group();
+
+        // 時針
+        const hourGeometry = new THREE.BoxGeometry(
+          size * 0.08,
+          size * 0.5,
+          size * 0.05
+        );
+        const hourMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffffff,
+          emissive: 0x88ccff,
+          emissiveIntensity: 0.5,
+          shininess: 80,
+        });
+        const hourHand = new THREE.Mesh(hourGeometry, hourMaterial);
+        hourHand.position.y = size * 0.25;
+        hands.add(hourHand);
+
+        // 分針
+        const minuteGeometry = new THREE.BoxGeometry(
+          size * 0.06,
+          size * 0.7,
+          size * 0.05
+        );
+        const minuteMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffffff,
+          emissive: 0xaaeeff,
+          emissiveIntensity: 0.5,
+          shininess: 80,
+        });
+        const minuteHand = new THREE.Mesh(minuteGeometry, minuteMaterial);
+        minuteHand.position.y = size * 0.35;
+        hands.add(minuteHand);
+
+        // 秒針
+        const secondGeometry = new THREE.BoxGeometry(
+          size * 0.03,
+          size * 0.8,
+          size * 0.05
+        );
+        const secondMaterial = new THREE.MeshPhongMaterial({
+          color: 0xff6688,
+          emissive: 0xff4466,
+          emissiveIntensity: 0.7,
+          shininess: 100,
+        });
+        const secondHand = new THREE.Mesh(secondGeometry, secondMaterial);
+        secondHand.position.y = size * 0.4;
+        hands.add(secondHand);
+
+        // 中心の円
+        const centerGeometry = new THREE.SphereGeometry(size * 0.1, 16, 16);
+        const centerMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffd700,
+          emissive: 0xffaa00,
+          emissiveIntensity: 0.6,
+          shininess: 100,
+        });
+        const center = new THREE.Mesh(centerGeometry, centerMaterial);
+        hands.add(center);
+
+        return hands;
+      }
+
+      // 時計の文字盤を作成
+      function createClockFace(size) {
+        const face = new THREE.Group();
+
+        // 文字盤
+        const faceGeometry = new THREE.CircleGeometry(size, 32);
+        const faceMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.2,
+          side: THREE.DoubleSide,
+        });
+        const faceMesh = new THREE.Mesh(faceGeometry, faceMaterial);
+        face.add(faceMesh);
+
+        // 数字マーク
+        for (let i = 0; i < 12; i++) {
+          const markGeometry = new THREE.BoxGeometry(
+            size * 0.05,
+            size * 0.15,
+            size * 0.02
+          );
+          const markMaterial = new THREE.MeshPhongMaterial({
+            color: 0xffffff,
+            emissive: 0x88ccff,
+            emissiveIntensity: 0.4,
+          });
+          const mark = new THREE.Mesh(markGeometry, markMaterial);
+
+          const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
+          mark.position.x = Math.cos(angle) * size * 0.85;
+          mark.position.y = Math.sin(angle) * size * 0.85;
+          mark.rotation.z = angle + Math.PI / 2;
+
+          face.add(mark);
+        }
+
+        return face;
+      }
+
+      // 泡を作成
+      function createBubble(size) {
+        const bubble = new THREE.Group();
+
+        // 泡の外殻
+        const bubbleGeometry = new THREE.SphereGeometry(size, 32, 32);
+        const bubbleMaterial = new THREE.MeshPhysicalMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.15,
+          roughness: 0,
+          metalness: 0.1,
+          clearcoat: 1,
+          clearcoatRoughness: 0,
+          side: THREE.DoubleSide,
+        });
+        const bubbleMesh = new THREE.Mesh(bubbleGeometry, bubbleMaterial);
+        bubble.add(bubbleMesh);
+
+        // 虹色のハイライト
+        const rainbowGeometry = new THREE.SphereGeometry(size * 1.02, 32, 32);
+        const rainbowMaterial = new THREE.MeshBasicMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.3,
+          blending: THREE.AdditiveBlending,
+        });
+        const rainbow = new THREE.Mesh(rainbowGeometry, rainbowMaterial);
+        bubble.add(rainbow);
+
+        // 時計
+        const clockFace = createClockFace(size * 0.6);
+        bubble.add(clockFace);
+
+        const clockHands = createClockHands(size * 0.6);
+        bubble.add(clockHands);
+
+        // グロー
+        const glowGeometry = new THREE.SphereGeometry(size * 1.15, 32, 32);
+        const glowMaterial = new THREE.MeshBasicMaterial({
+          color: 0x88ccff,
+          transparent: true,
+          opacity: 0.1,
+          blending: THREE.AdditiveBlending,
+        });
+        const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+        bubble.add(glow);
+
+        return bubble;
+      }
+
+      // 泡の配置
+      const bubbles = [];
+      const bubbleSizes = [
+        3, 2.5, 2, 1.8, 1.5, 1.2, 1, 0.8, 0.7, 0.6, 0.5, 0.5, 0.4, 0.4, 0.3,
+      ];
+
+      for (let i = 0; i < bubbleSizes.length; i++) {
+        const size = bubbleSizes[i];
+        const bubble = createBubble(size);
+
+        bubble.position.x = (Math.random() - 0.5) * 40;
+        bubble.position.y = (Math.random() - 0.5) * 30;
+        bubble.position.z = (Math.random() - 0.5) * 40;
+
+        bubble.userData = {
+          floatSpeed: 0.05 + Math.random() * 0.1,
+          driftSpeed: 0.3 + Math.random() * 0.5,
+          driftOffset: Math.random() * Math.PI * 2,
+          rotateSpeed: 0.1 + Math.random() * 0.3,
+          hourSpeed: 0.05 + Math.random() * 0.1,
+          minuteSpeed: 0.5 + Math.random() * 1,
+          secondSpeed: 2 + Math.random() * 4,
+          rainbowSpeed: 1 + Math.random() * 2,
+          size: size,
+        };
+
+        scene.add(bubble);
+        bubbles.push(bubble);
+      }
+
+      // キラキラの粒子
+      const particleGeometry = new THREE.BufferGeometry();
+      const particleCount = 300;
+      const particlePositions = new Float32Array(particleCount * 3);
+      const particleColors = new Float32Array(particleCount * 3);
+
+      for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3;
+
+        particlePositions[i3] = (Math.random() - 0.5) * 80;
+        particlePositions[i3 + 1] = (Math.random() - 0.5) * 60;
+        particlePositions[i3 + 2] = (Math.random() - 0.5) * 80;
+
+        const colors = [0x88ccff, 0xffaacc, 0xffffaa, 0xaaffcc];
+        const color = new THREE.Color(
+          colors[Math.floor(Math.random() * colors.length)]
+        );
+        particleColors[i3] = color.r;
+        particleColors[i3 + 1] = color.g;
+        particleColors[i3 + 2] = color.b;
+      }
+
+      particleGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(particlePositions, 3)
+      );
+      particleGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(particleColors, 3)
+      );
+
+      const particleMaterial = new THREE.PointsMaterial({
+        size: 0.15,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.7,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const particles = new THREE.Points(particleGeometry, particleMaterial);
+      scene.add(particles);
+
+      // 泡の衝突判定と融合エフェクト
+      function checkCollisions() {
+        for (let i = 0; i < bubbles.length; i++) {
+          for (let j = i + 1; j < bubbles.length; j++) {
+            const b1 = bubbles[i];
+            const b2 = bubbles[j];
+            const distance = b1.position.distanceTo(b2.position);
+            const minDistance = b1.userData.size + b2.userData.size;
+
+            if (distance < minDistance) {
+              // 衝突時の反発
+              const direction = new THREE.Vector3()
+                .subVectors(b1.position, b2.position)
+                .normalize();
+              b1.position.addScaledVector(direction, 0.1);
+              b2.position.addScaledVector(direction, -0.1);
+
+              // グローのフラッシュ
+              if (b1.children[4]) {
+                b1.children[4].material.opacity = 0.3;
+              }
+              if (b2.children[4]) {
+                b2.children[4].material.opacity = 0.3;
+              }
+            }
+          }
+        }
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 泡の動き
+        bubbles.forEach((bubble, index) => {
+          const data = bubble.userData;
+
+          // 浮遊
+          bubble.position.y +=
+            Math.sin(t * data.driftSpeed + data.driftOffset) * 0.02;
+
+          // 横の動き
+          bubble.position.x +=
+            Math.cos(t * data.driftSpeed + data.driftOffset) * 0.015;
+          bubble.position.z +=
+            Math.sin(t * data.driftSpeed * 0.7 + data.driftOffset) * 0.015;
+
+          // 回転
+          bubble.rotation.x += data.rotateSpeed * 0.005;
+          bubble.rotation.y += data.rotateSpeed * 0.008;
+
+          // 時計の針の動き
+          if (bubble.children[3]) {
+            const hands = bubble.children[3];
+            if (hands.children[0]) {
+              hands.children[0].rotation.z = -t * data.hourSpeed;
+            }
+            if (hands.children[1]) {
+              hands.children[1].rotation.z = -t * data.minuteSpeed;
+            }
+            if (hands.children[2]) {
+              hands.children[2].rotation.z = -t * data.secondSpeed;
+            }
+          }
+
+          // 虹色のハイライト
+          if (bubble.children[1]) {
+            const hue = (t * data.rainbowSpeed + index * 0.1) % 1;
+            bubble.children[1].material.color.setHSL(hue, 0.8, 0.7);
+          }
+
+          // グローの脈動
+          if (bubble.children[4]) {
+            const pulse = Math.sin(t * 2 + index * 0.5) * 0.5 + 0.5;
+            bubble.children[4].material.opacity = 0.05 + pulse * 0.1;
+          }
+
+          // 境界チェック
+          if (Math.abs(bubble.position.x) > 30) {
+            bubble.position.x = Math.sign(bubble.position.x) * -30;
+          }
+          if (Math.abs(bubble.position.y) > 20) {
+            bubble.position.y = Math.sign(bubble.position.y) * -20;
+          }
+          if (Math.abs(bubble.position.z) > 30) {
+            bubble.position.z = Math.sign(bubble.position.z) * -30;
+          }
+        });
+
+        // 衝突判定
+        checkCollisions();
+
+        // 粒子の動き
+        const particlePos = particleGeometry.attributes.position.array;
+        for (let i = 0; i < particleCount; i++) {
+          const i3 = i * 3;
+
+          particlePos[i3] += Math.sin(t + i * 0.2) * 0.02;
+          particlePos[i3 + 1] += Math.cos(t * 0.7 + i * 0.3) * 0.02;
+          particlePos[i3 + 2] += Math.sin(t * 0.5 + i * 0.4) * 0.02;
+
+          // 範囲外に出たらリセット
+          if (
+            Math.abs(particlePos[i3]) > 50 ||
+            Math.abs(particlePos[i3 + 1]) > 40 ||
+            Math.abs(particlePos[i3 + 2]) > 50
+          ) {
+            particlePos[i3] = (Math.random() - 0.5) * 80;
+            particlePos[i3 + 1] = (Math.random() - 0.5) * 60;
+            particlePos[i3 + 2] = (Math.random() - 0.5) * 80;
+          }
+        }
+        particleGeometry.attributes.position.needsUpdate = true;
+
+        // ライトの動き
+        light1.position.x = Math.cos(t * 0.3) * 25;
+        light1.position.y = Math.sin(t * 0.4) * 20;
+
+        light2.position.x = Math.cos(t * 0.35 + Math.PI) * 25;
+        light2.position.y = Math.sin(t * 0.45 + Math.PI) * 20;
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.1) * 25;
+        camera.position.y = Math.sin(t * 0.15) * 15;
+        camera.position.z = 30 + Math.cos(t * 0.1) * 10;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

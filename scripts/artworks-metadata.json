@@ -2224,5 +2224,166 @@
       "surreal",
       "colorful-lights"
     ]
+  },
+  {
+    "filename": "fragment_033_three.html",
+    "title": "Moonlight Forest",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "forest",
+      "moonlight",
+      "night-scene",
+      "fog",
+      "glow",
+      "mushrooms",
+      "magical-plants",
+      "fairies",
+      "ambient-animation",
+      "soft-volumetric-light",
+      "fantasy",
+      "dreamy"
+    ]
+  },
+  {
+    "filename": "fragment_034_three.html",
+    "title": "Time Bubbles",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "bubbles",
+      "floating",
+      "time",
+      "clocks",
+      "particles",
+      "ambient-animation",
+      "soft-light",
+      "fantasy",
+      "interactive",
+      "dreamy",
+      "glow"
+    ]
+  },
+  {
+    "filename": "fragment_035_three.html",
+    "title": "Aurora",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "aurora",
+      "night-sky",
+      "mountains",
+      "plane-geometry",
+      "shader-animation",
+      "particles",
+      "stars",
+      "volumetric-light",
+      "dreamy",
+      "fantasy",
+      "ambient-animation"
+    ]
+  },
+  {
+    "filename": "fragment_036_three.html",
+    "title": "Nebula",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "nebula",
+      "stars",
+      "space",
+      "particle-system",
+      "glow",
+      "gas-clouds",
+      "rotating",
+      "ambient-animation",
+      "fantasy",
+      "dreamy",
+      "cosmic"
+    ]
+  },
+  {
+    "filename": "fragment_037_three.html",
+    "title": "Nebula",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "nebula",
+      "stars",
+      "space",
+      "particle-system",
+      "glow",
+      "gas-clouds",
+      "rotating",
+      "ambient-animation",
+      "fantasy",
+      "dreamy",
+      "cosmic"
+    ]
+  },
+  {
+    "filename": "fragment_038_three.html",
+    "title": "Magic Circle",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "magic-circle",
+      "runes",
+      "fantasy",
+      "glow",
+      "particles",
+      "rotating",
+      "geometric-pattern",
+      "energy-orbs",
+      "ambient-animation",
+      "mystical",
+      "spiral"
+    ]
+  },
+  {
+    "filename": "fragment_039_three.html",
+    "title": "Kaleidoscope",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "kaleidoscope",
+      "geometric-pattern",
+      "rotating",
+      "particles",
+      "color-cycling",
+      "emissive",
+      "layered-animation",
+      "psychedelic",
+      "3d-shapes",
+      "dynamic-lighting",
+      "pulsating"
+    ]
+  },
+  {
+    "filename": "fragment_040_three.html",
+    "title": "Fractal Tunnel",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "fractal",
+      "tunnel",
+      "rings",
+      "rotating",
+      "particles",
+      "color-cycling",
+      "trails",
+      "3d-animation",
+      "perspective-motion",
+      "branching-structures",
+      "additive-blending"
+    ]
   }
 ]

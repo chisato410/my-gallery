@@ -1,0 +1,440 @@
+<!-- fragment_038_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #139 – Magic Circle</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #1a0f2e 0%,
+          #2d1b4e 30%,
+          #4a2560 60%,
+          #2d1b4e 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(200, 150, 255, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 8px rgba(150, 100, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Magic Circle" ✨</div>
+
+    <script>
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x2d1b4e, 20, 60);
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 25, 25);
+      camera.lookAt(0, 0, 0);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      document.body.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0x6644aa, 0.4);
+      scene.add(ambientLight);
+
+      // 魔法陣のグループ
+      const magicCircle = new THREE.Group();
+
+      // 魔法陣の円を作成
+      function createCircle(radius, thickness, color, segments = 128) {
+        const geometry = new THREE.TorusGeometry(
+          radius,
+          thickness,
+          16,
+          segments
+        );
+        const material = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.8,
+          blending: THREE.AdditiveBlending,
+        });
+        const circle = new THREE.Mesh(geometry, material);
+        circle.rotation.x = -Math.PI / 2;
+        return circle;
+      }
+
+      // メインの円
+      const mainCircle = createCircle(10, 0.15, 0xaa88ff);
+      magicCircle.add(mainCircle);
+
+      const innerCircle1 = createCircle(8, 0.12, 0xff88cc);
+      magicCircle.add(innerCircle1);
+
+      const innerCircle2 = createCircle(6, 0.1, 0x88ffcc);
+      magicCircle.add(innerCircle2);
+
+      const outerCircle = createCircle(12, 0.18, 0xffaa88);
+      magicCircle.add(outerCircle);
+
+      // 幾何学模様を作成
+      function createGeometricPattern(radius, count, size, color) {
+        const pattern = new THREE.Group();
+
+        for (let i = 0; i < count; i++) {
+          const angle = (i / count) * Math.PI * 2;
+          const x = Math.cos(angle) * radius;
+          const z = Math.sin(angle) * radius;
+
+          // シンボル（球）
+          const symbolGeometry = new THREE.SphereGeometry(size, 8, 8);
+          const symbolMaterial = new THREE.MeshBasicMaterial({
+            color: color,
+            transparent: true,
+            opacity: 0.9,
+            blending: THREE.AdditiveBlending,
+          });
+          const symbol = new THREE.Mesh(symbolGeometry, symbolMaterial);
+          symbol.position.set(x, 0, z);
+
+          pattern.add(symbol);
+
+          // 線で繋ぐ
+          const lineGeometry = new THREE.BufferGeometry();
+          const linePositions = new Float32Array([0, 0, 0, x, 0, z]);
+          lineGeometry.setAttribute(
+            "position",
+            new THREE.BufferAttribute(linePositions, 3)
+          );
+          const lineMaterial = new THREE.LineBasicMaterial({
+            color: color,
+            transparent: true,
+            opacity: 0.5,
+            blending: THREE.AdditiveBlending,
+          });
+          const line = new THREE.Line(lineGeometry, lineMaterial);
+          pattern.add(line);
+        }
+
+        pattern.rotation.x = -Math.PI / 2;
+        return pattern;
+      }
+
+      const pattern1 = createGeometricPattern(10, 8, 0.3, 0xaa88ff);
+      magicCircle.add(pattern1);
+
+      const pattern2 = createGeometricPattern(8, 6, 0.25, 0xff88cc);
+      magicCircle.add(pattern2);
+
+      // ルーン文字風の装飾
+      function createRunes(radius, count) {
+        const runes = new THREE.Group();
+
+        for (let i = 0; i < count; i++) {
+          const angle = (i / count) * Math.PI * 2;
+          const x = Math.cos(angle) * radius;
+          const z = Math.sin(angle) * radius;
+
+          // ルーン文字（シンプルな形状）
+          const runeGeometry = new THREE.BoxGeometry(0.15, 0.8, 0.1);
+          const runeMaterial = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending,
+          });
+          const rune = new THREE.Mesh(runeGeometry, runeMaterial);
+          rune.position.set(x, 0.01, z);
+          rune.rotation.y = -angle + Math.PI / 2;
+
+          // 追加の装飾
+          const decorGeometry = new THREE.BoxGeometry(0.4, 0.1, 0.1);
+          const decor = new THREE.Mesh(decorGeometry, runeMaterial);
+          decor.position.set(0, 0.3, 0);
+          rune.add(decor);
+
+          runes.add(rune);
+        }
+
+        return runes;
+      }
+
+      const runes = createRunes(11, 16);
+      magicCircle.add(runes);
+
+      // 星形
+      function createStar(radius, points, color) {
+        const starShape = new THREE.Shape();
+
+        for (let i = 0; i < points * 2; i++) {
+          const angle = (i / (points * 2)) * Math.PI * 2 - Math.PI / 2;
+          const r = i % 2 === 0 ? radius : radius * 0.5;
+          const x = Math.cos(angle) * r;
+          const y = Math.sin(angle) * r;
+
+          if (i === 0) {
+            starShape.moveTo(x, y);
+          } else {
+            starShape.lineTo(x, y);
+          }
+        }
+        starShape.lineTo(starShape.curves[0].v1.x, starShape.curves[0].v1.y);
+
+        const geometry = new THREE.ShapeGeometry(starShape);
+        const material = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.6,
+          side: THREE.DoubleSide,
+          blending: THREE.AdditiveBlending,
+        });
+
+        const star = new THREE.Mesh(geometry, material);
+        star.rotation.x = -Math.PI / 2;
+        return star;
+      }
+
+      const star1 = createStar(7, 6, 0xff88cc);
+      magicCircle.add(star1);
+
+      const star2 = createStar(4, 5, 0x88ffcc);
+      magicCircle.add(star2);
+
+      // 中心のコア
+      const coreGeometry = new THREE.SphereGeometry(0.8, 8, 8);
+      const coreMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.9,
+        blending: THREE.AdditiveBlending,
+      });
+      const core = new THREE.Mesh(coreGeometry, coreMaterial);
+      core.position.y = 0.5;
+      magicCircle.add(core);
+
+      // コアのグロー
+      const coreGlowGeometry = new THREE.SphereGeometry(1.5, 8, 8);
+      const coreGlowMaterial = new THREE.MeshBasicMaterial({
+        color: 0xaa88ff,
+        transparent: true,
+        opacity: 0.3,
+        blending: THREE.AdditiveBlending,
+      });
+      const coreGlow = new THREE.Mesh(coreGlowGeometry, coreGlowMaterial);
+      coreGlow.position.y = 0.5;
+      magicCircle.add(coreGlow);
+
+      scene.add(magicCircle);
+
+      // 魔法陣の上に上昇する光柱
+      const pillarGeometry = new THREE.CylinderGeometry(
+        0.1,
+        2,
+        20,
+        32,
+        1,
+        true
+      );
+      const pillarMaterial = new THREE.MeshBasicMaterial({
+        color: 0xaa88ff,
+        transparent: true,
+        opacity: 0.3,
+        side: THREE.DoubleSide,
+        blending: THREE.AdditiveBlending,
+      });
+      const pillar = new THREE.Mesh(pillarGeometry, pillarMaterial);
+      pillar.position.y = 10;
+      scene.add(pillar);
+
+      // 上昇する光の粒子
+      const particleGeometry = new THREE.BufferGeometry();
+      const particleCount = 300;
+      const particlePositions = new Float32Array(particleCount * 3);
+      const particleColors = new Float32Array(particleCount * 3);
+
+      for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3;
+
+        const angle = Math.random() * Math.PI * 2;
+        const radius = Math.random() * 12;
+        particlePositions[i3] = Math.cos(angle) * radius;
+        particlePositions[i3 + 1] = Math.random() * 25;
+        particlePositions[i3 + 2] = Math.sin(angle) * radius;
+
+        const colors = [0xaa88ff, 0xff88cc, 0x88ffcc, 0xffaa88];
+        const color = new THREE.Color(
+          colors[Math.floor(Math.random() * colors.length)]
+        );
+        particleColors[i3] = color.r;
+        particleColors[i3 + 1] = color.g;
+        particleColors[i3 + 2] = color.b;
+      }
+
+      particleGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(particlePositions, 3)
+      );
+      particleGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(particleColors, 3)
+      );
+
+      const particleMaterial = new THREE.PointsMaterial({
+        size: 0.3,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const particles = new THREE.Points(particleGeometry, particleMaterial);
+      scene.add(particles);
+
+      // 魔法エネルギーの球体
+      const energySpheres = [];
+      for (let i = 0; i < 50; i++) {
+        const sphereGeometry = new THREE.SphereGeometry(0.4, 8, 8);
+        const sphereMaterial = new THREE.MeshBasicMaterial({
+          color: [0xaa88ff, 0xff88cc, 0x88ffcc, 0xffaa88, 0xffffff][i],
+          transparent: true,
+          opacity: 0.7,
+          blending: THREE.AdditiveBlending,
+        });
+        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+
+        sphere.userData = {
+          angle: (i / 5) * Math.PI * 2,
+          radius: 8,
+          speed: 0.5 + i * 0.2,
+          height: 3 + i * 1.5,
+        };
+
+        scene.add(sphere);
+        energySpheres.push(sphere);
+      }
+
+      // ライト
+      const light1 = new THREE.PointLight(0xaa88ff, 3, 30);
+      light1.position.set(0, 5, 0);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0xff88cc, 2, 20);
+      scene.add(light2);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 魔法陣の回転
+        magicCircle.rotation.y = t * 0.3;
+
+        // 各要素の個別回転
+        if (magicCircle.children[4]) {
+          magicCircle.children[4].rotation.y = -t * 0.5; // pattern1
+        }
+        if (magicCircle.children[5]) {
+          magicCircle.children[5].rotation.y = t * 0.7; // pattern2
+        }
+        if (magicCircle.children[6]) {
+          magicCircle.children[6].rotation.y = t * 0.2; // runes
+        }
+
+        // コアの脈動
+        const corePulse = Math.sin(t * 2) * 0.5 + 0.5;
+        core.scale.setScalar(1 + corePulse * 0.3);
+        coreMaterial.opacity = 0.7 + corePulse * 0.3;
+
+        coreGlow.scale.setScalar(1 + corePulse * 0.5);
+        coreGlowMaterial.opacity = 0.2 + corePulse * 0.2;
+
+        // 光柱の効果
+        pillarMaterial.opacity = 0.2 + Math.sin(t * 1.5) * 0.1;
+
+        // エネルギー球体の動き
+        energySpheres.forEach((sphere) => {
+          const data = sphere.userData;
+          data.angle += data.speed * 0.02;
+
+          sphere.position.x = Math.cos(data.angle) * data.radius;
+          sphere.position.y = data.height + Math.sin(t * 2 + data.angle) * 0.5;
+          sphere.position.z = Math.sin(data.angle) * data.radius;
+
+          const pulse = Math.sin(t * 3 + data.angle) * 0.5 + 0.5;
+          sphere.scale.setScalar(1 + pulse * 0.3);
+          sphere.material.opacity = 0.5 + pulse * 0.3;
+        });
+
+        // 粒子の動き
+        const particlePos = particleGeometry.attributes.position.array;
+        for (let i = 0; i < particleCount; i++) {
+          const i3 = i * 3;
+
+          // 螺旋状に上昇
+          particlePos[i3 + 1] += 0.08;
+
+          const angle = particlePos[i3 + 1] * 0.1 + i;
+          const radius = Math.sqrt(
+            particlePos[i3] * particlePos[i3] +
+              particlePos[i3 + 2] * particlePos[i3 + 2]
+          );
+
+          particlePos[i3] = Math.cos(angle) * radius * 0.98;
+          particlePos[i3 + 2] = Math.sin(angle) * radius * 0.98;
+
+          // リセット
+          if (particlePos[i3 + 1] > 30) {
+            const newAngle = Math.random() * Math.PI * 2;
+            const newRadius = Math.random() * 12;
+            particlePos[i3] = Math.cos(newAngle) * newRadius;
+            particlePos[i3 + 1] = 0;
+            particlePos[i3 + 2] = Math.sin(newAngle) * newRadius;
+          }
+        }
+        particleGeometry.attributes.position.needsUpdate = true;
+
+        // ライトの動き
+        light1.intensity = 2.5 + corePulse * 1.5;
+
+        light2.position.x = Math.cos(t * 0.7) * 10;
+        light2.position.y = 8 + Math.sin(t * 0.5) * 3;
+        light2.position.z = Math.sin(t * 0.7) * 10;
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.15) * 30;
+        camera.position.z = Math.cos(t * 0.15) * 30;
+        camera.position.y = 25 + Math.sin(t * 0.1) * 5;
+        camera.lookAt(0, 2, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>
