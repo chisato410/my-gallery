@@ -2385,5 +2385,188 @@
       "branching-structures",
       "additive-blending"
     ]
+  },
+  {
+    "filename": "fragment_041_three.html",
+    "title": "Liquid Geometry",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "3d-shapes",
+      "liquid-effect",
+      "morphing",
+      "metaballs",
+      "particles",
+      "splash",
+      "orbit-motion",
+      "color-cycling",
+      "lights",
+      "additive-blending"
+    ]
+  },
+  {
+    "filename": "fragment_042_three.html",
+    "title": "Psychedelic Waves",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "wave-simulation",
+      "shader-material",
+      "psychedelic",
+      "floating-spheres",
+      "trails",
+      "particles",
+      "additive-blending",
+      "color-cycling",
+      "animated-plane",
+      "3d-animation"
+    ]
+  },
+  {
+    "filename": "fragment_043_three.html",
+    "title": "Rainbow Vortex",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "vortex",
+      "spiral",
+      "rainbow",
+      "particles",
+      "glow",
+      "energy-rings",
+      "additive-blending",
+      "3d-animation",
+      "rotating-camera"
+    ]
+  },
+  {
+    "filename": "fragment_044_three.html",
+    "title": "Neon Mandala",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "mandala",
+      "neon",
+      "geometric-shapes",
+      "particles",
+      "ripples",
+      "energy-trails",
+      "additive-blending",
+      "3d-animation",
+      "rotating-camera"
+    ]
+  },
+  {
+    "filename": "fragment_045_three.html",
+    "title": "Melting Psychedelic",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "3d-animation",
+      "melting-spheres",
+      "dripping-liquid",
+      "psychedelic",
+      "rainbow-colors",
+      "particles",
+      "orbiting-objects",
+      "dynamic-lights",
+      "additive-blending"
+    ]
+  },
+  {
+    "filename": "fragment_046_three.html",
+    "title": "Melting Chocolate",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "3d-animation",
+      "melting-chocolate",
+      "dripping-chocolate",
+      "chocolate-bar",
+      "particles",
+      "steam",
+      "dynamic-lights",
+      "wave-deformation",
+      "falling-chunks"
+    ]
+  },
+  {
+    "filename": "fragment_047_three.html",
+    "title": "Melting Ice Cream",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "3d-animation",
+      "melting-ice-cream",
+      "dripping-liquid",
+      "colorful-scoops",
+      "puddles",
+      "particles",
+      "dynamic-lights",
+      "sun-glow",
+      "camera-orbit"
+    ]
+  },
+  {
+    "filename": "fragment_048_three.html",
+    "title": "Melting Ice",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "3d-animation",
+      "melting-ice-blocks",
+      "water-puddles",
+      "ripples",
+      "steam",
+      "falling-ice-shards",
+      "particles",
+      "dynamic-lights",
+      "camera-orbit"
+    ]
+  },
+  {
+    "filename": "fragment_049_three.html",
+    "title": "Melting Clock",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "3d-animation",
+      "melting-clock",
+      "surreal",
+      "dripping-objects",
+      "rotating-hands",
+      "pedestals",
+      "particles",
+      "dynamic-lights",
+      "camera-orbit"
+    ]
+  },
+  {
+    "filename": "fragment_050_three.html",
+    "title": "Melting Brain",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "3d-animation",
+      "melting-brain",
+      "surreal",
+      "dripping-objects",
+      "synapses",
+      "wrinkles",
+      "puddles",
+      "particles",
+      "dynamic-lights",
+      "camera-orbit"
+    ]
   }
 ]

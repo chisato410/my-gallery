@@ -1,0 +1,392 @@
+<!-- fragment_047_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Melting Ice Cream</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #87ceeb 0%,
+          #b0e0e6 50%,
+          #ffebcd 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(100, 100, 150, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Melting Ice Cream" 🍦</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 5, 20);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      document.body.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+      scene.add(ambientLight);
+
+      const sunLight = new THREE.DirectionalLight(0xffeeaa, 1.5);
+      sunLight.position.set(5, 10, 5);
+      scene.add(sunLight);
+
+      // アイスクリームコーンを作成
+      function createIceCreamCone(scoopColors) {
+        const cone = new THREE.Group();
+
+        // コーン
+        const coneGeometry = new THREE.ConeGeometry(1.2, 3, 32);
+        const coneMaterial = new THREE.MeshPhongMaterial({
+          color: 0xd2691e,
+          shininess: 20,
+        });
+        const coneMesh = new THREE.Mesh(coneGeometry, coneMaterial);
+        coneMesh.position.y = 1.5;
+        cone.add(coneMesh);
+
+        // ワッフル模様
+        for (let i = 0; i < 50; i++) {
+          const angle = (i / 8) * Math.PI * 2;
+          const lineGeometry = new THREE.BoxGeometry(0.05, 3, 0.05);
+          const lineMesh = new THREE.Mesh(lineGeometry, coneMaterial);
+          lineMesh.position.set(
+            Math.cos(angle) * 0.8,
+            1.5,
+            Math.sin(angle) * 0.8
+          );
+          lineMesh.rotation.y = angle;
+          cone.add(lineMesh);
+        }
+
+        // アイススクープ
+        const scoops = [];
+        scoopColors.forEach((color, index) => {
+          const scoopGeometry = new THREE.SphereGeometry(1.3, 8, 8);
+          const originalPositions =
+            scoopGeometry.attributes.position.array.slice();
+          scoopGeometry.userData.originalPositions = originalPositions;
+
+          const scoopMaterial = new THREE.MeshPhongMaterial({
+            color: color,
+            shininess: 60,
+            specular: 0xffffff,
+          });
+          const scoop = new THREE.Mesh(scoopGeometry, scoopMaterial);
+          scoop.position.y = 3 + index * 2;
+
+          scoop.userData = {
+            initialY: 3 + index * 2,
+            meltSpeed: 0.3 + index * 0.1,
+            color: color,
+          };
+
+          cone.add(scoop);
+          scoops.push(scoop);
+        });
+
+        // 溶けた液体の滴
+        const drips = [];
+        for (let i = 0; i < 50; i++) {
+          const dripGeometry = new THREE.SphereGeometry(0.15, 8, 8);
+          dripGeometry.scale(1, 2, 1);
+          const colorIndex = Math.floor(Math.random() * scoopColors.length);
+          const dripMaterial = new THREE.MeshPhongMaterial({
+            color: scoopColors[colorIndex],
+            shininess: 80,
+            transparent: true,
+            opacity: 0.9,
+          });
+          const drip = new THREE.Mesh(dripGeometry, dripMaterial);
+
+          const angle = (i / 15) * Math.PI * 2;
+          drip.position.x = Math.cos(angle) * 1;
+          drip.position.z = Math.sin(angle) * 1;
+          drip.position.y = 2;
+
+          drip.userData = {
+            fallSpeed: 0.03 + Math.random() * 0.05,
+            initialY: 2,
+            maxFall: 8 + Math.random() * 4,
+            angle: angle,
+          };
+
+          cone.add(drip);
+          drips.push(drip);
+        }
+
+        cone.userData = {
+          scoops: scoops,
+          drips: drips,
+        };
+
+        return cone;
+      }
+
+      // 複数のアイスクリーム
+      const iceCreamCones = [];
+      const flavorSets = [
+        [0xffb6c1, 0xffd700, 0x98fb98],
+        [0xff69b4, 0x87ceeb, 0xffa500],
+        [0xdda0dd, 0xf0e68c, 0xffb6c1],
+      ];
+
+      flavorSets.forEach((flavors, index) => {
+        const iceCream = createIceCreamCone(flavors);
+        iceCream.position.x = (index - 1) * 6;
+        iceCream.position.y = 0;
+        scene.add(iceCream);
+        iceCreamCones.push(iceCream);
+      });
+
+      // 地面
+      const groundGeometry = new THREE.CircleGeometry(30, 64);
+      const groundMaterial = new THREE.MeshPhongMaterial({
+        color: 0xf5deb3,
+        shininess: 30,
+      });
+      const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+      ground.rotation.x = -Math.PI / 2;
+      ground.position.y = -2;
+      scene.add(ground);
+
+      // 溶けた液だまり
+      const puddles = [];
+      iceCreamCones.forEach((cone, coneIndex) => {
+        for (let i = 0; i < 50; i++) {
+          const puddleGeometry = new THREE.CircleGeometry(
+            1.5 + Math.random(),
+            32
+          );
+          const color = flavorSets[coneIndex][i];
+          const puddleMaterial = new THREE.MeshPhongMaterial({
+            color: color,
+            shininess: 80,
+            transparent: true,
+            opacity: 0.7,
+          });
+          const puddle = new THREE.Mesh(puddleGeometry, puddleMaterial);
+          puddle.rotation.x = -Math.PI / 2;
+          puddle.position.y = -1.9;
+          puddle.position.x = cone.position.x + (Math.random() - 0.5) * 2;
+          puddle.position.z = (Math.random() - 0.5) * 3;
+
+          puddle.userData = {
+            initialScale: 1,
+            growSpeed: 0.1 + Math.random() * 0.2,
+          };
+
+          scene.add(puddle);
+          puddles.push(puddle);
+        }
+      });
+
+      // 液滴
+      const dropletGeometry = new THREE.BufferGeometry();
+      const dropletCount = 100;
+      const dropletPositions = new Float32Array(dropletCount * 3);
+      const dropletColors = new Float32Array(dropletCount * 3);
+      const dropletVelocities = [];
+
+      const allColors = flavorSets.flat();
+
+      for (let i = 0; i < dropletCount; i++) {
+        const i3 = i * 3;
+
+        dropletPositions[i3] = (Math.random() - 0.5) * 20;
+        dropletPositions[i3 + 1] = Math.random() * 15 + 3;
+        dropletPositions[i3 + 2] = (Math.random() - 0.5) * 20;
+
+        const color = new THREE.Color(
+          allColors[Math.floor(Math.random() * allColors.length)]
+        );
+        dropletColors[i3] = color.r;
+        dropletColors[i3 + 1] = color.g;
+        dropletColors[i3 + 2] = color.b;
+
+        dropletVelocities.push({
+          y: -(0.05 + Math.random() * 0.1),
+        });
+      }
+
+      dropletGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(dropletPositions, 3)
+      );
+      dropletGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(dropletColors, 3)
+      );
+
+      const dropletMaterial = new THREE.PointsMaterial({
+        size: 0.3,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8,
+      });
+
+      const droplets = new THREE.Points(dropletGeometry, dropletMaterial);
+      scene.add(droplets);
+
+      // 太陽
+      const sunGeometry = new THREE.SphereGeometry(3, 8, 8);
+      const sunMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffff00,
+        transparent: true,
+        opacity: 0.8,
+      });
+      const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+      sun.position.set(15, 20, -10);
+      scene.add(sun);
+
+      // 太陽の光輝
+      const sunGlowGeometry = new THREE.SphereGeometry(4, 8, 8);
+      const sunGlowMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffff88,
+        transparent: true,
+        opacity: 0.3,
+        blending: THREE.AdditiveBlending,
+      });
+      const sunGlow = new THREE.Mesh(sunGlowGeometry, sunGlowMaterial);
+      sun.add(sunGlow);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // アイスクリームの溶け
+        iceCreamCones.forEach((cone) => {
+          const data = cone.userData;
+
+          // スクープの溶け
+          data.scoops.forEach((scoop, index) => {
+            const scoopData = scoop.userData;
+            const geometry = scoop.geometry;
+            const positions = geometry.attributes.position.array;
+            const originalPositions = geometry.userData.originalPositions;
+
+            const meltAmount = Math.sin(t * scoopData.meltSpeed) * 0.5 + 0.5;
+
+            for (let i = 0; i < positions.length; i += 3) {
+              const x = originalPositions[i];
+              const y = originalPositions[i + 1];
+              const z = originalPositions[i + 2];
+
+              // 下に垂れる
+              if (y < 0) {
+                const factor = -y / 1.3;
+                positions[i] = x * (1 - factor * meltAmount * 0.3);
+                positions[i + 1] = y * (1 + factor * meltAmount * 0.5);
+                positions[i + 2] = z * (1 - factor * meltAmount * 0.3);
+              } else {
+                positions[i] = x * (1 - meltAmount * 0.1);
+                positions[i + 1] = y * (1 - meltAmount * 0.05);
+                positions[i + 2] = z * (1 - meltAmount * 0.1);
+              }
+
+              // 波打つ
+              const wave = Math.sin(t * 3 + y * 0.5 + index) * 0.1;
+              positions[i] += wave * meltAmount;
+            }
+
+            geometry.attributes.position.needsUpdate = true;
+            geometry.computeVertexNormals();
+
+            // スクープが下がる
+            scoop.position.y = scoopData.initialY - meltAmount * 0.5;
+          });
+
+          // 滴の落下
+          data.drips.forEach((drip) => {
+            const dripData = drip.userData;
+            drip.position.y -= dripData.fallSpeed;
+
+            const stretch =
+              1 + Math.abs(drip.position.y - dripData.initialY) * 0.2;
+            drip.scale.set(1, stretch, 1);
+
+            if (drip.position.y < dripData.initialY - dripData.maxFall) {
+              drip.position.y = dripData.initialY;
+              drip.scale.set(1, 1, 1);
+            }
+          });
+        });
+
+        // 液だまりの拡大
+        puddles.forEach((puddle) => {
+          const data = puddle.userData;
+          const growth = Math.sin(t * data.growSpeed) * 0.5 + 0.5;
+          puddle.scale.setScalar(data.initialScale + growth * 0.3);
+        });
+
+        // 液滴
+        const dropletPos = dropletGeometry.attributes.position.array;
+        for (let i = 0; i < dropletCount; i++) {
+          const i3 = i * 3;
+          const vel = dropletVelocities[i];
+
+          dropletPos[i3 + 1] += vel.y;
+
+          if (dropletPos[i3 + 1] < -2) {
+            dropletPos[i3] = (Math.random() - 0.5) * 20;
+            dropletPos[i3 + 1] = 18;
+            dropletPos[i3 + 2] = (Math.random() - 0.5) * 20;
+          }
+        }
+        dropletGeometry.attributes.position.needsUpdate = true;
+
+        // 太陽の脈動
+        const sunPulse = Math.sin(t * 2) * 0.5 + 0.5;
+        sunGlow.scale.setScalar(1 + sunPulse * 0.2);
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.15) * 25;
+        camera.position.z = 20 + Math.cos(t * 0.15) * 10;
+        camera.position.y = 5 + Math.sin(t * 0.1) * 3;
+        camera.lookAt(0, 3, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

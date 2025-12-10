@@ -1,0 +1,444 @@
+<!-- fragment_048_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Melting Ice</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #e6f2ff 0%,
+          #cce6ff 50%,
+          #b3d9ff 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(70, 130, 180, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Melting Ice" 🧊</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        200
+      );
+      camera.position.set(0, 10, 30);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.body.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+      scene.add(ambientLight);
+
+      const light1 = new THREE.DirectionalLight(0xffffff, 1);
+      light1.position.set(10, 15, 10);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0xaaccff, 1.5, 50);
+      light2.position.set(-10, 10, -10);
+      scene.add(light2);
+
+      // 氷のブロックを作成
+      function createIceBlock(size) {
+        const ice = new THREE.Group();
+
+        // 氷の本体
+        const iceGeometry = new THREE.BoxGeometry(size, size, size, 20, 20, 20);
+        const originalPositions = iceGeometry.attributes.position.array.slice();
+        iceGeometry.userData.originalPositions = originalPositions;
+
+        const iceMaterial = new THREE.MeshPhysicalMaterial({
+          color: 0xddeeff,
+          transparent: true,
+          opacity: 0.7,
+          roughness: 0.1,
+          metalness: 0.1,
+          clearcoat: 1,
+          clearcoatRoughness: 0.1,
+        });
+
+        const iceMesh = new THREE.Mesh(iceGeometry, iceMaterial);
+        ice.add(iceMesh);
+
+        // 氷のエッジ
+        const edgesGeometry = new THREE.EdgesGeometry(iceGeometry);
+        const edgesMaterial = new THREE.LineBasicMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.5,
+        });
+        const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
+        ice.add(edges);
+
+        // 内部の気泡
+        const bubbles = [];
+        for (let i = 0; i < 10; i++) {
+          const bubbleGeometry = new THREE.SphereGeometry(
+            size * 0.05 + Math.random() * size * 0.05,
+            8,
+            8
+          );
+          const bubbleMaterial = new THREE.MeshPhongMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.3,
+          });
+          const bubble = new THREE.Mesh(bubbleGeometry, bubbleMaterial);
+
+          bubble.position.set(
+            (Math.random() - 0.5) * size * 0.8,
+            (Math.random() - 0.5) * size * 0.8,
+            (Math.random() - 0.5) * size * 0.8
+          );
+
+          ice.add(bubble);
+          bubbles.push(bubble);
+        }
+
+        ice.userData = {
+          bubbles: bubbles,
+          size: size,
+        };
+
+        return ice;
+      }
+
+      // 氷のブロック群
+      const iceBlocks = [];
+      for (let i = 0; i < 8; i++) {
+        const size = 3 + Math.random() * 2;
+        const ice = createIceBlock(size);
+
+        const angle = (i / 8) * Math.PI * 2;
+        const radius = 12;
+        ice.position.x = Math.cos(angle) * radius;
+        ice.position.z = Math.sin(angle) * radius;
+        ice.position.y = size / 2;
+
+        ice.userData.meltSpeed = 0.2 + Math.random() * 0.3;
+        ice.userData.rotateSpeedX = (Math.random() - 0.5) * 0.01;
+        ice.userData.rotateSpeedY = (Math.random() - 0.5) * 0.01;
+        ice.userData.initialY = ice.position.y;
+
+        scene.add(ice);
+        iceBlocks.push(ice);
+      }
+
+      // 水たまり
+      const waterGeometry = new THREE.CircleGeometry(35, 64);
+      const waterMaterial = new THREE.MeshPhongMaterial({
+        color: 0x88ccff,
+        shininess: 100,
+        transparent: true,
+        opacity: 0.6,
+      });
+      const water = new THREE.Mesh(waterGeometry, waterMaterial);
+      water.rotation.x = -Math.PI / 2;
+      water.position.y = -2;
+      scene.add(water);
+
+      // 水面の波紋
+      const ripples = [];
+      for (let i = 0; i < 5; i++) {
+        const rippleGeometry = new THREE.TorusGeometry(3 + i * 3, 0.1, 8, 64);
+        const rippleMaterial = new THREE.MeshBasicMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.3,
+        });
+        const ripple = new THREE.Mesh(rippleGeometry, rippleMaterial);
+        ripple.rotation.x = Math.PI / 2;
+        ripple.position.y = -1.9;
+
+        ripple.userData = {
+          speed: 0.5 + i * 0.2,
+          maxScale: 3 + i,
+        };
+
+        scene.add(ripple);
+        ripples.push(ripple);
+      }
+
+      // 水滴
+      const dropGeometry = new THREE.BufferGeometry();
+      const dropCount = 200;
+      const dropPositions = new Float32Array(dropCount * 3);
+      const dropVelocities = [];
+
+      for (let i = 0; i < dropCount; i++) {
+        const i3 = i * 3;
+
+        const angle = Math.random() * Math.PI * 2;
+        const radius = Math.random() * 20;
+        dropPositions[i3] = Math.cos(angle) * radius;
+        dropPositions[i3 + 1] = Math.random() * 20 + 2;
+        dropPositions[i3 + 2] = Math.sin(angle) * radius;
+
+        dropVelocities.push({
+          y: -(0.05 + Math.random() * 0.1),
+        });
+      }
+
+      dropGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(dropPositions, 3)
+      );
+
+      const dropMaterial = new THREE.PointsMaterial({
+        color: 0xaaccff,
+        size: 0.3,
+        transparent: true,
+        opacity: 0.7,
+      });
+
+      const drops = new THREE.Points(dropGeometry, dropMaterial);
+      scene.add(drops);
+
+      // 蒸気
+      const steamGeometry = new THREE.BufferGeometry();
+      const steamCount = 100;
+      const steamPositions = new Float32Array(steamCount * 3);
+
+      for (let i = 0; i < steamCount; i++) {
+        const i3 = i * 3;
+
+        steamPositions[i3] = (Math.random() - 0.5) * 30;
+        steamPositions[i3 + 1] = Math.random() * 10;
+        steamPositions[i3 + 2] = (Math.random() - 0.5) * 30;
+      }
+
+      steamGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(steamPositions, 3)
+      );
+
+      const steamMaterial = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.8,
+        transparent: true,
+        opacity: 0.2,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const steam = new THREE.Points(steamGeometry, steamMaterial);
+      scene.add(steam);
+
+      // 砕けた氷の欠片
+      const shards = [];
+      for (let i = 0; i < 30; i++) {
+        const shardGeometry = new THREE.TetrahedronGeometry(
+          0.3 + Math.random() * 0.5,
+          0
+        );
+        const shardMaterial = new THREE.MeshPhysicalMaterial({
+          color: 0xddeeff,
+          transparent: true,
+          opacity: 0.7,
+          roughness: 0.1,
+          metalness: 0.1,
+        });
+        const shard = new THREE.Mesh(shardGeometry, shardMaterial);
+
+        shard.position.x = (Math.random() - 0.5) * 40;
+        shard.position.y = Math.random() * 15 + 2;
+        shard.position.z = (Math.random() - 0.5) * 40;
+
+        shard.userData = {
+          rotateSpeedX: (Math.random() - 0.5) * 0.05,
+          rotateSpeedY: (Math.random() - 0.5) * 0.05,
+          rotateSpeedZ: (Math.random() - 0.5) * 0.05,
+          fallSpeed: 0.02 + Math.random() * 0.03,
+          meltSpeed: 0.001 + Math.random() * 0.002,
+        };
+
+        scene.add(shard);
+        shards.push(shard);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 氷の溶解
+        iceBlocks.forEach((ice) => {
+          const data = ice.userData;
+          const iceMesh = ice.children[0];
+          const geometry = iceMesh.geometry;
+          const positions = geometry.attributes.position.array;
+          const originalPositions = geometry.userData.originalPositions;
+
+          const meltAmount = Math.sin(t * data.meltSpeed) * 0.5 + 0.5;
+
+          for (let i = 0; i < positions.length; i += 3) {
+            const x = originalPositions[i];
+            const y = originalPositions[i + 1];
+            const z = originalPositions[i + 2];
+
+            // 全体的に縮小
+            const shrink = 1 - meltAmount * 0.3;
+
+            // 下部がより溶ける
+            const verticalFactor = y / data.size + 0.5;
+            const localShrink =
+              shrink * (1 - verticalFactor * meltAmount * 0.3);
+
+            positions[i] = x * localShrink;
+            positions[i + 1] = y * localShrink - meltAmount * 0.5;
+            positions[i + 2] = z * localShrink;
+
+            // 不規則な溶け方
+            const noise = Math.sin(x * 2 + t) * Math.cos(z * 2 + t) * 0.1;
+            positions[i] += noise * meltAmount;
+            positions[i + 2] +=
+              Math.cos(x * 2 + t) * Math.sin(z * 2 + t) * 0.1 * meltAmount;
+          }
+
+          geometry.attributes.position.needsUpdate = true;
+          geometry.computeVertexNormals();
+
+          // 透明度の変化
+          iceMesh.material.opacity = 0.7 - meltAmount * 0.3;
+
+          // 下に沈む
+          ice.position.y = data.initialY - meltAmount * 2;
+
+          // 回転
+          ice.rotation.x += data.rotateSpeedX;
+          ice.rotation.y += data.rotateSpeedY;
+
+          // 気泡の動き
+          data.bubbles.forEach((bubble, index) => {
+            bubble.position.y += Math.sin(t + index) * 0.01;
+          });
+        });
+
+        // 水面の波
+        const waterPos = waterGeometry.attributes.position.array;
+        for (let i = 0; i < waterPos.length; i += 3) {
+          if (i === 0) continue;
+          const x = waterPos[i];
+          const z = waterPos[i + 2];
+          const distance = Math.sqrt(x * x + z * z);
+          waterPos[i + 1] = Math.sin(t * 2 + distance * 0.2) * 0.1;
+        }
+        waterGeometry.attributes.position.needsUpdate = true;
+        waterGeometry.computeVertexNormals();
+
+        // 波紋
+        ripples.forEach((ripple, index) => {
+          const data = ripple.userData;
+          const expansion = (t * data.speed) % 2;
+          ripple.scale.setScalar(1 + expansion);
+          ripple.material.opacity = 0.3 * (1 - expansion / 2);
+        });
+
+        // 水滴
+        const dropPos = dropGeometry.attributes.position.array;
+        for (let i = 0; i < dropCount; i++) {
+          const i3 = i * 3;
+          const vel = dropVelocities[i];
+
+          dropPos[i3 + 1] += vel.y;
+
+          if (dropPos[i3 + 1] < -2) {
+            const angle = Math.random() * Math.PI * 2;
+            const radius = Math.random() * 20;
+            dropPos[i3] = Math.cos(angle) * radius;
+            dropPos[i3 + 1] = 22;
+            dropPos[i3 + 2] = Math.sin(angle) * radius;
+          }
+        }
+        dropGeometry.attributes.position.needsUpdate = true;
+
+        // 蒸気
+        const steamPos = steamGeometry.attributes.position.array;
+        for (let i = 0; i < steamCount; i++) {
+          const i3 = i * 3;
+
+          steamPos[i3 + 1] += 0.03;
+          steamPos[i3] += Math.sin(t + i) * 0.02;
+          steamPos[i3 + 2] += Math.cos(t + i) * 0.02;
+
+          if (steamPos[i3 + 1] > 20) {
+            steamPos[i3] = (Math.random() - 0.5) * 30;
+            steamPos[i3 + 1] = 0;
+            steamPos[i3 + 2] = (Math.random() - 0.5) * 30;
+          }
+        }
+        steamGeometry.attributes.position.needsUpdate = true;
+
+        // 氷の欠片
+        shards.forEach((shard) => {
+          const data = shard.userData;
+
+          shard.rotation.x += data.rotateSpeedX;
+          shard.rotation.y += data.rotateSpeedY;
+          shard.rotation.z += data.rotateSpeedZ;
+
+          shard.position.y -= data.fallSpeed;
+
+          // 溶けて小さくなる
+          const currentScale = shard.scale.x - data.meltSpeed;
+          if (currentScale > 0) {
+            shard.scale.setScalar(currentScale);
+            shard.material.opacity = Math.max(0, currentScale);
+          }
+
+          // リセット
+          if (shard.position.y < -2 || currentScale <= 0) {
+            shard.position.x = (Math.random() - 0.5) * 40;
+            shard.position.y = 17;
+            shard.position.z = (Math.random() - 0.5) * 40;
+            shard.scale.setScalar(1);
+            shard.material.opacity = 0.7;
+          }
+        });
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.1) * 35;
+        camera.position.z = 30 + Math.cos(t * 0.1) * 15;
+        camera.position.y = 10 + Math.sin(t * 0.15) * 5;
+        camera.lookAt(0, 2, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,380 @@
+<!-- fragment_045_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Melting Psychedelic</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #000000 0%,
+          #1a0033 50%,
+          #330066 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 8px rgba(255, 0, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Melting Psychedelic" 🌈💧</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        200
+      );
+      camera.position.set(0, 10, 40);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.body.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+      scene.add(ambientLight);
+
+      // 溶ける球体を作成
+      function createMeltingSphere(radius, color) {
+        const sphere = new THREE.Group();
+
+        // メイン球体
+        const geometry = new THREE.SphereGeometry(radius, 64, 64);
+        const originalPositions = geometry.attributes.position.array.slice();
+        geometry.userData.originalPositions = originalPositions;
+
+        const material = new THREE.MeshPhongMaterial({
+          color: color,
+          emissive: color,
+          emissiveIntensity: 0.3,
+          shininess: 80,
+          transparent: true,
+          opacity: 0.9,
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+        sphere.add(mesh);
+
+        // 滴る液体
+        const dripCount = 20;
+        const drips = [];
+
+        for (let i = 0; i < dripCount; i++) {
+          const dripGeometry = new THREE.SphereGeometry(radius * 0.15, 16, 16);
+          dripGeometry.scale(1, 2, 1);
+          const dripMaterial = new THREE.MeshPhongMaterial({
+            color: color,
+            emissive: color,
+            emissiveIntensity: 0.4,
+            shininess: 100,
+            transparent: true,
+            opacity: 0.8,
+          });
+          const drip = new THREE.Mesh(dripGeometry, dripMaterial);
+
+          const angle = (i / dripCount) * Math.PI * 2;
+          const distance = radius * 0.8;
+          drip.position.x = Math.cos(angle) * distance;
+          drip.position.z = Math.sin(angle) * distance;
+          drip.position.y = -radius;
+
+          drip.userData = {
+            angle: angle,
+            distance: distance,
+            fallSpeed: 0.05 + Math.random() * 0.1,
+            maxFall: radius * 2 + Math.random() * radius * 2,
+            resetDelay: Math.random() * 5,
+            initialY: -radius,
+          };
+
+          sphere.add(drip);
+          drips.push(drip);
+        }
+
+        sphere.userData = {
+          drips: drips,
+          meltAmount: 0,
+        };
+
+        return sphere;
+      }
+
+      // 複数の溶ける球体
+      const meltingSpheres = [];
+      const colors = [
+        0xff00ff, 0x00ffff, 0xffff00, 0xff0080, 0x80ff00, 0x0080ff,
+      ];
+
+      for (let i = 0; i < 6; i++) {
+        const radius = 3 + Math.random() * 2;
+        const color = colors[i];
+        const sphere = createMeltingSphere(radius, color);
+
+        const angle = (i / 6) * Math.PI * 2;
+        const distance = 15;
+        sphere.position.x = Math.cos(angle) * distance;
+        sphere.position.z = Math.sin(angle) * distance;
+        sphere.position.y = 5;
+
+        sphere.userData.orbitAngle = angle;
+        sphere.userData.orbitSpeed = 0.2 + Math.random() * 0.3;
+        sphere.userData.meltSpeed = 0.3 + Math.random() * 0.5;
+
+        scene.add(sphere);
+        meltingSpheres.push(sphere);
+      }
+
+      // 地面の液だまり
+      const puddles = [];
+      for (let i = 0; i < 20; i++) {
+        const puddleGeometry = new THREE.CircleGeometry(
+          2 + Math.random() * 3,
+          32
+        );
+        const hue = Math.random();
+        const color = new THREE.Color().setHSL(hue, 1, 0.5);
+        const puddleMaterial = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.6,
+          side: THREE.DoubleSide,
+          blending: THREE.AdditiveBlending,
+        });
+        const puddle = new THREE.Mesh(puddleGeometry, puddleMaterial);
+        puddle.rotation.x = -Math.PI / 2;
+        puddle.position.y = -10;
+        puddle.position.x = (Math.random() - 0.5) * 40;
+        puddle.position.z = (Math.random() - 0.5) * 40;
+
+        puddle.userData = {
+          hue: hue,
+          pulseSpeed: 0.5 + Math.random() * 1,
+          initialScale: 1,
+        };
+
+        scene.add(puddle);
+        puddles.push(puddle);
+      }
+
+      // 落ちる液滴の粒子
+      const dropletGeometry = new THREE.BufferGeometry();
+      const dropletCount = 300;
+      const dropletPositions = new Float32Array(dropletCount * 3);
+      const dropletColors = new Float32Array(dropletCount * 3);
+      const dropletVelocities = [];
+
+      for (let i = 0; i < dropletCount; i++) {
+        const i3 = i * 3;
+
+        dropletPositions[i3] = (Math.random() - 0.5) * 50;
+        dropletPositions[i3 + 1] = Math.random() * 30 + 10;
+        dropletPositions[i3 + 2] = (Math.random() - 0.5) * 50;
+
+        const hue = Math.random();
+        const color = new THREE.Color().setHSL(hue, 1, 0.5);
+        dropletColors[i3] = color.r;
+        dropletColors[i3 + 1] = color.g;
+        dropletColors[i3 + 2] = color.b;
+
+        dropletVelocities.push({
+          y: -(0.1 + Math.random() * 0.2),
+        });
+      }
+
+      dropletGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(dropletPositions, 3)
+      );
+      dropletGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(dropletColors, 3)
+      );
+
+      const dropletMaterial = new THREE.PointsMaterial({
+        size: 0.5,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const droplets = new THREE.Points(dropletGeometry, dropletMaterial);
+      scene.add(droplets);
+
+      // ライト
+      const lights = [];
+      for (let i = 0; i < 6; i++) {
+        const hue = i / 6;
+        const color = new THREE.Color().setHSL(hue, 1, 0.5);
+        const light = new THREE.PointLight(color, 2, 50);
+        scene.add(light);
+        lights.push(light);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 溶ける球体の処理
+        meltingSpheres.forEach((sphere, index) => {
+          const data = sphere.userData;
+
+          // 軌道運動
+          data.orbitAngle += data.orbitSpeed * 0.01;
+          sphere.position.x = Math.cos(data.orbitAngle) * 15;
+          sphere.position.z = Math.sin(data.orbitAngle) * 15;
+
+          // メイン球体の溶け変形
+          const mesh = sphere.children[0];
+          const geometry = mesh.geometry;
+          const positions = geometry.attributes.position.array;
+          const originalPositions = geometry.userData.originalPositions;
+
+          data.meltAmount = Math.sin(t * data.meltSpeed) * 0.5 + 0.5;
+
+          for (let i = 0; i < positions.length; i += 3) {
+            const x = originalPositions[i];
+            const y = originalPositions[i + 1];
+            const z = originalPositions[i + 2];
+
+            // 下側を伸ばす（溶ける効果）
+            const normalizedY = y / 3;
+            const meltFactor =
+              normalizedY < 0 ? (1 - normalizedY) * data.meltAmount : 1;
+
+            positions[i] = x * (1 - data.meltAmount * 0.2);
+            positions[i + 1] = y * (1 + meltFactor * 0.5) - data.meltAmount * 2;
+            positions[i + 2] = z * (1 - data.meltAmount * 0.2);
+
+            // 波打つ効果
+            const wave = Math.sin(t * 2 + y * 0.5 + index) * 0.3;
+            positions[i] += wave * data.meltAmount;
+            positions[i + 2] +=
+              Math.cos(t * 2 + y * 0.5 + index) * 0.3 * data.meltAmount;
+          }
+          geometry.attributes.position.needsUpdate = true;
+          geometry.computeVertexNormals();
+
+          // 色の変化
+          const hue = (t * 0.1 + index / 6) % 1;
+          const color = new THREE.Color().setHSL(hue, 1, 0.5);
+          mesh.material.color.copy(color);
+          mesh.material.emissive.copy(color);
+
+          // 滴の処理
+          data.drips.forEach((drip, dripIndex) => {
+            const dripData = drip.userData;
+
+            drip.position.y -= dripData.fallSpeed;
+
+            // 伸びる効果
+            const stretch =
+              1 + Math.abs(drip.position.y - dripData.initialY) * 0.1;
+            drip.scale.set(1, stretch, 1);
+
+            // リセット
+            if (drip.position.y < dripData.initialY - dripData.maxFall) {
+              drip.position.y = dripData.initialY;
+              drip.scale.set(1, 1, 1);
+            }
+
+            // 色の同期
+            drip.material.color.copy(color);
+            drip.material.emissive.copy(color);
+          });
+        });
+
+        // 液だまりの脈動
+        puddles.forEach((puddle) => {
+          const data = puddle.userData;
+          const pulse = Math.sin(t * data.pulseSpeed) * 0.5 + 0.5;
+          puddle.scale.setScalar(data.initialScale + pulse * 0.3);
+
+          const hue = (data.hue + t * 0.1) % 1;
+          const color = new THREE.Color().setHSL(hue, 1, 0.5);
+          puddle.material.color.copy(color);
+          puddle.material.opacity = 0.4 + pulse * 0.3;
+        });
+
+        // 液滴の落下
+        const dropletPos = dropletGeometry.attributes.position.array;
+        const dropletCol = dropletGeometry.attributes.color.array;
+
+        for (let i = 0; i < dropletCount; i++) {
+          const i3 = i * 3;
+          const vel = dropletVelocities[i];
+
+          dropletPos[i3 + 1] += vel.y;
+
+          // リセット
+          if (dropletPos[i3 + 1] < -10) {
+            dropletPos[i3] = (Math.random() - 0.5) * 50;
+            dropletPos[i3 + 1] = 40;
+            dropletPos[i3 + 2] = (Math.random() - 0.5) * 50;
+          }
+
+          // 色の変化
+          const hue = (t * 0.2 + i * 0.01) % 1;
+          const color = new THREE.Color().setHSL(hue, 1, 0.5);
+          dropletCol[i3] = color.r;
+          dropletCol[i3 + 1] = color.g;
+          dropletCol[i3 + 2] = color.b;
+        }
+        dropletGeometry.attributes.position.needsUpdate = true;
+        dropletGeometry.attributes.color.needsUpdate = true;
+
+        // ライトの動き
+        lights.forEach((light, index) => {
+          const angle = t * 0.5 + (index / lights.length) * Math.PI * 2;
+          light.position.x = Math.cos(angle) * 25;
+          light.position.y = 15;
+          light.position.z = Math.sin(angle) * 25;
+
+          const hue = (t * 0.1 + index / lights.length) % 1;
+          light.color.setHSL(hue, 1, 0.5);
+        });
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.1) * 45;
+        camera.position.z = 40 + Math.cos(t * 0.1) * 15;
+        camera.position.y = 10 + Math.sin(t * 0.15) * 5;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

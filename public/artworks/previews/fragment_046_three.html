@@ -1,0 +1,399 @@
+<!-- fragment_046_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Melting Chocolate</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #2d1810 0%,
+          #3d2418 50%,
+          #4d3020 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 200, 150, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 8px rgba(139, 69, 19, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Melting Chocolate" 🍫</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 8, 20);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      document.body.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0xffddbb, 0.6);
+      scene.add(ambientLight);
+
+      const light1 = new THREE.PointLight(0xffaa66, 2, 50);
+      light1.position.set(10, 15, 10);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0xff8844, 1.5, 40);
+      light2.position.set(-10, 10, -10);
+      scene.add(light2);
+
+      // チョコレートバーを作成
+      function createChocolateBar(width, height, depth) {
+        const bar = new THREE.Group();
+
+        // バーの本体
+        const barGeometry = new THREE.BoxGeometry(
+          width,
+          height,
+          depth,
+          20,
+          30,
+          10
+        );
+        const originalPositions = barGeometry.attributes.position.array.slice();
+        barGeometry.userData.originalPositions = originalPositions;
+
+        const barMaterial = new THREE.MeshPhongMaterial({
+          color: 0x5c3317,
+          shininess: 40,
+          specular: 0x332211,
+        });
+        const barMesh = new THREE.Mesh(barGeometry, barMaterial);
+        bar.add(barMesh);
+
+        // 分割線
+        for (let i = 1; i < 4; i++) {
+          for (let j = 1; j < 3; j++) {
+            const lineGeometry = new THREE.BoxGeometry(0.05, height, depth);
+            const lineMesh = new THREE.Mesh(lineGeometry, barMaterial);
+            lineMesh.position.x = -width / 2 + (width / 4) * i;
+            bar.add(lineMesh);
+          }
+        }
+
+        for (let i = 1; i < 3; i++) {
+          const lineGeometry = new THREE.BoxGeometry(width, height, 0.05);
+          const lineMesh = new THREE.Mesh(lineGeometry, barMaterial);
+          lineMesh.position.z = -depth / 2 + (depth / 3) * i;
+          bar.add(lineMesh);
+        }
+
+        // 溶けた部分
+        const dripGeometry = new THREE.CylinderGeometry(0.3, 0.5, 3, 16);
+        const dripMaterial = new THREE.MeshPhongMaterial({
+          color: 0x6d4423,
+          shininess: 60,
+        });
+
+        const drips = [];
+        for (let i = 0; i < 50; i++) {
+          const drip = new THREE.Mesh(dripGeometry, dripMaterial);
+          drip.position.x = (Math.random() - 0.5) * width * 0.8;
+          drip.position.z = (Math.random() - 0.5) * depth * 0.8;
+          drip.position.y = -height / 2 - 1.5;
+
+          drip.userData = {
+            fallSpeed: 0.02 + Math.random() * 0.03,
+            maxFall: 3 + Math.random() * 2,
+            initialY: -height / 2 - 1.5,
+          };
+
+          bar.add(drip);
+          drips.push(drip);
+        }
+
+        bar.userData = {
+          drips: drips,
+        };
+
+        return bar;
+      }
+
+      // チョコレートバー
+      const chocolateBars = [];
+      for (let i = 0; i < 50; i++) {
+        const bar = createChocolateBar(6, 1.5, 4);
+        bar.position.x = (i - 1) * 8;
+        bar.position.y = 5;
+        bar.rotation.x = 0.2;
+
+        bar.userData.meltSpeed = 0.3 + i * 0.1;
+
+        scene.add(bar);
+        chocolateBars.push(bar);
+      }
+
+      // 地面の溶けたチョコプール
+      const groundGeometry = new THREE.PlaneGeometry(40, 40, 50, 50);
+      const groundMaterial = new THREE.MeshPhongMaterial({
+        color: 0x6d4423,
+        shininess: 80,
+        specular: 0x443322,
+      });
+      const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+      ground.rotation.x = -Math.PI / 2;
+      ground.position.y = -5;
+      scene.add(ground);
+
+      // チョコの波
+      const groundPositions = groundGeometry.attributes.position.array;
+      const originalGroundPositions = groundPositions.slice();
+
+      // チョコの滴
+      const dropGeometry = new THREE.BufferGeometry();
+      const dropCount = 150;
+      const dropPositions = new Float32Array(dropCount * 3);
+      const dropVelocities = [];
+
+      for (let i = 0; i < dropCount; i++) {
+        const i3 = i * 3;
+
+        dropPositions[i3] = (Math.random() - 0.5) * 30;
+        dropPositions[i3 + 1] = Math.random() * 20 + 5;
+        dropPositions[i3 + 2] = (Math.random() - 0.5) * 30;
+
+        dropVelocities.push({
+          y: -(0.05 + Math.random() * 0.1),
+        });
+      }
+
+      dropGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(dropPositions, 3)
+      );
+
+      const dropMaterial = new THREE.PointsMaterial({
+        color: 0x6d4423,
+        size: 0.4,
+        transparent: true,
+        opacity: 0.8,
+      });
+
+      const drops = new THREE.Points(dropGeometry, dropMaterial);
+      scene.add(drops);
+
+      // チョコの塊
+      const chunks = [];
+      for (let i = 0; i < 50; i++) {
+        const chunkGeometry = new THREE.DodecahedronGeometry(
+          0.5 + Math.random() * 0.5,
+          0
+        );
+        const chunkMaterial = new THREE.MeshPhongMaterial({
+          color: 0x5c3317,
+          shininess: 50,
+        });
+        const chunk = new THREE.Mesh(chunkGeometry, chunkMaterial);
+
+        chunk.position.x = (Math.random() - 0.5) * 25;
+        chunk.position.y = Math.random() * 15 + 2;
+        chunk.position.z = (Math.random() - 0.5) * 25;
+
+        chunk.userData = {
+          rotateSpeedX: (Math.random() - 0.5) * 0.02,
+          rotateSpeedY: (Math.random() - 0.5) * 0.02,
+          rotateSpeedZ: (Math.random() - 0.5) * 0.02,
+          fallSpeed: 0.02 + Math.random() * 0.03,
+        };
+
+        scene.add(chunk);
+        chunks.push(chunk);
+      }
+
+      // 湯気
+      const steamGeometry = new THREE.BufferGeometry();
+      const steamCount = 100;
+      const steamPositions = new Float32Array(steamCount * 3);
+      const steamOpacities = new Float32Array(steamCount);
+
+      for (let i = 0; i < steamCount; i++) {
+        const i3 = i * 3;
+
+        steamPositions[i3] = (Math.random() - 0.5) * 20;
+        steamPositions[i3 + 1] = Math.random() * 15;
+        steamPositions[i3 + 2] = (Math.random() - 0.5) * 20;
+
+        steamOpacities[i] = Math.random();
+      }
+
+      steamGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(steamPositions, 3)
+      );
+
+      const steamMaterial = new THREE.PointsMaterial({
+        color: 0xffeecc,
+        size: 1,
+        transparent: true,
+        opacity: 0.3,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const steam = new THREE.Points(steamGeometry, steamMaterial);
+      scene.add(steam);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // チョコバーの溶け
+        chocolateBars.forEach((bar, index) => {
+          const barMesh = bar.children[0];
+          const geometry = barMesh.geometry;
+          const positions = geometry.attributes.position.array;
+          const originalPositions = geometry.userData.originalPositions;
+
+          const meltAmount = Math.sin(t * bar.userData.meltSpeed) * 0.5 + 0.5;
+
+          for (let i = 0; i < positions.length; i += 3) {
+            const x = originalPositions[i];
+            const y = originalPositions[i + 1];
+            const z = originalPositions[i + 2];
+
+            // 下部を伸ばす
+            if (y < 0) {
+              positions[i + 1] = y * (1 + meltAmount * 0.8);
+
+              // 波打つ
+              const wave = Math.sin(t * 2 + x * 0.5 + z * 0.5) * 0.2;
+              positions[i] = x + wave * meltAmount;
+              positions[i + 2] =
+                z + Math.cos(t * 2 + x * 0.5 + z * 0.5) * 0.2 * meltAmount;
+            } else {
+              positions[i] = x;
+              positions[i + 1] = y;
+              positions[i + 2] = z;
+            }
+          }
+          geometry.attributes.position.needsUpdate = true;
+          geometry.computeVertexNormals();
+
+          // 滴の落下
+          bar.userData.drips.forEach((drip) => {
+            const data = drip.userData;
+            drip.position.y -= data.fallSpeed;
+
+            const stretch =
+              1 + Math.abs(drip.position.y - data.initialY) * 0.15;
+            drip.scale.set(1, stretch, 1);
+
+            if (drip.position.y < data.initialY - data.maxFall) {
+              drip.position.y = data.initialY;
+              drip.scale.set(1, 1, 1);
+            }
+          });
+        });
+
+        // 地面の波
+        for (let i = 0; i < groundPositions.length; i += 3) {
+          const x = originalGroundPositions[i];
+          const z = originalGroundPositions[i + 2];
+          const wave1 = Math.sin(t + x * 0.3 + z * 0.2) * 0.3;
+          const wave2 = Math.cos(t * 1.5 + x * 0.2 + z * 0.3) * 0.2;
+          groundPositions[i + 1] = wave1 + wave2;
+        }
+        groundGeometry.attributes.position.needsUpdate = true;
+        groundGeometry.computeVertexNormals();
+
+        // チョコの滴
+        const dropPos = dropGeometry.attributes.position.array;
+        for (let i = 0; i < dropCount; i++) {
+          const i3 = i * 3;
+          const vel = dropVelocities[i];
+
+          dropPos[i3 + 1] += vel.y;
+
+          if (dropPos[i3 + 1] < -5) {
+            dropPos[i3] = (Math.random() - 0.5) * 30;
+            dropPos[i3 + 1] = 25;
+            dropPos[i3 + 2] = (Math.random() - 0.5) * 30;
+          }
+        }
+        dropGeometry.attributes.position.needsUpdate = true;
+
+        // チョコの塊
+        chunks.forEach((chunk) => {
+          const data = chunk.userData;
+          chunk.rotation.x += data.rotateSpeedX;
+          chunk.rotation.y += data.rotateSpeedY;
+          chunk.rotation.z += data.rotateSpeedZ;
+
+          chunk.position.y -= data.fallSpeed;
+
+          if (chunk.position.y < -5) {
+            chunk.position.y = 20;
+            chunk.position.x = (Math.random() - 0.5) * 25;
+            chunk.position.z = (Math.random() - 0.5) * 25;
+          }
+        });
+
+        // 湯気の上昇
+        const steamPos = steamGeometry.attributes.position.array;
+        for (let i = 0; i < steamCount; i++) {
+          const i3 = i * 3;
+
+          steamPos[i3 + 1] += 0.05;
+          steamPos[i3] += Math.sin(t + i) * 0.02;
+          steamPos[i3 + 2] += Math.cos(t + i) * 0.02;
+
+          if (steamPos[i3 + 1] > 25) {
+            steamPos[i3] = (Math.random() - 0.5) * 20;
+            steamPos[i3 + 1] = 0;
+            steamPos[i3 + 2] = (Math.random() - 0.5) * 20;
+          }
+        }
+        steamGeometry.attributes.position.needsUpdate = true;
+
+        // ライトの揺らぎ
+        light1.intensity = 1.8 + Math.sin(t * 2) * 0.4;
+        light2.intensity = 1.3 + Math.cos(t * 1.5) * 0.3;
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.1) * 22;
+        camera.position.z = 20 + Math.cos(t * 0.1) * 8;
+        camera.position.y = 8 + Math.sin(t * 0.15) * 3;
+        camera.lookAt(0, 2, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

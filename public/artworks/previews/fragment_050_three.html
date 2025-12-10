@@ -1,0 +1,422 @@
+<!-- fragment_050_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Melting Brain</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #0a0a0a 0%,
+          #1a0a1a 50%,
+          #2a1a2a 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 150, 200, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 8px rgba(255, 0, 100, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Melting Brain" 🧠</div>
+
+    <script>
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x1a0a1a, 10, 50);
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 5, 20);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      document.body.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0xff6699, 0.4);
+      scene.add(ambientLight);
+
+      const light1 = new THREE.PointLight(0xff3366, 2, 30);
+      light1.position.set(5, 8, 5);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0xff6699, 1.5, 25);
+      light2.position.set(-5, 5, -5);
+      scene.add(light2);
+
+      // 脳
+      function createBrain() {
+        const brain = new THREE.Group();
+
+        const hemisphereGeometry = new THREE.SphereGeometry(2.5, 16, 16);
+        const originalPositions =
+          hemisphereGeometry.attributes.position.array.slice();
+        hemisphereGeometry.userData.originalPositions = originalPositions;
+
+        const positions = hemisphereGeometry.attributes.position.array;
+        for (let i = 0; i < positions.length; i += 3) {
+          const x = positions[i];
+          const y = positions[i + 1];
+          const z = positions[i + 2];
+
+          const noise =
+            Math.sin(x * 3) * Math.cos(y * 3) * Math.sin(z * 3) * 0.3;
+          const length = Math.sqrt(x * x + y * y + z * z);
+          const factor = (length + noise) / length;
+
+          positions[i] *= factor;
+          positions[i + 1] *= factor;
+          positions[i + 2] *= factor;
+        }
+        hemisphereGeometry.computeVertexNormals();
+
+        const brainMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffaacc,
+          shininess: 40,
+          emissive: 0xff6688,
+          emissiveIntensity: 0.2,
+        });
+
+        const leftHemisphere = new THREE.Mesh(
+          hemisphereGeometry,
+          brainMaterial
+        );
+        leftHemisphere.position.x = -1;
+        brain.add(leftHemisphere);
+
+        const rightHemisphere = new THREE.Mesh(
+          hemisphereGeometry.clone(),
+          brainMaterial.clone()
+        );
+        rightHemisphere.position.x = 1;
+        brain.add(rightHemisphere);
+
+        const brainStemGeometry = new THREE.CylinderGeometry(0.8, 1.2, 3, 32);
+        const brainStemMaterial = new THREE.MeshPhongMaterial({
+          color: 0xff99bb,
+          shininess: 50,
+        });
+        const brainStem = new THREE.Mesh(brainStemGeometry, brainStemMaterial);
+        brainStem.position.y = -3;
+        brain.add(brainStem);
+
+        const wrinkles = [];
+        for (let i = 0; i < 50; i++) {
+          const points = [];
+          const segments = 20;
+
+          for (let j = 0; j < segments; j++) {
+            const t = j / segments;
+            const angle1 = Math.random() * Math.PI * 2;
+            const angle2 = Math.random() * Math.PI;
+            const radius = 2.3 + Math.random() * 0.5;
+
+            const x = Math.cos(angle1) * Math.sin(angle2) * radius;
+            const y = Math.sin(angle1) * Math.sin(angle2) * radius;
+            const z = Math.cos(angle2) * radius;
+
+            points.push(new THREE.Vector3(x, y, z));
+          }
+
+          const wrinkleGeometry = new THREE.BufferGeometry().setFromPoints(
+            points
+          );
+          const wrinkleMaterial = new THREE.LineBasicMaterial({
+            color: 0xff6688,
+            transparent: true,
+            opacity: 0.5,
+          });
+          const wrinkle = new THREE.Line(wrinkleGeometry, wrinkleMaterial);
+          brain.add(wrinkle);
+          wrinkles.push(wrinkle);
+        }
+
+        // 神経シナプス（発光する点）
+        const synapseCount = 100;
+        const synapses = [];
+
+        for (let i = 0; i < synapseCount; i++) {
+          const synapseGeometry = new THREE.SphereGeometry(0.08, 8, 8);
+          const synapseMaterial = new THREE.MeshBasicMaterial({
+            color: 0xffff00,
+            transparent: true,
+            opacity: 0.8,
+          });
+          const synapse = new THREE.Mesh(synapseGeometry, synapseMaterial);
+
+          const angle1 = Math.random() * Math.PI * 2;
+          const angle2 = Math.random() * Math.PI;
+          const radius = 2.5 + Math.random() * 0.3;
+
+          synapse.position.x = Math.cos(angle1) * Math.sin(angle2) * radius;
+          synapse.position.y = Math.sin(angle1) * Math.sin(angle2) * radius;
+          synapse.position.z = Math.cos(angle2) * radius;
+
+          synapse.userData = {
+            pulseSpeed: 2 + Math.random() * 3,
+            pulseOffset: Math.random() * Math.PI * 2,
+          };
+
+          brain.add(synapse);
+          synapses.push(synapse);
+        }
+
+        brain.userData = {
+          leftHemisphere: leftHemisphere,
+          rightHemisphere: rightHemisphere,
+          synapses: synapses,
+        };
+
+        return brain;
+      }
+
+      const brain = createBrain();
+      brain.position.y = 5;
+      scene.add(brain);
+
+      const drips = [];
+      for (let i = 0; i < 50; i++) {
+        const dripGeometry = new THREE.SphereGeometry(0.2, 8, 8);
+        dripGeometry.scale(1, 2.5, 1);
+        const dripMaterial = new THREE.MeshPhongMaterial({
+          color: 0xff99bb,
+          shininess: 80,
+          transparent: true,
+          opacity: 0.9,
+        });
+        const drip = new THREE.Mesh(dripGeometry, dripMaterial);
+
+        const angle = (i / 40) * Math.PI * 2;
+        const radius = 2 + Math.random() * 0.5;
+        drip.position.x = Math.cos(angle) * radius;
+        drip.position.z = Math.sin(angle) * radius;
+        drip.position.y = 5;
+
+        drip.userData = {
+          fallSpeed: 0.05 + Math.random() * 0.08,
+          initialY: 5,
+          maxFall: 8 + Math.random() * 5,
+        };
+
+        scene.add(drip);
+        drips.push(drip);
+      }
+
+      // 地面の液だまり
+      const puddleGeometry = new THREE.CircleGeometry(8, 64);
+      const puddleMaterial = new THREE.MeshPhongMaterial({
+        color: 0xff6688,
+        shininess: 100,
+        transparent: true,
+        opacity: 0.7,
+      });
+      const puddle = new THREE.Mesh(puddleGeometry, puddleMaterial);
+      puddle.rotation.x = -Math.PI / 2;
+      puddle.position.y = -3;
+      scene.add(puddle);
+
+      const puddlePositions = puddleGeometry.attributes.position.array;
+      const originalPuddlePositions = puddlePositions.slice();
+
+      const thoughtGeometry = new THREE.BufferGeometry();
+      const thoughtCount = 200;
+      const thoughtPositions = new Float32Array(thoughtCount * 3);
+      const thoughtColors = new Float32Array(thoughtCount * 3);
+
+      for (let i = 0; i < thoughtCount; i++) {
+        const i3 = i * 3;
+
+        const angle = Math.random() * Math.PI * 2;
+        const radius = 3 + Math.random() * 10;
+        const height = Math.random() * 15;
+
+        thoughtPositions[i3] = Math.cos(angle) * radius;
+        thoughtPositions[i3 + 1] = height;
+        thoughtPositions[i3 + 2] = Math.sin(angle) * radius;
+
+        const colors = [0xff3366, 0xff6699, 0xffaacc, 0xffff00];
+        const color = new THREE.Color(
+          colors[Math.floor(Math.random() * colors.length)]
+        );
+        thoughtColors[i3] = color.r;
+        thoughtColors[i3 + 1] = color.g;
+        thoughtColors[i3 + 2] = color.b;
+      }
+
+      thoughtGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(thoughtPositions, 3)
+      );
+      thoughtGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(thoughtColors, 3)
+      );
+
+      const thoughtMaterial = new THREE.PointsMaterial({
+        size: 0.4,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.7,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const thoughts = new THREE.Points(thoughtGeometry, thoughtMaterial);
+      scene.add(thoughts);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        const leftHemi = brain.userData.leftHemisphere;
+        const rightHemi = brain.userData.rightHemisphere;
+
+        [leftHemi, rightHemi].forEach((hemi, hemiIndex) => {
+          const geometry = hemi.geometry;
+          const positions = geometry.attributes.position.array;
+          const originalPositions = geometry.userData.originalPositions;
+
+          const meltAmount = Math.sin(t * 0.4) * 0.5 + 0.5;
+
+          for (let i = 0; i < positions.length; i += 3) {
+            const x = originalPositions[i];
+            const y = originalPositions[i + 1];
+            const z = originalPositions[i + 2];
+
+            if (y < 0) {
+              const factor = -y / 2.5;
+              positions[i] = x * (1 - factor * meltAmount * 0.4);
+              positions[i + 1] = y * (1 + factor * meltAmount * 0.8);
+              positions[i + 2] = z * (1 - factor * meltAmount * 0.4);
+            } else {
+              positions[i] = x;
+              positions[i + 1] = y * (1 - meltAmount * 0.1);
+              positions[i + 2] = z;
+            }
+
+            const wave = Math.sin(t * 2 + x + y + z) * 0.15;
+            positions[i + 1] += wave * meltAmount;
+          }
+
+          geometry.attributes.position.needsUpdate = true;
+          geometry.computeVertexNormals();
+        });
+
+        brain.rotation.y = t * 0.2;
+        brain.rotation.x = Math.sin(t * 0.3) * 0.1;
+
+        brain.userData.synapses.forEach((synapse) => {
+          const data = synapse.userData;
+          const pulse =
+            Math.sin(t * data.pulseSpeed + data.pulseOffset) * 0.5 + 0.5;
+          synapse.scale.setScalar(1 + pulse * 0.8);
+          synapse.material.opacity = 0.5 + pulse * 0.5;
+        });
+
+        drips.forEach((drip) => {
+          const data = drip.userData;
+          drip.position.y -= data.fallSpeed;
+
+          const stretch = 1 + Math.abs(drip.position.y - data.initialY) * 0.1;
+          drip.scale.set(1, stretch, 1);
+
+          if (drip.position.y < data.initialY - data.maxFall) {
+            drip.position.y = data.initialY;
+            drip.scale.set(1, 1, 1);
+          }
+        });
+
+        // 液だまりの波
+        for (let i = 0; i < puddlePositions.length; i += 3) {
+          if (i === 0) continue;
+          const x = originalPuddlePositions[i];
+          const z = originalPuddlePositions[i + 2];
+          const distance = Math.sqrt(x * x + z * z);
+          puddlePositions[i + 1] = Math.sin(t * 2 + distance * 0.5) * 0.2;
+        }
+        puddleGeometry.attributes.position.needsUpdate = true;
+        puddleGeometry.computeVertexNormals();
+
+        // 思考の粒子の動き
+        const thoughtPos = thoughtGeometry.attributes.position.array;
+        const thoughtCol = thoughtGeometry.attributes.color.array;
+
+        for (let i = 0; i < thoughtCount; i++) {
+          const i3 = i * 3;
+
+          thoughtPos[i3] += Math.sin(t + i * 0.1) * 0.05;
+          thoughtPos[i3 + 1] += Math.cos(t * 0.7 + i * 0.2) * 0.03;
+          thoughtPos[i3 + 2] += Math.cos(t + i * 0.15) * 0.05;
+
+          // 色の変化
+          const hue = (t * 0.1 + i * 0.01) % 0.3;
+          const color = new THREE.Color().setHSL(hue + 0.85, 1, 0.6);
+          thoughtCol[i3] = color.r;
+          thoughtCol[i3 + 1] = color.g;
+          thoughtCol[i3 + 2] = color.b;
+
+          // リセット
+          const x = thoughtPos[i3];
+          const z = thoughtPos[i3 + 2];
+          const dist = Math.sqrt(x * x + z * z);
+
+          if (dist > 20 || thoughtPos[i3 + 1] > 20 || thoughtPos[i3 + 1] < -5) {
+            const angle = Math.random() * Math.PI * 2;
+            const radius = 3 + Math.random() * 10;
+            thoughtPos[i3] = Math.cos(angle) * radius;
+            thoughtPos[i3 + 1] = Math.random() * 15;
+            thoughtPos[i3 + 2] = Math.sin(angle) * radius;
+          }
+        }
+        thoughtGeometry.attributes.position.needsUpdate = true;
+        thoughtGeometry.attributes.color.needsUpdate = true;
+
+        // ライトの脈動
+        light1.intensity = 1.5 + Math.sin(t * 2) * 0.7;
+        light2.intensity = 1 + Math.cos(t * 1.5) * 0.5;
+
+        light1.position.x = Math.cos(t * 0.5) * 8;
+        light1.position.z = Math.sin(t * 0.5) * 8;
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.12) * 22;
+        camera.position.z = 20 + Math.cos(t * 0.12) * 10;
+        camera.position.y = 5 + Math.sin(t * 0.15) * 5;
+        camera.lookAt(0, 5, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

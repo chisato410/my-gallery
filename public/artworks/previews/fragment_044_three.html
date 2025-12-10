@@ -1,0 +1,434 @@
+<!-- fragment_044_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #145 – Neon Mandala</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: #000000;
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 8px rgba(255, 0, 200, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Neon Mandala" 🪷</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        200
+      );
+      camera.position.set(0, 0, 50);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      document.body.appendChild(renderer.domElement);
+
+      // 曼荼羅のメイングループ
+      const mandala = new THREE.Group();
+
+      // 曼荼羅のレイヤーを作成
+      function createMandalaLayer(radius, segments, petals, depth) {
+        const layer = new THREE.Group();
+
+        // 円形の基本パターン
+        for (let i = 0; i < segments; i++) {
+          const angle = (i / segments) * Math.PI * 2;
+
+          // 花びら状の形状
+          for (let p = 0; p < petals; p++) {
+            const petalAngle = angle + (p / petals) * (Math.PI / segments);
+            const petalRadius =
+              radius + Math.sin((p * Math.PI) / petals) * radius * 0.3;
+
+            // 線分
+            const linePoints = [];
+            linePoints.push(new THREE.Vector3(0, 0, 0));
+            linePoints.push(
+              new THREE.Vector3(
+                Math.cos(petalAngle) * petalRadius,
+                Math.sin(petalAngle) * petalRadius,
+                0
+              )
+            );
+
+            const lineGeometry = new THREE.BufferGeometry().setFromPoints(
+              linePoints
+            );
+            const hue = (i / segments + p / petals) % 1;
+            const color = new THREE.Color().setHSL(hue, 1, 0.5);
+            const lineMaterial = new THREE.LineBasicMaterial({
+              color: color,
+              transparent: true,
+              opacity: 0.8,
+              blending: THREE.AdditiveBlending,
+            });
+            const line = new THREE.Line(lineGeometry, lineMaterial);
+            layer.add(line);
+
+            // 端点の装飾
+            const decorGeometry = new THREE.SphereGeometry(0.2, 8, 8);
+            const decorMaterial = new THREE.MeshBasicMaterial({
+              color: color,
+              transparent: true,
+              opacity: 0.9,
+              blending: THREE.AdditiveBlending,
+            });
+            const decor = new THREE.Mesh(decorGeometry, decorMaterial);
+            decor.position.set(
+              Math.cos(petalAngle) * petalRadius,
+              Math.sin(petalAngle) * petalRadius,
+              0
+            );
+            layer.add(decor);
+          }
+
+          // リング
+          const ringGeometry = new THREE.TorusGeometry(
+            radius,
+            0.05,
+            8,
+            segments
+          );
+          const ringHue = i / segments;
+          const ringColor = new THREE.Color().setHSL(ringHue, 1, 0.5);
+          const ringMaterial = new THREE.MeshBasicMaterial({
+            color: ringColor,
+            transparent: true,
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending,
+          });
+          const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+          ring.rotation.x = Math.PI / 2;
+          layer.add(ring);
+        }
+
+        layer.position.z = depth;
+        return layer;
+      }
+
+      // 複数レイヤーの曼荼羅
+      const layers = [];
+      const layerCount = 8;
+
+      for (let l = 0; l < layerCount; l++) {
+        const radius = 5 + l * 4;
+        const segments = 8 + l * 2;
+        const petals = 3 + l;
+        const depth = -l * 5;
+
+        const layer = createMandalaLayer(radius, segments, petals, depth);
+
+        layer.userData = {
+          rotateSpeed: 0.2 + l * 0.1,
+          pulseSpeed: 0.5 + l * 0.2,
+          layer: l,
+        };
+
+        mandala.add(layer);
+        layers.push(layer);
+      }
+
+      scene.add(mandala);
+
+      // 幾何学的な装飾
+      const geometricShapes = [];
+      const shapeTypes = ["triangle", "square", "pentagon", "hexagon"];
+
+      for (let i = 0; i < 50; i++) {
+        const angle = (i / 60) * Math.PI * 2;
+        const radius = 15 + (i % 4) * 5;
+        const size = 0.5 + Math.random() * 1;
+
+        const shapeType = shapeTypes[i % shapeTypes.length];
+        let geometry;
+
+        switch (shapeType) {
+          case "triangle":
+            geometry = new THREE.CircleGeometry(size, 3);
+            break;
+          case "square":
+            geometry = new THREE.PlaneGeometry(size, size);
+            break;
+          case "pentagon":
+            geometry = new THREE.CircleGeometry(size, 5);
+            break;
+          case "hexagon":
+            geometry = new THREE.CircleGeometry(size, 6);
+            break;
+        }
+
+        const hue = (i / 60) % 1;
+        const color = new THREE.Color().setHSL(hue, 1, 0.5);
+        const material = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.7,
+          side: THREE.DoubleSide,
+          blending: THREE.AdditiveBlending,
+        });
+
+        const shape = new THREE.Mesh(geometry, material);
+        shape.position.x = Math.cos(angle) * radius;
+        shape.position.y = Math.sin(angle) * radius;
+        shape.position.z = (Math.random() - 0.5) * 20;
+
+        shape.userData = {
+          hue: hue,
+          rotateSpeed: (Math.random() - 0.5) * 0.1,
+          pulseSpeed: 1 + Math.random() * 2,
+          pulseOffset: Math.random() * Math.PI * 2,
+        };
+
+        scene.add(shape);
+        geometricShapes.push(shape);
+      }
+
+      // 中心のコア
+      const coreGeometry = new THREE.SphereGeometry(2, 8, 8);
+      const coreMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.9,
+        blending: THREE.AdditiveBlending,
+      });
+      const core = new THREE.Mesh(coreGeometry, coreMaterial);
+      scene.add(core);
+
+      // 光の波紋
+      const ripples = [];
+      for (let i = 0; i < 50; i++) {
+        const rippleGeometry = new THREE.TorusGeometry(3 + i * 4, 0.15, 16, 64);
+        const hue = i / 10;
+        const color = new THREE.Color().setHSL(hue, 1, 0.5);
+        const rippleMaterial = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.5,
+          blending: THREE.AdditiveBlending,
+        });
+        const ripple = new THREE.Mesh(rippleGeometry, rippleMaterial);
+        ripple.rotation.x = Math.PI / 2;
+
+        ripple.userData = {
+          hue: hue,
+          speed: 0.5 + i * 0.1,
+          initialScale: 1,
+        };
+
+        scene.add(ripple);
+        ripples.push(ripple);
+      }
+
+      // エネルギーの軌跡
+      const energyTrails = [];
+      for (let i = 0; i < 50; i++) {
+        const trailPoints = [];
+        const angle = (i / 30) * Math.PI * 2;
+
+        for (let j = 0; j < 50; j++) {
+          const t = j / 50;
+          const radius = t * 40;
+          const spiralAngle = angle + t * Math.PI * 4;
+          const x = Math.cos(spiralAngle) * radius;
+          const y = Math.sin(spiralAngle) * radius;
+          const z = (Math.random() - 0.5) * 10;
+          trailPoints.push(new THREE.Vector3(x, y, z));
+        }
+
+        const trailGeometry = new THREE.BufferGeometry().setFromPoints(
+          trailPoints
+        );
+        const hue = i / 30;
+        const color = new THREE.Color().setHSL(hue, 1, 0.5);
+        const trailMaterial = new THREE.LineBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.5,
+          blending: THREE.AdditiveBlending,
+        });
+        const trail = new THREE.Line(trailGeometry, trailMaterial);
+
+        trail.userData = {
+          hue: hue,
+          rotateSpeed: 0.3 + Math.random() * 0.5,
+        };
+
+        scene.add(trail);
+        energyTrails.push(trail);
+      }
+
+      // 粒子
+      const particleGeometry = new THREE.BufferGeometry();
+      const particleCount = 1000;
+      const particlePositions = new Float32Array(particleCount * 3);
+      const particleColors = new Float32Array(particleCount * 3);
+
+      for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3;
+
+        const angle = Math.random() * Math.PI * 2;
+        const radius = Math.random() * 50;
+        particlePositions[i3] = Math.cos(angle) * radius;
+        particlePositions[i3 + 1] = Math.sin(angle) * radius;
+        particlePositions[i3 + 2] = (Math.random() - 0.5) * 60;
+
+        const hue = Math.random();
+        const color = new THREE.Color().setHSL(hue, 1, 0.5);
+        particleColors[i3] = color.r;
+        particleColors[i3 + 1] = color.g;
+        particleColors[i3 + 2] = color.b;
+      }
+
+      particleGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(particlePositions, 3)
+      );
+      particleGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(particleColors, 3)
+      );
+
+      const particleMaterial = new THREE.PointsMaterial({
+        size: 0.3,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const particles = new THREE.Points(particleGeometry, particleMaterial);
+      scene.add(particles);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 曼荼羅全体の回転
+        mandala.rotation.z = t * 0.2;
+
+        // 各レイヤーの動き
+        layers.forEach((layer) => {
+          const data = layer.userData;
+          layer.rotation.z =
+            t * data.rotateSpeed * (data.layer % 2 === 0 ? 1 : -1);
+
+          // 各要素の色更新
+          layer.children.forEach((child, index) => {
+            if (child.material) {
+              const hue =
+                (t * 0.1 + index / layer.children.length + data.layer / 10) % 1;
+              const color = new THREE.Color().setHSL(hue, 1, 0.5);
+              child.material.color.copy(color);
+
+              if (child.geometry.type === "SphereGeometry") {
+                const pulse = Math.sin(t * 3 + index + data.layer) * 0.5 + 0.5;
+                child.scale.setScalar(1 + pulse * 0.5);
+              }
+            }
+          });
+        });
+
+        // 幾何学形状
+        geometricShapes.forEach((shape) => {
+          const data = shape.userData;
+          shape.rotation.z += data.rotateSpeed;
+
+          const pulse =
+            Math.sin(t * data.pulseSpeed + data.pulseOffset) * 0.5 + 0.5;
+          shape.scale.setScalar(1 + pulse * 0.5);
+
+          const hue = (data.hue + t * 0.1) % 1;
+          const color = new THREE.Color().setHSL(hue, 1, 0.5);
+          shape.material.color.copy(color);
+          shape.material.opacity = 0.5 + pulse * 0.3;
+        });
+
+        // コアの脈動
+        const corePulse = Math.sin(t * 2) * 0.5 + 0.5;
+        core.scale.setScalar(1 + corePulse * 0.5);
+
+        const coreHue = (t * 0.2) % 1;
+        core.material.color.setHSL(coreHue, 1, 0.8);
+
+        // 波紋
+        ripples.forEach((ripple, index) => {
+          const data = ripple.userData;
+
+          const expansion = (t * data.speed) % 3;
+          ripple.scale.setScalar(data.initialScale + expansion);
+          ripple.material.opacity = 0.8 * (1 - expansion / 3);
+
+          const hue = (data.hue + t * 0.1) % 1;
+          ripple.material.color.setHSL(hue, 1, 0.5);
+        });
+
+        // エネルギーの軌跡
+        energyTrails.forEach((trail) => {
+          const data = trail.userData;
+          trail.rotation.z += data.rotateSpeed * 0.01;
+
+          const hue = (data.hue + t * 0.1) % 1;
+          trail.material.color.setHSL(hue, 1, 0.5);
+        });
+
+        // 粒子の回転
+        particles.rotation.z = t * 0.1;
+
+        const particleCol = particleGeometry.attributes.color.array;
+        for (let i = 0; i < particleCount; i++) {
+          const i3 = i * 3;
+          const hue = (t * 0.2 + i * 0.01) % 1;
+          const color = new THREE.Color().setHSL(hue, 1, 0.5);
+          particleCol[i3] = color.r;
+          particleCol[i3 + 1] = color.g;
+          particleCol[i3 + 2] = color.b;
+        }
+        particleGeometry.attributes.color.needsUpdate = true;
+
+        // カメラの動き
+        camera.position.z = 50 + Math.sin(t * 0.3) * 10;
+        camera.position.x = Math.sin(t * 0.15) * 5;
+        camera.position.y = Math.cos(t * 0.2) * 5;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

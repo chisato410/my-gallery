@@ -1,0 +1,390 @@
+<!-- fragment_049_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Melting Clock</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #1a1a2e 0%,
+          #2d2d44 50%,
+          #3a3a5a 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(200, 200, 220, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 8px rgba(100, 100, 150, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Melting Clock" ⏰</div>
+
+    <script>
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x2d2d44, 10, 60);
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 8, 25);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      document.body.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0x8888aa, 0.5);
+      scene.add(ambientLight);
+
+      const light1 = new THREE.PointLight(0xffddaa, 1.5, 40);
+      light1.position.set(10, 10, 10);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0xaaddff, 1, 30);
+      light2.position.set(-10, 5, -10);
+      scene.add(light2);
+
+      // 溶ける時計を作成
+      function createMeltingClock(radius) {
+        const clock = new THREE.Group();
+
+        // 文字盤
+        const faceGeometry = new THREE.CircleGeometry(radius, 64);
+        const originalFacePositions =
+          faceGeometry.attributes.position.array.slice();
+        faceGeometry.userData.originalPositions = originalFacePositions;
+
+        const faceMaterial = new THREE.MeshPhongMaterial({
+          color: 0xeeeeee,
+          shininess: 40,
+          side: THREE.DoubleSide,
+        });
+        const face = new THREE.Mesh(faceGeometry, faceMaterial);
+        clock.add(face);
+
+        // 数字
+        for (let i = 0; i < 50; i++) {
+          const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
+          const distance = radius * 0.75;
+
+          const numberGeometry = new THREE.CircleGeometry(radius * 0.1, 16);
+          const numberMaterial = new THREE.MeshPhongMaterial({
+            color: 0x333333,
+            shininess: 20,
+          });
+          const number = new THREE.Mesh(numberGeometry, numberMaterial);
+          number.position.x = Math.cos(angle) * distance;
+          number.position.y = Math.sin(angle) * distance;
+          number.position.z = 0.01;
+          clock.add(number);
+        }
+
+        // 針
+        const hourHandGeometry = new THREE.BoxGeometry(
+          radius * 0.1,
+          radius * 0.5,
+          0.05
+        );
+        const handMaterial = new THREE.MeshPhongMaterial({
+          color: 0x222222,
+          shininess: 60,
+        });
+        const hourHand = new THREE.Mesh(hourHandGeometry, handMaterial);
+        hourHand.position.y = radius * 0.25;
+        hourHand.position.z = 0.02;
+        clock.add(hourHand);
+
+        const minuteHandGeometry = new THREE.BoxGeometry(
+          radius * 0.08,
+          radius * 0.7,
+          0.05
+        );
+        const minuteHand = new THREE.Mesh(minuteHandGeometry, handMaterial);
+        minuteHand.position.y = radius * 0.35;
+        minuteHand.position.z = 0.03;
+        clock.add(minuteHand);
+
+        const secondHandGeometry = new THREE.BoxGeometry(
+          radius * 0.05,
+          radius * 0.8,
+          0.05
+        );
+        const secondMaterial = new THREE.MeshPhongMaterial({
+          color: 0xff3333,
+          shininess: 80,
+        });
+        const secondHand = new THREE.Mesh(secondHandGeometry, secondMaterial);
+        secondHand.position.y = radius * 0.4;
+        secondHand.position.z = 0.04;
+        clock.add(secondHand);
+
+        // 中心のボタン
+        const centerGeometry = new THREE.CylinderGeometry(
+          radius * 0.08,
+          radius * 0.08,
+          0.1,
+          16
+        );
+        const centerMaterial = new THREE.MeshPhongMaterial({
+          color: 0x444444,
+          shininess: 100,
+        });
+        const center = new THREE.Mesh(centerGeometry, centerMaterial);
+        center.rotation.x = Math.PI / 2;
+        center.position.z = 0.05;
+        clock.add(center);
+
+        clock.userData = {
+          radius: radius,
+        };
+
+        return clock;
+      }
+
+      // 台座（溶ける時計が乗る）
+      function createPedestal(width, height, depth) {
+        const pedestalGeometry = new THREE.BoxGeometry(width, height, depth);
+        const pedestalMaterial = new THREE.MeshPhongMaterial({
+          color: 0x8b7355,
+          shininess: 20,
+        });
+        const pedestal = new THREE.Mesh(pedestalGeometry, pedestalMaterial);
+        return pedestal;
+      }
+
+      // シーンに配置
+      const clocks = [];
+      const pedestals = [];
+
+      // 中央の垂れ下がる時計
+      const centralClock = createMeltingClock(3);
+      centralClock.position.y = 6;
+      centralClock.userData.meltSpeed = 0.4;
+      centralClock.userData.meltType = "drape";
+      scene.add(centralClock);
+      clocks.push(centralClock);
+
+      const centralPedestal = createPedestal(4, 1, 3);
+      centralPedestal.position.y = 2;
+      scene.add(centralPedestal);
+      pedestals.push(centralPedestal);
+
+      // 左の時計
+      const leftClock = createMeltingClock(2.5);
+      leftClock.position.set(-8, 5, -3);
+      leftClock.userData.meltSpeed = 0.5;
+      leftClock.userData.meltType = "side";
+      scene.add(leftClock);
+      clocks.push(leftClock);
+
+      const leftPedestal = createPedestal(3, 0.8, 2.5);
+      leftPedestal.position.set(-8, 1.5, -3);
+      scene.add(leftPedestal);
+      pedestals.push(leftPedestal);
+
+      // 右の時計
+      const rightClock = createMeltingClock(2.5);
+      rightClock.position.set(8, 4.5, -2);
+      rightClock.userData.meltSpeed = 0.3;
+      rightClock.userData.meltType = "drape";
+      scene.add(rightClock);
+      clocks.push(rightClock);
+
+      const rightPedestal = createPedestal(2.5, 1.2, 2);
+      rightPedestal.position.set(8, 1, -2);
+      scene.add(rightPedestal);
+      pedestals.push(rightPedestal);
+
+      // 地面
+      const groundGeometry = new THREE.PlaneGeometry(60, 60);
+      const groundMaterial = new THREE.MeshPhongMaterial({
+        color: 0x4a4a6a,
+        shininess: 10,
+      });
+      const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+      ground.rotation.x = -Math.PI / 2;
+      ground.position.y = 0;
+      scene.add(ground);
+
+      // 時間の粒子
+      const particleGeometry = new THREE.BufferGeometry();
+      const particleCount = 200;
+      const particlePositions = new Float32Array(particleCount * 3);
+      const particleColors = new Float32Array(particleCount * 3);
+
+      for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3;
+
+        particlePositions[i3] = (Math.random() - 0.5) * 50;
+        particlePositions[i3 + 1] = Math.random() * 20;
+        particlePositions[i3 + 2] = (Math.random() - 0.5) * 50;
+
+        const color = new THREE.Color().setHSL(
+          0.6 + Math.random() * 0.2,
+          0.5,
+          0.7
+        );
+        particleColors[i3] = color.r;
+        particleColors[i3 + 1] = color.g;
+        particleColors[i3 + 2] = color.b;
+      }
+
+      particleGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(particlePositions, 3)
+      );
+      particleGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(particleColors, 3)
+      );
+
+      const particleMaterial = new THREE.PointsMaterial({
+        size: 0.2,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const particles = new THREE.Points(particleGeometry, particleMaterial);
+      scene.add(particles);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 時計の溶け
+        clocks.forEach((clock, clockIndex) => {
+          const data = clock.userData;
+          const face = clock.children[0];
+          const geometry = face.geometry;
+          const positions = geometry.attributes.position.array;
+          const originalPositions = geometry.userData.originalPositions;
+
+          const meltAmount = Math.sin(t * data.meltSpeed) * 0.5 + 0.5;
+
+          if (data.meltType === "drape") {
+            // 垂れ下がる
+            for (let i = 0; i < positions.length; i += 3) {
+              const x = originalPositions[i];
+              const y = originalPositions[i + 1];
+
+              const distance = Math.sqrt(x * x + y * y);
+              const factor = distance / data.radius;
+
+              // 下方向に伸ばす
+              positions[i] = x;
+              positions[i + 1] = y - factor * meltAmount * data.radius * 0.8;
+              positions[i + 2] = originalPositions[i + 2];
+
+              // 波打つ
+              const wave = Math.sin(t * 2 + distance * 2) * 0.2;
+              positions[i + 1] += wave * meltAmount;
+            }
+          } else if (data.meltType === "side") {
+            // 横に溶ける
+            for (let i = 0; i < positions.length; i += 3) {
+              const x = originalPositions[i];
+              const y = originalPositions[i + 1];
+
+              positions[i] = x + y * meltAmount * 0.5;
+              positions[i + 1] = y * (1 - meltAmount * 0.3);
+              positions[i + 2] = originalPositions[i + 2];
+
+              const wave = Math.sin(t * 3 + x + y) * 0.1;
+              positions[i + 1] += wave * meltAmount;
+            }
+          }
+
+          geometry.attributes.position.needsUpdate = true;
+          geometry.computeVertexNormals();
+
+          // 針の動き（溶けながらも動く）
+          if (clock.children[13]) {
+            // 時針
+            clock.children[13].rotation.z = -t * 0.1 + meltAmount * 0.5;
+          }
+          if (clock.children[14]) {
+            // 分針
+            clock.children[14].rotation.z = -t * 0.5 + Math.sin(t) * meltAmount;
+          }
+          if (clock.children[15]) {
+            // 秒針
+            clock.children[15].rotation.z =
+              -t * 2 + Math.sin(t * 3) * meltAmount * 0.3;
+          }
+
+          // 時計全体がゆっくり回転
+          clock.rotation.y = Math.sin(t * 0.2 + clockIndex) * 0.2;
+          clock.rotation.x = Math.cos(t * 0.15 + clockIndex) * 0.1;
+        });
+
+        // 台座のゆっくりした動き
+        pedestals.forEach((pedestal, index) => {
+          pedestal.rotation.y = Math.sin(t * 0.1 + index) * 0.05;
+        });
+
+        // 粒子の動き（時間が流れる感じ）
+        const particlePos = particleGeometry.attributes.position.array;
+        for (let i = 0; i < particleCount; i++) {
+          const i3 = i * 3;
+
+          particlePos[i3] += Math.sin(t + i * 0.1) * 0.02;
+          particlePos[i3 + 1] -= 0.02;
+          particlePos[i3 + 2] += Math.cos(t + i * 0.1) * 0.02;
+
+          if (particlePos[i3 + 1] < 0) {
+            particlePos[i3] = (Math.random() - 0.5) * 50;
+            particlePos[i3 + 1] = 20;
+            particlePos[i3 + 2] = (Math.random() - 0.5) * 50;
+          }
+        }
+        particleGeometry.attributes.position.needsUpdate = true;
+
+        // ライトの揺らぎ
+        light1.intensity = 1.3 + Math.sin(t * 2) * 0.3;
+        light2.intensity = 0.8 + Math.cos(t * 1.5) * 0.3;
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.08) * 28;
+        camera.position.z = 25 + Math.cos(t * 0.08) * 10;
+        camera.position.y = 8 + Math.sin(t * 0.1) * 3;
+        camera.lookAt(0, 4, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>
