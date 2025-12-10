@@ -1,0 +1,398 @@
+<!-- fragment_052_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dark Forest</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: #000000;
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(100, 150, 100, 0.8);
+        z-index: 10;
+        text-shadow: 0 0 10px rgba(50, 100, 50, 0.5);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Dark Forest" 🌲</div>
+
+    <script>
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x000000, 0.08);
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 1, 5);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.body.appendChild(renderer.domElement);
+
+      // 暗いライティング
+      const ambientLight = new THREE.AmbientLight(0x0a0a0a, 0.3);
+      scene.add(ambientLight);
+
+      // 不気味な緑の光
+      const eerieLight1 = new THREE.PointLight(0x00ff00, 0.5, 15);
+      eerieLight1.position.set(5, 2, -5);
+      scene.add(eerieLight1);
+
+      const eerieLight2 = new THREE.PointLight(0x00ff00, 0.5, 15);
+      eerieLight2.position.set(-5, 2, 5);
+      scene.add(eerieLight2);
+
+      // 木を作る関数
+      function createTree(x, z, twisted = false) {
+        const tree = new THREE.Group();
+
+        // 幹
+        const trunkGeometry = new THREE.CylinderGeometry(0.3, 0.4, 4, 8);
+        const trunkMaterial = new THREE.MeshPhongMaterial({
+          color: 0x2a2a2a,
+          shininess: 0,
+        });
+        const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
+        trunk.position.y = 2;
+
+        if (twisted) {
+          // ねじれた木
+          trunk.rotation.z = Math.random() * 0.3 - 0.15;
+          trunk.scale.y = 1 + Math.random() * 0.5;
+        }
+
+        tree.add(trunk);
+
+        // 枝
+        for (let i = 0; i < 5; i++) {
+          const branchGeometry = new THREE.CylinderGeometry(0.08, 0.15, 1.5, 6);
+          const branch = new THREE.Mesh(branchGeometry, trunkMaterial);
+
+          const angle = (i / 5) * Math.PI * 2 + Math.random();
+          const height = 2 + i * 0.5;
+
+          branch.position.y = height;
+          branch.position.x = Math.cos(angle) * 0.3;
+          branch.position.z = Math.sin(angle) * 0.3;
+          branch.rotation.z = Math.cos(angle) * 0.8;
+          branch.rotation.x = Math.sin(angle) * 0.8;
+
+          tree.add(branch);
+        }
+
+        tree.position.set(x, 0, z);
+        return tree;
+      }
+
+      // 森を作成
+      const trees = [];
+      for (let i = 0; i < 30; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const radius = 5 + Math.random() * 15;
+        const x = Math.cos(angle) * radius;
+        const z = Math.sin(angle) * radius;
+
+        const tree = createTree(x, z, Math.random() > 0.5);
+        tree.userData = {
+          swaySpeed: 0.5 + Math.random() * 0.5,
+          swayAmount: 0.02 + Math.random() * 0.03,
+          swayOffset: Math.random() * Math.PI * 2,
+        };
+
+        scene.add(tree);
+        trees.push(tree);
+      }
+
+      // 光る目（動物の目）
+      const eyes = [];
+      for (let i = 0; i < 20; i++) {
+        const eyePair = new THREE.Group();
+
+        const eyeGeometry = new THREE.SphereGeometry(0.08, 8, 8);
+        const eyeMaterial = new THREE.MeshBasicMaterial({
+          color: 0xff0000,
+          transparent: true,
+          opacity: 0.9,
+        });
+
+        const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+        leftEye.position.x = -0.15;
+        eyePair.add(leftEye);
+
+        const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+        rightEye.position.x = 0.15;
+        eyePair.add(rightEye);
+
+        // グロー効果
+        const glowGeometry = new THREE.SphereGeometry(0.15, 8, 8);
+        const glowMaterial = new THREE.MeshBasicMaterial({
+          color: 0xff0000,
+          transparent: true,
+          opacity: 0.3,
+          blending: THREE.AdditiveBlending,
+        });
+
+        const leftGlow = new THREE.Mesh(glowGeometry, glowMaterial);
+        leftGlow.position.x = -0.15;
+        eyePair.add(leftGlow);
+
+        const rightGlow = new THREE.Mesh(glowGeometry, glowMaterial);
+        rightGlow.position.x = 0.15;
+        eyePair.add(rightGlow);
+
+        eyePair.position.x = (Math.random() - 0.5) * 30;
+        eyePair.position.y = 0.5 + Math.random() * 1.5;
+        eyePair.position.z = (Math.random() - 0.5) * 30;
+
+        eyePair.userData = {
+          blinkSpeed: 1 + Math.random() * 2,
+          blinkOffset: Math.random() * Math.PI * 2,
+          moveSpeed: 0.005 + Math.random() * 0.01,
+        };
+
+        scene.add(eyePair);
+        eyes.push(eyePair);
+      }
+
+      // 蜘蛛の巣
+      const spiderWebs = [];
+      for (let i = 0; i < 8; i++) {
+        const webGroup = new THREE.Group();
+
+        // 放射状の糸
+        for (let j = 0; j < 8; j++) {
+          const angle = (j / 8) * Math.PI * 2;
+          const points = [];
+          points.push(new THREE.Vector3(0, 0, 0));
+          points.push(
+            new THREE.Vector3(Math.cos(angle) * 2, Math.sin(angle) * 2, 0)
+          );
+
+          const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+          const lineMaterial = new THREE.LineBasicMaterial({
+            color: 0xcccccc,
+            transparent: true,
+            opacity: 0.3,
+          });
+          const line = new THREE.Line(lineGeometry, lineMaterial);
+          webGroup.add(line);
+        }
+
+        // 円形の糸
+        for (let r = 0.5; r < 2; r += 0.5) {
+          const circlePoints = [];
+          for (let a = 0; a <= Math.PI * 2; a += 0.3) {
+            circlePoints.push(
+              new THREE.Vector3(Math.cos(a) * r, Math.sin(a) * r, 0)
+            );
+          }
+          const circleGeometry = new THREE.BufferGeometry().setFromPoints(
+            circlePoints
+          );
+          const circleMaterial = new THREE.LineBasicMaterial({
+            color: 0xcccccc,
+            transparent: true,
+            opacity: 0.3,
+          });
+          const circle = new THREE.Line(circleGeometry, circleMaterial);
+          webGroup.add(circle);
+        }
+
+        webGroup.position.x = (Math.random() - 0.5) * 20;
+        webGroup.position.y = 2 + Math.random() * 2;
+        webGroup.position.z = (Math.random() - 0.5) * 20;
+        webGroup.rotation.y = Math.random() * Math.PI;
+
+        scene.add(webGroup);
+        spiderWebs.push(webGroup);
+      }
+
+      // 霧のパーティクル
+      const fogParticles = new THREE.BufferGeometry();
+      const fogCount = 300;
+      const fogPositions = new Float32Array(fogCount * 3);
+
+      for (let i = 0; i < fogCount; i++) {
+        const i3 = i * 3;
+
+        fogPositions[i3] = (Math.random() - 0.5) * 50;
+        fogPositions[i3 + 1] = Math.random() * 8;
+        fogPositions[i3 + 2] = (Math.random() - 0.5) * 50;
+      }
+
+      fogParticles.setAttribute(
+        "position",
+        new THREE.BufferAttribute(fogPositions, 3)
+      );
+
+      const fogMaterial = new THREE.PointsMaterial({
+        size: 0.8,
+        color: 0x2a2a2a,
+        transparent: true,
+        opacity: 0.4,
+        blending: THREE.NormalBlending,
+      });
+
+      const fog = new THREE.Points(fogParticles, fogMaterial);
+      scene.add(fog);
+
+      // カラス
+      const crows = [];
+      for (let i = 0; i < 6; i++) {
+        const crow = new THREE.Group();
+
+        // 体
+        const bodyGeometry = new THREE.SphereGeometry(0.2, 8, 8);
+        bodyGeometry.scale(1, 1, 1.5);
+        const bodyMaterial = new THREE.MeshPhongMaterial({
+          color: 0x0a0a0a,
+          shininess: 20,
+        });
+        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        crow.add(body);
+
+        // 翼
+        const wingGeometry = new THREE.BoxGeometry(0.8, 0.05, 0.4);
+        const leftWing = new THREE.Mesh(wingGeometry, bodyMaterial);
+        leftWing.position.set(-0.4, 0, 0);
+        crow.add(leftWing);
+
+        const rightWing = new THREE.Mesh(wingGeometry, bodyMaterial);
+        rightWing.position.set(0.4, 0, 0);
+        crow.add(rightWing);
+
+        crow.userData = {
+          leftWing: leftWing,
+          rightWing: rightWing,
+          pathAngle: Math.random() * Math.PI * 2,
+          pathSpeed: 0.3 + Math.random() * 0.3,
+          pathRadius: 8 + Math.random() * 5,
+          flapSpeed: 6 + Math.random() * 4,
+        };
+
+        scene.add(crow);
+        crows.push(crow);
+      }
+
+      // 地面
+      const groundGeometry = new THREE.CircleGeometry(30, 32);
+      const groundMaterial = new THREE.MeshPhongMaterial({
+        color: 0x0a0a0a,
+        shininess: 0,
+      });
+      const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+      ground.rotation.x = -Math.PI / 2;
+      scene.add(ground);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 木の揺れ
+        trees.forEach((tree) => {
+          const data = tree.userData;
+          tree.rotation.z =
+            Math.sin(t * data.swaySpeed + data.swayOffset) * data.swayAmount;
+        });
+
+        // 光る目の点滅と移動
+        eyes.forEach((eyePair) => {
+          const data = eyePair.userData;
+
+          // 点滅
+          const blink = Math.sin(t * data.blinkSpeed + data.blinkOffset);
+          const opacity = blink < -0.8 ? 0 : 0.9;
+          eyePair.children.forEach((child) => {
+            if (child.material) {
+              child.material.opacity =
+                child.material.opacity > 0.5 ? opacity : opacity * 0.3;
+            }
+          });
+
+          // ゆっくり移動
+          eyePair.position.x += Math.sin(t + data.blinkOffset) * data.moveSpeed;
+          eyePair.position.z += Math.cos(t + data.blinkOffset) * data.moveSpeed;
+
+          // カメラの方を向く
+          eyePair.lookAt(camera.position);
+        });
+
+        // 不気味な光の動き
+        eerieLight1.position.x = 5 + Math.sin(t * 0.5) * 3;
+        eerieLight1.position.z = -5 + Math.cos(t * 0.7) * 3;
+        eerieLight1.intensity = 0.3 + Math.sin(t * 2) * 0.2;
+
+        eerieLight2.position.x = -5 + Math.cos(t * 0.6) * 3;
+        eerieLight2.position.z = 5 + Math.sin(t * 0.8) * 3;
+        eerieLight2.intensity = 0.3 + Math.cos(t * 2.5) * 0.2;
+
+        // 霧の動き
+        const fogPos = fogParticles.attributes.position.array;
+        for (let i = 0; i < fogCount; i++) {
+          const i3 = i * 3;
+          fogPos[i3] += Math.sin(t * 0.2 + i) * 0.01;
+          fogPos[i3 + 1] += Math.cos(t * 0.3 + i) * 0.005;
+        }
+        fogParticles.attributes.position.needsUpdate = true;
+
+        // カラスの飛行
+        crows.forEach((crow) => {
+          const data = crow.userData;
+          data.pathAngle += data.pathSpeed * 0.01;
+
+          crow.position.x = Math.cos(data.pathAngle) * data.pathRadius;
+          crow.position.y = 4 + Math.sin(data.pathAngle * 2) * 2;
+          crow.position.z = Math.sin(data.pathAngle) * data.pathRadius;
+
+          // 羽ばたき
+          const flapAngle = Math.sin(t * data.flapSpeed) * 0.4;
+          data.leftWing.rotation.z = flapAngle;
+          data.rightWing.rotation.z = -flapAngle;
+
+          crow.lookAt(
+            Math.cos(data.pathAngle + 0.1) * data.pathRadius,
+            4 + Math.sin((data.pathAngle + 0.1) * 2) * 2,
+            Math.sin(data.pathAngle + 0.1) * data.pathRadius
+          );
+        });
+
+        // カメラの不気味な動き
+        camera.position.x = Math.sin(t * 0.1) * 0.3;
+        camera.position.y = 1 + Math.sin(t * 0.15) * 0.2;
+        camera.lookAt(0, 1, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

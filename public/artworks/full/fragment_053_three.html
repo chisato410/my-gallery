@@ -1,0 +1,428 @@
+<!-- fragment_053_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cursed Hospital</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #1a1a20 0%,
+          #0f0f15 50%,
+          #050508 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(180, 180, 200, 0.8);
+        z-index: 10;
+        text-shadow: 0 0 10px rgba(100, 100, 150, 0.5);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Cursed Hospital" 🏥</div>
+
+    <script>
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x0a0a0f, 5, 35);
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 2, 10);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.body.appendChild(renderer.domElement);
+
+      // 暗いライティング
+      const ambientLight = new THREE.AmbientLight(0x1a1a2e, 0.2);
+      scene.add(ambientLight);
+
+      // 点滅する蛍光灯
+      const flickerLight = new THREE.PointLight(0xccffcc, 0.8, 25);
+      flickerLight.position.set(0, 4, 0);
+      scene.add(flickerLight);
+
+      // 赤い非常灯
+      const emergencyLight = new THREE.PointLight(0xff0000, 0.5, 20);
+      emergencyLight.position.set(-5, 3, -5);
+      scene.add(emergencyLight);
+
+      // 廊下の壁
+      const corridor = new THREE.Group();
+
+      // 左の壁
+      const leftWallGeometry = new THREE.BoxGeometry(0.5, 5, 30);
+      const wallMaterial = new THREE.MeshPhongMaterial({
+        color: 0x3a3a4a,
+        shininess: 10,
+      });
+      const leftWall = new THREE.Mesh(leftWallGeometry, wallMaterial);
+      leftWall.position.set(-5, 2.5, 0);
+      corridor.add(leftWall);
+
+      // 右の壁
+      const rightWall = new THREE.Mesh(leftWallGeometry, wallMaterial);
+      rightWall.position.set(5, 2.5, 0);
+      corridor.add(rightWall);
+
+      // 天井
+      const ceilingGeometry = new THREE.BoxGeometry(10, 0.3, 30);
+      const ceiling = new THREE.Mesh(ceilingGeometry, wallMaterial);
+      ceiling.position.y = 5;
+      corridor.add(ceiling);
+
+      // ドア
+      for (let i = 0; i < 8; i++) {
+        const doorGeometry = new THREE.BoxGeometry(1.2, 2.5, 0.2);
+        const doorMaterial = new THREE.MeshPhongMaterial({
+          color: 0x2a4a3a,
+          shininess: 5,
+        });
+        const door = new THREE.Mesh(doorGeometry, doorMaterial);
+
+        const z = -12 + i * 4;
+        const side = i % 2 === 0 ? -4.75 : 4.75;
+
+        door.position.set(side, 1.25, z);
+        door.rotation.y = side < 0 ? Math.PI / 2 : -Math.PI / 2;
+        corridor.add(door);
+
+        // ドアの窓（不気味に光る）
+        const windowGeometry = new THREE.PlaneGeometry(0.6, 0.6);
+        const windowMaterial = new THREE.MeshBasicMaterial({
+          color: 0xff0000,
+          transparent: true,
+          opacity: 0.3,
+          emissive: 0xff0000,
+          emissiveIntensity: 0.5,
+        });
+        const doorWindow = new THREE.Mesh(windowGeometry, windowMaterial);
+        doorWindow.position.set(side > 0 ? 0.11 : -0.11, 0.8, 0);
+        door.add(doorWindow);
+      }
+
+      scene.add(corridor);
+
+      // 床
+      const floorGeometry = new THREE.PlaneGeometry(10, 30);
+      const floorMaterial = new THREE.MeshPhongMaterial({
+        color: 0x2a2a3a,
+        shininess: 20,
+      });
+      const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+      floor.rotation.x = -Math.PI / 2;
+      scene.add(floor);
+
+      // 血痕
+      const bloodStains = [];
+      for (let i = 0; i < 15; i++) {
+        const stainGeometry = new THREE.CircleGeometry(
+          0.3 + Math.random() * 0.5,
+          16
+        );
+        const stainMaterial = new THREE.MeshBasicMaterial({
+          color: 0x3a0000,
+          transparent: true,
+          opacity: 0.6,
+        });
+        const stain = new THREE.Mesh(stainGeometry, stainMaterial);
+        stain.rotation.x = -Math.PI / 2;
+        stain.position.set(
+          (Math.random() - 0.5) * 8,
+          0.01,
+          (Math.random() - 0.5) * 25
+        );
+        scene.add(stain);
+        bloodStains.push(stain);
+      }
+
+      // 車椅子
+      const wheelchairs = [];
+      for (let i = 0; i < 3; i++) {
+        const wheelchair = new THREE.Group();
+
+        // 座席
+        const seatGeometry = new THREE.BoxGeometry(0.8, 0.1, 0.8);
+        const metalMaterial = new THREE.MeshPhongMaterial({
+          color: 0x4a4a5a,
+          shininess: 30,
+        });
+        const seat = new THREE.Mesh(seatGeometry, metalMaterial);
+        seat.position.y = 0.6;
+        wheelchair.add(seat);
+
+        // 背もたれ
+        const backGeometry = new THREE.BoxGeometry(0.8, 1, 0.1);
+        const back = new THREE.Mesh(backGeometry, metalMaterial);
+        back.position.set(0, 1.1, -0.35);
+        wheelchair.add(back);
+
+        // 車輪
+        const wheelGeometry = new THREE.TorusGeometry(0.3, 0.08, 8, 16);
+        const wheelMaterial = new THREE.MeshPhongMaterial({
+          color: 0x2a2a2a,
+          shininess: 10,
+        });
+
+        const leftWheel = new THREE.Mesh(wheelGeometry, wheelMaterial);
+        leftWheel.position.set(-0.5, 0.3, 0);
+        leftWheel.rotation.y = Math.PI / 2;
+        wheelchair.add(leftWheel);
+
+        const rightWheel = new THREE.Mesh(wheelGeometry, wheelMaterial);
+        rightWheel.position.set(0.5, 0.3, 0);
+        rightWheel.rotation.y = Math.PI / 2;
+        wheelchair.add(rightWheel);
+
+        wheelchair.position.set(i % 2 === 0 ? -3 : 3, 0, -8 + i * 6);
+        wheelchair.rotation.y = i % 2 === 0 ? 0.3 : -0.3;
+
+        wheelchair.userData = {
+          rockSpeed: 0.5 + Math.random() * 0.3,
+          rockAmount: 0.02,
+        };
+
+        scene.add(wheelchair);
+        wheelchairs.push(wheelchair);
+      }
+
+      // 影のような存在
+      const shadows = [];
+      for (let i = 0; i < 5; i++) {
+        const shadowGeometry = new THREE.PlaneGeometry(1, 2);
+        const shadowMaterial = new THREE.MeshBasicMaterial({
+          color: 0x000000,
+          transparent: true,
+          opacity: 0.7,
+          side: THREE.DoubleSide,
+        });
+        const shadow = new THREE.Mesh(shadowGeometry, shadowMaterial);
+
+        shadow.position.set(
+          (Math.random() - 0.5) * 8,
+          1,
+          (Math.random() - 0.5) * 25
+        );
+
+        shadow.userData = {
+          moveSpeed: 0.01 + Math.random() * 0.02,
+          fadeSpeed: 1 + Math.random(),
+          fadeOffset: Math.random() * Math.PI * 2,
+        };
+
+        scene.add(shadow);
+        shadows.push(shadow);
+      }
+
+      // 浮遊する注射器
+      const syringes = [];
+      for (let i = 0; i < 8; i++) {
+        const syringe = new THREE.Group();
+
+        // 本体
+        const bodyGeometry = new THREE.CylinderGeometry(0.05, 0.05, 0.8, 8);
+        const bodyMaterial = new THREE.MeshPhongMaterial({
+          color: 0xcccccc,
+          transparent: true,
+          opacity: 0.8,
+          shininess: 80,
+        });
+        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        body.rotation.z = Math.PI / 2;
+        syringe.add(body);
+
+        // 針
+        const needleGeometry = new THREE.CylinderGeometry(0.01, 0.01, 0.5, 8);
+        const needleMaterial = new THREE.MeshPhongMaterial({
+          color: 0x888888,
+          shininess: 100,
+        });
+        const needle = new THREE.Mesh(needleGeometry, needleMaterial);
+        needle.position.set(0.65, 0, 0);
+        needle.rotation.z = Math.PI / 2;
+        syringe.add(needle);
+
+        syringe.position.set(
+          (Math.random() - 0.5) * 8,
+          1 + Math.random() * 2,
+          (Math.random() - 0.5) * 20
+        );
+
+        syringe.userData = {
+          floatSpeed: 0.5 + Math.random() * 0.5,
+          floatAmount: 0.3 + Math.random() * 0.3,
+          rotationSpeed: 0.01 + Math.random() * 0.02,
+        };
+
+        scene.add(syringe);
+        syringes.push(syringe);
+      }
+
+      // 点滴スタンド
+      const ivStands = [];
+      for (let i = 0; i < 4; i++) {
+        const stand = new THREE.Group();
+
+        // ポール
+        const poleGeometry = new THREE.CylinderGeometry(0.05, 0.05, 2.5, 8);
+        const poleMaterial = new THREE.MeshPhongMaterial({
+          color: 0x4a4a5a,
+          shininess: 30,
+        });
+        const pole = new THREE.Mesh(poleGeometry, poleMaterial);
+        pole.position.y = 1.25;
+        stand.add(pole);
+
+        // 点滴バッグ
+        const bagGeometry = new THREE.SphereGeometry(0.2, 16, 16);
+        bagGeometry.scale(1, 1.5, 0.8);
+        const bagMaterial = new THREE.MeshPhongMaterial({
+          color: 0xff0000,
+          transparent: true,
+          opacity: 0.5,
+          shininess: 50,
+          emissive: 0x330000,
+          emissiveIntensity: 0.3,
+        });
+        const bag = new THREE.Mesh(bagGeometry, bagMaterial);
+        bag.position.y = 2.3;
+        stand.add(bag);
+
+        stand.position.set(i % 2 === 0 ? -3.5 : 3.5, 0, -10 + i * 6);
+
+        stand.userData = {
+          swaySpeed: 0.5 + Math.random() * 0.3,
+          swayAmount: 0.05,
+        };
+
+        scene.add(stand);
+        ivStands.push(stand);
+      }
+
+      // 埃のパーティクル
+      const dustGeometry = new THREE.BufferGeometry();
+      const dustCount = 250;
+      const dustPositions = new Float32Array(dustCount * 3);
+
+      for (let i = 0; i < dustCount; i++) {
+        const i3 = i * 3;
+
+        dustPositions[i3] = (Math.random() - 0.5) * 15;
+        dustPositions[i3 + 1] = Math.random() * 5;
+        dustPositions[i3 + 2] = (Math.random() - 0.5) * 30;
+      }
+
+      dustGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(dustPositions, 3)
+      );
+
+      const dustMaterial = new THREE.PointsMaterial({
+        size: 0.05,
+        color: 0x888888,
+        transparent: true,
+        opacity: 0.4,
+      });
+
+      const dust = new THREE.Points(dustGeometry, dustMaterial);
+      scene.add(dust);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 蛍光灯の点滅
+        if (Math.random() > 0.95) {
+          flickerLight.intensity = Math.random() * 0.5 + 0.3;
+        } else {
+          flickerLight.intensity = 0.8;
+        }
+
+        // 非常灯の点滅
+        emergencyLight.intensity = Math.sin(t * 3) * 0.25 + 0.25;
+
+        // 車椅子の揺れ
+        wheelchairs.forEach((wheelchair) => {
+          const data = wheelchair.userData;
+          wheelchair.rotation.z =
+            Math.sin(t * data.rockSpeed) * data.rockAmount;
+        });
+
+        // 影の動きとフェード
+        shadows.forEach((shadow) => {
+          const data = shadow.userData;
+
+          shadow.position.z += data.moveSpeed;
+          if (shadow.position.z > 15) {
+            shadow.position.z = -15;
+          }
+
+          shadow.material.opacity =
+            (Math.sin(t * data.fadeSpeed + data.fadeOffset) * 0.5 + 0.5) * 0.7;
+          shadow.lookAt(camera.position);
+        });
+
+        // 注射器の浮遊
+        syringes.forEach((syringe) => {
+          const data = syringe.userData;
+          syringe.position.y += Math.sin(t * data.floatSpeed) * 0.01;
+          syringe.rotation.y += data.rotationSpeed;
+        });
+
+        // 点滴スタンドの揺れ
+        ivStands.forEach((stand) => {
+          const data = stand.userData;
+          stand.rotation.z = Math.sin(t * data.swaySpeed) * data.swayAmount;
+        });
+
+        // 埃の動き
+        const dustPos = dustGeometry.attributes.position.array;
+        for (let i = 0; i < dustCount; i++) {
+          const i3 = i * 3;
+          dustPos[i3] += Math.sin(t + i) * 0.005;
+          dustPos[i3 + 1] += Math.cos(t * 0.5 + i) * 0.003;
+        }
+        dustGeometry.attributes.position.needsUpdate = true;
+
+        // カメラの不気味な揺れ
+        camera.position.x = Math.sin(t * 0.3) * 0.2;
+        camera.position.y = 2 + Math.sin(t * 0.4) * 0.1;
+        camera.lookAt(0, 2, -10);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

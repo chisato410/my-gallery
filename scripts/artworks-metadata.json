@@ -2568,5 +2568,106 @@
       "dynamic-lights",
       "camera-orbit"
     ]
+  },
+  {
+    "filename": "fragment_051_three.html",
+    "title": "Haunted Mansion",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "3d-animation",
+      "haunted-house",
+      "ghosts",
+      "bats",
+      "moon",
+      "fog",
+      "glowing-windows",
+      "tombstones",
+      "dynamic-lights",
+      "camera-sway"
+    ]
+  },
+  {
+    "filename": "fragment_052_three.html",
+    "title": "Dark Forest",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "3d-animation",
+      "dark-forest",
+      "trees",
+      "glowing-eyes",
+      "spider-webs",
+      "crows",
+      "fog",
+      "dynamic-lights",
+      "tree-sway",
+      "camera-movement"
+    ]
+  },
+  {
+    "filename": "fragment_053_three.html",
+    "title": "Cursed Hospital",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "3d-animation",
+      "horror",
+      "hospital",
+      "ghosts",
+      "floating-objects",
+      "wheelchair",
+      "iv-stand",
+      "blood-stains",
+      "flickering-lights",
+      "fog",
+      "camera-sway"
+    ]
+  },
+  {
+    "filename": "fragment_054_three.html",
+    "title": "Ancient Catacombs",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "3d-animation",
+      "horror",
+      "catacombs",
+      "skeletons",
+      "coffins",
+      "floating-hands",
+      "spiders",
+      "candles",
+      "torch-lights",
+      "fog",
+      "camera-sway",
+      "red-glowing-eyes"
+    ]
+  },
+  {
+    "filename": "fragment_055_three.html",
+    "title": "Demonic Ritual",
+    "tech": "Three.js",
+    "createdAt": "2025-12-10",
+    "tags": [
+      "webgl",
+      "3d-animation",
+      "horror",
+      "dark-fantasy",
+      "demonic-ritual",
+      "pentagram",
+      "candles",
+      "floating-skulls",
+      "demonic-eyes",
+      "blood-rain",
+      "smoke",
+      "fog",
+      "camera-orbit",
+      "red-glow"
+    ]
   }
 ]

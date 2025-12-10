@@ -1,0 +1,432 @@
+<!-- fragment_051_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Haunted Mansion</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #0a0a0a 0%,
+          #1a0f1f 50%,
+          #0f0a1a 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(150, 150, 180, 0.8);
+        z-index: 10;
+        text-shadow: 0 0 10px rgba(100, 100, 150, 0.5);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Haunted Mansion" 👻</div>
+
+    <script>
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x0a0a0a, 5, 30);
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 2, 12);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      document.body.appendChild(renderer.domElement);
+
+      // 不気味なライティング
+      const ambientLight = new THREE.AmbientLight(0x1a1a2e, 0.2);
+      scene.add(ambientLight);
+
+      const moonLight = new THREE.DirectionalLight(0x6666aa, 0.3);
+      moonLight.position.set(-5, 10, -5);
+      scene.add(moonLight);
+
+      // 緑の不気味な光
+      const eerieLight = new THREE.PointLight(0x00ff00, 0.8, 20);
+      eerieLight.position.set(0, 3, 0);
+      scene.add(eerieLight);
+
+      // 屋敷を作る
+      const mansion = new THREE.Group();
+
+      // メインの建物
+      const buildingGeometry = new THREE.BoxGeometry(6, 5, 4);
+      const buildingMaterial = new THREE.MeshPhongMaterial({
+        color: 0x2a2a3a,
+        shininess: 10,
+        emissive: 0x0a0a0f,
+        emissiveIntensity: 0.2,
+      });
+      const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
+      building.position.y = 2.5;
+      mansion.add(building);
+
+      // 屋根
+      const roofGeometry = new THREE.ConeGeometry(4.5, 2, 4);
+      const roofMaterial = new THREE.MeshPhongMaterial({
+        color: 0x1a1a2a,
+        shininess: 5,
+      });
+      const roof = new THREE.Mesh(roofGeometry, roofMaterial);
+      roof.position.y = 6;
+      roof.rotation.y = Math.PI / 4;
+      mansion.add(roof);
+
+      // 窓（不気味に光る）
+      const windowPositions = [
+        [-1.5, 3, 2.01],
+        [1.5, 3, 2.01],
+        [-1.5, 1.5, 2.01],
+        [1.5, 1.5, 2.01],
+      ];
+
+      windowPositions.forEach((pos) => {
+        const windowGeometry = new THREE.PlaneGeometry(0.8, 1.2);
+        const windowMaterial = new THREE.MeshBasicMaterial({
+          color: 0x00ff00,
+          transparent: true,
+          opacity: 0.6,
+          emissive: 0x00ff00,
+          emissiveIntensity: 0.8,
+        });
+        const window = new THREE.Mesh(windowGeometry, windowMaterial);
+        window.position.set(pos[0], pos[1], pos[2]);
+        mansion.add(window);
+
+        // 窓の枠
+        const frameGeometry = new THREE.BoxGeometry(0.9, 1.3, 0.1);
+        const frameMaterial = new THREE.MeshPhongMaterial({
+          color: 0x1a1a1a,
+        });
+        const frame = new THREE.Mesh(frameGeometry, frameMaterial);
+        frame.position.set(pos[0], pos[1], pos[2] - 0.05);
+        mansion.add(frame);
+      });
+
+      // ドア
+      const doorGeometry = new THREE.BoxGeometry(1.2, 2, 0.2);
+      const doorMaterial = new THREE.MeshPhongMaterial({
+        color: 0x3a2a1a,
+        shininess: 5,
+      });
+      const door = new THREE.Mesh(doorGeometry, doorMaterial);
+      door.position.set(0, 1, 2.1);
+      mansion.add(door);
+
+      mansion.position.y = -2;
+      scene.add(mansion);
+
+      // 幽霊たち
+      const ghosts = [];
+      for (let i = 0; i < 50; i++) {
+        const ghost = new THREE.Group();
+
+        // 頭部
+        const headGeometry = new THREE.SphereGeometry(0.5, 8, 8);
+        const ghostMaterial = new THREE.MeshPhongMaterial({
+          color: 0xccccff,
+          transparent: true,
+          opacity: 0.6,
+          emissive: 0x6666ff,
+          emissiveIntensity: 0.5,
+        });
+        const head = new THREE.Mesh(headGeometry, ghostMaterial);
+        head.position.y = 0.5;
+        ghost.add(head);
+
+        // 体（布のような）
+        const bodyGeometry = new THREE.ConeGeometry(0.6, 1.5, 16);
+        const body = new THREE.Mesh(bodyGeometry, ghostMaterial);
+        body.position.y = -0.25;
+        ghost.add(body);
+
+        // 目
+        const eyeGeometry = new THREE.SphereGeometry(0.1, 8, 8);
+        const eyeMaterial = new THREE.MeshBasicMaterial({
+          color: 0x000000,
+        });
+        const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+        leftEye.position.set(-0.15, 0.6, 0.4);
+        ghost.add(leftEye);
+
+        const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+        rightEye.position.set(0.15, 0.6, 0.4);
+        ghost.add(rightEye);
+
+        // グロー効果
+        const glowGeometry = new THREE.SphereGeometry(0.8, 8, 8);
+        const glowMaterial = new THREE.MeshBasicMaterial({
+          color: 0x6666ff,
+          transparent: true,
+          opacity: 0.2,
+          blending: THREE.AdditiveBlending,
+        });
+        const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+        glow.position.y = 0.5;
+        ghost.add(glow);
+
+        ghost.position.x = (Math.random() - 0.5) * 15;
+        ghost.position.y = Math.random() * 8 - 2;
+        ghost.position.z = (Math.random() - 0.5) * 15;
+
+        ghost.userData = {
+          floatSpeed: 0.3 + Math.random() * 0.3,
+          floatAmount: 0.5 + Math.random() * 0.5,
+          floatOffset: Math.random() * Math.PI * 2,
+          pathAngle: Math.random() * Math.PI * 2,
+          pathSpeed: 0.1 + Math.random() * 0.1,
+          pathRadius: 3 + Math.random() * 5,
+        };
+
+        scene.add(ghost);
+        ghosts.push(ghost);
+      }
+
+      // 月
+      const moonGeometry = new THREE.SphereGeometry(2, 8, 8);
+      const moonMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffffcc,
+        transparent: true,
+        opacity: 0.8,
+      });
+      const moon = new THREE.Mesh(moonGeometry, moonMaterial);
+      moon.position.set(-10, 8, -15);
+      scene.add(moon);
+
+      // 月のグロー
+      const moonGlowGeometry = new THREE.SphereGeometry(2.5, 8, 8);
+      const moonGlowMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffffcc,
+        transparent: true,
+        opacity: 0.3,
+        blending: THREE.AdditiveBlending,
+      });
+      const moonGlow = new THREE.Mesh(moonGlowGeometry, moonGlowMaterial);
+      moon.add(moonGlow);
+
+      // 不気味な霧
+      const mistParticles = new THREE.BufferGeometry();
+      const mistCount = 200;
+      const mistPositions = new Float32Array(mistCount * 3);
+      const mistColors = new Float32Array(mistCount * 3);
+
+      for (let i = 0; i < mistCount; i++) {
+        const i3 = i * 3;
+
+        mistPositions[i3] = (Math.random() - 0.5) * 30;
+        mistPositions[i3 + 1] = Math.random() * 5 - 3;
+        mistPositions[i3 + 2] = (Math.random() - 0.5) * 30;
+
+        const color = new THREE.Color(0x6666aa);
+        mistColors[i3] = color.r;
+        mistColors[i3 + 1] = color.g;
+        mistColors[i3 + 2] = color.b;
+      }
+
+      mistParticles.setAttribute(
+        "position",
+        new THREE.BufferAttribute(mistPositions, 3)
+      );
+      mistParticles.setAttribute(
+        "color",
+        new THREE.BufferAttribute(mistColors, 3)
+      );
+
+      const mistMaterial = new THREE.PointsMaterial({
+        size: 1,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.3,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const mist = new THREE.Points(mistParticles, mistMaterial);
+      scene.add(mist);
+
+      // コウモリ
+      const bats = [];
+      for (let i = 0; i < 50; i++) {
+        const bat = new THREE.Group();
+
+        // 体
+        const bodyGeometry = new THREE.SphereGeometry(0.15, 8, 8);
+        bodyGeometry.scale(1, 1, 1.5);
+        const bodyMaterial = new THREE.MeshPhongMaterial({
+          color: 0x1a1a1a,
+        });
+        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        bat.add(body);
+
+        // 翼（左）
+        const wingGeometry = new THREE.ConeGeometry(0.3, 0.5, 3);
+        wingGeometry.rotateZ(Math.PI / 2);
+        const leftWing = new THREE.Mesh(wingGeometry, bodyMaterial);
+        leftWing.position.set(-0.2, 0, 0);
+        bat.add(leftWing);
+
+        // 翼（右）
+        const rightWing = new THREE.Mesh(wingGeometry, bodyMaterial);
+        rightWing.rotation.z = -Math.PI / 2;
+        rightWing.position.set(0.2, 0, 0);
+        bat.add(rightWing);
+
+        bat.userData = {
+          leftWing: leftWing,
+          rightWing: rightWing,
+          pathAngle: Math.random() * Math.PI * 2,
+          pathSpeed: 0.5 + Math.random() * 0.5,
+          pathRadius: 8 + Math.random() * 4,
+          flapSpeed: 10 + Math.random() * 5,
+        };
+
+        scene.add(bat);
+        bats.push(bat);
+      }
+
+      // 墓石
+      const tombstones = [];
+      for (let i = 0; i < 50; i++) {
+        const tombstone = new THREE.Group();
+
+        const stoneGeometry = new THREE.BoxGeometry(0.8, 1.2, 0.2);
+        const stoneMaterial = new THREE.MeshPhongMaterial({
+          color: 0x3a3a3a,
+          shininess: 5,
+        });
+        const stone = new THREE.Mesh(stoneGeometry, stoneMaterial);
+        stone.position.y = 0.6;
+        tombstone.add(stone);
+
+        // 十字架
+        const crossHGeometry = new THREE.BoxGeometry(0.4, 0.08, 0.08);
+        const crossH = new THREE.Mesh(crossHGeometry, stoneMaterial);
+        crossH.position.y = 0.9;
+        tombstone.add(crossH);
+
+        const angle = (i / 10) * Math.PI * 2;
+        const radius = 10;
+        tombstone.position.x = Math.cos(angle) * radius;
+        tombstone.position.z = Math.sin(angle) * radius;
+        tombstone.position.y = -2;
+
+        tombstone.rotation.y = -angle;
+
+        scene.add(tombstone);
+        tombstones.push(tombstone);
+      }
+
+      // 地面
+      const groundGeometry = new THREE.CircleGeometry(20, 32);
+      const groundMaterial = new THREE.MeshPhongMaterial({
+        color: 0x1a1a2a,
+        shininess: 0,
+      });
+      const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+      ground.rotation.x = -Math.PI / 2;
+      ground.position.y = -2;
+      scene.add(ground);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 幽霊の動き
+        ghosts.forEach((ghost) => {
+          const data = ghost.userData;
+
+          // 円を描きながら浮遊
+          data.pathAngle += data.pathSpeed * 0.01;
+          ghost.position.x = Math.cos(data.pathAngle) * data.pathRadius;
+          ghost.position.z = Math.sin(data.pathAngle) * data.pathRadius;
+          ghost.position.y +=
+            Math.sin(t * data.floatSpeed + data.floatOffset) * 0.01;
+
+          // ゆらゆら
+          ghost.rotation.z = Math.sin(t * 2 + data.floatOffset) * 0.1;
+        });
+
+        // 不気味な光の点滅
+        eerieLight.intensity = 0.5 + Math.sin(t * 3) * 0.3;
+        eerieLight.position.y = 3 + Math.sin(t * 2) * 0.5;
+
+        // 窓の明滅
+        mansion.children.forEach((child) => {
+          if (child.material && child.material.emissive) {
+            child.material.emissiveIntensity =
+              0.5 + Math.sin(t * 4 + Math.random()) * 0.3;
+          }
+        });
+
+        // 霧の動き
+        const mistPos = mistParticles.attributes.position.array;
+        for (let i = 0; i < mistCount; i++) {
+          const i3 = i * 3;
+          mistPos[i3] += Math.sin(t + i) * 0.01;
+          mistPos[i3 + 1] += Math.cos(t * 0.5 + i) * 0.005;
+        }
+        mistParticles.attributes.position.needsUpdate = true;
+
+        // コウモリの飛行
+        bats.forEach((bat) => {
+          const data = bat.userData;
+          data.pathAngle += data.pathSpeed * 0.01;
+
+          bat.position.x = Math.cos(data.pathAngle) * data.pathRadius;
+          bat.position.y = 3 + Math.sin(data.pathAngle * 2) * 2;
+          bat.position.z = Math.sin(data.pathAngle) * data.pathRadius;
+
+          // 羽ばたき
+          const flapAngle = Math.sin(t * data.flapSpeed) * 0.5;
+          data.leftWing.rotation.y = flapAngle;
+          data.rightWing.rotation.y = -flapAngle;
+
+          // 向きを変える
+          bat.lookAt(
+            Math.cos(data.pathAngle + 0.1) * data.pathRadius,
+            3 + Math.sin((data.pathAngle + 0.1) * 2) * 2,
+            Math.sin(data.pathAngle + 0.1) * data.pathRadius
+          );
+        });
+
+        // カメラの不気味な揺れ
+        camera.position.x = Math.sin(t * 0.2) * 0.5;
+        camera.position.y = 2 + Math.sin(t * 0.3) * 0.3;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>
