@@ -1,0 +1,382 @@
+<!-- fragment_026_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #127 – Macaron Party</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          135deg,
+          #fff5f7 0%,
+          #ffe8f0 50%,
+          #ffd6e8 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(200, 100, 150, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Macaron Party" 🧁</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 3, 12);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.body.appendChild(renderer.domElement);
+
+      // ライティング
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+      scene.add(ambientLight);
+
+      const light1 = new THREE.DirectionalLight(0xffe4e1, 0.6);
+      light1.position.set(5, 5, 5);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0xffc0cb, 0.5, 30);
+      light2.position.set(-5, 3, -5);
+      scene.add(light2);
+
+      // マカロンの色
+      const macaronColors = [
+        { shell: 0xffb3d9, cream: 0xffd9ec }, // ピンク
+        { shell: 0xb3e5ff, cream: 0xe0f4ff }, // ブルー
+        { shell: 0xffe4b3, cream: 0xfff0d9 }, // イエロー
+        { shell: 0xd9b3ff, cream: 0xf0e0ff }, // パープル
+        { shell: 0xb3ffd9, cream: 0xe0fff0 }, // ミント
+        { shell: 0xffcccb, cream: 0xffe6e5 }, // コーラル
+      ];
+
+      // マカロンを作る関数
+      function createMacaron(colorSet, size) {
+        const macaron = new THREE.Group();
+
+        // 上のシェル
+        const topGeometry = new THREE.SphereGeometry(
+          size,
+          32,
+          32,
+          0,
+          Math.PI * 2,
+          0,
+          Math.PI / 2
+        );
+        const shellMaterial = new THREE.MeshPhongMaterial({
+          color: colorSet.shell,
+          shininess: 40,
+          flatShading: false,
+        });
+        const topShell = new THREE.Mesh(topGeometry, shellMaterial);
+        topShell.position.y = size * 0.3;
+        macaron.add(topShell);
+
+        // フリル（ピエ）
+        const frillGeometry = new THREE.TorusGeometry(
+          size,
+          size * 0.15,
+          16,
+          32
+        );
+        const frillMaterial = new THREE.MeshPhongMaterial({
+          color: colorSet.shell,
+          shininess: 30,
+        });
+        const frill = new THREE.Mesh(frillGeometry, frillMaterial);
+        frill.rotation.x = Math.PI / 2;
+        macaron.add(frill);
+
+        // クリーム
+        const creamGeometry = new THREE.CylinderGeometry(
+          size * 0.9,
+          size * 0.9,
+          size * 0.3,
+          32
+        );
+        const creamMaterial = new THREE.MeshPhongMaterial({
+          color: colorSet.cream,
+          shininess: 20,
+        });
+        const cream = new THREE.Mesh(creamGeometry, creamMaterial);
+        macaron.add(cream);
+
+        // 下のシェル
+        const bottomGeometry = new THREE.SphereGeometry(
+          size,
+          32,
+          32,
+          0,
+          Math.PI * 2,
+          Math.PI / 2,
+          Math.PI / 2
+        );
+        const bottomShell = new THREE.Mesh(bottomGeometry, shellMaterial);
+        bottomShell.position.y = -size * 0.3;
+        macaron.add(bottomShell);
+
+        return macaron;
+      }
+
+      // マカロンタワー
+      const macaronTower = [];
+      const towerLevels = 5;
+      for (let level = 0; level < towerLevels; level++) {
+        const macaronsInLevel = 6 - level;
+        const radius = 2 + level * 0.5;
+
+        for (let i = 0; i < macaronsInLevel; i++) {
+          const angle = (i / macaronsInLevel) * Math.PI * 2;
+          const colorSet =
+            macaronColors[Math.floor(Math.random() * macaronColors.length)];
+          const macaron = createMacaron(colorSet, 0.6);
+
+          macaron.position.x = Math.cos(angle) * radius;
+          macaron.position.z = Math.sin(angle) * radius;
+          macaron.position.y = level * 1.2 - 2;
+
+          macaron.userData = {
+            angle: angle,
+            radius: radius,
+            level: level,
+            rotationSpeed: 0.01 + Math.random() * 0.01,
+          };
+
+          scene.add(macaron);
+          macaronTower.push(macaron);
+        }
+      }
+
+      // 浮遊するマカロン
+      const floatingMacarons = [];
+      for (let i = 0; i < 15; i++) {
+        const colorSet =
+          macaronColors[Math.floor(Math.random() * macaronColors.length)];
+        const macaron = createMacaron(colorSet, 0.4 + Math.random() * 0.3);
+
+        macaron.position.x = (Math.random() - 0.5) * 15;
+        macaron.position.y = Math.random() * 10 - 3;
+        macaron.position.z = (Math.random() - 0.5) * 12;
+
+        macaron.userData = {
+          rotationSpeedX: (Math.random() - 0.5) * 0.02,
+          rotationSpeedY: (Math.random() - 0.5) * 0.02,
+          floatSpeed: 0.3 + Math.random() * 0.4,
+          floatAmount: 0.2 + Math.random() * 0.3,
+        };
+
+        scene.add(macaron);
+        floatingMacarons.push(macaron);
+      }
+
+      // カップケーキ
+      const cupcakes = [];
+      for (let i = 0; i < 6; i++) {
+        const cupcake = new THREE.Group();
+
+        // カップ部分
+        const cupGeometry = new THREE.CylinderGeometry(0.4, 0.3, 0.6, 16);
+        const cupMaterial = new THREE.MeshPhongMaterial({
+          color: macaronColors[i % macaronColors.length].shell,
+          shininess: 30,
+        });
+        const cup = new THREE.Mesh(cupGeometry, cupMaterial);
+        cup.position.y = -0.3;
+        cupcake.add(cup);
+
+        // クリーム部分
+        const creamTopGeometry = new THREE.SphereGeometry(0.5, 16, 16);
+        const creamTopMaterial = new THREE.MeshPhongMaterial({
+          color: macaronColors[i % macaronColors.length].cream,
+          shininess: 40,
+        });
+        const creamTop = new THREE.Mesh(creamTopGeometry, creamTopMaterial);
+        creamTop.position.y = 0.2;
+        cupcake.add(creamTop);
+
+        // チェリー
+        const cherryGeometry = new THREE.SphereGeometry(0.1, 16, 16);
+        const cherryMaterial = new THREE.MeshPhongMaterial({
+          color: 0xff3366,
+          shininess: 100,
+        });
+        const cherry = new THREE.Mesh(cherryGeometry, cherryMaterial);
+        cherry.position.y = 0.7;
+        cupcake.add(cherry);
+
+        const angle = (i / 6) * Math.PI * 2;
+        cupcake.position.x = Math.cos(angle) * 8;
+        cupcake.position.z = Math.sin(angle) * 8;
+        cupcake.position.y = -2;
+
+        cupcake.userData = {
+          bobSpeed: 0.5 + Math.random() * 0.3,
+          bobAmount: 0.1 + Math.random() * 0.1,
+        };
+
+        scene.add(cupcake);
+        cupcakes.push(cupcake);
+      }
+
+      // 砂糖の結晶（キラキラ）
+      const sugarCrystalsGeometry = new THREE.BufferGeometry();
+      const crystalsCount = 200;
+      const crystalsPositions = new Float32Array(crystalsCount * 3);
+      const crystalsColors = new Float32Array(crystalsCount * 3);
+
+      for (let i = 0; i < crystalsCount; i++) {
+        const i3 = i * 3;
+
+        crystalsPositions[i3] = (Math.random() - 0.5) * 25;
+        crystalsPositions[i3 + 1] = (Math.random() - 0.5) * 15;
+        crystalsPositions[i3 + 2] = (Math.random() - 0.5) * 20;
+
+        const colorSet =
+          macaronColors[Math.floor(Math.random() * macaronColors.length)];
+        const color = new THREE.Color(colorSet.shell);
+        crystalsColors[i3] = color.r;
+        crystalsColors[i3 + 1] = color.g;
+        crystalsColors[i3 + 2] = color.b;
+      }
+
+      sugarCrystalsGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(crystalsPositions, 3)
+      );
+      sugarCrystalsGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(crystalsColors, 3)
+      );
+
+      const sugarCrystalsMaterial = new THREE.PointsMaterial({
+        size: 0.12,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.7,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const sugarCrystals = new THREE.Points(
+        sugarCrystalsGeometry,
+        sugarCrystalsMaterial
+      );
+      scene.add(sugarCrystals);
+
+      // リボン
+      const ribbons = [];
+      for (let i = 0; i < 4; i++) {
+        const ribbonGeometry = new THREE.TorusGeometry(0.5, 0.1, 8, 20);
+        const ribbonMaterial = new THREE.MeshPhongMaterial({
+          color: macaronColors[(i * 2) % macaronColors.length].shell,
+          shininess: 60,
+        });
+        const ribbon = new THREE.Mesh(ribbonGeometry, ribbonMaterial);
+
+        ribbon.position.x = (Math.random() - 0.5) * 10;
+        ribbon.position.y = Math.random() * 6 - 1;
+        ribbon.position.z = (Math.random() - 0.5) * 8;
+
+        ribbon.userData = {
+          rotationSpeedX: 0.01 + Math.random() * 0.01,
+          rotationSpeedY: 0.01 + Math.random() * 0.01,
+        };
+
+        scene.add(ribbon);
+        ribbons.push(ribbon);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // マカロンタワーの回転
+        macaronTower.forEach((macaron) => {
+          const data = macaron.userData;
+          macaron.rotation.y += data.rotationSpeed;
+
+          // 各レベルが逆方向に回転
+          const levelRotation = t * 0.2 * (data.level % 2 === 0 ? 1 : -1);
+          macaron.position.x =
+            Math.cos(data.angle + levelRotation) * data.radius;
+          macaron.position.z =
+            Math.sin(data.angle + levelRotation) * data.radius;
+        });
+
+        // 浮遊するマカロンの動き
+        floatingMacarons.forEach((macaron) => {
+          const data = macaron.userData;
+          macaron.rotation.x += data.rotationSpeedX;
+          macaron.rotation.y += data.rotationSpeedY;
+          macaron.position.y += Math.sin(t * data.floatSpeed) * 0.01;
+        });
+
+        // カップケーキの上下運動
+        cupcakes.forEach((cupcake) => {
+          const data = cupcake.userData;
+          cupcake.position.y =
+            -2 + Math.sin(t * data.bobSpeed) * data.bobAmount;
+        });
+
+        // 砂糖の結晶の動き
+        sugarCrystals.rotation.y = t * 0.05;
+        const crystalsPos = sugarCrystalsGeometry.attributes.position.array;
+        for (let i = 0; i < crystalsCount; i++) {
+          const i3 = i * 3;
+          crystalsPos[i3 + 1] += Math.sin(t + i * 0.1) * 0.01;
+        }
+        sugarCrystalsGeometry.attributes.position.needsUpdate = true;
+
+        // リボンの回転
+        ribbons.forEach((ribbon) => {
+          const data = ribbon.userData;
+          ribbon.rotation.x += data.rotationSpeedX;
+          ribbon.rotation.y += data.rotationSpeedY;
+        });
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.15) * 2;
+        camera.position.y = 3 + Math.cos(t * 0.12) * 1;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

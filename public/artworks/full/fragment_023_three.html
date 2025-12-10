@@ -1,0 +1,336 @@
+<!-- fragment_023_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #124 – Fluffy Cloud Garden</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #87ceeb 0%,
+          #b0e0e6 50%,
+          #ffebcd 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(100, 150, 200, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Fluffy Cloud Garden" ☁️</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 2, 15);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.body.appendChild(renderer.domElement);
+
+      // ライティング
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+      scene.add(ambientLight);
+
+      const sunLight = new THREE.DirectionalLight(0xfffacd, 0.6);
+      sunLight.position.set(10, 10, 5);
+      scene.add(sunLight);
+
+      // ふわふわ雲を作る関数
+      function createCloud(size, x, y, z) {
+        const cloud = new THREE.Group();
+
+        // 雲は複数の球体で構成
+        const numPuffs = 5 + Math.floor(Math.random() * 3);
+
+        for (let i = 0; i < numPuffs; i++) {
+          const puffSize = size * (0.6 + Math.random() * 0.4);
+          const geometry = new THREE.SphereGeometry(puffSize, 16, 16);
+          const material = new THREE.MeshPhongMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.85,
+            shininess: 30,
+            flatShading: false,
+          });
+
+          const puff = new THREE.Mesh(geometry, material);
+          puff.position.x = (Math.random() - 0.5) * size * 1.5;
+          puff.position.y = (Math.random() - 0.5) * size * 0.8;
+          puff.position.z = (Math.random() - 0.5) * size * 1.2;
+
+          cloud.add(puff);
+        }
+
+        cloud.position.set(x, y, z);
+        return cloud;
+      }
+
+      // 雲を配置
+      const clouds = [];
+      for (let i = 0; i < 12; i++) {
+        const size = 1 + Math.random() * 1.5;
+        const x = (Math.random() - 0.5) * 25;
+        const y = Math.random() * 8 - 2;
+        const z = (Math.random() - 0.5) * 15;
+
+        const cloud = createCloud(size, x, y, z);
+        cloud.userData = {
+          speedX: 0.01 + Math.random() * 0.02,
+          bobSpeed: 0.3 + Math.random() * 0.4,
+          bobAmount: 0.2 + Math.random() * 0.3,
+          bobOffset: Math.random() * Math.PI * 2,
+        };
+
+        scene.add(cloud);
+        clouds.push(cloud);
+      }
+
+      // 虹
+      const rainbowColors = [
+        0xff0000, 0xff7f00, 0xffff00, 0x00ff00, 0x0000ff, 0x4b0082, 0x9400d3,
+      ];
+
+      const rainbowGroup = new THREE.Group();
+      rainbowColors.forEach((color, i) => {
+        const geometry = new THREE.TorusGeometry(
+          8 + i * 0.3,
+          0.15,
+          8,
+          50,
+          Math.PI
+        );
+        const material = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.6,
+        });
+        const arc = new THREE.Mesh(geometry, material);
+        arc.rotation.z = Math.PI / 2;
+        rainbowGroup.add(arc);
+      });
+      rainbowGroup.position.set(-5, -3, -8);
+      rainbowGroup.rotation.y = 0.3;
+      scene.add(rainbowGroup);
+
+      // 太陽
+      const sunGeometry = new THREE.SphereGeometry(1.5, 32, 32);
+      const sunMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffeb3b,
+        transparent: true,
+        opacity: 0.9,
+      });
+      const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+      sun.position.set(8, 6, -10);
+      scene.add(sun);
+
+      // 太陽の光輪
+      const glowGeometry = new THREE.SphereGeometry(2, 32, 32);
+      const glowMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffeb3b,
+        transparent: true,
+        opacity: 0.3,
+      });
+      const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+      sun.add(glow);
+
+      // 星（昼でも見える可愛い星）
+      const starGroup = new THREE.Group();
+      for (let i = 0; i < 20; i++) {
+        const starGeometry = new THREE.SphereGeometry(0.1, 8, 8);
+        const starMaterial = new THREE.MeshBasicMaterial({
+          color: 0xffffcc,
+          transparent: true,
+          opacity: 0.7,
+        });
+        const star = new THREE.Mesh(starGeometry, starMaterial);
+
+        star.position.x = (Math.random() - 0.5) * 30;
+        star.position.y = 5 + Math.random() * 5;
+        star.position.z = (Math.random() - 0.5) * 20;
+
+        star.userData = {
+          twinkleSpeed: 1 + Math.random() * 2,
+          twinkleOffset: Math.random() * Math.PI * 2,
+        };
+
+        starGroup.add(star);
+      }
+      scene.add(starGroup);
+
+      // 小鳥（シンプルな形）
+      const birds = [];
+      for (let i = 0; i < 5; i++) {
+        const birdGroup = new THREE.Group();
+
+        // 胴体
+        const bodyGeometry = new THREE.SphereGeometry(0.2, 8, 8);
+        const bodyMaterial = new THREE.MeshPhongMaterial({
+          color: i % 2 === 0 ? 0xffc0cb : 0xadd8e6,
+        });
+        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        birdGroup.add(body);
+
+        // 翼（左）
+        const wingGeometry = new THREE.SphereGeometry(0.15, 8, 8);
+        wingGeometry.scale(2, 0.5, 0.3);
+        const wingMaterial = new THREE.MeshPhongMaterial({
+          color: i % 2 === 0 ? 0xffb6c1 : 0x87ceeb,
+        });
+        const leftWing = new THREE.Mesh(wingGeometry, wingMaterial);
+        leftWing.position.set(-0.2, 0, 0);
+        birdGroup.add(leftWing);
+
+        // 翼（右）
+        const rightWing = new THREE.Mesh(wingGeometry, wingMaterial);
+        rightWing.position.set(0.2, 0, 0);
+        birdGroup.add(rightWing);
+
+        birdGroup.userData = {
+          leftWing: leftWing,
+          rightWing: rightWing,
+          pathOffset: i * Math.PI * 0.4,
+          speed: 0.5 + Math.random() * 0.3,
+          flapSpeed: 3 + Math.random(),
+        };
+
+        scene.add(birdGroup);
+        birds.push(birdGroup);
+      }
+
+      // ハートの風船
+      const balloons = [];
+      for (let i = 0; i < 8; i++) {
+        const balloonGeometry = new THREE.SphereGeometry(0.4, 16, 16);
+        balloonGeometry.scale(1, 1.2, 1);
+        const balloonMaterial = new THREE.MeshPhongMaterial({
+          color: i % 2 === 0 ? 0xff69b4 : 0xffd700,
+          shininess: 100,
+        });
+        const balloon = new THREE.Mesh(balloonGeometry, balloonMaterial);
+
+        balloon.position.x = (Math.random() - 0.5) * 15;
+        balloon.position.y = -5 + Math.random() * 3;
+        balloon.position.z = (Math.random() - 0.5) * 10;
+
+        balloon.userData = {
+          speedY: 0.02 + Math.random() * 0.02,
+          swaySpeed: 0.5 + Math.random() * 0.5,
+          swayAmount: 0.5 + Math.random() * 0.5,
+        };
+
+        scene.add(balloon);
+        balloons.push(balloon);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 雲の動き
+        clouds.forEach((cloud) => {
+          const data = cloud.userData;
+          cloud.position.x += data.speedX;
+          cloud.position.y +=
+            Math.sin(t * data.bobSpeed + data.bobOffset) * 0.01;
+
+          if (cloud.position.x > 15) {
+            cloud.position.x = -15;
+          }
+        });
+
+        // 太陽の脈動
+        const sunScale = 1 + Math.sin(t * 2) * 0.05;
+        sun.scale.set(sunScale, sunScale, sunScale);
+        glow.scale.set(
+          1 + Math.sin(t * 3) * 0.1,
+          1 + Math.sin(t * 3) * 0.1,
+          1 + Math.sin(t * 3) * 0.1
+        );
+
+        // 星のキラキラ
+        starGroup.children.forEach((star) => {
+          const data = star.userData;
+          star.material.opacity =
+            (Math.sin(t * data.twinkleSpeed + data.twinkleOffset) * 0.5 + 0.5) *
+            0.7;
+        });
+
+        // 小鳥の飛行
+        birds.forEach((bird, index) => {
+          const data = bird.userData;
+          const pathT = t * data.speed + data.pathOffset;
+
+          bird.position.x = Math.cos(pathT) * 10;
+          bird.position.y = 2 + Math.sin(pathT * 2) * 3;
+          bird.position.z = Math.sin(pathT) * 8;
+
+          bird.lookAt(
+            Math.cos(pathT + 0.1) * 10,
+            2 + Math.sin((pathT + 0.1) * 2) * 3,
+            Math.sin(pathT + 0.1) * 8
+          );
+
+          // 羽ばたき
+          const flapAngle = Math.sin(t * data.flapSpeed) * 0.5;
+          data.leftWing.rotation.z = flapAngle;
+          data.rightWing.rotation.z = -flapAngle;
+        });
+
+        // 風船の上昇
+        balloons.forEach((balloon) => {
+          const data = balloon.userData;
+          balloon.position.y += data.speedY;
+          balloon.position.x += Math.sin(t * data.swaySpeed) * 0.01;
+
+          if (balloon.position.y > 10) {
+            balloon.position.y = -5;
+          }
+        });
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.1) * 1;
+        camera.position.y = 2 + Math.cos(t * 0.08) * 0.5;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

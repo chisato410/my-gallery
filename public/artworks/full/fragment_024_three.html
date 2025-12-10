@@ -1,0 +1,392 @@
+<!-- fragment_024_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #125 – Dreamy Flower Garden</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #e3f2fd 0%,
+          #fff8e1 50%,
+          #f1f8e9 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(150, 100, 150, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Dreamy Flower Garden" 🌸</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 3, 12);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.body.appendChild(renderer.domElement);
+
+      // ライティング
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+      scene.add(ambientLight);
+
+      const sunLight = new THREE.DirectionalLight(0xffeaa7, 0.8);
+      sunLight.position.set(10, 10, 5);
+      scene.add(sunLight);
+
+      const pinkLight = new THREE.PointLight(0xffb3d9, 0.5, 30);
+      pinkLight.position.set(-5, 3, 5);
+      scene.add(pinkLight);
+
+      // お花の色
+      const flowerColors = [
+        0xff69b4, 0xffc0cb, 0xffb6c1, 0xdda0dd, 0xff1493, 0xffd700, 0xffa07a,
+        0xff6b9d,
+      ];
+
+      // お花を作る関数
+      function createFlower(x, y, z, color) {
+        const flower = new THREE.Group();
+
+        // 花びら
+        const petalCount = 5 + Math.floor(Math.random() * 3);
+        for (let i = 0; i < petalCount; i++) {
+          const angle = (i / petalCount) * Math.PI * 2;
+          const petalGeometry = new THREE.SphereGeometry(0.3, 8, 8);
+          petalGeometry.scale(1.5, 1, 0.5);
+
+          const petalMaterial = new THREE.MeshPhongMaterial({
+            color: color,
+            shininess: 50,
+            transparent: true,
+            opacity: 0.9,
+          });
+
+          const petal = new THREE.Mesh(petalGeometry, petalMaterial);
+          petal.position.x = Math.cos(angle) * 0.4;
+          petal.position.z = Math.sin(angle) * 0.4;
+          petal.rotation.y = angle;
+          petal.rotation.x = Math.PI / 6;
+
+          flower.add(petal);
+        }
+
+        // 花の中心
+        const centerGeometry = new THREE.SphereGeometry(0.2, 16, 16);
+        const centerMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffd700,
+          shininess: 100,
+        });
+        const center = new THREE.Mesh(centerGeometry, centerMaterial);
+        flower.add(center);
+
+        // 茎
+        const stemGeometry = new THREE.CylinderGeometry(0.05, 0.05, 2, 8);
+        const stemMaterial = new THREE.MeshPhongMaterial({
+          color: 0x90ee90,
+        });
+        const stem = new THREE.Mesh(stemGeometry, stemMaterial);
+        stem.position.y = -1;
+        flower.add(stem);
+
+        // 葉っぱ
+        const leafGeometry = new THREE.SphereGeometry(0.2, 8, 8);
+        leafGeometry.scale(2, 0.5, 0.5);
+        const leafMaterial = new THREE.MeshPhongMaterial({
+          color: 0x7cfc00,
+        });
+
+        const leaf1 = new THREE.Mesh(leafGeometry, leafMaterial);
+        leaf1.position.set(0.3, -0.8, 0);
+        leaf1.rotation.z = Math.PI / 4;
+        flower.add(leaf1);
+
+        const leaf2 = new THREE.Mesh(leafGeometry, leafMaterial);
+        leaf2.position.set(-0.3, -1.2, 0);
+        leaf2.rotation.z = -Math.PI / 4;
+        flower.add(leaf2);
+
+        flower.position.set(x, y, z);
+        return flower;
+      }
+
+      // お花畑を作成
+      const flowers = [];
+      for (let i = 0; i < 30; i++) {
+        const x = (Math.random() - 0.5) * 20;
+        const z = (Math.random() - 0.5) * 15;
+        const y = -2;
+        const color =
+          flowerColors[Math.floor(Math.random() * flowerColors.length)];
+
+        const flower = createFlower(x, y, z, color);
+        flower.userData = {
+          swaySpeed: 0.5 + Math.random() * 0.5,
+          swayAmount: 0.1 + Math.random() * 0.1,
+          swayOffset: Math.random() * Math.PI * 2,
+        };
+
+        scene.add(flower);
+        flowers.push(flower);
+      }
+
+      // チューリップ
+      const tulips = [];
+      for (let i = 0; i < 15; i++) {
+        const tulipGroup = new THREE.Group();
+
+        // チューリップの花
+        const flowerGeometry = new THREE.ConeGeometry(0.3, 0.8, 6);
+        const flowerMaterial = new THREE.MeshPhongMaterial({
+          color: flowerColors[Math.floor(Math.random() * flowerColors.length)],
+          shininess: 60,
+        });
+        const flowerMesh = new THREE.Mesh(flowerGeometry, flowerMaterial);
+        flowerMesh.position.y = 0.4;
+        tulipGroup.add(flowerMesh);
+
+        // 茎
+        const stemGeometry = new THREE.CylinderGeometry(0.05, 0.05, 1.5, 8);
+        const stemMaterial = new THREE.MeshPhongMaterial({
+          color: 0x90ee90,
+        });
+        const stem = new THREE.Mesh(stemGeometry, stemMaterial);
+        stem.position.y = -0.75;
+        tulipGroup.add(stem);
+
+        tulipGroup.position.x = (Math.random() - 0.5) * 18;
+        tulipGroup.position.y = -2;
+        tulipGroup.position.z = (Math.random() - 0.5) * 12;
+
+        tulipGroup.userData = {
+          swaySpeed: 0.4 + Math.random() * 0.4,
+          swayAmount: 0.15 + Math.random() * 0.1,
+          swayOffset: Math.random() * Math.PI * 2,
+        };
+
+        scene.add(tulipGroup);
+        tulips.push(tulipGroup);
+      }
+
+      // 蝶々
+      const butterflies = [];
+      for (let i = 0; i < 8; i++) {
+        const butterfly = new THREE.Group();
+
+        // 胴体
+        const bodyGeometry = new THREE.CylinderGeometry(0.05, 0.05, 0.3, 8);
+        const bodyMaterial = new THREE.MeshPhongMaterial({
+          color: 0x333333,
+        });
+        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        butterfly.add(body);
+
+        // 左の羽
+        const wingGeometry = new THREE.CircleGeometry(0.3, 16);
+        const wingMaterial = new THREE.MeshPhongMaterial({
+          color: i % 2 === 0 ? 0xffb347 : 0xffc0cb,
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: 0.8,
+        });
+
+        const leftWing = new THREE.Mesh(wingGeometry, wingMaterial);
+        leftWing.position.set(-0.25, 0.1, 0);
+        butterfly.add(leftWing);
+
+        // 右の羽
+        const rightWing = new THREE.Mesh(wingGeometry, wingMaterial);
+        rightWing.position.set(0.25, 0.1, 0);
+        butterfly.add(rightWing);
+
+        butterfly.userData = {
+          leftWing: leftWing,
+          rightWing: rightWing,
+          pathOffset: i * Math.PI * 0.25,
+          speed: 0.3 + Math.random() * 0.3,
+          flapSpeed: 8 + Math.random() * 4,
+          height: 1 + Math.random() * 2,
+        };
+
+        scene.add(butterfly);
+        butterflies.push(butterfly);
+      }
+
+      // 花粉（キラキラ）
+      const pollenGeometry = new THREE.BufferGeometry();
+      const pollenCount = 150;
+      const pollenPositions = new Float32Array(pollenCount * 3);
+      const pollenColors = new Float32Array(pollenCount * 3);
+
+      for (let i = 0; i < pollenCount; i++) {
+        const i3 = i * 3;
+
+        pollenPositions[i3] = (Math.random() - 0.5) * 25;
+        pollenPositions[i3 + 1] = Math.random() * 8 - 2;
+        pollenPositions[i3 + 2] = (Math.random() - 0.5) * 20;
+
+        const color = new THREE.Color().setHSL(0.15, 0.8, 0.7);
+        pollenColors[i3] = color.r;
+        pollenColors[i3 + 1] = color.g;
+        pollenColors[i3 + 2] = color.b;
+      }
+
+      pollenGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(pollenPositions, 3)
+      );
+      pollenGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(pollenColors, 3)
+      );
+
+      const pollenMaterial = new THREE.PointsMaterial({
+        size: 0.1,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.7,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const pollen = new THREE.Points(pollenGeometry, pollenMaterial);
+      scene.add(pollen);
+
+      // てんとう虫
+      const ladybugs = [];
+      for (let i = 0; i < 5; i++) {
+        const ladybug = new THREE.Group();
+
+        // 胴体
+        const bodyGeometry = new THREE.SphereGeometry(0.15, 16, 16);
+        const bodyMaterial = new THREE.MeshPhongMaterial({
+          color: 0xff0000,
+          shininess: 100,
+        });
+        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        ladybug.add(body);
+
+        // 黒い点
+        const dotGeometry = new THREE.SphereGeometry(0.04, 8, 8);
+        const dotMaterial = new THREE.MeshPhongMaterial({
+          color: 0x000000,
+        });
+
+        for (let j = 0; j < 3; j++) {
+          const dot = new THREE.Mesh(dotGeometry, dotMaterial);
+          dot.position.set(
+            (Math.random() - 0.5) * 0.2,
+            0.12,
+            (Math.random() - 0.5) * 0.2
+          );
+          ladybug.add(dot);
+        }
+
+        ladybug.userData = {
+          pathOffset: i * Math.PI * 0.4,
+          speed: 0.2 + Math.random() * 0.2,
+        };
+
+        scene.add(ladybug);
+        ladybugs.push(ladybug);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // お花が風に揺れる
+        flowers.forEach((flower) => {
+          const data = flower.userData;
+          flower.rotation.z =
+            Math.sin(t * data.swaySpeed + data.swayOffset) * data.swayAmount;
+        });
+
+        // チューリップが揺れる
+        tulips.forEach((tulip) => {
+          const data = tulip.userData;
+          tulip.rotation.z =
+            Math.sin(t * data.swaySpeed + data.swayOffset) * data.swayAmount;
+        });
+
+        // 蝶々の飛行
+        butterflies.forEach((butterfly) => {
+          const data = butterfly.userData;
+          const pathT = t * data.speed + data.pathOffset;
+
+          butterfly.position.x = Math.cos(pathT) * 8;
+          butterfly.position.y = data.height + Math.sin(pathT * 2) * 1;
+          butterfly.position.z = Math.sin(pathT) * 6;
+
+          // 羽ばたき
+          const flapAngle = (Math.sin(t * data.flapSpeed) * Math.PI) / 4;
+          data.leftWing.rotation.y = -flapAngle;
+          data.rightWing.rotation.y = flapAngle;
+        });
+
+        // 花粉が漂う
+        const pollenPos = pollenGeometry.attributes.position.array;
+        for (let i = 0; i < pollenCount; i++) {
+          const i3 = i * 3;
+          pollenPos[i3] += Math.sin(t + i) * 0.01;
+          pollenPos[i3 + 1] += Math.cos(t * 2 + i) * 0.01;
+        }
+        pollenGeometry.attributes.position.needsUpdate = true;
+
+        // てんとう虫の移動
+        ladybugs.forEach((ladybug) => {
+          const data = ladybug.userData;
+          const pathT = t * data.speed + data.pathOffset;
+
+          ladybug.position.x = Math.cos(pathT) * 5;
+          ladybug.position.y = -1.5 + Math.sin(pathT * 3) * 0.3;
+          ladybug.position.z = Math.sin(pathT) * 4;
+        });
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.1) * 2;
+        camera.position.y = 3 + Math.cos(t * 0.08) * 0.5;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

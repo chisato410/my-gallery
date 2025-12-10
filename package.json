@@ -13,7 +13,8 @@
     "add": "npm run setup && npm run add-to-firebase && add-new-to-firebase.js && echo '✅ 作品が追加されました！'",
     "test-firebase": "node scripts/test-firebase.js",
     "test-env": "node scripts/test-env.js",
-    "update-artwork": "node scripts/update-artwork.js"
+    "update-artwork": "node scripts/update-artwork.js",
+    "export": "node scripts/exportFirebaseToJson.js"
   },
   "dependencies": {
     "firebase": "^12.6.0",

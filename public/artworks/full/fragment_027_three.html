@@ -1,0 +1,434 @@
+<!-- fragment_027_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #128 – Plushie Friends</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          135deg,
+          #fef5e7 0%,
+          #fdebd0 50%,
+          #fad7a0 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(150, 100, 80, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Plushie Friends" 🧸</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 3, 15);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.body.appendChild(renderer.domElement);
+
+      // ライティング
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+      scene.add(ambientLight);
+
+      const sunLight = new THREE.DirectionalLight(0xfff4e6, 0.6);
+      sunLight.position.set(5, 5, 5);
+      scene.add(sunLight);
+
+      // くまのぬいぐるみを作る関数
+      function createTeddyBear(color) {
+        const bear = new THREE.Group();
+
+        // 頭
+        const headGeometry = new THREE.SphereGeometry(0.8, 32, 32);
+        const furMaterial = new THREE.MeshPhongMaterial({
+          color: color,
+          shininess: 10,
+          flatShading: false,
+        });
+        const head = new THREE.Mesh(headGeometry, furMaterial);
+        head.position.y = 1.5;
+        bear.add(head);
+
+        // 耳（左）
+        const earGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+        const leftEar = new THREE.Mesh(earGeometry, furMaterial);
+        leftEar.position.set(-0.5, 2, 0.2);
+        bear.add(leftEar);
+
+        // 耳（右）
+        const rightEar = new THREE.Mesh(earGeometry, furMaterial);
+        rightEar.position.set(0.5, 2, 0.2);
+        bear.add(rightEar);
+
+        // 鼻
+        const noseGeometry = new THREE.SphereGeometry(0.15, 16, 16);
+        const noseMaterial = new THREE.MeshPhongMaterial({
+          color: 0x8b4513,
+          shininess: 50,
+        });
+        const nose = new THREE.Mesh(noseGeometry, noseMaterial);
+        nose.position.set(0, 1.5, 0.7);
+        bear.add(nose);
+
+        // 目（左）
+        const eyeGeometry = new THREE.SphereGeometry(0.1, 16, 16);
+        const eyeMaterial = new THREE.MeshPhongMaterial({
+          color: 0x000000,
+          shininess: 100,
+        });
+        const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+        leftEye.position.set(-0.3, 1.7, 0.6);
+        bear.add(leftEye);
+
+        // 目（右）
+        const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+        rightEye.position.set(0.3, 1.7, 0.6);
+        bear.add(rightEye);
+
+        // 胴体
+        const bodyGeometry = new THREE.SphereGeometry(1, 32, 32);
+        bodyGeometry.scale(1, 1.2, 0.9);
+        const body = new THREE.Mesh(bodyGeometry, furMaterial);
+        body.position.y = 0.3;
+        bear.add(body);
+
+        // お腹の白い部分
+        const bellyGeometry = new THREE.SphereGeometry(0.7, 32, 32);
+        const bellyMaterial = new THREE.MeshPhongMaterial({
+          color: 0xfff8dc,
+          shininess: 10,
+        });
+        const belly = new THREE.Mesh(bellyGeometry, bellyMaterial);
+        belly.position.set(0, 0.3, 0.5);
+        belly.scale.set(1, 1.2, 0.5);
+        bear.add(belly);
+
+        // 腕（左）
+        const armGeometry = new THREE.SphereGeometry(0.35, 16, 16);
+        armGeometry.scale(1, 1.5, 1);
+        const leftArm = new THREE.Mesh(armGeometry, furMaterial);
+        leftArm.position.set(-0.9, 0.5, 0);
+        leftArm.rotation.z = 0.3;
+        bear.add(leftArm);
+
+        // 腕（右）
+        const rightArm = new THREE.Mesh(armGeometry, furMaterial);
+        rightArm.position.set(0.9, 0.5, 0);
+        rightArm.rotation.z = -0.3;
+        bear.add(rightArm);
+
+        // 足（左）
+        const legGeometry = new THREE.SphereGeometry(0.4, 16, 16);
+        legGeometry.scale(1, 1.3, 1);
+        const leftLeg = new THREE.Mesh(legGeometry, furMaterial);
+        leftLeg.position.set(-0.5, -0.8, 0);
+        bear.add(leftLeg);
+
+        // 足（右）
+        const rightLeg = new THREE.Mesh(legGeometry, furMaterial);
+        rightLeg.position.set(0.5, -0.8, 0);
+        bear.add(rightLeg);
+
+        return bear;
+      }
+
+      // うさぎのぬいぐるみを作る関数
+      function createBunny(color) {
+        const bunny = new THREE.Group();
+
+        const furMaterial = new THREE.MeshPhongMaterial({
+          color: color,
+          shininess: 15,
+        });
+
+        // 頭
+        const headGeometry = new THREE.SphereGeometry(0.7, 32, 32);
+        const head = new THREE.Mesh(headGeometry, furMaterial);
+        head.position.y = 1.2;
+        bunny.add(head);
+
+        // 長い耳（左）
+        const earGeometry = new THREE.SphereGeometry(0.2, 16, 16);
+        earGeometry.scale(1, 3, 0.5);
+        const leftEar = new THREE.Mesh(earGeometry, furMaterial);
+        leftEar.position.set(-0.3, 2.3, 0);
+        leftEar.rotation.z = 0.2;
+        bunny.add(leftEar);
+
+        // 長い耳（右）
+        const rightEar = new THREE.Mesh(earGeometry, furMaterial);
+        rightEar.position.set(0.3, 2.3, 0);
+        rightEar.rotation.z = -0.2;
+        bunny.add(rightEar);
+
+        // 鼻
+        const noseGeometry = new THREE.SphereGeometry(0.08, 16, 16);
+        const noseMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffb6c1,
+          shininess: 50,
+        });
+        const nose = new THREE.Mesh(noseGeometry, noseMaterial);
+        nose.position.set(0, 1.2, 0.65);
+        bunny.add(nose);
+
+        // 目（左）
+        const eyeGeometry = new THREE.SphereGeometry(0.1, 16, 16);
+        const eyeMaterial = new THREE.MeshPhongMaterial({
+          color: 0x000000,
+          shininess: 100,
+        });
+        const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+        leftEye.position.set(-0.25, 1.35, 0.55);
+        bunny.add(leftEye);
+
+        // 目（右）
+        const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+        rightEye.position.set(0.25, 1.35, 0.55);
+        bunny.add(rightEye);
+
+        // 胴体
+        const bodyGeometry = new THREE.SphereGeometry(0.8, 32, 32);
+        bodyGeometry.scale(1, 1.1, 0.9);
+        const body = new THREE.Mesh(bodyGeometry, furMaterial);
+        body.position.y = 0.2;
+        bunny.add(body);
+
+        // しっぽ
+        const tailGeometry = new THREE.SphereGeometry(0.25, 16, 16);
+        const tail = new THREE.Mesh(tailGeometry, furMaterial);
+        tail.position.set(0, 0.3, -0.7);
+        bunny.add(tail);
+
+        return bunny;
+      }
+
+      // くまのぬいぐるみたち
+      const bears = [];
+      const bearColors = [0xd2691e, 0xf4a460, 0xdeb887, 0xffc0cb];
+
+      for (let i = 0; i < 4; i++) {
+        const bear = createTeddyBear(bearColors[i]);
+        const angle = (i / 4) * Math.PI * 2;
+        bear.position.x = Math.cos(angle) * 5;
+        bear.position.z = Math.sin(angle) * 5;
+        bear.position.y = -1;
+
+        bear.rotation.y = -angle;
+
+        bear.userData = {
+          angle: angle,
+          bobSpeed: 0.5 + Math.random() * 0.3,
+          bobAmount: 0.15 + Math.random() * 0.1,
+          swaySpeed: 1 + Math.random() * 0.5,
+        };
+
+        scene.add(bear);
+        bears.push(bear);
+      }
+
+      // うさぎのぬいぐるみたち
+      const bunnies = [];
+      const bunnyColors = [0xffffff, 0xffe4e1, 0xffd1dc, 0xe6e6fa];
+
+      for (let i = 0; i < 4; i++) {
+        const bunny = createBunny(bunnyColors[i]);
+        const angle = (i / 4) * Math.PI * 2 + Math.PI / 4;
+        bunny.position.x = Math.cos(angle) * 7;
+        bunny.position.z = Math.sin(angle) * 7;
+        bunny.position.y = -1;
+
+        bunny.rotation.y = -angle;
+
+        bunny.userData = {
+          angle: angle,
+          hopSpeed: 2 + Math.random(),
+          hopHeight: 0.3 + Math.random() * 0.2,
+        };
+
+        scene.add(bunny);
+        bunnies.push(bunny);
+      }
+
+      // ハートの風船
+      const balloons = [];
+      for (let i = 0; i < 12; i++) {
+        const balloonGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+        balloonGeometry.scale(1, 1.2, 1);
+        const balloonMaterial = new THREE.MeshPhongMaterial({
+          color: i % 2 === 0 ? 0xff69b4 : 0xffd700,
+          shininess: 100,
+          transparent: true,
+          opacity: 0.9,
+        });
+        const balloon = new THREE.Mesh(balloonGeometry, balloonMaterial);
+
+        balloon.position.x = (Math.random() - 0.5) * 18;
+        balloon.position.y = 2 + Math.random() * 6;
+        balloon.position.z = (Math.random() - 0.5) * 15;
+
+        // 紐
+        const stringGeometry = new THREE.CylinderGeometry(0.01, 0.01, 2, 8);
+        const stringMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffffff,
+        });
+        const string = new THREE.Mesh(stringGeometry, stringMaterial);
+        string.position.y = -1;
+        balloon.add(string);
+
+        balloon.userData = {
+          swaySpeed: 0.5 + Math.random() * 0.5,
+          swayAmount: 0.3 + Math.random() * 0.3,
+        };
+
+        scene.add(balloon);
+        balloons.push(balloon);
+      }
+
+      // 星のキラキラ
+      const starsGeometry = new THREE.BufferGeometry();
+      const starsCount = 100;
+      const starsPositions = new Float32Array(starsCount * 3);
+      const starsColors = new Float32Array(starsCount * 3);
+
+      for (let i = 0; i < starsCount; i++) {
+        const i3 = i * 3;
+
+        starsPositions[i3] = (Math.random() - 0.5) * 30;
+        starsPositions[i3 + 1] = Math.random() * 15;
+        starsPositions[i3 + 2] = (Math.random() - 0.5) * 25;
+
+        const color = new THREE.Color().setHSL(
+          0.15 + Math.random() * 0.2,
+          0.7,
+          0.8
+        );
+        starsColors[i3] = color.r;
+        starsColors[i3 + 1] = color.g;
+        starsColors[i3 + 2] = color.b;
+      }
+
+      starsGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(starsPositions, 3)
+      );
+      starsGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(starsColors, 3)
+      );
+
+      const starsMaterial = new THREE.PointsMaterial({
+        size: 0.15,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.7,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const stars = new THREE.Points(starsGeometry, starsMaterial);
+      scene.add(stars);
+
+      // 床（ふわふわマット）
+      const floorGeometry = new THREE.CircleGeometry(12, 32);
+      const floorMaterial = new THREE.MeshPhongMaterial({
+        color: 0xffefd5,
+        shininess: 10,
+        side: THREE.DoubleSide,
+      });
+      const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+      floor.rotation.x = -Math.PI / 2;
+      floor.position.y = -2;
+      scene.add(floor);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // くまのぬいぐるみの動き
+        bears.forEach((bear) => {
+          const data = bear.userData;
+
+          // ゆらゆら上下
+          bear.position.y = -1 + Math.sin(t * data.bobSpeed) * data.bobAmount;
+
+          // 左右に揺れる
+          bear.rotation.z = Math.sin(t * data.swaySpeed) * 0.1;
+
+          // ゆっくり回転
+          bear.rotation.y += 0.002;
+        });
+
+        // うさぎのぬいぐるみのホッピング
+        bunnies.forEach((bunny) => {
+          const data = bunny.userData;
+
+          // ぴょんぴょん跳ねる
+          const hop = Math.abs(Math.sin(t * data.hopSpeed));
+          bunny.position.y = -1 + hop * data.hopHeight;
+
+          // 着地時に少し潰れる
+          const squash = 1 - hop * 0.1;
+          bunny.scale.set(
+            1 + (1 - squash) * 0.2,
+            squash,
+            1 + (1 - squash) * 0.2
+          );
+        });
+
+        // 風船の揺れ
+        balloons.forEach((balloon) => {
+          const data = balloon.userData;
+          balloon.position.x += Math.sin(t * data.swaySpeed) * 0.01;
+          balloon.rotation.z = Math.sin(t * data.swaySpeed) * 0.1;
+        });
+
+        // 星のキラキラ
+        stars.rotation.y = t * 0.05;
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.1) * 2;
+        camera.position.y = 3 + Math.cos(t * 0.08) * 1;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

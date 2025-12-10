@@ -1,0 +1,314 @@
+<!-- fragment_021_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #122 – Cute Floating Bubbles</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          135deg,
+          #ffd1dc 0%,
+          #ffb6d9 50%,
+          #d4a5ff 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Cute Floating Bubbles" ✨</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 0, 15);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      document.body.appendChild(renderer.domElement);
+
+      // 柔らかいライティング
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+      scene.add(ambientLight);
+
+      const light1 = new THREE.PointLight(0xffc0e0, 1.5, 50);
+      light1.position.set(10, 10, 10);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0xe0c0ff, 1.2, 50);
+      light2.position.set(-10, -5, 5);
+      scene.add(light2);
+
+      // 可愛いバブル（泡）を作成
+      const bubbles = [];
+      const numBubbles = 20;
+
+      for (let i = 0; i < numBubbles; i++) {
+        const size = 0.3 + Math.random() * 0.8;
+        const geometry = new THREE.SphereGeometry(size, 8, 8);
+
+        // パステルカラー
+        const hue = Math.random() * 0.3 + 0.8; // ピンク〜パープル系
+        const color = new THREE.Color().setHSL(hue, 0.6, 0.85);
+
+        const material = new THREE.MeshPhongMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.7,
+          shininess: 100,
+          specular: 0xffffff,
+        });
+
+        const bubble = new THREE.Mesh(geometry, material);
+
+        // ランダムな位置
+        bubble.position.x = (Math.random() - 0.5) * 20;
+        bubble.position.y = (Math.random() - 0.5) * 15;
+        bubble.position.z = (Math.random() - 0.5) * 10;
+
+        // アニメーション用データ
+        bubble.userData = {
+          speedY: 0.01 + Math.random() * 0.02,
+          speedX: (Math.random() - 0.5) * 0.01,
+          speedZ: (Math.random() - 0.5) * 0.01,
+          swayAmount: Math.random() * 2,
+          swaySpeed: 0.5 + Math.random() * 0.5,
+          rotationSpeed: (Math.random() - 0.5) * 0.02,
+        };
+
+        scene.add(bubble);
+        bubbles.push(bubble);
+      }
+
+      // 星のキラキラ
+      const starsGeometry = new THREE.BufferGeometry();
+      const starsCount = 100;
+      const starsPositions = new Float32Array(starsCount * 3);
+      const starsColors = new Float32Array(starsCount * 3);
+      const starsSizes = new Float32Array(starsCount);
+
+      for (let i = 0; i < starsCount; i++) {
+        const i3 = i * 3;
+
+        starsPositions[i3] = (Math.random() - 0.5) * 40;
+        starsPositions[i3 + 1] = (Math.random() - 0.5) * 30;
+        starsPositions[i3 + 2] = (Math.random() - 0.5) * 20;
+
+        const hue = Math.random() * 0.3 + 0.75;
+        const color = new THREE.Color().setHSL(hue, 0.8, 0.9);
+        starsColors[i3] = color.r;
+        starsColors[i3 + 1] = color.g;
+        starsColors[i3 + 2] = color.b;
+
+        starsSizes[i] = Math.random() * 0.2 + 0.1;
+      }
+
+      starsGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(starsPositions, 3)
+      );
+      starsGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(starsColors, 3)
+      );
+      starsGeometry.setAttribute(
+        "size",
+        new THREE.BufferAttribute(starsSizes, 1)
+      );
+
+      const starsMaterial = new THREE.PointsMaterial({
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending,
+        sizeAttenuation: true,
+      });
+
+      const stars = new THREE.Points(starsGeometry, starsMaterial);
+      scene.add(stars);
+
+      // ハート型のパーティクル
+      const heartsGeometry = new THREE.BufferGeometry();
+      const heartsCount = 30;
+      const heartsPositions = new Float32Array(heartsCount * 3);
+      const heartsColors = new Float32Array(heartsCount * 3);
+
+      for (let i = 0; i < heartsCount; i++) {
+        const i3 = i * 3;
+
+        heartsPositions[i3] = (Math.random() - 0.5) * 30;
+        heartsPositions[i3 + 1] = (Math.random() - 0.5) * 20;
+        heartsPositions[i3 + 2] = (Math.random() - 0.5) * 15;
+
+        const color = new THREE.Color().setHSL(0.95, 0.7, 0.85);
+        heartsColors[i3] = color.r;
+        heartsColors[i3 + 1] = color.g;
+        heartsColors[i3 + 2] = color.b;
+      }
+
+      heartsGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(heartsPositions, 3)
+      );
+      heartsGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(heartsColors, 3)
+      );
+
+      const heartsMaterial = new THREE.PointsMaterial({
+        size: 0.3,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const hearts = new THREE.Points(heartsGeometry, heartsMaterial);
+      scene.add(hearts);
+
+      // 小さなリボン風のオブジェクト
+      const ribbons = [];
+      for (let i = 0; i < 50; i++) {
+        const ribbonGeometry = new THREE.TorusGeometry(0.3, 0.08, 8, 20);
+        const ribbonColor = new THREE.Color().setHSL(
+          Math.random() * 0.2 + 0.85,
+          0.7,
+          0.8
+        );
+        const ribbonMaterial = new THREE.MeshPhongMaterial({
+          color: ribbonColor,
+          shininess: 80,
+          transparent: true,
+          opacity: 0.8,
+        });
+
+        const ribbon = new THREE.Mesh(ribbonGeometry, ribbonMaterial);
+        ribbon.position.x = (Math.random() - 0.5) * 15;
+        ribbon.position.y = (Math.random() - 0.5) * 10;
+        ribbon.position.z = (Math.random() - 0.5) * 8;
+
+        ribbon.userData = {
+          rotationSpeedX: (Math.random() - 0.5) * 0.02,
+          rotationSpeedY: (Math.random() - 0.5) * 0.02,
+          floatSpeed: 0.3 + Math.random() * 0.3,
+          floatOffset: Math.random() * Math.PI * 2,
+        };
+
+        scene.add(ribbon);
+        ribbons.push(ribbon);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // バブルのアニメーション
+        bubbles.forEach((bubble, index) => {
+          const data = bubble.userData;
+
+          // ふわふわ上昇
+          bubble.position.y += data.speedY;
+
+          // 左右にゆらゆら
+          bubble.position.x += Math.sin(t * data.swaySpeed + index) * 0.01;
+          bubble.position.z += Math.cos(t * data.swaySpeed + index) * 0.01;
+
+          // 回転
+          bubble.rotation.y += data.rotationSpeed;
+          bubble.rotation.x += data.rotationSpeed * 0.5;
+
+          // 画面外に出たら下に戻す
+          if (bubble.position.y > 10) {
+            bubble.position.y = -10;
+            bubble.position.x = (Math.random() - 0.5) * 20;
+            bubble.position.z = (Math.random() - 0.5) * 10;
+          }
+
+          // ぷるぷる感（スケールアニメーション）
+          const scale = 1 + Math.sin(t * 2 + index) * 0.05;
+          bubble.scale.set(scale, scale, scale);
+        });
+
+        // 星のキラキラ
+        const sizes = starsGeometry.attributes.size.array;
+        for (let i = 0; i < starsCount; i++) {
+          sizes[i] = (Math.sin(t * 3 + i) * 0.5 + 0.5) * 0.3 + 0.1;
+        }
+        starsGeometry.attributes.size.needsUpdate = true;
+        stars.rotation.y = t * 0.05;
+
+        // ハートのゆっくり回転
+        hearts.rotation.y = t * 0.1;
+        const heartPositions = heartsGeometry.attributes.position.array;
+        for (let i = 0; i < heartsCount; i++) {
+          const i3 = i * 3;
+          heartPositions[i3 + 1] += 0.01;
+          if (heartPositions[i3 + 1] > 15) {
+            heartPositions[i3 + 1] = -15;
+          }
+        }
+        heartsGeometry.attributes.position.needsUpdate = true;
+
+        // リボンの回転とふわふわ
+        ribbons.forEach((ribbon) => {
+          const data = ribbon.userData;
+          ribbon.rotation.x += data.rotationSpeedX;
+          ribbon.rotation.y += data.rotationSpeedY;
+          ribbon.position.y +=
+            Math.sin(t * data.floatSpeed + data.floatOffset) * 0.01;
+        });
+
+        // ライトをゆっくり動かす
+        light1.position.x = Math.cos(t * 0.3) * 10;
+        light1.position.z = Math.sin(t * 0.3) * 10;
+
+        light2.position.x = Math.cos(t * 0.4 + Math.PI) * 10;
+        light2.position.z = Math.sin(t * 0.4 + Math.PI) * 10;
+
+        // カメラを少しだけ動かす
+        camera.position.x = Math.sin(t * 0.1) * 0.5;
+        camera.position.y = Math.cos(t * 0.15) * 0.5;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

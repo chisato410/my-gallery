@@ -1,0 +1,435 @@
+<!-- fragment_032_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #133 – Music Box Galaxy</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #2d1b4e 0%,
+          #4a2c5a 30%,
+          #6b4c7a 60%,
+          #8b6b9a 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 200, 255, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 8px rgba(200, 100, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Music Box Galaxy" 🎵</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        200
+      );
+      camera.position.set(0, 15, 30);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.body.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0xaa88ff, 0.5);
+      scene.add(ambientLight);
+
+      const light1 = new THREE.PointLight(0xffaaee, 2, 50);
+      light1.position.set(15, 10, 10);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0xaaeeff, 2, 50);
+      light2.position.set(-15, 10, -10);
+      scene.add(light2);
+
+      // 音符を作成
+      function createMusicNote(size) {
+        const note = new THREE.Group();
+
+        // 音符の玉
+        const headGeometry = new THREE.SphereGeometry(size, 16, 16);
+        const headMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffffff,
+          emissive: 0xffaaee,
+          emissiveIntensity: 0.5,
+          shininess: 80,
+        });
+        const head = new THREE.Mesh(headGeometry, headMaterial);
+        note.add(head);
+
+        // 棒
+        const stemGeometry = new THREE.CylinderGeometry(
+          size * 0.15,
+          size * 0.15,
+          size * 3,
+          8
+        );
+        const stemMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffffff,
+          emissive: 0xffaaee,
+          emissiveIntensity: 0.3,
+          shininess: 60,
+        });
+        const stem = new THREE.Mesh(stemGeometry, stemMaterial);
+        stem.position.set(size * 0.7, size * 1.5, 0);
+        note.add(stem);
+
+        // 旗
+        const flagGeometry = new THREE.SphereGeometry(size * 0.8, 16, 16);
+        flagGeometry.scale(1.2, 0.6, 0.1);
+        const flagMaterial = new THREE.MeshPhongMaterial({
+          color: 0xffffff,
+          emissive: 0xaaeeff,
+          emissiveIntensity: 0.4,
+          shininess: 80,
+        });
+        const flag = new THREE.Mesh(flagGeometry, flagMaterial);
+        flag.position.set(size * 1.2, size * 2.8, 0);
+        note.add(flag);
+
+        return note;
+      }
+
+      // 惑星を作成
+      function createPlanet(size, color, ringColor) {
+        const planet = new THREE.Group();
+
+        // 惑星本体
+        const planetGeometry = new THREE.SphereGeometry(size, 32, 32);
+        const planetMaterial = new THREE.MeshPhongMaterial({
+          color: color,
+          emissive: color,
+          emissiveIntensity: 0.3,
+          shininess: 60,
+        });
+        const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
+        planet.add(planetMesh);
+
+        // リング
+        if (ringColor) {
+          const ringGeometry = new THREE.TorusGeometry(
+            size * 1.8,
+            size * 0.3,
+            16,
+            64
+          );
+          const ringMaterial = new THREE.MeshPhongMaterial({
+            color: ringColor,
+            emissive: ringColor,
+            emissiveIntensity: 0.2,
+            shininess: 80,
+            transparent: true,
+            opacity: 0.7,
+          });
+          const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+          ring.rotation.x = Math.PI / 2 + 0.3;
+          planet.add(ring);
+        }
+
+        // グロー
+        const glowGeometry = new THREE.SphereGeometry(size * 1.3, 32, 32);
+        const glowMaterial = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.2,
+          blending: THREE.AdditiveBlending,
+        });
+        const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+        planet.add(glow);
+
+        return planet;
+      }
+
+      // 楽器を作成
+      function createInstrument(type) {
+        const instrument = new THREE.Group();
+
+        if (type === "violin") {
+          // バイオリン
+          const bodyGeometry = new THREE.SphereGeometry(0.8, 16, 16);
+          bodyGeometry.scale(1, 1.5, 0.5);
+          const bodyMaterial = new THREE.MeshPhongMaterial({
+            color: 0xcc8844,
+            emissive: 0xffaa66,
+            emissiveIntensity: 0.3,
+            shininess: 80,
+          });
+          const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+          instrument.add(body);
+
+          const neckGeometry = new THREE.CylinderGeometry(0.1, 0.1, 2, 8);
+          const neck = new THREE.Mesh(neckGeometry, bodyMaterial);
+          neck.position.y = 2;
+          instrument.add(neck);
+        } else if (type === "harp") {
+          // ハープ
+          const frameGeometry = new THREE.TorusGeometry(
+            1.5,
+            0.1,
+            16,
+            32,
+            Math.PI
+          );
+          const frameMaterial = new THREE.MeshPhongMaterial({
+            color: 0xffd700,
+            emissive: 0xffee88,
+            emissiveIntensity: 0.4,
+            shininess: 100,
+          });
+          const frame = new THREE.Mesh(frameGeometry, frameMaterial);
+          frame.rotation.x = Math.PI / 2;
+          instrument.add(frame);
+
+          for (let i = 0; i < 10; i++) {
+            const stringGeometry = new THREE.CylinderGeometry(0.02, 0.02, 2, 8);
+            const stringMaterial = new THREE.MeshPhongMaterial({
+              color: 0xffffff,
+              emissive: 0xaaeeff,
+              emissiveIntensity: 0.5,
+            });
+            const string = new THREE.Mesh(stringGeometry, stringMaterial);
+            string.position.x = -1.2 + i * 0.25;
+            string.position.y = 0.5;
+            string.rotation.z = 0.2;
+            instrument.add(string);
+          }
+        }
+
+        return instrument;
+      }
+
+      // 螺旋状の軌道
+      const spiral = new THREE.Group();
+
+      // 音符の配置
+      const notes = [];
+      for (let i = 0; i < 60; i++) {
+        const size = 0.3 + Math.random() * 0.4;
+        const note = createMusicNote(size);
+
+        const angle = (i / 60) * Math.PI * 8;
+        const radius = 3 + (i / 60) * 20;
+        const height = (i / 60) * 30 - 15;
+
+        note.position.x = Math.cos(angle) * radius;
+        note.position.y = height;
+        note.position.z = Math.sin(angle) * radius;
+
+        note.rotation.z = Math.random() * Math.PI;
+
+        note.userData = {
+          angle: angle,
+          radius: radius,
+          initialHeight: height,
+          floatSpeed: 0.5 + Math.random() * 0.5,
+          floatAmount: 0.3 + Math.random() * 0.3,
+          rotateSpeed: 0.5 + Math.random() * 1,
+          offset: Math.random() * Math.PI * 2,
+        };
+
+        spiral.add(note);
+        notes.push(note);
+      }
+
+      // 惑星の配置
+      const planets = [];
+      const planetConfigs = [
+        { size: 2, color: 0xffb3d9, ring: 0xffd9e6, distance: 15 },
+        { size: 1.5, color: 0xb3d9ff, ring: null, distance: 20 },
+        { size: 1.8, color: 0xd9b3ff, ring: 0xe6d9ff, distance: 25 },
+        { size: 1.2, color: 0xffd9b3, ring: null, distance: 30 },
+      ];
+
+      planetConfigs.forEach((config, index) => {
+        const planet = createPlanet(config.size, config.color, config.ring);
+        const angle = (index / planetConfigs.length) * Math.PI * 2;
+        planet.position.x = Math.cos(angle) * config.distance;
+        planet.position.z = Math.sin(angle) * config.distance;
+        planet.position.y = (Math.random() - 0.5) * 10;
+
+        planet.userData = {
+          angle: angle,
+          distance: config.distance,
+          speed: 0.1 + Math.random() * 0.2,
+          rotateSpeed: 0.2 + Math.random() * 0.3,
+        };
+
+        spiral.add(planet);
+        planets.push(planet);
+      });
+
+      // 楽器の配置
+      const instruments = [];
+      const instrumentTypes = ["violin", "harp", "violin", "harp"];
+
+      instrumentTypes.forEach((type, index) => {
+        const instrument = createInstrument(type);
+        const angle =
+          (index / instrumentTypes.length) * Math.PI * 2 + Math.PI / 4;
+        const distance = 18;
+        instrument.position.x = Math.cos(angle) * distance;
+        instrument.position.z = Math.sin(angle) * distance;
+        instrument.position.y = (Math.random() - 0.5) * 8;
+
+        instrument.userData = {
+          angle: angle,
+          distance: distance,
+          speed: 0.15,
+          rotateSpeed: 0.3,
+        };
+
+        spiral.add(instrument);
+        instruments.push(instrument);
+      });
+
+      scene.add(spiral);
+
+      // キラキラの軌跡
+      const trailGeometry = new THREE.BufferGeometry();
+      const trailCount = 400;
+      const trailPositions = new Float32Array(trailCount * 3);
+      const trailColors = new Float32Array(trailCount * 3);
+
+      for (let i = 0; i < trailCount; i++) {
+        const i3 = i * 3;
+        const angle = (i / trailCount) * Math.PI * 8;
+        const radius = 3 + (i / trailCount) * 20;
+        const height = (i / trailCount) * 30 - 15;
+
+        trailPositions[i3] = Math.cos(angle) * radius;
+        trailPositions[i3 + 1] = height;
+        trailPositions[i3 + 2] = Math.sin(angle) * radius;
+
+        const colors = [0xffaaee, 0xaaeeff, 0xffffaa, 0xffaaff];
+        const color = new THREE.Color(
+          colors[Math.floor(Math.random() * colors.length)]
+        );
+        trailColors[i3] = color.r;
+        trailColors[i3 + 1] = color.g;
+        trailColors[i3 + 2] = color.b;
+      }
+
+      trailGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(trailPositions, 3)
+      );
+      trailGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(trailColors, 3)
+      );
+
+      const trailMaterial = new THREE.PointsMaterial({
+        size: 0.15,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const trail = new THREE.Points(trailGeometry, trailMaterial);
+      spiral.add(trail);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 螺旋全体の回転
+        spiral.rotation.y = t * 0.15;
+
+        // 音符の動き
+        notes.forEach((note, index) => {
+          const data = note.userData;
+          const float =
+            Math.sin(t * data.floatSpeed + data.offset) * data.floatAmount;
+          note.position.y = data.initialHeight + float;
+          note.rotation.y += data.rotateSpeed * 0.01;
+          note.rotation.x = Math.sin(t + index) * 0.2;
+
+          // きらめき
+          const twinkle = Math.sin(t * 2 + index * 0.3) * 0.5 + 0.5;
+          note.children[0].material.emissiveIntensity = 0.3 + twinkle * 0.4;
+        });
+
+        // 惑星の動き
+        planets.forEach((planet) => {
+          const data = planet.userData;
+          data.angle += data.speed * 0.01;
+
+          planet.position.x = Math.cos(data.angle) * data.distance;
+          planet.position.z = Math.sin(data.angle) * data.distance;
+          planet.rotation.y += data.rotateSpeed * 0.01;
+
+          // リングの回転
+          if (planet.children[1]) {
+            planet.children[1].rotation.z += 0.005;
+          }
+
+          // グローの脈動
+          const pulse = Math.sin(t * 1.5 + data.angle) * 0.5 + 0.5;
+          planet.children[planet.children.length - 1].material.opacity =
+            0.1 + pulse * 0.2;
+        });
+
+        // 楽器の動き
+        instruments.forEach((instrument) => {
+          const data = instrument.userData;
+          data.angle += data.speed * 0.01;
+
+          instrument.position.x = Math.cos(data.angle) * data.distance;
+          instrument.position.z = Math.sin(data.angle) * data.distance;
+          instrument.rotation.y += data.rotateSpeed * 0.01;
+          instrument.position.y += Math.sin(t * 0.5 + data.angle) * 0.02;
+        });
+
+        // ライトの動き
+        light1.position.x = Math.cos(t * 0.3) * 20;
+        light1.position.z = Math.sin(t * 0.3) * 20;
+
+        light2.position.x = Math.cos(t * 0.4 + Math.PI) * 20;
+        light2.position.z = Math.sin(t * 0.4 + Math.PI) * 20;
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.08) * 35;
+        camera.position.z = Math.cos(t * 0.08) * 35;
+        camera.position.y = 15 + Math.sin(t * 0.1) * 8;
+        camera.lookAt(0, 0, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

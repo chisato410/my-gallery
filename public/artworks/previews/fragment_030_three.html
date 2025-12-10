@@ -1,0 +1,327 @@
+<!-- fragment_030_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #131 – Crystal Garden</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #0d1b2a 0%,
+          #1b263b 40%,
+          #2d3e50 70%,
+          #415a77 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(150, 200, 255, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Crystal Garden" 💎</div>
+
+    <script>
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x1b263b, 10, 50);
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+      camera.position.set(0, 8, 15);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      document.body.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0x6699cc, 0.4);
+      scene.add(ambientLight);
+
+      const light1 = new THREE.PointLight(0x66ccff, 2, 50);
+      light1.position.set(10, 15, 10);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0xff66cc, 2, 50);
+      light2.position.set(-10, 15, -10);
+      scene.add(light2);
+
+      const light3 = new THREE.PointLight(0xccff66, 2, 50);
+      light3.position.set(0, 20, -15);
+      scene.add(light3);
+
+      function createCrystal(height, baseRadius, segments, color) {
+        const crystal = new THREE.Group();
+
+        const points = [];
+        points.push(new THREE.Vector2(0, height));
+
+        for (let i = segments; i >= 0; i--) {
+          const t = i / segments;
+          const y = height * t;
+          const radius = baseRadius * Math.sin(Math.PI * t) * 1.5;
+          points.push(new THREE.Vector2(radius, y));
+        }
+
+        points.push(new THREE.Vector2(0, 0));
+
+        const geometry = new THREE.LatheGeometry(points, 6);
+
+        const material = new THREE.MeshPhysicalMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.6,
+          roughness: 0.1,
+          metalness: 0.1,
+          clearcoat: 1,
+          clearcoatRoughness: 0.1,
+          envMapIntensity: 1,
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+        crystal.add(mesh);
+
+        // 内部の光
+        const innerGlowGeometry = new THREE.CylinderGeometry(
+          baseRadius * 0.3,
+          baseRadius * 0.1,
+          height * 0.8,
+          6
+        );
+        const innerGlowMaterial = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.4,
+          blending: THREE.AdditiveBlending,
+        });
+        const innerGlow = new THREE.Mesh(innerGlowGeometry, innerGlowMaterial);
+        innerGlow.position.y = height * 0.4;
+        crystal.add(innerGlow);
+
+        // エッジのグロー
+        const edgesGeometry = new THREE.EdgesGeometry(geometry);
+        const edgesMaterial = new THREE.LineBasicMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.6,
+        });
+        const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
+        crystal.add(edges);
+
+        return crystal;
+      }
+
+      // クリスタルの配置
+      const crystals = [];
+      const crystalColors = [
+        0x66ccff, 0xff66cc, 0xccff66, 0xff99cc, 0x99ccff, 0xccff99, 0xffcc66,
+        0x66ffcc, 0xcc66ff,
+      ];
+
+      // 地面
+      const groundGeometry = new THREE.CircleGeometry(25, 32);
+      const groundMaterial = new THREE.MeshPhongMaterial({
+        color: 0x1b263b,
+        shininess: 30,
+        transparent: true,
+        opacity: 0.8,
+      });
+      const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+      ground.rotation.x = -Math.PI / 2;
+      ground.position.y = -0.1;
+      scene.add(ground);
+
+      // クリスタルの森
+      for (let i = 0; i < 50; i++) {
+        const height = 2 + Math.random() * 4;
+        const baseRadius = 0.3 + Math.random() * 0.5;
+        const segments = 8 + Math.floor(Math.random() * 8);
+        const color =
+          crystalColors[Math.floor(Math.random() * crystalColors.length)];
+
+        const crystal = createCrystal(height, baseRadius, segments, color);
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 20;
+
+        crystal.position.x = Math.cos(angle) * distance;
+        crystal.position.z = Math.sin(angle) * distance;
+        crystal.position.y = 0;
+
+        crystal.rotation.y = Math.random() * Math.PI * 2;
+
+        crystal.userData = {
+          growthSpeed: 0.5 + Math.random() * 0.5,
+          rotateSpeed: 0.1 + Math.random() * 0.3,
+          glowSpeed: 1 + Math.random() * 2,
+          initialScale: 0.8 + Math.random() * 0.4,
+          offset: Math.random() * Math.PI * 2,
+        };
+
+        crystal.scale.setScalar(crystal.userData.initialScale);
+
+        scene.add(crystal);
+        crystals.push(crystal);
+      }
+
+      // 光の粒子
+      const particleGeometry = new THREE.BufferGeometry();
+      const particleCount = 200;
+      const particlePositions = new Float32Array(particleCount * 3);
+      const particleColors = new Float32Array(particleCount * 3);
+      const particleSizes = new Float32Array(particleCount);
+
+      for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3;
+
+        const angle = Math.random() * Math.PI * 2;
+        const radius = Math.random() * 25;
+        particlePositions[i3] = Math.cos(angle) * radius;
+        particlePositions[i3 + 1] = Math.random() * 15;
+        particlePositions[i3 + 2] = Math.sin(angle) * radius;
+
+        const color = new THREE.Color(
+          crystalColors[Math.floor(Math.random() * crystalColors.length)]
+        );
+        particleColors[i3] = color.r;
+        particleColors[i3 + 1] = color.g;
+        particleColors[i3 + 2] = color.b;
+
+        particleSizes[i] = Math.random() * 0.3 + 0.1;
+      }
+
+      particleGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(particlePositions, 3)
+      );
+      particleGeometry.setAttribute(
+        "color",
+        new THREE.BufferAttribute(particleColors, 3)
+      );
+      particleGeometry.setAttribute(
+        "size",
+        new THREE.BufferAttribute(particleSizes, 1)
+      );
+
+      const particleMaterial = new THREE.PointsMaterial({
+        size: 0.2,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending,
+        sizeAttenuation: true,
+      });
+
+      const particles = new THREE.Points(particleGeometry, particleMaterial);
+      scene.add(particles);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // クリスタルの動き
+        crystals.forEach((crystal, index) => {
+          const data = crystal.userData;
+
+          // 成長アニメーション
+          const growth =
+            Math.sin(t * data.growthSpeed + data.offset) * 0.5 + 0.5;
+          const scale = data.initialScale * (0.95 + growth * 0.1);
+          crystal.scale.setScalar(scale);
+
+          // 回転
+          crystal.rotation.y += data.rotateSpeed * 0.01;
+
+          // 内部の光の脈動
+          if (crystal.children[1]) {
+            const innerGlow = crystal.children[1];
+            const pulse =
+              Math.sin(t * data.glowSpeed + index * 0.3) * 0.5 + 0.5;
+            innerGlow.material.opacity = 0.2 + pulse * 0.4;
+          }
+
+          // エッジの輝き
+          if (crystal.children[2]) {
+            const edges = crystal.children[2];
+            const shimmer = Math.sin(t * 2 + index * 0.5) * 0.5 + 0.5;
+            edges.material.opacity = 0.4 + shimmer * 0.4;
+          }
+        });
+
+        // 粒子の動き
+        const particlePos = particleGeometry.attributes.position.array;
+        for (let i = 0; i < particleCount; i++) {
+          const i3 = i * 3;
+
+          particlePos[i3 + 1] += Math.sin(t + i * 0.1) * 0.02;
+          particlePos[i3] += Math.cos(t * 0.5 + i * 0.2) * 0.01;
+          particlePos[i3 + 2] += Math.sin(t * 0.5 + i * 0.3) * 0.01;
+
+          // 範囲外に出たらリセット
+          const x = particlePos[i3];
+          const z = particlePos[i3 + 2];
+          const dist = Math.sqrt(x * x + z * z);
+
+          if (
+            dist > 30 ||
+            particlePos[i3 + 1] > 20 ||
+            particlePos[i3 + 1] < 0
+          ) {
+            const angle = Math.random() * Math.PI * 2;
+            const radius = Math.random() * 25;
+            particlePos[i3] = Math.cos(angle) * radius;
+            particlePos[i3 + 1] = Math.random() * 15;
+            particlePos[i3 + 2] = Math.sin(angle) * radius;
+          }
+        }
+        particleGeometry.attributes.position.needsUpdate = true;
+
+        // ライトの動き
+        light1.position.x = Math.cos(t * 0.5) * 12;
+        light1.position.z = Math.sin(t * 0.5) * 12;
+
+        light2.position.x = Math.cos(t * 0.3 + Math.PI) * 15;
+        light2.position.z = Math.sin(t * 0.3 + Math.PI) * 15;
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.15) * 12;
+        camera.position.z = 15 + Math.cos(t * 0.15) * 8;
+        camera.position.y = 8 + Math.sin(t * 0.1) * 2;
+        camera.lookAt(0, 2, 0);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

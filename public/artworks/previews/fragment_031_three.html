@@ -1,0 +1,345 @@
+<!-- fragment_031_three.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fragment #132 – Starry Whale</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #000814 0%,
+          #001d3d 30%,
+          #003566 60%,
+          #001845 100%
+        );
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .caption {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        font-family: "Helvetica Neue", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(150, 200, 255, 0.9);
+        z-index: 10;
+        text-shadow: 0 2px 8px rgba(0, 150, 255, 0.8);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="caption">"Starry Whale" 🐋</div>
+
+    <script>
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        200
+      );
+      camera.position.set(0, 5, 25);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: false,
+        alpha: true,
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(1));
+      document.body.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0x4488ff, 0.3);
+      scene.add(ambientLight);
+
+      // 鯨を作成
+      const whale = new THREE.Group();
+
+      // 胴体
+      const bodyGeometry = new THREE.SphereGeometry(3, 8, 8);
+      bodyGeometry.scale(2.5, 1, 1);
+      const bodyMaterial = new THREE.MeshPhongMaterial({
+        color: 0x1a4d7a,
+        emissive: 0x2288dd,
+        emissiveIntensity: 0.3,
+        shininess: 60,
+        transparent: true,
+        opacity: 0.9,
+      });
+      const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+      whale.add(body);
+
+      // 頭部
+      const headGeometry = new THREE.SphereGeometry(2.5, 8, 8);
+      headGeometry.scale(1.3, 1.1, 1);
+      const head = new THREE.Mesh(headGeometry, bodyMaterial);
+      head.position.x = 6;
+      whale.add(head);
+
+      // 尾
+      const tailGeometry = new THREE.ConeGeometry(2, 4, 32);
+      tailGeometry.rotateZ(Math.PI / 2);
+      const tail = new THREE.Mesh(tailGeometry, bodyMaterial);
+      tail.position.x = -8;
+      whale.add(tail);
+
+      // 尾びれ
+      const flukeGeometry = new THREE.SphereGeometry(2.5, 8, 8);
+      flukeGeometry.scale(0.3, 2, 1);
+      const flukeLeft = new THREE.Mesh(flukeGeometry, bodyMaterial);
+      flukeLeft.position.set(-9.5, 0, 1.5);
+      flukeLeft.rotation.y = Math.PI / 4;
+      whale.add(flukeLeft);
+
+      const flukeRight = new THREE.Mesh(flukeGeometry, bodyMaterial);
+      flukeRight.position.set(-9.5, 0, -1.5);
+      flukeRight.rotation.y = -Math.PI / 4;
+      whale.add(flukeRight);
+
+      // 胸びれ
+      const finGeometry = new THREE.SphereGeometry(1.5, 8, 8);
+      finGeometry.scale(0.3, 1.5, 0.8);
+      const finLeft = new THREE.Mesh(finGeometry, bodyMaterial);
+      finLeft.position.set(2, -1, 2);
+      finLeft.rotation.z = Math.PI / 6;
+      whale.add(finLeft);
+
+      const finRight = new THREE.Mesh(finGeometry, bodyMaterial);
+      finRight.position.set(2, -1, -2);
+      finRight.rotation.z = Math.PI / 6;
+      whale.add(finRight);
+
+      // 目
+      const eyeGeometry = new THREE.SphereGeometry(0.3, 8, 8);
+      const eyeMaterial = new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        emissive: 0x88ccff,
+        emissiveIntensity: 0.8,
+        shininess: 100,
+      });
+      const eyeLeft = new THREE.Mesh(eyeGeometry, eyeMaterial);
+      eyeLeft.position.set(6.5, 0.8, 1.5);
+      whale.add(eyeLeft);
+
+      const eyeRight = new THREE.Mesh(eyeGeometry, eyeMaterial);
+      eyeRight.position.set(6.5, 0.8, -1.5);
+      whale.add(eyeRight);
+
+      // 鯨の体表の星
+      const starGeometry = new THREE.SphereGeometry(0.08, 8, 8);
+      const starMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.9,
+      });
+
+      const whaleStars = [];
+      for (let i = 0; i < 50; i++) {
+        const star = new THREE.Mesh(starGeometry, starMaterial.clone());
+
+        const phi = Math.random() * Math.PI;
+        const theta = Math.random() * Math.PI * 2;
+        const radius = 3.2;
+
+        const x = radius * Math.sin(phi) * Math.cos(theta) * 2.5;
+        const y = radius * Math.sin(phi) * Math.sin(theta);
+        const z = radius * Math.cos(phi);
+
+        star.position.set(x, y, z);
+
+        star.userData = {
+          twinkleSpeed: 1 + Math.random() * 2,
+          twinkleOffset: Math.random() * Math.PI * 2,
+        };
+
+        whale.add(star);
+        whaleStars.push(star);
+      }
+
+      // 鯨の周りの光
+      const whaleGlowGeometry = new THREE.SphereGeometry(9, 8, 8);
+      const whaleGlowMaterial = new THREE.MeshBasicMaterial({
+        color: 0x4488ff,
+        transparent: true,
+        opacity: 0.1,
+        blending: THREE.AdditiveBlending,
+      });
+      const whaleGlow = new THREE.Mesh(whaleGlowGeometry, whaleGlowMaterial);
+      whale.add(whaleGlow);
+
+      whale.position.set(-10, 0, 0);
+      scene.add(whale);
+
+      // 小さな魚の群れ
+      const fish = [];
+      for (let i = 0; i < 50; i++) {
+        const fishGroup = new THREE.Group();
+
+        const fishBodyGeometry = new THREE.SphereGeometry(0.3, 8, 8);
+        fishBodyGeometry.scale(1.5, 1, 1);
+        const fishMaterial = new THREE.MeshPhongMaterial({
+          color: 0x66ccff,
+          emissive: 0x4488ff,
+          emissiveIntensity: 0.5,
+          shininess: 80,
+          transparent: true,
+          opacity: 0.8,
+        });
+        const fishBody = new THREE.Mesh(fishBodyGeometry, fishMaterial);
+        fishGroup.add(fishBody);
+
+        const fishTailGeometry = new THREE.ConeGeometry(0.2, 0.4, 8);
+        fishTailGeometry.rotateZ(Math.PI / 2);
+        const fishTail = new THREE.Mesh(fishTailGeometry, fishMaterial);
+        fishTail.position.x = -0.5;
+        fishGroup.add(fishTail);
+
+        const angle = (i / 30) * Math.PI * 2;
+        const radius = 12 + Math.random() * 8;
+        fishGroup.position.x = Math.cos(angle) * radius;
+        fishGroup.position.y = Math.sin(angle * 2) * 5;
+        fishGroup.position.z = Math.sin(angle) * radius;
+
+        fishGroup.userData = {
+          angle: angle,
+          radius: radius,
+          speed: 0.5 + Math.random() * 0.5,
+          verticalSpeed: 0.3 + Math.random() * 0.3,
+          verticalOffset: Math.random() * Math.PI * 2,
+        };
+
+        scene.add(fishGroup);
+        fish.push(fishGroup);
+      }
+
+      // 背景の星
+      const starsGeometry = new THREE.BufferGeometry();
+      const starsCount = 500;
+      const starsPositions = new Float32Array(starsCount * 3);
+      const starsSizes = new Float32Array(starsCount);
+
+      for (let i = 0; i < starsCount; i++) {
+        const i3 = i * 3;
+        starsPositions[i3] = (Math.random() - 0.5) * 150;
+        starsPositions[i3 + 1] = (Math.random() - 0.5) * 150;
+        starsPositions[i3 + 2] = (Math.random() - 0.5) * 150;
+        starsSizes[i] = Math.random() * 2 + 0.5;
+      }
+
+      starsGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(starsPositions, 3)
+      );
+      starsGeometry.setAttribute(
+        "size",
+        new THREE.BufferAttribute(starsSizes, 1)
+      );
+
+      const starsMaterial = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.3,
+        transparent: true,
+        opacity: 0.8,
+        sizeAttenuation: true,
+      });
+
+      const stars = new THREE.Points(starsGeometry, starsMaterial);
+      scene.add(stars);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const t = performance.now() * 0.001;
+
+        // 鯨の動き
+        whale.position.x = Math.sin(t * 0.2) * 15;
+        whale.position.y = Math.sin(t * 0.3) * 5;
+        whale.rotation.y = Math.sin(t * 0.2) * 0.3;
+        whale.rotation.z = Math.sin(t * 0.25) * 0.1;
+
+        // 尾の動き
+        if (whale.children[2]) {
+          whale.children[2].rotation.y = Math.sin(t * 2) * 0.3;
+        }
+
+        // 尾びれの動き
+        if (whale.children[3] && whale.children[4]) {
+          const tailFlap = Math.sin(t * 2) * 0.2;
+          whale.children[3].rotation.x = tailFlap;
+          whale.children[4].rotation.x = -tailFlap;
+        }
+
+        // 胸びれの動き
+        if (whale.children[5] && whale.children[6]) {
+          const finFlap = Math.sin(t * 1.5) * 0.3;
+          whale.children[5].rotation.z = Math.PI / 6 + finFlap;
+          whale.children[6].rotation.z = Math.PI / 6 + finFlap;
+        }
+
+        // 体表の星のきらめき
+        whaleStars.forEach((star) => {
+          const data = star.userData;
+          const twinkle =
+            Math.sin(t * data.twinkleSpeed + data.twinkleOffset) * 0.5 + 0.5;
+          star.material.opacity = 0.5 + twinkle * 0.5;
+          const scale = 1 + twinkle * 0.5;
+          star.scale.setScalar(scale);
+        });
+
+        // グローの脈動
+        const glowPulse = Math.sin(t * 0.8) * 0.5 + 0.5;
+        whaleGlow.material.opacity = 0.05 + glowPulse * 0.1;
+        whaleGlow.scale.setScalar(1 + glowPulse * 0.1);
+
+        // 魚の動き
+        fish.forEach((f) => {
+          const data = f.userData;
+          data.angle += data.speed * 0.01;
+
+          f.position.x = Math.cos(data.angle) * data.radius;
+          f.position.z = Math.sin(data.angle) * data.radius;
+          f.position.y =
+            Math.sin(t * data.verticalSpeed + data.verticalOffset) * 5;
+
+          f.lookAt(
+            Math.cos(data.angle + 0.1) * data.radius,
+            f.position.y,
+            Math.sin(data.angle + 0.1) * data.radius
+          );
+
+          // 尾の動き
+          if (f.children[1]) {
+            f.children[1].rotation.y = Math.sin(t * 5 + data.angle) * 0.4;
+          }
+        });
+
+        // 背景の星の回転
+        stars.rotation.y += 0.0001;
+        stars.rotation.x += 0.0002;
+
+        // カメラの動き
+        camera.position.x = Math.sin(t * 0.1) * 20;
+        camera.position.y = 5 + Math.sin(t * 0.15) * 8;
+        camera.position.z = 25 + Math.cos(t * 0.1) * 10;
+        camera.lookAt(whale.position);
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    </script>
+  </body>
+</html>

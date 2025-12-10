@@ -11,7 +11,7 @@ export function FilterBar({
   return (
     <div className="bg-gray-900 border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex gap-2 items-center flex-wrap">
+        {/* <div className="flex gap-2 items-center flex-wrap">
           <button
             onClick={() => setFilter("all")}
             className={`px-4 py-2 rounded transition-colors ${
@@ -43,7 +43,7 @@ export function FilterBar({
             Three.js
           </button>
           <span className="text-sm text-gray-400 ml-2">{totalCount} works</span>
-        </div>
+        </div> */}
 
         <select
           value={sortBy}

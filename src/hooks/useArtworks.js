@@ -16,7 +16,7 @@ export function useArtworks(sortBy = "newest") {
       const unsubscribe = onSnapshot(q, (snapshot) => {
         const data = snapshot.docs.map((doc) => ({
           ...doc.data(),
-          id: parseInt(doc.id),
+          id: doc.id,
         }));
         setArtworks(data);
         setLoading(false);
@@ -30,7 +30,8 @@ export function useArtworks(sortBy = "newest") {
       if (sortBy === "title") {
         sorted.sort((a, b) => a.title.localeCompare(b.title));
       } else {
-        sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        // newest: ID（数値）で降順ソート
+        sorted.sort((a, b) => b.id - a.id);
       }
 
       setArtworks(sorted);

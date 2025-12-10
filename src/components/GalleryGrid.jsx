@@ -14,7 +14,7 @@ const GridComponents = {
         gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
         gap: "1.5rem",
         padding: "0 1.5rem",
-        maxWidth: "1580px", // 200px × 5 + 1.5rem × 4 + padding × 2 = 1180px
+        maxWidth: "1580px",
         margin: "0 auto",
         ...style,
       }}
@@ -29,7 +29,7 @@ const GridComponents = {
         display: "flex",
         flexDirection: "column",
         width: "100%",
-        aspectRatio: "1 / 1", // 正方形を保証
+        aspectRatio: "1 / 1",
         position: "relative",
       }}
     >

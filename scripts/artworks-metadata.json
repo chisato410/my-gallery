@@ -1975,5 +1975,254 @@
       "fog",
       "additive-blending"
     ]
+  },
+  {
+    "filename": "fragment_021_three.html",
+    "title": "Cute Floating Bubbles",
+    "tech": "Three.js",
+    "createdAt": "2025-11-28",
+    "tags": [
+      "webgl",
+      "bubbles",
+      "cute",
+      "pastel",
+      "kawaii",
+      "floating",
+      "particles",
+      "hearts",
+      "stars",
+      "ribbons",
+      "ambient-animation",
+      "glow",
+      "soft-lighting"
+    ]
+  },
+  {
+    "filename": "fragment_022_three.html",
+    "title": "Pastel Candy Land",
+    "tech": "Three.js",
+    "createdAt": "2025-11-28",
+    "tags": [
+      "webgl",
+      "candy",
+      "cute",
+      "pastel",
+      "kawaii",
+      "lollipops",
+      "donuts",
+      "floating-candies",
+      "particles",
+      "sparkles",
+      "circular-motion",
+      "soft-lighting",
+      "fantasy"
+    ]
+  },
+  {
+    "filename": "fragment_023_three.html",
+    "title": "Fluffy Cloud Garden",
+    "tech": "Three.js",
+    "createdAt": "2025-11-28",
+    "tags": [
+      "webgl",
+      "clouds",
+      "cute",
+      "pastel",
+      "kawaii",
+      "garden",
+      "birds",
+      "rainbow",
+      "balloons",
+      "stars",
+      "sun",
+      "ambient-animation",
+      "floating",
+      "daylight-fantasy"
+    ]
+  },
+  {
+    "filename": "fragment_024_three.html",
+    "title": "Dreamy Flower Garden",
+    "tech": "Three.js",
+    "createdAt": "2025-11-28",
+    "tags": [
+      "webgl",
+      "flowers",
+      "garden",
+      "cute",
+      "pastel",
+      "kawaii",
+      "butterflies",
+      "ladybugs",
+      "pollen",
+      "floating",
+      "nature",
+      "soft-lighting",
+      "ambient-animation"
+    ]
+  },
+  {
+    "filename": "fragment_025_three.html",
+    "title": "Sparkling Jewel Box",
+    "tech": "Three.js",
+    "createdAt": "2025-11-28",
+    "tags": [
+      "webgl",
+      "jewels",
+      "crystals",
+      "gems",
+      "sparkles",
+      "rings",
+      "glow",
+      "fantasy",
+      "additive-blending",
+      "pastel-neon",
+      "floating",
+      "ambient-animation"
+    ]
+  },
+  {
+    "filename": "fragment_026_three.html",
+    "title": "Macaron Party",
+    "tech": "Three.js",
+    "createdAt": "2025-11-28",
+    "tags": [
+      "webgl",
+      "macarons",
+      "cupcakes",
+      "sweets",
+      "cute",
+      "pastel",
+      "kawaii",
+      "tower",
+      "floating",
+      "ribbons",
+      "sugar-crystals",
+      "soft-lighting",
+      "ambient-animation"
+    ]
+  },
+  {
+    "filename": "fragment_027_three.html",
+    "title": "Plushie Friends",
+    "tech": "Three.js",
+    "createdAt": "2025-11-28",
+    "tags": [
+      "webgl",
+      "plushies",
+      "teddy-bears",
+      "bunnies",
+      "cute",
+      "pastel",
+      "kawaii",
+      "floating",
+      "balloons",
+      "stars",
+      "soft-lighting",
+      "ambient-animation",
+      "character-modeling"
+    ]
+  },
+  {
+    "filename": "fragment_028_three.html",
+    "title": "Dreamy Carousel",
+    "tech": "Three.js",
+    "createdAt": "2025-11-28",
+    "tags": [
+      "webgl",
+      "carousel",
+      "horses",
+      "cute",
+      "pastel",
+      "kawaii",
+      "rotation-animation",
+      "lights",
+      "confetti",
+      "fantasy",
+      "soft-lighting",
+      "ambient-animation",
+      "decorative-objects"
+    ]
+  },
+  {
+    "filename": "fragment_029_three.html",
+    "title": "Floating Lanterns",
+    "tech": "Three.js",
+    "createdAt": "2025-11-28",
+    "tags": [
+      "webgl",
+      "lanterns",
+      "floating",
+      "night-scene",
+      "glow",
+      "fog",
+      "particles",
+      "ambient-animation",
+      "soft-volumetric-light",
+      "fantasy",
+      "lantern-festival",
+      "dreamy"
+    ]
+  },
+  {
+    "filename": "fragment_030_three.html",
+    "title": "Crystal Garden",
+    "tech": "Three.js",
+    "createdAt": "2025-11-29",
+    "tags": [
+      "webgl",
+      "crystals",
+      "procedural-geometry",
+      "glow",
+      "lathe-geometry",
+      "forest",
+      "fantasy",
+      "fog",
+      "particles",
+      "ambient-animation",
+      "colorful-lights",
+      "pulsing-effects"
+    ]
+  },
+  {
+    "filename": "fragment_031_three.html",
+    "title": "Starry Whale",
+    "tech": "Three.js",
+    "createdAt": "2025-11-29",
+    "tags": [
+      "webgl",
+      "whale",
+      "creature-animation",
+      "stars",
+      "glow",
+      "underwater-fantasy",
+      "ambient-animation",
+      "orbiting-fish",
+      "emissive-materials",
+      "cosmic",
+      "dreamy",
+      "floating"
+    ]
+  },
+  {
+    "filename": "fragment_032_three.html",
+    "title": "Music Box Galaxy",
+    "tech": "Three.js",
+    "createdAt": "2025-11-29",
+    "tags": [
+      "webgl",
+      "music-notes",
+      "galaxy",
+      "spiral-motion",
+      "planets",
+      "instruments",
+      "ambient-animation",
+      "glow",
+      "fantasy-space",
+      "orbiting-objects",
+      "particles",
+      "surreal",
+      "colorful-lights"
+    ]
   }
 ]
