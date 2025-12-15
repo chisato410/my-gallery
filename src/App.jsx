@@ -59,17 +59,16 @@ export default function App() {
             artworks={filteredArtworks}
             onSelectArt={setSelectedArt}
           />
+          {/* モーダル */}
+          <ArtworkModal
+            artwork={selectedArt}
+            onClose={() => setSelectedArt(null)}
+          />
         </main>
 
         {/* ボトムナビ */}
         <BottomNav />
       </div>
-
-      {/* モーダル */}
-      <ArtworkModal
-        artwork={selectedArt}
-        onClose={() => setSelectedArt(null)}
-      />
     </>
   );
 }

@@ -1,0 +1,37 @@
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 64px;
+  background-color: #f6e7e7;
+  border-top: 1px solid #d1d5db; // gray-300
+  color: #1f2937; // gray-800
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #f1dede;
+  }
+}
+
+.centerButton {
+  border-left: 1px solid #d1d5db;
+  border-right: 1px solid #d1d5db;
+}
