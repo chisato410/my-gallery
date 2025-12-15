@@ -1,5 +1,6 @@
 // src/components/FilterBar.jsx
 import React from "react";
+import styles from "./FilterBar.module.scss";
 
 export function FilterBar({
   filter,
@@ -9,46 +10,42 @@ export function FilterBar({
   totalCount,
 }) {
   return (
-    <div className="bg-gray-900 border-b border-gray-800">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
-        {/* <div className="flex gap-2 items-center flex-wrap">
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        {/* フィルタボタン群（将来復活用）
+        <div className={styles.filters}>
           <button
             onClick={() => setFilter("all")}
-            className={`px-4 py-2 rounded transition-colors ${
-              filter === "all"
-                ? "bg-white text-black"
-                : "bg-gray-800 hover:bg-gray-700"
+            className={`${styles.filterButton} ${
+              filter === "all" ? styles.active : ""
             }`}
           >
             All
           </button>
           <button
             onClick={() => setFilter("p5.js")}
-            className={`px-4 py-2 rounded transition-colors ${
-              filter === "p5.js"
-                ? "bg-white text-black"
-                : "bg-gray-800 hover:bg-gray-700"
+            className={`${styles.filterButton} ${
+              filter === "p5.js" ? styles.active : ""
             }`}
           >
             p5.js
           </button>
           <button
             onClick={() => setFilter("Three.js")}
-            className={`px-4 py-2 rounded transition-colors ${
-              filter === "Three.js"
-                ? "bg-white text-black"
-                : "bg-gray-800 hover:bg-gray-700"
+            className={`${styles.filterButton} ${
+              filter === "Three.js" ? styles.active : ""
             }`}
           >
             Three.js
           </button>
-          <span className="text-sm text-gray-400 ml-2">{totalCount} works</span>
-        </div> */}
+          <span className={styles.count}>{totalCount} works</span>
+        </div>
+        */}
 
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
-          className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded transition-colors text-sm"
+          className={styles.select}
         >
           <option value="newest">Newest</option>
           <option value="popular">Most Popular</option>
