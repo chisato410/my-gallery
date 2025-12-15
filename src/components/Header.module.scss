@@ -1,0 +1,26 @@
+.header {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 2rem 1.5rem; /* py-8 px-6 相当 */
+}
+
+.container {
+  max-width: 1120px; /* max-w-7xl 相当 */
+  margin: 0 auto;
+}
+
+.subtitle {
+  font-size: 0.875rem; /* text-sm */
+  margin-bottom: 0.5rem; /* mb-2 */
+  letter-spacing: 0.05em; /* tracking-wider */
+}
+
+.title {
+  font-size: 3rem; /* text-5xl */
+  font-weight: 300; /* font-light */
+  letter-spacing: -0.015em; /* tracking-tight */
+
+  @media (min-width: 768px) {
+    font-size: 3.75rem; /* md:text-6xl */
+  }
+}
