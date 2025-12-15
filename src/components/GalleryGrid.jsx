@@ -41,7 +41,7 @@ export function GalleryGrid({ artworks, onSelectArt }) {
   return (
     <VirtuosoGrid
       style={{
-        height: "calc(100vh - 120px)", // ← ★ 必須
+        height: "calc(100vh - 120px)",
         width: "100%",
       }}
       overscan={1000}
