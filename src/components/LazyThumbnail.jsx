@@ -34,9 +34,6 @@ export function LazyThumbnail({ artwork, onSelect }) {
             title={artwork.title}
           />
         )}
-
-        {/* Hover overlay */}
-        <div className={styles.overlay} />
       </button>
     </div>
   );

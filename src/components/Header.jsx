@@ -3,9 +3,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 
-export default function Header() {
+export default function Header({ isCompact = false }) {
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isCompact ? styles.compact : ""}`}>
       <div className={styles.container}>
         <p className={styles.subtitle}>Universes of Web Art</p>
         <h1 className={styles.title}>Thousand Fragments</h1>

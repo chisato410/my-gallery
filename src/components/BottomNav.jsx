@@ -1,17 +1,29 @@
 // src/components/BottomNav.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./BottomNav.module.scss";
 
 export default function BottomNav({ artworks = [], setBgColor, virtuosoRef }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [optionsOpen, setOptionsOpen] = useState(false);
+  const [currentBgColor, setCurrentBgColor] = useState("white");
 
   const location = useLocation();
 
   const allTags = Array.from(
     new Set(artworks.flatMap((art) => art.tags || []))
   );
+
+  // 現在のテーマを取得
+  useEffect(() => {
+    const theme = document.documentElement.getAttribute("data-theme");
+    setCurrentBgColor(theme === "dark" ? "black" : "white");
+  }, []);
+
+  const handleBgColorChange = (color) => {
+    setBgColor(color);
+    setCurrentBgColor(color);
+  };
 
   const scrollToTop = () => {
     if (location.pathname === "/" && virtuosoRef?.current) {
@@ -41,12 +53,20 @@ export default function BottomNav({ artworks = [], setBgColor, virtuosoRef }) {
       <div className={`${styles.navPanel} ${menuOpen ? styles.active : ""}`}>
         <ul className={styles.navList}>
           <li>
-            <Link to="/" onClick={() => setMenuOpen(false)}>
+            <Link
+              to="/"
+              onClick={() => setMenuOpen(false)}
+              className={location.pathname === "/" ? styles.active : ""}
+            >
               Gallery
             </Link>
           </li>
           <li>
-            <Link to="/about" onClick={() => setMenuOpen(false)}>
+            <Link
+              to="/about"
+              onClick={() => setMenuOpen(false)}
+              className={location.pathname === "/about" ? styles.active : ""}
+            >
               About
             </Link>
           </li>
@@ -67,8 +87,18 @@ export default function BottomNav({ artworks = [], setBgColor, virtuosoRef }) {
 
           <h4>Background</h4>
           <div className={styles.bgButtons}>
-            <button onClick={() => setBgColor("white")}>White</button>
-            <button onClick={() => setBgColor("black")}>Black</button>
+            <button
+              onClick={() => handleBgColorChange("white")}
+              className={currentBgColor === "white" ? styles.active : ""}
+            >
+              White
+            </button>
+            <button
+              onClick={() => handleBgColorChange("black")}
+              className={currentBgColor === "black" ? styles.active : ""}
+            >
+              Black
+            </button>
           </div>
         </div>
       </div>
@@ -93,6 +123,7 @@ export default function BottomNav({ artworks = [], setBgColor, virtuosoRef }) {
           <span>TOP</span>
           <span>BACK TO TOP</span>
         </button>
+
         {/* OPTIONボタン */}
         <button
           className={styles.btnTextChange}

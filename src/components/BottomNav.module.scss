@@ -42,21 +42,36 @@
 }
 
 .navList li a {
-  color: #333;
+  color: var(--text-color);
   text-decoration: none;
   font-weight: bold;
   font-size: 1.2rem;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--accent-color);
+  }
+
+  &.active {
+    color: var(--accent-color);
+  }
 }
 
 /* オプションパネル */
 .options {
   padding: 2rem;
+
+  h4 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+  }
 }
 
 .tagList {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .tag {
@@ -68,12 +83,32 @@
   color: var(--text-color);
 }
 
+.bgButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .bgButtons button {
-  margin-right: 0.5rem;
   padding: 0.4rem 0.8rem;
-  border: 1px solid #555;
+  border: 1px solid var(--text-color);
   border-radius: 4px;
   cursor: pointer;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.2s;
+
+  &:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--bg-color);
+  }
+
+  &.active {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--bg-color);
+    font-weight: 600;
+  }
 }
 
 /* ボトムナビ */
@@ -89,21 +124,22 @@
   height: 64px;
   background-color: var(--bg-color);
   padding: 0 1rem;
+  border-top: 1px solid rgba(128, 128, 128, 0.2);
 }
 
 .btnTextChange {
   position: relative;
-  min-width: 150px; // ← 120 → 150 に変更
+  min-width: 150px;
   padding: 10px 28px;
   text-align: center;
   display: inline-block;
   cursor: pointer;
   outline: none;
+  border: none;
   transition: all 0.2s;
   color: var(--text-color);
   background: var(--bg-color);
 
-  /* 括弧装飾（前回のまま） */
   &::before,
   &::after {
     content: "";

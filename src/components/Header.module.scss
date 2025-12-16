@@ -1,7 +1,12 @@
 .header {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   padding: 2rem 1.5rem;
+  transition: padding 0.3s ease;
+
+  &.compact {
+    padding: 1rem 1.5rem;
+  }
 }
 
 .container {
@@ -13,15 +18,34 @@
   font-size: 0.875rem;
   margin-bottom: 0.5rem;
   letter-spacing: 0.05em;
+  color: var(--text-color);
+  transition: opacity 0.3s ease;
+
+  .compact & {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+  }
 }
 
 .title {
   font-size: 3rem;
   font-weight: 300;
   letter-spacing: -0.015em;
+  color: var(--text-color);
+  transition: font-size 0.3s ease;
 
   @media (min-width: 768px) {
     font-size: 3.75rem;
+  }
+
+  .compact & {
+    font-size: 1.5rem;
+
+    @media (min-width: 768px) {
+      font-size: 2rem;
+    }
   }
 }
 
@@ -29,20 +53,24 @@
   margin-top: 1rem;
   display: flex;
   gap: 1.5rem;
+
+  .compact & {
+    margin-top: 0.5rem;
+  }
 }
 
 .navLink {
-  color: #000;
+  color: var(--text-color);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
 
   &:hover {
-    color: #555;
+    color: var(--accent-color);
   }
 }
 
 .activeLink {
-  color: #1a73e8; // アクティブリンクは青などで強調
+  color: var(--accent-color);
   font-weight: 600;
 }

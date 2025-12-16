@@ -24,10 +24,17 @@ const GridComponents = {
 };
 
 export const GalleryGrid = forwardRef(
-  ({ artworks, onSelectArt }, virtuosoRef) => {
+  ({ artworks, onSelectArt, setIsScrolled }, virtuosoRef) => {
+    // スクロール位置を検知
+    const handleRangeChanged = (range) => {
+      if (setIsScrolled) {
+        // 最初の行が少しでも隠れたら縮小（より敏感）
+        setIsScrolled(range.startIndex > 0 || range.startOffset > 0);
+      }
+    };
     return (
       <VirtuosoGrid
-        ref={virtuosoRef} // ← ★ここ
+        ref={virtuosoRef}
         style={{
           height: "calc(100vh - 120px)",
           width: "100%",
@@ -35,6 +42,7 @@ export const GalleryGrid = forwardRef(
         overscan={1000}
         totalCount={artworks.length}
         components={GridComponents}
+        rangeChanged={handleRangeChanged}
         itemContent={(index) => {
           const artwork = artworks[index];
           if (!artwork) return null;
