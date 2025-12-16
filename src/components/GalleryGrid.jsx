@@ -9,7 +9,7 @@ const GridComponents = {
       ref={ref}
       {...props}
       style={{
-        ...style, // ← ★ 必須（Virtuoso の transform / height）
+        ...style,
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
         gap: "24px",
@@ -21,38 +21,26 @@ const GridComponents = {
       {children}
     </div>
   )),
-
-  Item: ({ style, children, ...props }) => (
-    <div
-      {...props}
-      style={{
-        ...style, // ← ★ 必須
-        width: "100%",
-        aspectRatio: "1 / 1",
-        position: "relative",
-      }}
-    >
-      {children}
-    </div>
-  ),
 };
 
-export function GalleryGrid({ artworks, onSelectArt }) {
-  return (
-    <VirtuosoGrid
-      style={{
-        height: "calc(100vh - 120px)",
-        width: "100%",
-      }}
-      overscan={1000}
-      totalCount={artworks.length}
-      components={GridComponents}
-      itemContent={(index) => {
-        const artwork = artworks[index];
-        if (!artwork) return null;
-
-        return <LazyThumbnail artwork={artwork} onSelect={onSelectArt} />;
-      }}
-    />
-  );
-}
+export const GalleryGrid = forwardRef(
+  ({ artworks, onSelectArt }, virtuosoRef) => {
+    return (
+      <VirtuosoGrid
+        ref={virtuosoRef} // ← ★ここ
+        style={{
+          height: "calc(100vh - 120px)",
+          width: "100%",
+        }}
+        overscan={1000}
+        totalCount={artworks.length}
+        components={GridComponents}
+        itemContent={(index) => {
+          const artwork = artworks[index];
+          if (!artwork) return null;
+          return <LazyThumbnail artwork={artwork} onSelect={onSelectArt} />;
+        }}
+      />
+    );
+  }
+);

@@ -1,37 +1,131 @@
-.bottomNav {
+/* 背景ぼかし */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+/* パネルのスライド表示 */
+.navPanel {
+  position: fixed;
+  bottom: -120%;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+  transition: all 0.5s ease;
+  z-index: 20;
+  overflow-y: auto;
+}
+
+.navPanel.active {
+  bottom: 0;
+}
+
+.navList {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  list-style: none;
+  text-align: center;
+}
+
+.navList li {
+  margin: 10px 0;
+}
+
+.navList li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* オプションパネル */
+.options {
+  padding: 2rem;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  background: #eee;
+  font-size: 0.9rem;
+}
+
+.bgButtons button {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #555;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ボトムナビ */
+.footer {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 40;
-}
-
-.container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  height: 64px;
-  background-color: #f6e7e7;
-  border-top: 1px solid #d1d5db; // gray-300
-  color: #1f2937; // gray-800
-}
-
-.button {
+  z-index: 30;
   display: flex;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  height: 64px;
+  background-color: #fff;
+  padding: 0 1rem;
+}
 
-  &:hover {
-    background-color: #f1dede;
+/* テキスト切替ボタン */
+.btnTextChange {
+  position: relative;
+  min-width: 120px;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  color: #333;
+  background: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+
+  span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s;
+    display: block;
+    white-space: nowrap;
+  }
+
+  span:nth-child(2) {
+    opacity: 0;
+  }
+
+  &:hover span:nth-child(1) {
+    opacity: 0;
+  }
+
+  &:hover span:nth-child(2) {
+    opacity: 1;
   }
 }
 
-.centerButton {
-  border-left: 1px solid #d1d5db;
-  border-right: 1px solid #d1d5db;
+/* ▲トップに戻るボタン */
+.button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
 }

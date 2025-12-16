@@ -1,74 +1,27 @@
-// src/App.jsx
-import React, { useState } from "react";
-import { Header } from "./components/Header";
-import { FilterBar } from "./components/FilterBar";
-import { GalleryGrid } from "./components/GalleryGrid";
-import { ArtworkModal } from "./components/ArtworkModal";
-import { BottomNav } from "./components/BottomNav";
-import { useArtworks } from "./hooks/useArtworks";
-import "./index.css";
+import React, { useRef } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import BottomNav from "./components/BottomNav";
+import GalleryPage from "./pages/GalleryPage";
+import AboutPage from "./pages/AboutPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 export default function App() {
-  const [filter, setFilter] = useState("all");
-  const [sortBy, setSortBy] = useState("newest");
-  const [selectedArt, setSelectedArt] = useState(null);
+  const virtuosoRef = useRef(null);
 
-  const { artworks, loading } = useArtworks(sortBy);
-
-  const filteredArtworks =
-    filter === "all" ? artworks : artworks.filter((art) => art.tech === filter);
-
-  const handleFilterChange = (newFilter) => {
-    setFilter(newFilter);
-  };
-
-  const handleSortChange = (newSort) => {
-    setSortBy(newSort);
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-neutral-950 text-white flex items-center justify-center">
-        <div className="text-lg tracking-wide opacity-80 animate-pulse">
-          Loading...
-        </div>
-      </div>
-    );
-  }
+  console.log(virtuosoRef.current);
 
   return (
-    <>
-      <div className="min-h-screen bg-neutral-950 text-white flex flex-col">
-        {/* ヘッダー */}
-        <Header />
+    <Router>
+      <Header />
 
-        {/* フィルタバー */}
-        <div className="border-b border-neutral-800 bg-neutral-900/40 backdrop-blur-md sticky top-0 z-30">
-          <FilterBar
-            filter={filter}
-            setFilter={handleFilterChange}
-            sortBy={sortBy}
-            setSortBy={handleSortChange}
-            totalCount={filteredArtworks.length}
-          />
-        </div>
+      <Routes>
+        <Route path="/" element={<GalleryPage ref={virtuosoRef} />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
 
-        {/* メイン */}
-        <main className="max-w-7xl mx-auto w-full px-4 py-8 pb-32">
-          <GalleryGrid
-            artworks={filteredArtworks}
-            onSelectArt={setSelectedArt}
-          />
-          {/* モーダル */}
-          <ArtworkModal
-            artwork={selectedArt}
-            onClose={() => setSelectedArt(null)}
-          />
-        </main>
-
-        {/* ボトムナビ */}
-        <BottomNav />
-      </div>
-    </>
+      <BottomNav virtuosoRef={virtuosoRef} />
+    </Router>
   );
 }
