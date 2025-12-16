@@ -1,5 +1,5 @@
 // src/components/GalleryGrid.jsx
-import React, { forwardRef } from "react";
+import React, { forwardRef, useCallback } from "react";
 import { VirtuosoGrid } from "react-virtuoso";
 import { LazyThumbnail } from "./LazyThumbnail";
 
@@ -25,16 +25,33 @@ const GridComponents = {
 
 export const GalleryGrid = forwardRef(
   ({ artworks, onSelectArt, setIsScrolled }, virtuosoRef) => {
-    // スクロール位置を検知
-    const handleRangeChanged = (range) => {
-      if (setIsScrolled) {
-        // 最初の行が少しでも隠れたら縮小（より敏感）
-        setIsScrolled(range.startIndex > 0 || range.startOffset > 0);
-      }
-    };
+    // スクロールイベントハンドラ
+    const handleScroll = useCallback(
+      (e) => {
+        if (setIsScrolled) {
+          // 30px以上スクロールしたら縮小（この数値を変更可能）
+          const scrollTop = e.target.scrollTop || 0;
+          setIsScrolled(scrollTop > 30);
+        }
+      },
+      [setIsScrolled]
+    );
+
+    // scrollerRefのコールバック
+    const scrollerRef = useCallback(
+      (element) => {
+        if (element) {
+          element.addEventListener("scroll", handleScroll);
+          return () => element.removeEventListener("scroll", handleScroll);
+        }
+      },
+      [handleScroll]
+    );
+
     return (
       <VirtuosoGrid
         ref={virtuosoRef}
+        scrollerRef={scrollerRef}
         style={{
           height: "calc(100vh - 120px)",
           width: "100%",
@@ -42,7 +59,6 @@ export const GalleryGrid = forwardRef(
         overscan={1000}
         totalCount={artworks.length}
         components={GridComponents}
-        rangeChanged={handleRangeChanged}
         itemContent={(index) => {
           const artwork = artworks[index];
           if (!artwork) return null;

@@ -1,18 +1,45 @@
 // src/components/BottomNav.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./BottomNav.module.scss";
 
-export default function BottomNav({ artworks = [], setBgColor, virtuosoRef }) {
+export default function BottomNav({
+  artworks = [],
+  setBgColor,
+  virtuosoRef,
+  selectedTags = [],
+  setSelectedTags,
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [currentBgColor, setCurrentBgColor] = useState("white");
 
   const location = useLocation();
 
-  const allTags = Array.from(
-    new Set(artworks.flatMap((art) => art.tags || []))
-  );
+  // タグごとの作品数を計算
+  const tagCounts = useMemo(() => {
+    const counts = {};
+    artworks.forEach((artwork) => {
+      artwork.tags?.forEach((tag) => {
+        counts[tag] = (counts[tag] || 0) + 1;
+      });
+    });
+    return counts;
+  }, [artworks]);
+
+  const allTags = useMemo(() => {
+    return Object.keys(tagCounts).sort();
+  }, [tagCounts]);
+
+  // フィルター結果の作品数を計算
+  const filteredCount = useMemo(() => {
+    if (selectedTags.length === 0) {
+      return artworks.length;
+    }
+    return artworks.filter((artwork) =>
+      selectedTags.every((tag) => artwork.tags?.includes(tag))
+    ).length;
+  }, [artworks, selectedTags]);
 
   // 現在のテーマを取得
   useEffect(() => {
@@ -23,6 +50,20 @@ export default function BottomNav({ artworks = [], setBgColor, virtuosoRef }) {
   const handleBgColorChange = (color) => {
     setBgColor(color);
     setCurrentBgColor(color);
+  };
+
+  const handleTagClick = (tag) => {
+    if (selectedTags.includes(tag)) {
+      // タグを削除
+      setSelectedTags(selectedTags.filter((t) => t !== tag));
+    } else {
+      // タグを追加
+      setSelectedTags([...selectedTags, tag]);
+    }
+  };
+
+  const clearAllTags = () => {
+    setSelectedTags([]);
   };
 
   const scrollToTop = () => {
@@ -76,15 +117,6 @@ export default function BottomNav({ artworks = [], setBgColor, virtuosoRef }) {
       {/* オプションパネル */}
       <div className={`${styles.navPanel} ${optionsOpen ? styles.active : ""}`}>
         <div className={styles.options}>
-          <h4>Tags</h4>
-          <div className={styles.tagList}>
-            {allTags.map((tag) => (
-              <span key={tag} className={styles.tag}>
-                {tag}
-              </span>
-            ))}
-          </div>
-
           <h4>Background</h4>
           <div className={styles.bgButtons}>
             <button
@@ -99,6 +131,38 @@ export default function BottomNav({ artworks = [], setBgColor, virtuosoRef }) {
             >
               Black
             </button>
+          </div>
+
+          <div className={styles.tagSection}>
+            <div className={styles.tagHeader}>
+              <h4>Tags ({allTags.length})</h4>
+              <div className={styles.tagInfo}>
+                {selectedTags.length > 0 && (
+                  <span className={styles.resultCount}>
+                    {filteredCount} {filteredCount === 1 ? "art" : "arts"}
+                  </span>
+                )}
+                {selectedTags.length > 0 && (
+                  <button onClick={clearAllTags} className={styles.clearButton}>
+                    Clear All
+                  </button>
+                )}
+              </div>
+            </div>
+            <div className={styles.tagList}>
+              {allTags.map((tag) => (
+                <button
+                  key={tag}
+                  onClick={() => handleTagClick(tag)}
+                  className={`${styles.tag} ${
+                    selectedTags.includes(tag) ? styles.tagActive : ""
+                  }`}
+                >
+                  {tag}{" "}
+                  <span className={styles.tagCount}>({tagCounts[tag]})</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>

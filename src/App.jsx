@@ -11,6 +11,7 @@ export default function App() {
   const [bgColor, setBgColor] = useState("white");
   const [artworks, setArtworks] = useState([]);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [selectedTags, setSelectedTags] = useState([]); // 追加
 
   console.log(virtuosoRef.current);
 
@@ -37,6 +38,7 @@ export default function App() {
               ref={virtuosoRef}
               setArtworks={setArtworks}
               setIsScrolled={setIsScrolled}
+              selectedTags={selectedTags}
             />
           }
         />
@@ -48,6 +50,8 @@ export default function App() {
         virtuosoRef={virtuosoRef}
         artworks={artworks}
         setBgColor={setBgColor}
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
       />
     </Router>
   );
