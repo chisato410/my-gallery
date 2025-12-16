@@ -1,3 +1,19 @@
-html {
-  margin: 0;
+/* ===== Theme variables ===== */
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --accent-color: #ff7f7f; /* 白背景：赤 */
+}
+
+[data-theme="dark"] {
+  --bg-color: #0b0b0b;
+  --text-color: #eeeeee;
+  --accent-color: #3fd1c6; /* 黒背景：青緑 */
+}
+
+/* 念のため body に反映 */
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
 }

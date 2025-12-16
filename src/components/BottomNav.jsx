@@ -85,10 +85,14 @@ export default function BottomNav({ artworks = [], setBgColor, virtuosoRef }) {
         </button>
 
         {/* ▲トップに戻る */}
-        <button className={styles.button} onClick={scrollToTop}>
-          △
+        <button
+          className={styles.btnTextChange}
+          onClick={scrollToTop}
+          aria-label="Back to top"
+        >
+          <span>TOP</span>
+          <span>BACK TO TOP</span>
         </button>
-
         {/* OPTIONボタン */}
         <button
           className={styles.btnTextChange}
