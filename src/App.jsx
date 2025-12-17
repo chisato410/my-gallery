@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import BottomNav from "./components/BottomNav";
+// import BottomNav from "./components/BottomNav";
 import GalleryPage from "./pages/GalleryPage";
 import AboutPage from "./pages/AboutPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -49,13 +49,13 @@ export default function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
-      <BottomNav
+      {/* <BottomNav
         virtuosoRef={virtuosoRef}
         artworks={artworks}
         setBgColor={setBgColor}
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}
-      />
+      /> */}
     </Router>
   );
 }
