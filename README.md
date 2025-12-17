@@ -55,3 +55,39 @@ CSS 変数を全面的に採用。背景色の切り替え（Light/Dark/Color）
 │   └── styles/          # グローバルテーマ設定（SCSS）
 └── artworks-metadata.json # 全作品のマスターデータ
 ```
+
+---
+
+## 🛠 Setup & Development
+
+### Installation
+
+```bash
+
+npm install
+
+```
+
+### Run Development Server
+
+```bash
+npm run dev
+
+```
+
+### Run Asset Pipeline
+
+#### 作品 HTML からプレビュー GIF を一括生成
+
+```bash
+
+node scripts/generate-gifs.js
+```
+
+#### Firestore へデータを同期
+
+```bash
+
+node scripts/init-firestore.js
+
+```
