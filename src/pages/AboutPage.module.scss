@@ -1,0 +1,94 @@
+/* src/pages/AboutPage.module.scss */
+
+.container {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 5rem 1.5rem;
+  transition: background-color var(--transition-speed);
+}
+
+.content {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8rem;
+  color: var(--accent-color);
+}
+
+.section {
+  margin-bottom: 8rem;
+  max-width: 800px;
+
+  h3 {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    opacity: 0.5;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 2;
+    font-weight: 300;
+    margin-bottom: 2rem;
+  }
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+
+  li {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+
+    strong {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    span {
+      font-size: 0.9rem;
+      font-weight: 300;
+      opacity: 0.7;
+    }
+  }
+}
+
+.techLinkSection {
+  margin-top: 10rem;
+
+  p {
+    font-size: 0.875rem;
+    font-weight: 300;
+    opacity: 0.5;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.techButton {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--text-color);
+  padding-bottom: 4px;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
