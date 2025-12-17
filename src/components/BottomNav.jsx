@@ -188,14 +188,14 @@ export default function BottomNav({
           <span>BACK TO TOP</span>
         </button>
 
-        {/* OPTIONボタン */}
+        {/* OPTIONボタン
         <button
           className={styles.btnTextChange}
           onClick={() => setOptionsOpen((prev) => !prev)}
         >
           <span>OPTION</span>
           <span>{optionsOpen ? "CLOSE" : "OPEN"}</span>
-        </button>
+        </button> */}
       </footer>
     </>
   );

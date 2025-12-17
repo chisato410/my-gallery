@@ -2,25 +2,21 @@
 
 :root {
   --bg-color: #ffffff;
+  --bg-color-rgb: 255, 255, 255; /* 追加 */
   --text-color: #333333;
-  --accent-color: #ff7f7f; /* 白背景：赤 */
+  --accent-color: #ff7f7f;
 }
 
 [data-theme="dark"] {
   --bg-color: #0b0b0b;
+  --bg-color-rgb: 11, 11, 11; /* 追加 */
   --text-color: #eeeeee;
-  --accent-color: #3fd1c6; /* 黒背景：青緑 */
+  --accent-color: #3fd1c6;
 }
 
 /* 念のため body に反映 */
 body {
   background: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease; /* 追加 */
-}
-
-/* すべての要素にスムーズな色変更を適用 */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease,
-    border-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

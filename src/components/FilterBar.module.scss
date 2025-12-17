@@ -1,54 +1,311 @@
 .wrapper {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 5;
   background: var(--bg-color);
-  border-bottom: 1px solid color-mix(in srgb, var(--text-color) 15%, transparent);
-  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  transition: background-color 0.3s;
 }
 
 .container {
-  max-width: 80rem;
+  max-width: 1580px;
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 1rem 1.5rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-end;
+  gap: 1rem;
 }
 
-/* ========= Select ========= */
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 
 .select {
-  appearance: none;
-  background: transparent;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  background: var(--bg-color);
   color: var(--text-color);
-  border: 1px solid color-mix(in srgb, var(--text-color) 25%, transparent);
-  border-radius: 999px;
-  padding: 8px 36px 8px 16px;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.25s ease;
-  position: relative;
-
-  background-image:
-    linear-gradient(45deg, transparent 50%, var(--accent-color) 50%),
-    linear-gradient(135deg, var(--accent-color) 50%, transparent 50%);
-  background-position:
-    calc(100% - 18px) 55%,
-    calc(100% - 12px) 55%;
-  background-size:
-    6px 6px,
-    6px 6px;
-  background-repeat: no-repeat;
+  transition: all 0.2s;
 
   &:hover {
-    border-color: var(--accent-color);
+    background: var(--accent-color);
+    color: var(--bg-color);
   }
 
   &:focus {
     outline: none;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-color) 25%, transparent);
+    box-shadow: 0 0 0 2px var(--accent-color);
+  }
+}
+
+/* タグフィルター情報 */
+.tagFilterInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.totalCount {
+  color: var(--text-color);
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.resultCount {
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.clearButton {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--accent-color);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--accent-color);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+
+  &:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+  }
+}
+
+/* オプションボタン */
+.optionButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+  }
+}
+
+/* 背景ぼかし */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+}
+
+/* 全画面オプションパネル */
+.optionsPanel {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--bg-color);
+  z-index: 101;
+  transition: bottom 0.5s ease;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+  &.open {
+    bottom: 0;
+  }
+}
+
+/* 閉じるボタン */
+.closeButton {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--accent-color);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+
+  &:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    transform: rotate(90deg);
+  }
+}
+
+/* パネルコンテンツ */
+.panelContent {
+  max-width: 1580px;
+  margin: 0 auto;
+  padding: 4rem 2rem 2rem;
+  width: 100%;
+}
+
+.optionSection {
+  margin-bottom: 3rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  h4 {
+    color: var(--text-color);
+    margin: 0 0 1.5rem 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}
+
+/* 背景色ボタン */
+.bgButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+.bgButton {
+  padding: 1rem 2rem;
+  border: 2px solid var(--accent-color);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &:hover {
+    background: rgba(255, 127, 127, 0.1);
+    transform: translateY(-2px);
+  }
+
+  &.active {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    font-weight: 600;
+  }
+}
+
+/* タグリスト */
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  max-height: 60vh;
+  overflow-y: auto;
+
+  /* スクロールバーのスタイル */
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 5px;
+  }
+}
+
+.tag {
+  padding: 0.6rem 1rem;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  background: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  &:hover {
+    background: rgba(255, 127, 127, 0.1);
+    transform: translateY(-2px);
+  }
+
+  &.tagActive {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    font-weight: 600;
+
+    .tagCount {
+      color: var(--bg-color);
+      opacity: 0.8;
+    }
+  }
+}
+
+.tagCount {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  font-weight: normal;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .leftSection,
+  .rightSection {
+    justify-content: space-between;
+  }
+
+  .select {
+    flex: 1;
+  }
+
+  .closeButton {
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .panelContent {
+    padding: 3rem 1.5rem 1.5rem;
+  }
+
+  .bgButtons {
+    flex-direction: column;
+  }
+
+  .tagList {
+    max-height: 50vh;
   }
 }

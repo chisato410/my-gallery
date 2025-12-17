@@ -39,9 +39,12 @@ export default function App() {
               setArtworks={setArtworks}
               setIsScrolled={setIsScrolled}
               selectedTags={selectedTags}
+              setSelectedTags={setSelectedTags}
+              currentBgColor={bgColor}
+              setBgColor={setBgColor}
             />
           }
-        />
+        />{" "}
         <Route path="/about" element={<AboutPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
