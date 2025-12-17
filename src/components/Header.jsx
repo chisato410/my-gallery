@@ -28,6 +28,14 @@ export default function Header({ isCompact = false }) {
           >
             About
           </NavLink>
+          <NavLink
+            to="/tech"
+            className={({ isActive }) =>
+              isActive ? styles.activeLink : styles.navLink
+            }
+          >
+            Tech
+          </NavLink>
         </nav>
       </div>
     </header>

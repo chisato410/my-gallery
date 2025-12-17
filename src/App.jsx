@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import GalleryPage from "./pages/GalleryPage";
 import AboutPage from "./pages/AboutPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import TechPage from "./pages/tech";
 
 export default function App() {
   const virtuosoRef = useRef(null);
@@ -46,6 +47,7 @@ export default function App() {
           }
         />{" "}
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/tech" element={<TechPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
