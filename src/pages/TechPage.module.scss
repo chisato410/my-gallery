@@ -1,0 +1,95 @@
+/* src/pages/TechPage.module.scss */
+
+.container {
+  @extend .container; // AboutPage.module.scss の設定を継承
+}
+
+.content {
+  @extend .content;
+}
+
+// 技術要素を並べるグリッド
+.stackGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin: 4rem 0 6rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stackItem {
+    strong {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+    span {
+      font-size: 1rem;
+      font-weight: 300;
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+  }
+}
+
+// 自動化フローの視覚化（ミニマルなリスト）
+.flowList {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+  position: relative;
+
+  li {
+    position: relative;
+    padding-left: 2rem;
+    padding-bottom: 2rem;
+    font-size: 0.9rem;
+    font-weight: 300;
+    opacity: 0.8;
+
+    // 工程を繋ぐ細い線
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 1px;
+      height: 100%;
+      background-color: var(--text-color);
+      opacity: 0.1;
+    }
+
+    // 工程のドット
+    &::after {
+      content: "";
+      position: absolute;
+      left: -2px;
+      top: 0.5rem;
+      width: 5px;
+      height: 5px;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
+// 補足の数値（定量的なアピール）
+.metric {
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  opacity: 0.5;
+  margin-top: 1rem;
+  font-style: italic;
+}
