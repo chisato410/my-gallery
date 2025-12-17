@@ -91,3 +91,15 @@ node scripts/generate-gifs.js
 node scripts/init-firestore.js
 
 ```
+
+## 🎨 About the Artworks
+
+本アーカイブに収められている作品は、p5.js や Vanilla JS を用いて描かれたものです。個々の作品は独立した sandbox 環境として public/artworks/ 内に保持されており、メインサイトからは iframe を通じて安全かつ動的に展開されます。
+
+この設計により、各作品のライブラリ依存関係やグローバル変数がメインサイトの実行環境に干渉することなく、500 点以上の多様なプログラムを同一ブラウザタブ内でシームレスに切り替えて鑑賞することが可能になっています。
+
+## ⚖️ License
+
+MIT License.
+
+Copyright (c) 2025 Chisato Machino
