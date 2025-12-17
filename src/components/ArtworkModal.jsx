@@ -1,10 +1,12 @@
 // src/components/ArtworkModal.jsx
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { X, ExternalLink } from "lucide-react";
 import { VoteButton } from "./VoteButton";
 import styles from "./ArtworkModal.module.scss";
 
 export function ArtworkModal({ artwork, onClose }) {
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     if (!artwork) return;
     window.history.pushState({ modal: true }, "");
@@ -28,23 +30,31 @@ export function ArtworkModal({ artwork, onClose }) {
 
   return (
     <div className={styles.overlay} onClick={onClose}>
-      <button onClick={onClose} className={styles.closeButton}>
+      <button
+        onClick={onClose}
+        className={styles.closeButton}
+        aria-label="Close"
+      >
         <X size={24} strokeWidth={1.5} />
       </button>
 
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>
-        {/* 左側：作品表示エリア */}
         <div className={styles.artworkContainer}>
           <div className={styles.artworkWrapper}>
+            {isLoading && (
+              <div className={styles.loader}>
+                <div className={styles.loadingBar}></div>
+              </div>
+            )}
             <iframe
               src={fullUrl}
               className={styles.iframe}
               title={artwork.title}
+              onLoad={() => setIsLoading(false)}
             />
           </div>
         </div>
 
-        {/* 右側：情報エリア（キャプション） */}
         <div className={styles.infoArea}>
           <header className={styles.header}>
             <span className={styles.techLabel}>{artwork.tech}</span>
