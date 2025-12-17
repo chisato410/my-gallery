@@ -93,7 +93,7 @@ export function FilterBar({
                   currentBgColor === "white" ? styles.active : ""
                 }`}
               >
-                ☀️ White
+                White
               </button>
               <button
                 onClick={() => onBgColorChange("black")}
@@ -101,7 +101,7 @@ export function FilterBar({
                   currentBgColor === "black" ? styles.active : ""
                 }`}
               >
-                🌙 Black
+                Black
               </button>
             </div>
           </div>

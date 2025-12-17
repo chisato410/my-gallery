@@ -2,21 +2,39 @@
 
 :root {
   --bg-color: #ffffff;
-  --bg-color-rgb: 255, 255, 255; /* 追加 */
+  --bg-color-rgb: 255, 255, 255;
   --text-color: #333333;
   --accent-color: #ff7f7f;
+
+  /* トランジション用 */
+  --transition-speed: 0.3s;
 }
 
 [data-theme="dark"] {
   --bg-color: #0b0b0b;
-  --bg-color-rgb: 11, 11, 11; /* 追加 */
+  --bg-color-rgb: 11, 11, 11;
   --text-color: #eeeeee;
   --accent-color: #3fd1c6;
 }
 
-/* 念のため body に反映 */
 body {
   background: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color var(--transition-speed) ease,
+    color var(--transition-speed) ease;
+}
+
+/* 全要素にスムーズな色変更を適用 */
+* {
+  transition: background-color var(--transition-speed) ease,
+    color var(--transition-speed) ease,
+    border-color var(--transition-speed) ease;
+}
+
+/* アニメーションやtransformは除外 */
+*:where(:not(:has(> *))) {
+  transition: background-color var(--transition-speed) ease,
+    color var(--transition-speed) ease,
+    border-color var(--transition-speed) ease, transform 0.2s ease,
+    opacity 0.2s ease;
 }
