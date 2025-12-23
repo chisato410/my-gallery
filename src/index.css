@@ -1,16 +1,16 @@
 /* ===== Theme variables ===== */
 
 :root {
+  /* デフォルト (White) */
   --bg-color: #ffffff;
   --bg-color-rgb: 255, 255, 255;
   --text-color: #333333;
   --accent-color: #ff7f7f;
-
-  /* トランジション用 */
   --transition-speed: 0.3s;
 }
 
-[data-theme="dark"] {
+/* setTheme("black") に対応 */
+[data-theme="black"] {
   --bg-color: #0b0b0b;
   --bg-color-rgb: 11, 11, 11;
   --text-color: #eeeeee;
@@ -18,23 +18,26 @@
 }
 
 body {
-  background: var(--bg-color);
+  margin: 0;
+  background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color var(--transition-speed) ease,
     color var(--transition-speed) ease;
 }
 
-/* 全要素にスムーズな色変更を適用 */
-* {
+/* 全要素にトランジションを適用 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   transition: background-color var(--transition-speed) ease,
     color var(--transition-speed) ease,
     border-color var(--transition-speed) ease;
 }
 
-/* アニメーションやtransformは除外 */
-*:where(:not(:has(> *))) {
-  transition: background-color var(--transition-speed) ease,
-    color var(--transition-speed) ease,
-    border-color var(--transition-speed) ease, transform 0.2s ease,
-    opacity 0.2s ease;
+/* ボタンなどのインタラクション要素 */
+button,
+select,
+a {
+  transition: all 0.2s ease;
 }

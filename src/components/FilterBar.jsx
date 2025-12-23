@@ -1,5 +1,5 @@
-// src/components/FilterBar.jsx
 import React, { useState } from "react";
+import { useTheme } from "../context/ThemeContext";
 import styles from "./FilterBar.module.scss";
 
 export function FilterBar({
@@ -13,10 +13,10 @@ export function FilterBar({
   tagCounts = {},
   onTagClick,
   onClearTags,
-  currentBgColor,
-  onBgColorChange,
 }) {
   const [optionsOpen, setOptionsOpen] = useState(false);
+  // Contextから現在のテーマと変更関数を取得
+  const { theme, setTheme } = useTheme();
 
   return (
     <>
@@ -64,7 +64,7 @@ export function FilterBar({
         </div>
       </div>
 
-      {/* 背景ぼかし */}
+      {/* 背景ぼかし（オーバーレイ） */}
       {optionsOpen && (
         <div className={styles.overlay} onClick={() => setOptionsOpen(false)} />
       )}
@@ -73,7 +73,6 @@ export function FilterBar({
       <div
         className={`${styles.optionsPanel} ${optionsOpen ? styles.open : ""}`}
       >
-        {/* 閉じるボタン */}
         <button
           className={styles.closeButton}
           onClick={() => setOptionsOpen(false)}
@@ -83,22 +82,22 @@ export function FilterBar({
         </button>
 
         <div className={styles.panelContent}>
-          {/* 背景色切り替え */}
+          {/* 背景色切り替えセクション */}
           <div className={styles.optionSection}>
             <h4>Background</h4>
             <div className={styles.bgButtons}>
               <button
-                onClick={() => onBgColorChange("white")}
+                onClick={() => setTheme("white")}
                 className={`${styles.bgButton} ${
-                  currentBgColor === "white" ? styles.active : ""
+                  theme === "white" ? styles.active : ""
                 }`}
               >
                 White
               </button>
               <button
-                onClick={() => onBgColorChange("black")}
+                onClick={() => setTheme("black")}
                 className={`${styles.bgButton} ${
-                  currentBgColor === "black" ? styles.active : ""
+                  theme === "black" ? styles.active : ""
                 }`}
               >
                 Black
@@ -106,7 +105,7 @@ export function FilterBar({
             </div>
           </div>
 
-          {/* タグリスト */}
+          {/* タグリストセクション */}
           <div className={styles.optionSection}>
             <h4>Tags ({allTags.length})</h4>
             <div className={styles.tagList}>
