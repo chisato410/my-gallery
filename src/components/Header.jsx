@@ -7,8 +7,8 @@ export default function Header({ isCompact = false }) {
   return (
     <header className={`${styles.header} ${isCompact ? styles.compact : ""}`}>
       <div className={styles.container}>
-        <p className={styles.subtitle}>Universes of Web Art</p>
-        <h1 className={styles.title}>Thousand Fragments</h1>
+        <p className={styles.subtitle}>Thousand Fragments</p>
+        <h1 className={styles.title}>Universes of Web Art</h1>
 
         {/* ナビゲーション */}
         <nav className={styles.nav}>
