@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Spiral particles</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px double #ff0;
+        border-radius: 50%;
+        width: 400px;
+        height: 400px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Spiral particles”</div>
+    <script>
+      let t = 0;
+      function setup() {
+        createCanvas(400, 400);
+        noFill();
+      }
+      function draw() {
+        background(0, 20);
+        translate(width / 2, height / 2);
+        for (let i = 0; i < 150; i++) {
+          stroke(
+            (i * 2 + frameCount) % 255,
+            (i * 5) % 255,
+            (i * 3 + frameCount) % 255
+          );
+          let angle = i * 0.1 + t;
+          let r = i * 0.5;
+          point(r * cos(angle), r * sin(angle));
+        }
+        t += 0.01;
+      }
+    </script>
+  </body>
+</html>

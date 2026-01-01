@@ -2669,5 +2669,163 @@
       "camera-orbit",
       "red-glow"
     ]
+  },
+  {
+    "filename": "fragment_104_p5.html",
+    "title": "Shadow of Sakura",
+    "tech": "p5.js",
+    "createdAt": "2026-01-01",
+    "tags": [
+      "p5js",
+      "creative-coding",
+      "minimalism",
+      "japanese-aesthetic",
+      "sakura",
+      "dynamic-lighting",
+      "shadow-projection",
+      "interactive-animation",
+      "hsl-colors",
+      "trigonometry",
+      "flat-design",
+      "zen",
+      "nature-inspired"
+    ]
+  },
+  {
+    "filename": "fragment_105_p5.html",
+    "title": "Butterfly Noon",
+    "tech": "p5.js",
+    "createdAt": "2026-01-01",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "minimalism",
+      "nature-inspired",
+      "butterfly",
+      "flapping-wings",
+      "sin-wave",
+      "cos-wave",
+      "harmonic-motion",
+      "spring-colors",
+      "hsl-colors",
+      "flat-design",
+      "looping-animation",
+      "soft-shadows"
+    ]
+  },
+  {
+    "filename": "fragment_106_p5.html",
+    "title": "Sprout",
+    "tech": "p5.js",
+    "createdAt": "2026-01-01",
+    "tags": [
+      "p5js",
+      "creative-coding",
+      "interactive",
+      "mouse-interaction",
+      "minimalism",
+      "nature-inspired",
+      "sprout",
+      "seedling",
+      "sway-animation",
+      "harmonic-motion",
+      "sin-wave",
+      "dynamic-lighting",
+      "hsl-colors",
+      "flat-design",
+      "zen"
+    ]
+  },
+  {
+    "filename": "fragment_107_p5.html",
+    "title": "Cat in Warm Wind",
+    "tech": "p5.js",
+    "createdAt": "2026-01-01",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "minimalism",
+      "cat-motif",
+      "animal-illustration",
+      "warm-colors",
+      "dynamic-lighting",
+      "tail-wagging",
+      "sin-wave",
+      "cos-wave",
+      "harmonic-motion",
+      "hsl-colors",
+      "flat-design",
+      "serene",
+      "geometric-shapes"
+    ]
+  },
+  {
+    "filename": "fragment_108_p5.html",
+    "title": "Rotating Line",
+    "tech": "p5.js",
+    "createdAt": "2026-01-01",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "abstract",
+      "kinetic-art",
+      "dark-mode",
+      "neon-aesthetic",
+      "radial-symmetry",
+      "trailing-effect",
+      "motion-blur",
+      "random-colors",
+      "trigonometry",
+      "rotation",
+      "geometry",
+      "minimal-code",
+      "hypnotic"
+    ]
+  },
+  {
+    "filename": "fragment_109_p5.html",
+    "title": "Wavy lines",
+    "tech": "p5.js",
+    "createdAt": "2026-01-01",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "sine-wave",
+      "mathematical-art",
+      "cyberpunk-aesthetic",
+      "neon-colors",
+      "liquid-motion",
+      "rhythmic-animation",
+      "waveform",
+      "dynamic-gradient",
+      "trailing-effect",
+      "trigonometry",
+      "interference-pattern",
+      "dark-mode",
+      "digital-ocean"
+    ]
+  },
+  {
+    "filename": "fragment_110_p5.html",
+    "title": "Spiral particles",
+    "tech": "p5.js",
+    "createdAt": "2026-01-01",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "particle-art",
+      "archimedean-spiral",
+      "mathematical-art",
+      "trigonometry",
+      "point-rendering",
+      "color-cycling",
+      "trailing-effect",
+      "dark-mode",
+      "hypnotic",
+      "rotational-motion",
+      "minimalism",
+      "geometry",
+      "cosmic-aesthetic"
+    ]
   }
 ]

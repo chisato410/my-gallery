@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Shadow of Sakura</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #fbf6ef;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Shadow of Sakura”</div>
+
+    <script>
+      let angle = 0;
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+      }
+      function draw() {
+        background(340, 30, 97);
+        fill(120, 20, 92);
+        rect(0, height * 0.7, width, height * 0.3);
+
+        angle = frameCount * 0.01;
+        let lx = width / 2 + cos(angle) * 200;
+        let ly = height * 0.2;
+
+        fill(50, 80, 90);
+        ellipse(lx, ly, 36);
+
+        let cx = width / 2,
+          cy = height * 0.65;
+        let petals = [];
+        for (let i = 0; i < 50; i++) {
+          let a = (TWO_PI / 8) * i;
+          petals.push({ x: cos(a) * 30, y: sin(a) * 20 });
+        }
+
+        push();
+        translate(cx, cy);
+        fill(0, 0, 10, 0.3);
+        beginShape();
+        for (let p of petals) {
+          let vx = cx + p.x - lx;
+          let vy = cy + p.y - ly;
+          vertex(p.x + vx * 1.6, p.y + vy * 1.6);
+        }
+        endShape(CLOSE);
+
+        fill(340, 60, 70);
+        beginShape();
+        for (let p of petals) vertex(p.x, p.y);
+        endShape(CLOSE);
+        pop();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Butterfly Noon</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f7fbef;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Butterfly Noon”</div>
+    <script>
+      let t = 0;
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+      }
+      function draw() {
+        background(90, 30, 96);
+        fill(100, 30, 92);
+        rect(0, height * 0.7, width, height * 0.3);
+        t += 0.03;
+        let lx = width / 2 + cos(t) * 180,
+          ly = height * 0.25;
+        fill(55, 80, 90);
+        ellipse(lx, ly, 34);
+        let x = width / 2,
+          y = height * 0.6;
+        let flap = sin(frameCount * 0.1) * 20;
+        push();
+        translate(x, y);
+        fill(0, 0, 10, 0.25);
+        ellipse(-40 - flap * 1.5, 0, 80, 30);
+        ellipse(40 + flap * 1.5, 0, 80, 30);
+        fill(55, 70, 60);
+        ellipse(-40 - flap, 0, 60, 26);
+        ellipse(40 + flap, 0, 60, 26);
+        rect(-5, -10, 10, 20, 5);
+        pop();
+      }
+    </script>
+  </body>
+</html>

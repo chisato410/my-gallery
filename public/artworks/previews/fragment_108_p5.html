@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rotating Line</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border-radius: 15px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Rotating Line”</div>
+    <script>
+      let angle = 0;
+      function setup() {
+        createCanvas(400, 400);
+        strokeWeight(2);
+      }
+      function draw() {
+        background(0, 20);
+        translate(width / 2, height / 2);
+        for (let i = 0; i < 72; i += 20) {
+          stroke(random(255), random(255), random(255));
+          let a = radians(i) + angle;
+          line(0, 0, 150 * cos(a), 150 * sin(a));
+        }
+        angle += 0.02;
+      }
+    </script>
+  </body>
+</html>

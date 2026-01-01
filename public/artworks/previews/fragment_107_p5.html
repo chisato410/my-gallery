@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cat in Warm Wind</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fbfaf2;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Cat in Warm Wind”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+      }
+      function draw() {
+        background(60, 30, 96);
+        fill(70, 30, 92);
+        rect(0, height * 0.7, width, height * 0.3);
+        let lx = width / 2 + cos(frameCount * 0.01) * 200,
+          ly = 130;
+        fill(55, 80, 90);
+        ellipse(lx, ly, 34);
+        let x = width / 2,
+          y = height * 0.65;
+        let tail = sin(frameCount * 0.05) * 25;
+        push();
+        translate(x, y);
+        fill(0, 0, 10, 0.3);
+        ellipse(0, 0, 140, 50);
+        ellipse(70 + tail * 1.5, 10, 60, 20);
+        fill(30, 40, 30);
+        ellipse(0, 0, 120, 40);
+        ellipse(70 + tail, 10, 40, 14);
+        triangle(-40, -20, -20, -40, 0, -20);
+        triangle(0, -20, 20, -40, 40, -20);
+        pop();
+      }
+    </script>
+  </body>
+</html>

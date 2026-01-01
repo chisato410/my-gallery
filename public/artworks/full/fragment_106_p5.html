@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sprout</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f3fbf2;
+      }
+      canvas {
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Sprout”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        colorMode(HSL);
+        noStroke();
+      }
+      function draw() {
+        background(110, 25, 95);
+        fill(80, 30, 90);
+        rect(0, height * 0.7, width, height * 0.3);
+        let lx = map(mouseX, 0, width, 100, 400),
+          ly = 120;
+        fill(55, 80, 90);
+        ellipse(lx, ly, 32);
+        let x = width / 2,
+          y = height * 0.7;
+        let sway = sin(frameCount * 0.02) * 10;
+        push();
+        translate(x, y);
+        fill(0, 0, 10, 0.3);
+        ellipse(-20 - sway * 2, -20, 60, 30);
+        ellipse(20 - sway * 2, -20, 60, 30);
+        fill(120, 60, 45);
+        ellipse(-20 - sway, -20, 40, 20);
+        ellipse(20 - sway, -20, 40, 20);
+        rect(-4, -40, 8, 40);
+        pop();
+      }
+    </script>
+  </body>
+</html>
