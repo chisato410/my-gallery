@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ripples</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 2px dotted #f0f;
+        border-radius: 50%;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“ripples”</div>
+    <script>
+      let r = 0;
+      function setup() {
+        createCanvas(380, 380);
+        noFill();
+      }
+      function draw() {
+        background(0, 20);
+        stroke(
+          (frameCount * 2) % 255,
+          (frameCount * 3) % 255,
+          (frameCount * 5) % 255,
+          150
+        );
+        ellipse(width / 2, height / 2, r * 2, r * 2);
+        r += 2;
+        if (r > width) r = 0;
+      }
+    </script>
+  </body>
+</html>

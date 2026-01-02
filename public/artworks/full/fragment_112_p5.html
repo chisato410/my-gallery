@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Random Triangles</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 3px solid #0f0;
+        border-radius: 5px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Random Triangles”</div>
+    <script>
+      let triangles = [];
+      function setup() {
+        createCanvas(360, 360);
+        for (let i = 0; i < 40; i++) {
+          triangles.push({
+            x1: random(width),
+            y1: random(height),
+            x2: random(width),
+            y2: random(height),
+            x3: random(width),
+            y3: random(height),
+            dx: random(-2, 2),
+            dy: random(-2, 2),
+          });
+        }
+      }
+      function draw() {
+        background(0, 30);
+        for (let t of triangles) {
+          fill(random(255), random(255), random(255), 150);
+          noStroke();
+          triangle(t.x1, t.y1, t.x2, t.y2, t.x3, t.y3);
+          t.x1 += t.dx;
+          t.y1 += t.dy;
+          t.x2 += t.dx;
+          t.y2 += t.dy;
+          t.x3 += t.dx;
+          t.y3 += t.dy;
+        }
+      }
+    </script>
+  </body>
+</html>

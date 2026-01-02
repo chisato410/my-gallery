@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Colorful Noise</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 3px dashed #0ff;
+        border-radius: 10px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Colorful Noise”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        noStroke();
+      }
+      function draw() {
+        loadPixels();
+        for (let x = 0; x < width; x++) {
+          for (let y = 0; y < height; y++) {
+            let idx = 4 * (x + y * width);
+            pixels[idx] = (x + y + frameCount * 2) % 255;
+            pixels[idx + 1] = (y * 2 + frameCount * 3) % 255;
+            pixels[idx + 2] = (x * 3 + frameCount * 4) % 255;
+            pixels[idx + 3] = 255;
+          }
+        }
+        updatePixels();
+      }
+    </script>
+  </body>
+</html>

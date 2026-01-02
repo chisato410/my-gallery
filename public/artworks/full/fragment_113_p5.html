@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Colorful Spiral</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px solid #ff8000;
+        border-radius: 20px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Colorful Spiral”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        noFill();
+        strokeWeight(2);
+      }
+      function draw() {
+        background(0, 20);
+        translate(width / 2, height / 2);
+        for (let i = 0; i < 200; i++) {
+          stroke(
+            (i * 5 + frameCount) % 255,
+            (i * 2) % 255,
+            (i * 3 + frameCount) % 255
+          );
+          let angle = i * 0.1 + frameCount * 0.02;
+          let r = i * 0.5;
+          line(
+            r * cos(angle),
+            r * sin(angle),
+            (r + 10) * cos(angle + 0.1),
+            (r + 10) * sin(angle + 0.1)
+          );
+        }
+      }
+    </script>
+  </body>
+</html>

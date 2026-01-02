@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>斜め縞ドドド</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px dashed #00ffff;
+        border-radius: 10px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“斜め縞ドドド”</div>
+    <script>
+      let offset = 0;
+      function setup() {
+        createCanvas(500, 500);
+        frameRate(20);
+      }
+      function draw() {
+        background(0, 50);
+        for (let i = -width; i < width; i += 40) {
+          stroke(255, 0, 0);
+          strokeWeight(5);
+          line(i + offset, 0, i + offset + 20, height);
+          stroke(255, 255, 0);
+          line(i + offset + 20, 0, i + offset + 40, height);
+        }
+        offset += 5;
+        if (offset > 40) offset = 0;
+      }
+    </script>
+  </body>
+</html>
