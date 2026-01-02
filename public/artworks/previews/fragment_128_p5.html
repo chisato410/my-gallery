@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>螺旋万華鏡</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px double #ff8000;
+        border-radius: 20px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“螺旋万華鏡”</div>
+    <script>
+      let t = 0;
+      function setup() {
+        createCanvas(500, 500);
+        noFill();
+        strokeWeight(2);
+      }
+      function draw() {
+        background(0, 20);
+        translate(width / 2, height / 2);
+        let sides = 5;
+        let mx = map(mouseX, 0, width, 0, PI);
+        let my = map(mouseY, 0, height, 0, PI);
+        for (let i = 0; i < sides; i++) {
+          push();
+          rotate((i * TWO_PI) / sides + t);
+          stroke(
+            (i * 50 + frameCount) % 255,
+            200,
+            (i * 100 + frameCount) % 255
+          );
+          ellipse(
+            0,
+            0,
+            150 + 50 * sin(frameCount * 0.02 + i * mx),
+            150 + 50 * cos(frameCount * 0.02 + i * my)
+          );
+          pop();
+        }
+        t += 0.01;
+      }
+    </script>
+  </body>
+</html>

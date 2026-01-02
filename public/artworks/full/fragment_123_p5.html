@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>放射線オーラ</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px solid #ff8000;
+        border-radius: 25px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“放射線オーラ”</div>
+    <script>
+      let a = 0;
+      function setup() {
+        createCanvas(500, 500);
+        strokeWeight(3);
+      }
+      function draw() {
+        background(0, 20);
+        translate(width / 2, height / 2);
+        for (let i = 0; i < 360; i += 15) {
+          stroke(random(255), 0, random(255));
+          let ang = radians(i) + a;
+          line(0, 0, 200 * cos(ang), 200 * sin(ang));
+        }
+        a += 0.02;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>光の花</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px solid #00ff00;
+        border-radius: 25px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“光の花”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        strokeWeight(2);
+        noFill();
+      }
+      function draw() {
+        background(0, 20);
+        translate(width / 2, height / 2);
+        let sides = 8;
+        let r = mouseX / 2;
+        for (let i = 0; i < sides; i++) {
+          push();
+          rotate((i * TWO_PI) / sides);
+          stroke((i * 30 + frameCount) % 255, 255, 200);
+          line(0, 0, r * sin(frameCount * 0.02), r * cos(frameCount * 0.02));
+          pop();
+        }
+      }
+    </script>
+  </body>
+</html>

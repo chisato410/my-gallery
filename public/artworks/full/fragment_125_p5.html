@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>波打つ螺旋円</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px double #ff00ff;
+        border-radius: 50%;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“波打つ螺旋円”</div>
+    <script>
+      let t2 = 0;
+      function setup() {
+        createCanvas(500, 500);
+        noFill();
+      }
+      function draw() {
+        background(0, 20);
+        translate(width / 2, height / 2);
+        for (let i = 0; i < 100; i++) {
+          stroke(
+            (i * 3 + frameCount) % 255,
+            (i * 5) % 255,
+            (i * 7 + frameCount) % 255
+          );
+          let r = i * 2;
+          let angle = i * 0.3 + t2;
+          ellipse(r * cos(angle), r * sin(angle), 10, 10);
+        }
+        t2 += 0.03;
+      }
+    </script>
+  </body>
+</html>

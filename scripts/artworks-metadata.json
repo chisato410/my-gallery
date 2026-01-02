@@ -2988,7 +2988,7 @@
     ]
   },
   {
-    "filename": "fragment_117_p5.html",
+    "filename": "fragment_118_p5.html",
     "title": "ポップアート円 (Pop Art Circle)",
     "tech": "p5.js",
     "createdAt": "2026-01-02",
@@ -3011,7 +3011,7 @@
     ]
   },
   {
-    "filename": "fragment_118_p5.html",
+    "filename": "fragment_119_p5.html",
     "title": "ド派手波紋 (Extravagant Ripples)",
     "tech": "p5.js",
     "createdAt": "2026-01-02",
@@ -3034,7 +3034,7 @@
     ]
   },
   {
-    "filename": "fragment_119_p5.html",
+    "filename": "fragment_120_p5.html",
     "title": "カラフル螺旋 (Colorful Rasen)",
     "tech": "p5.js",
     "createdAt": "2026-01-02",
@@ -3054,6 +3054,236 @@
       "optical-art",
       "mathematical-design",
       "high-speed-animation"
+    ]
+  },
+  {
+    "filename": "fragment_121_p5.html",
+    "title": "擬音文字ゴゴゴ (Onomatopoeia Gogogo)",
+    "tech": "p5.js",
+    "createdAt": "2026-01-02",
+    "tags": [
+      "p5js",
+      "generative-typography",
+      "onomatopoeia",
+      "manga-aesthetic",
+      "kinetic-typography",
+      "spiral-composition",
+      "rotational-motion",
+      "stroboscopic-effect",
+      "vibrant-colors",
+      "random-colors",
+      "trailing-effect",
+      "japanese-culture",
+      "pop-art",
+      "dynamic-text",
+      "dark-mode"
+    ]
+  },
+  {
+    "filename": "fragment_122_p5.html",
+    "title": "斜め線ポップ (Diagonal Line Pop)",
+    "tech": "p5.js",
+    "createdAt": "2026-01-02",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "diagonal-stripes",
+      "pop-art",
+      "vibrant-colors",
+      "random-colors",
+      "kinetic-pattern",
+      "looping-animation",
+      "retro-aesthetic",
+      "stroboscopic-effect",
+      "high-contrast",
+      "motion-blur",
+      "trailing-effect",
+      "geometric-repetition",
+      "neon-palette"
+    ]
+  },
+  {
+    "filename": "fragment_123_p5.html",
+    "title": "放射線オーラ (Radiant Aura)",
+    "tech": "p5.js",
+    "createdAt": "2026-01-02",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "radial-symmetry",
+      "radiant-lines",
+      "kinetic-art",
+      "aura-effect",
+      "vibrant-colors",
+      "magenta-palette",
+      "trigonometry",
+      "rotational-motion",
+      "trailing-effect",
+      "stroboscopic-effect",
+      "dark-mode",
+      "spiritual-aesthetic",
+      "energy-visual"
+    ]
+  },
+  {
+    "filename": "fragment_124_p5.html",
+    "title": "サイケドット (Psychedelic Dot)",
+    "tech": "p5.js",
+    "createdAt": "2026-01-02",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "pointillism",
+      "visual-noise",
+      "psychedelic-art",
+      "randomness",
+      "stroboscopic-effect",
+      "particle-system",
+      "vibrant-colors",
+      "trailing-effect",
+      "flickering",
+      "dark-mode",
+      "minimal-code",
+      "neon-aesthetic",
+      "optical-shimmer"
+    ]
+  },
+  {
+    "filename": "fragment_125_p5.html",
+    "title": "波打つ螺旋円 (Wavy Spiral Circle)",
+    "tech": "p5.js",
+    "createdAt": "2026-01-02",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "spiral-pattern",
+      "wavy-motion",
+      "trigonometry",
+      "neon-aesthetic",
+      "galactic-structure",
+      "kinetic-art",
+      "color-cycling",
+      "trailing-effect",
+      "circular-composition",
+      "dark-mode",
+      "organic-geometry",
+      "hypnotic",
+      "mathematical-art"
+    ]
+  },
+  {
+    "filename": "fragment_126_p5.html",
+    "title": "万華鏡回転 (Kaleidoscope Rotation)",
+    "tech": "p5.js",
+    "createdAt": "2026-01-02",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "kaleidoscope-effect",
+      "rotational-symmetry",
+      "interactive-art",
+      "radial-design",
+      "geometric-patterns",
+      "sinusoidal-motion",
+      "color-cycling",
+      "trailing-effect",
+      "dark-mode",
+      "neon-aesthetic",
+      "trigonometry",
+      "dynamic-geometry",
+      "meditative"
+    ]
+  },
+  {
+    "filename": "fragment_127_p5.html",
+    "title": "光の花 (Flower of Light)",
+    "tech": "p5.js",
+    "createdAt": "2026-01-02",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "floral-design",
+      "rotational-symmetry",
+      "interactive-art",
+      "dynamic-scaling",
+      "pulsating-motion",
+      "neon-aesthetic",
+      "radial-composition",
+      "trigonometry",
+      "color-cycling",
+      "trailing-effect",
+      "dark-mode",
+      "digital-nature",
+      "kaleidoscope-effect"
+    ]
+  },
+  {
+    "filename": "fragment_128_p5.html",
+    "title": "螺旋万華鏡 (Spiral Kaleidoscope)",
+    "tech": "p5.js",
+    "createdAt": "2026-01-02",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "kaleidoscope-effect",
+      "interactive-art",
+      "pentagonal-symmetry",
+      "lissajous-curve-inspiration",
+      "dynamic-distortion",
+      "trigonometry",
+      "rotational-motion",
+      "color-cycling",
+      "neon-aesthetic",
+      "trailing-effect",
+      "complex-geometry",
+      "dark-mode",
+      "visual-rhythm"
+    ]
+  },
+  {
+    "filename": "fragment_129_p5.html",
+    "title": "波紋万華鏡 (Ripple Kaleidoscope)",
+    "tech": "p5.js",
+    "createdAt": "2026-01-02",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "heptagonal-symmetry",
+      "ripple-effect",
+      "interactive-art",
+      "kaleidoscope-effect",
+      "oscillating-geometry",
+      "neon-aesthetic",
+      "trigonometry",
+      "rotational-motion",
+      "color-cycling",
+      "trailing-effect",
+      "dynamic-composition",
+      "meditative",
+      "circular-harmonics"
+    ]
+  },
+  {
+    "filename": "fragment_130_p5.html",
+    "title": "光の螺旋 (Spiral of Light)",
+    "tech": "p5.js",
+    "createdAt": "2026-01-02",
+    "tags": [
+      "p5js",
+      "generative-art",
+      "rotational-symmetry",
+      "phase-shift",
+      "interactive-art",
+      "sinusoidal-motion",
+      "trigonometry",
+      "neon-aesthetic",
+      "kinetic-typography-vibe",
+      "color-cycling",
+      "trailing-effect",
+      "octagonal-symmetry",
+      "radial-lines",
+      "dark-mode",
+      "visual-rhythm"
     ]
   }
 ]

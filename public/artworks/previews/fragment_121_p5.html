@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>擬音文字ゴゴゴ</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px solid #00ffff;
+        border-radius: 15px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“擬音文字ゴゴゴ”</div>
+    <script>
+      let angle = 0;
+      function setup() {
+        createCanvas(500, 500);
+        textSize(32);
+      }
+      function draw() {
+        background(0, 20);
+        translate(width / 2, height / 2);
+        for (let i = 0; i < 50; i++) {
+          fill(random([255, 0]), random([255, 0]), random([0, 255]));
+          push();
+          rotate(angle + i);
+          text("ゴ", i * 15, i * 15);
+          pop();
+        }
+        angle += 0.05;
+      }
+    </script>
+  </body>
+</html>

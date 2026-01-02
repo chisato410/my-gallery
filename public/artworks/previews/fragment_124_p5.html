@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>サイケドット</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px double #00ff00;
+        border-radius: 20px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“サイケドット”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        noStroke();
+      }
+      function draw() {
+        background(0, 20);
+        for (let i = 0; i < 50; i++) {
+          fill(random(255), random(255), random(0, 255), 150);
+          ellipse(random(width), random(height), 5, 5);
+        }
+      }
+    </script>
+  </body>
+</html>

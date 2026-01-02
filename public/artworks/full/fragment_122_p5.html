@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>斜め線ポップ</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px dashed #ff00ff;
+        border-radius: 20px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“斜め線ポップ”</div>
+    <script>
+      let offset2 = 0;
+      function setup() {
+        createCanvas(500, 500);
+        strokeWeight(4);
+      }
+      function draw() {
+        background(0, 30);
+        for (let i = -width; i < width; i += 30) {
+          stroke(random(255), random(255), 0);
+          line(i + offset2, 0, i + offset2 + 20, height);
+          stroke(0, 255, 255);
+          line(i + offset2 + 20, 0, i + offset2 + 40, height);
+        }
+        offset2 += 3;
+        if (offset2 > 40) offset2 = 0;
+      }
+    </script>
+  </body>
+</html>
