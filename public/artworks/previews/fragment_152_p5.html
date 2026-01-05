@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>circle anime</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="https://unpkg.com/p5.brush@1.0.3/dist/p5.brush.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+        z-index: 10;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“circle anime”</div>
+    <script>
+      let colors = [
+        "#e6302b",
+        "#36ad63",
+        "#fbd400",
+        "#ffffff",
+        "#232323",
+        "#f654a9",
+        "#2B50AA",
+      ];
+      let ctx;
+      let centerX, centerY;
+      let circles = [];
+      let motionClasses = [];
+      let backgroundColor;
+      let fd;
+      let scene;
+      let timer;
+
+      function setup() {
+        createCanvas(900, 900);
+        rectMode(CENTER);
+        colorMode(HSB, 360, 100, 100, 100);
+        ctx = drawingContext;
+        centerX = width / 2;
+        centerY = height / 2;
+
+        noStroke();
+        stroke("#000000");
+        strokeWeight(width * 0.002);
+        initialize();
+      }
+
+      function draw() {
+        background(backgroundColor);
+        for (let c of circles) {
+          c.run();
+        }
+        if (scene == 1) {
+          fd.run();
+        }
+
+        if (timer == 180) {
+          scene = 1;
+        }
+
+        if (timer == 220) {
+          initialize();
+        }
+        timer++;
+      }
+
+      function initialize() {
+        circles = [];
+        motionClasses = [CircleMotion01, CircleMotion02, CircleMotion03];
+        backgroundColor = random(colors);
+        if (scene == 1) backgroundColor = fd.clr;
+        createRecursiveCircles(centerX, centerY, width * 0.75, 8, circles);
+        fd = new Curtain();
+        scene = 0;
+        timer = 0;
+      }
+
+      function createRecursiveCircles(x, y, d, n, arr) {
+        let t = -int((8 - n) * 5);
+        let motionClass = random(motionClasses);
+        arr.push(new motionClass(x, y, d, t));
+
+        n--;
+        if (n >= 0) {
+          let ang = random(TAU);
+          let d1 = d * random(0.1, 0.9);
+          let d2 = d - d1;
+          let r1 = (d - d1) / 2;
+          let r2 = (d - d2) / 2;
+          let x1 = x + r1 * cos(ang);
+          let y1 = y + r1 * sin(ang);
+          let x2 = x + r2 * cos(ang + PI);
+          let y2 = y + r2 * sin(ang + PI);
+          let MIN = width * 0.02;
+          if (MIN < d1) createRecursiveCircles(x1, y1, d1, n, arr);
+          if (MIN < d2) createRecursiveCircles(x2, y2, d2, n, arr);
+        }
+      }
+
+      function easeOutElastic(x) {
+        const c4 = (2 * Math.PI) / 3;
+
+        return x === 0
+          ? 0
+          : x === 1
+          ? 1
+          : Math.pow(2, -10 * x) * Math.sin((x * 10 - 0.75) * c4) + 1;
+      }
+
+      function easeOutBack(x) {
+        const c1 = 1.70158;
+        const c3 = c1 + 1;
+
+        return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
+      }
+
+      function easeInQuart(x) {
+        return x * x * x * x;
+      }
+
+      function easeOutQuart(x) {
+        return 1 - Math.pow(1 - x, 4);
+      }
+
+      function easeInOutQuart(x) {
+        return x < 0.5 ? 8 * x * x * x * x : 1 - Math.pow(-2 * x + 2, 4) / 2;
+      }
+
+      function easeInCirc(x) {
+        return 1 - Math.sqrt(1 - Math.pow(x, 2));
+      }
+
+      class CircleMotion01 {
+        constructor(x, y, d, t) {
+          this.x = x;
+          this.y = y;
+
+          this.d = d;
+          this.w = 0;
+          this.h = 0;
+
+          this.timer = t;
+          this.timings = [0, 10, 120, 130];
+          this.clr = random(colors);
+          this.angle = random(TAU);
+        }
+
+        show() {
+          push();
+          translate(this.x, this.y);
+          rotate(this.angle);
+          stroke("#000000");
+          strokeWeight(width * 0.002);
+          fill(this.clr);
+          ellipse(0, 0, this.w, this.h);
+          pop();
+        }
+
+        update() {
+          this.timer++;
+          for (let i = 0; i < this.timings.length - 1; i++) {
+            if (
+              this.timings[i] < this.timer &&
+              this.timer < this.timings[i + 2]
+            ) {
+              let nrm = norm(
+                this.timer,
+                this.timings[i],
+                this.timings[i + 2] - 1
+              );
+              if (i == 0) {
+                this.w = lerp(0, this.d, easeOutElastic(nrm));
+              }
+              if (i == 1) {
+                this.h = lerp(0, this.d, easeOutElastic(nrm));
+              }
+            }
+          }
+        }
+
+        run() {
+          this.update();
+          this.show();
+        }
+      }
+
+      class CircleMotion02 {
+        constructor(x, y, d, t) {
+          let r = width * 0.5;
+          this.angle = int(random(8)) * (TAU / 8);
+          this.x0 = x + r * cos(this.angle);
+          this.y0 = y + r * sin(this.angle);
+          this.x1 = x;
+          this.y1 = y;
+          this.x = this.x0;
+          this.y = this.y0;
+
+          this.d = d;
+          this.w = 0;
+          this.h = 0;
+
+          this.timer = t;
+          this.timings = [0, 90, 120];
+
+          this.clr = random(colors);
+          this.offsetX = 0;
+        }
+
+        show() {
+          push();
+          translate(this.x, this.y);
+          rotate(this.angle);
+          stroke("#000000");
+          strokeWeight(width * 0.002);
+          fill(this.clr);
+          ellipse(this.offsetX, 0, this.w, this.h);
+          pop();
+        }
+
+        update() {
+          this.timer++;
+          for (let i = 0; i < this.timings.length - 1; i++) {
+            if (
+              this.timings[i] < this.timer &&
+              this.timer < this.timings[i + 1]
+            ) {
+              let nrm = norm(
+                this.timer,
+                this.timings[i],
+                this.timings[i + 1] - 1
+              );
+              if (i == 0) {
+                this.w = lerp(0, this.d, easeInQuart(nrm));
+                this.h = lerp(0, this.d, easeInQuart(nrm));
+                this.x = lerp(this.x0, this.x1, easeInQuart(nrm));
+                this.y = lerp(this.y0, this.y1, easeInQuart(nrm));
+              } else if (i == 1) {
+                this.w = lerp(
+                  this.d,
+                  this.d * 0.75,
+                  sin(easeOutQuart(nrm) * PI)
+                );
+                this.h = lerp(
+                  this.d,
+                  this.d * 1.25,
+                  sin(easeOutQuart(nrm) * PI)
+                );
+                this.offsetX = lerp(
+                  0,
+                  -this.w * 0.25,
+                  sin(easeOutQuart(nrm) * PI)
+                );
+              }
+            }
+          }
+        }
+
+        run() {
+          this.update();
+          this.show();
+        }
+      }
+
+      class CircleMotion03 {
+        constructor(x, y, d, t) {
+          this.x = x;
+          this.y = y;
+          this.d1 = d;
+          this.d0 = 0;
+          this.d = this.d0;
+          this.timer = t;
+          this.timings = [];
+          for (let i = 0; i < 50; i++) {
+            this.timings.push(i * 120);
+          }
+          this.clr = random(colors);
+          this.angle = int(random(4)) * (TAU / 4);
+          this.shift = this.d / 2;
+          this.sign = random([-1, 1]);
+        }
+
+        show() {
+          push();
+          translate(this.x, this.y);
+          rotate(this.angle);
+          stroke("#000000");
+          strokeWeight(width * 0.002);
+          fill(this.clr);
+          circle(this.shift, 0, this.d);
+          pop();
+        }
+
+        update() {
+          this.timer++;
+          for (let i = 0; i < this.timings.length - 1; i++) {
+            if (
+              this.timings[i] < this.timer &&
+              this.timer < this.timings[i + 1]
+            ) {
+              let nrm = norm(
+                this.timer,
+                this.timings[i],
+                this.timings[i + 1] - 1
+              );
+              if (i == 0) {
+                this.angle = lerp(0, TAU * 2 * this.sign, easeInOutQuart(nrm));
+                this.d = lerp(this.d0, this.d1, easeInOutQuart(nrm));
+                this.shift = (this.d1 - this.d) / 2;
+              }
+            }
+          }
+        }
+
+        run() {
+          this.show();
+          this.update();
+        }
+      }
+
+      class CircleMotion {
+        constructor(x, y, d, t) {
+          this.x = x;
+          this.y = y;
+          this.d = d;
+          this.timer = t;
+          this.timings = [];
+          for (let i = 0; i < 50; i++) {
+            this.timings.push(i * 40);
+          }
+          this.clr = random(colors);
+        }
+
+        show() {
+          push();
+          translate(this.x, this.y);
+          circle(0, 0, this.d);
+          pop();
+        }
+
+        update() {
+          this.timer++;
+          for (let i = 0; i < this.timings.length - 1; i++) {
+            if (
+              this.timings[i] < this.timer &&
+              this.timer < this.timings[i + 1]
+            ) {
+              let nrm = norm(
+                this.timer,
+                this.timings[i],
+                this.timings[i + 1] - 1
+              );
+              if (i == 0) {
+              }
+            }
+          }
+        }
+
+        run() {
+          this.show();
+          this.update();
+        }
+      }
+
+      class Curtain {
+        constructor() {
+          this.clr = random(colors);
+          let angle = int(random(4)) * (TAU / 4);
+          this.x0 = centerX + width * cos(angle);
+          this.y0 = centerY + height * sin(angle);
+          this.x1 = centerX;
+          this.y1 = centerY;
+          this.x = this.x0;
+          this.y = this.y0;
+          this.timer = 0;
+          this.t1 = 60;
+        }
+
+        show() {
+          noStroke();
+          fill(this.clr);
+          rect(this.x, this.y, width, height);
+        }
+
+        update() {
+          this.timer++;
+          if (0 < this.timer && this.timer < this.t1) {
+            let nrm = norm(this.timer, 0, this.t1 - 1);
+            this.x = lerp(this.x0, this.x1, easeInOutQuart(nrm));
+            this.y = lerp(this.y0, this.y1, easeInOutQuart(nrm));
+          }
+        }
+
+        run() {
+          this.show();
+          this.update();
+        }
+      }
+    </script>
+  </body>
+</html>

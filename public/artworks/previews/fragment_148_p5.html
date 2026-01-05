@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rice Cake Ghost</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+        z-index: 10;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Rice Cake Ghost”</div>
+    <script>
+      let t = 0.0;
+      let vel = 1.5;
+      let num;
+      let count = 3;
+      let w;
+      let offset;
+      let paletteSelected;
+      let paletteSelected1;
+      let paletteSelected2;
+
+      function setup() {
+        createCanvas(800, 800);
+        pixelDensity(1);
+        angleMode(DEGREES);
+        num = random(100000);
+
+        paletteSelected = random(palettes);
+        paletteSelected1 = random(palettes);
+        paletteSelected2 = random(palettes);
+
+        pg = createGraphics(width, height);
+        pg.noStroke();
+        let particle_count = width * height * 0.08;
+        for (let i = 0; i < particle_count; i++) {
+          let x = random(width);
+          let y = random(height);
+          let n = noise(x * 0.01, y * 0.01) * (((width + height) / 2) * 0.001);
+          pg.fill(51);
+          pg.rect(x, y, n, n);
+        }
+      }
+
+      function draw() {
+        randomSeed(num);
+        background(0);
+
+        w = width / count;
+        offset = w / 2;
+        for (var j = 0; j < count; j++) {
+          for (var i = 0; i < count; i++) {
+            shape(i * w + offset, j * w + offset, w * 0.6, random(360));
+          }
+        }
+
+        t += vel;
+      }
+
+      function gradient(r) {
+        col1 = color(random(paletteSelected1));
+        col1.setAlpha(30);
+        col2 = random(paletteSelected2);
+
+        noStroke();
+        let gradientFill = drawingContext.createLinearGradient(0, -r, 0, r);
+        gradientFill.addColorStop(0, color(col1));
+        gradientFill.addColorStop(1, color(col2));
+        drawingContext.fillStyle = gradientFill;
+      }
+
+      function shape(x, y, r, ran) {
+        push();
+
+        let osci = r * 0.3 * sin(t + ran);
+        let headW = r * 0.5 + r * 0.05 * sin(t + ran);
+        let headCenter = -r / 2 + (r * 0.5) / 2;
+        let susoH = r * 0.5 + r * 0.3 * -sin(t + ran);
+        let susoW = r * 0.8 + r * 0.2 * sin(t + ran);
+        gradient(r);
+        superellipse(x, y, r, r, 3.0);
+        translate(x, y + osci);
+        fill("#f4f1de");
+        beginShape();
+        arc(0, headCenter, headW, r * 0.5, 130, 10, PIE);
+        vertex(-headW / 2, headCenter);
+        bezierVertex(
+          -susoW * 0.3,
+          susoH * 0.2,
+          -susoW * 0.3,
+          susoH * 0.7,
+          -susoW / 2,
+          susoH
+        );
+        for (let i = -susoW / 2; i < susoW / 2; i++) {
+          let y = susoH + r * 0.01 * sin((i * 0.5 * 360) / (r * 0.1));
+          vertex(i, y);
+        }
+        vertex(susoW / 2, susoH);
+        bezierVertex(
+          susoW * 0.25,
+          susoH * 0.8,
+          susoW * 0.31 - r * 0.01 * sin(t),
+          susoH * 0.2,
+          headW / 2,
+          headCenter
+        );
+
+        endShape();
+
+        //eye
+        push();
+        translate(-r * 0.1, headCenter + r * 0.1);
+        push();
+        fill("#503a65");
+        translate(r * 0.05, -r * 0.15);
+        let eyesizeH = r * 0.08 - r * 0.02 * sin(t + ran);
+        let eyesizeW = r * 0.05;
+        ellipse(0, 0, eyesizeW, eyesizeH);
+        ellipse(r * 0.17, 0, eyesizeW * 0.95, eyesizeH * 0.95);
+        noStroke();
+        arc(r * 0.08, eyesizeH, r * 0.1 + eyesizeH / 2, r * 0.05, 0, 180);
+        pop();
+        pop();
+        pop();
+      }
+
+      function sgn(val) {
+        if (val > 0) {
+          return 1;
+        } else if (val < 0) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }
+
+      function superellipse(x, y, w, h, val) {
+        push();
+        translate(x, y);
+        beginShape();
+        for (let i = 0; i < 72; i += 0.1) {
+          let na = 1.5 / val;
+          let x = pow(abs(cos(i)), na) * w * sgn(cos(i));
+          let y = pow(abs(sin(i)), na) * h * sgn(sin(i));
+          vertex(x, y);
+        }
+        endShape(CLOSE);
+        pop();
+      }
+
+      let palettes = [
+        ["#e9dbce", "#ea526f", "#fceade", "#e2c290", "#6b2d5c", "#25ced1"],
+        ["#e9dbce", "#d77a61", "#223843", "#eff1f3", "#dbd3d8", "#d8b4a0"],
+        ["#e29578", "#006d77", "#83c5be", "#ffddd2", "#edf6f9"],
+        ["#e9dbce", "#cc3528", "#028090", "#00a896", "#f8c522"],
+        ["#e9dbce", "#92accc", "#f8f7c1", "#f46902", "#da506a", "#fae402"],
+        ["#e42268", "#fb8075", "#761871", "#5b7d9c", "#a38cb4", "#476590"],
+        ["#f9b4ab", "#679186", "#fdebd3", "#264e70", "#bbd4ce"],
+        ["#1f306e", "#c7417b", "#553772", "#8f3b76", "#f5487f"],
+        ["#e0f0ea", "#95adbe", "#574f7d", "#503a65", "#3c2a4d"],
+        ["#413e4a", "#b38184", "#73626e", "#f0b49e", "#f7e4be"],
+        ["#ff4e50", "#fc913a", "#f9d423", "#ede574", "#e1f5c4"],
+        ["#99b898", "#fecea8", "#ff847c", "#e84a5f", "#2a363b"],
+        ["#69d2e7", "#a7dbd8", "#e0e4cc", "#f38630", "#fa6900"],
+        ["#fe4365", "#fc9d9a", "#f9cdad", "#c8c8a9", "#83af9b"],
+        ["#ecd078", "#d95b43", "#c02942", "#542437", "#53777a"],
+        ["#556270", "#4ecdc4", "#c7f464", "#ff6b6b", "#c44d58"],
+        ["#774f38", "#e08e79", "#f1d4af", "#ece5ce", "#c5e0dc"],
+        ["#e8ddcb", "#cdb380", "#036564", "#033649", "#031634"],
+        ["#490a3d", "#bd1550", "#e97f02", "#f8ca00", "#8a9b0f"],
+        ["#594f4f", "#9de0ad", "#547980", "#45ada8", "#e5fcc2"],
+        ["#00a0b0", "#cc333f", "#6a4a3c", "#eb6841", "#edc951"],
+        ["#5bc0eb", "#fde74c", "#9bc53d", "#e55934", "#fa7921"],
+        ["#ed6a5a", "#9bc1bc", "#f4f1bb", "#5ca4a9", "#e6ebe0"],
+        ["#ef476f", "#ffd166", "#06d6a0", "#118ab2", "#073b4c"],
+        ["#22223b", "#c9ada7", "#4a4e69", "#9a8c98", "#f2e9e4"],
+        ["#114b5f", "#1a936f", "#88d498", "#c6dabf", "#f3e9d2"],
+        ["#3d5a80", "#98c1d9", "#e0fbfc", "#ee6c4d", "#293241"],
+        ["#06aed5", "#f0c808", "#086788", "#fff1d0", "#dd1c1a"],
+        ["#540d6e", "#ee4266", "#ffd23f", "#3bceac", "#0ead69"],
+        ["#c9cba3", "#e26d5c", "#ffe1a8", "#723d46", "#472d30"],
+        ["#3c4cad", "#5FB49C", "#e8a49c"],
+        ["#1c3560", "#ff6343", "#f2efdb", "#fea985"],
+        [
+          "#e0d7c5",
+          "#488a50",
+          "#b59a55",
+          "#bf5513",
+          "#3b6fb6",
+          "#4f3224",
+          "#9a7f6e",
+        ], //o-ball
+        ["#DEEFB7", "#5FB49C", "#ed6a5a"],
+        ["#2B2B2B", "#91B3E1", "#2F5FB3", "#3D4B89", "#AE99E8", "#DBE2EC"], //clipper_tea.snore&peace.
+        ["#ffbe0b", "#fb5607", "#ff006e", "#8338ec", "#3a86ff"],
+        ["#A8C25D", "#5B7243", "#FFA088", "#FFFB42", "#a9cff0", "#2D6EA6"], //2025/07/08
+        [
+          "#F9F9F1",
+          "#191A18",
+          "#E15521",
+          "#3391CF",
+          "#E4901C",
+          "#F5B2B1",
+          "#009472",
+        ], //reference :: @posterlad :: https://x.com/posterlad/status/1963188864446566493
+      ];
+    </script>
+  </body>
+</html>

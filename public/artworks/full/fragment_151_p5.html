@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Generative Music Score - Fixed Full Code</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+      }
+      .caption {
+        position: absolute;
+        left: 20px;
+        bottom: 20px;
+        color: #fff;
+        font-family: "Georgia", serif;
+        z-index: 10;
+        pointer-events: none;
+        letter-spacing: 0.1em;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Music Score: Manuscript”</div>
+    <script>
+      const CANVAS_WIDTH = 1200;
+      const CANVAS_HEIGHT = 800;
+      const PIXEL_DENSITY = 2;
+      const NUM_BRUSH_GRAPHICS = 100;
+      const BRUSH_SIZE = 150;
+      const BRUSH_POINTS = 150;
+      const BRUSH_STROKE_ALPHA = 80;
+      const TEXTURE_ALPHA = 0.5;
+      const CANVAS_SPEED = 1.5;
+
+      const COLORS = ["#1a1a1a", "#1a1a1a", "#1a1a1a", "#1a1a1a", "#a62c21"];
+
+      let noteSpan = 12;
+      let overallTexture;
+      let subCanvas;
+      let allBrushGraphics = [];
+
+      let lastP = [];
+      let lastNoteDirection = [];
+      let canvasDeltaX = [];
+      let globalDeltaX = 0;
+
+      function preload() {
+        // テクスチャの読み込みとフォールバック
+        overallTexture = loadImage("paper.avif", null, () => {
+          overallTexture = createGraphics(CANVAS_WIDTH, CANVAS_HEIGHT);
+          overallTexture.background(245, 240, 225);
+          for (let i = 0; i < 5000; i++) {
+            overallTexture.stroke(0, 10);
+            overallTexture.point(random(CANVAS_WIDTH), random(CANVAS_HEIGHT));
+          }
+        });
+      }
+
+      function setup() {
+        pixelDensity(PIXEL_DENSITY);
+        createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+
+        subCanvas = createGraphics(width, height);
+        subCanvas.background(255);
+
+        // ブラシパターンの生成
+        for (let i = 0; i < NUM_BRUSH_GRAPHICS; i++) {
+          let bg = createGraphics(BRUSH_SIZE, BRUSH_SIZE);
+          createBrush(bg);
+          allBrushGraphics.push(bg);
+        }
+
+        for (let i = 0; i < 3; i++) {
+          lastP[i] = null;
+          canvasDeltaX[i] = 0;
+          lastNoteDirection[i] = 1;
+        }
+      }
+
+      function createBrush(graphics) {
+        graphics.clear();
+        graphics.noFill();
+        graphics.stroke(0, BRUSH_STROKE_ALPHA);
+        graphics.strokeWeight(random(0.5, 1.2));
+        for (let i = 0; i < BRUSH_POINTS; i++) {
+          let r = random() * random() * 5;
+          let ang = random(TWO_PI);
+          let x = r * cos(ang) + graphics.width / 2;
+          let y = r * sin(ang) + graphics.height / 2;
+          graphics.point(x, y);
+        }
+      }
+
+      function strokeDot(graphics, x, y, col = "#000") {
+        graphics.push();
+        let brush = random(allBrushGraphics);
+        graphics.tint(col);
+        graphics.image(brush, x - brush.width / 2, y - brush.height / 2);
+        graphics.pop();
+      }
+
+      function strokeLine(
+        graphics,
+        x1,
+        y1,
+        x2,
+        y2,
+        noiseFreq = 0.1,
+        noiseAmp = 0.5,
+        col = "#000"
+      ) {
+        let d = dist(x1, y1, x2, y2);
+        let distSteps = max(d / 1.5, 1);
+        for (let t = 0; t <= 1; t += 1 / distSteps) {
+          let x = lerp(x1, x2, t);
+          let y = lerp(y1, y2, t);
+          let amp = noiseAmp * sin(t * PI);
+          let nx = amp * noise(frameCount * 0.02, x * noiseFreq) * 10;
+          let ny = amp * noise(frameCount * 0.02, y * noiseFreq + 99) * 10;
+          strokeDot(graphics, x + nx, y + ny, col);
+        }
+      }
+
+      function draw() {
+        if (frameCount % 100 == 0) {
+          noteSpan = random([8, 12, 16]);
+        }
+
+        // 3つのパートを描画
+        drawScore(30, height * 0.25, 0);
+        drawScore(30, height * 0.5, 1);
+        drawScore(30, height * 0.75, 2);
+
+        // 背景描画
+        background(255);
+
+        // サブキャンバスを合成
+        push();
+        blendMode(MULTIPLY);
+        image(subCanvas, 0, 0);
+        pop();
+
+        // テクスチャ合成
+        push();
+        blendMode(MULTIPLY);
+        drawingContext.globalAlpha = TEXTURE_ALPHA;
+        let xOff = globalDeltaX % width;
+        image(overallTexture, xOff - width, 0, width, height);
+        image(overallTexture, xOff, 0, width, height);
+        pop();
+
+        // キャンバスのスクロール更新
+        subCanvas.push();
+        subCanvas.copy(
+          subCanvas,
+          0,
+          0,
+          width,
+          height,
+          CANVAS_SPEED,
+          0,
+          width,
+          height
+        );
+        subCanvas.fill(255);
+        subCanvas.noStroke();
+        subCanvas.rect(0, 0, CANVAS_SPEED + 1, height);
+        globalDeltaX += CANVAS_SPEED;
+        for (let i = 0; i < 3; i++) canvasDeltaX[i] += CANVAS_SPEED;
+        subCanvas.pop();
+      }
+
+      function drawScore(startX, mid, id) {
+        const grid = 15;
+        const scoreNoiseAmp = noise(frameCount * 0.01, id * 100) * 2;
+
+        // 五線譜の描画
+        for (let i = -2; i <= 2; i++) {
+          let y = mid + i * grid;
+          strokeDot(subCanvas, startX, y, "#333");
+        }
+
+        // 音符の生成
+        if (frameCount % noteSpan === 0) {
+          const noteCol = random(COLORS);
+          const noteId = floor(random(0, 10));
+          const direction = random() < 0.5 ? 1 : -1;
+
+          drawNoteHead(startX, mid, grid, noteId, direction, noteCol);
+          drawNoteStem(startX, mid, grid, noteId, direction, noteCol, id);
+        }
+
+        // 記号のランダム描画
+        if (frameCount % 300 === 0 && random() < 0.1) {
+          drawExpression(startX + 10, mid + grid * 4, grid);
+        }
+      }
+
+      function drawNoteHead(x, mid, grid, noteId, dir, col) {
+        const y = mid + (noteId / 2) * dir * grid;
+        subCanvas.push();
+        subCanvas.translate(x, y);
+        subCanvas.rotate(-PI / 10);
+        for (let a = 0; a < TWO_PI; a += 0.5) {
+          let rx = grid * 0.6 * cos(a);
+          let ry = grid * 0.4 * sin(a);
+          strokeDot(subCanvas, rx, ry, col);
+        }
+        subCanvas.pop();
+      }
+
+      function drawNoteStem(x, mid, grid, noteId, dir, col, id) {
+        const y = mid + (noteId / 2) * dir * grid;
+        const stemLen = grid * 3;
+        const endY = y - stemLen * dir;
+        const stemX = x + grid * 0.4;
+
+        strokeLine(subCanvas, stemX, y, stemX, endY, 0.1, 0.2, col);
+
+        const currentP = createVector(stemX, endY);
+        if (lastP[id] && random() < 0.6) {
+          strokeLine(
+            subCanvas,
+            currentP.x,
+            currentP.y,
+            lastP[id].x + canvasDeltaX[id],
+            lastP[id].y,
+            0.05,
+            0.5,
+            col
+          );
+        }
+
+        lastP[id] = currentP;
+        canvasDeltaX[id] = 0;
+      }
+
+      function drawExpression(x, y, grid) {
+        subCanvas.push();
+        subCanvas.fill(random(COLORS));
+        subCanvas.noStroke();
+        subCanvas.textFont("serif");
+        subCanvas.textSize(grid * 1.5);
+        subCanvas.textStyle(ITALIC);
+        subCanvas.text(random(["p", "f", "mf", "rit.", "dim."]), x, y);
+        subCanvas.pop();
+      }
+
+      function keyPressed() {
+        if (key == "s") save("Music_Score.jpg");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Music Score</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+        z-index: 10;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Music Score”</div>
+    <script>
+      const CANVAS_WIDTH = 1800;
+      const CANVAS_HEIGHT = 1200;
+      const PIXEL_DENSITY = 3;
+      const NUM_BRUSH_GRAPHICS = 200;
+      const BRUSH_SIZE = 250;
+      const BRUSH_POINTS = 200;
+      const BRUSH_STROKE_ALPHA = 100;
+      const TEXTURE_ALPHA = 0.35;
+      const CANVAS_SPEED = 2;
+
+      let noteSpan = 12;
+
+      // Canvas elements
+      let cnv;
+      let overallTexture;
+      let subCanvas;
+      let brushGraphics; // Graphics for the brush head
+      let allBrushGraphics = [];
+
+      // State tracking
+      let lastP = [];
+      let lastNoteDirection = [];
+      let lastNoteId = [];
+      let canvasDeltaX = [];
+      let globalDeltaX = 0;
+
+      function setup() {
+        pixelDensity(1);
+        cnv = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+        background(255);
+
+        // Create an off-screen graphics buffer
+        subCanvas = createGraphics(width, height);
+        subCanvas.background(255); // Optional: background for subCanvas
+
+        overallTexture = loadImage("paper.avif");
+
+        // Create the brush graphics (brush head)
+        for (let i = 0; i < NUM_BRUSH_GRAPHICS; i++) {
+          let brushGraphics = createGraphics(BRUSH_SIZE, BRUSH_SIZE);
+          createBrush(brushGraphics);
+          allBrushGraphics.push(brushGraphics);
+        }
+      }
+
+      function createBrush(graphics) {
+        graphics.clear(); // Clear any existing drawing
+        graphics.noFill();
+        graphics.stroke(0, BRUSH_STROKE_ALPHA); // Semi-transparent black
+        graphics.strokeWeight(random(0.8, 2));
+        for (let i = 0; i < BRUSH_POINTS; i++) {
+          let r = random() * random() * random() * 3;
+          let ang = random(-5, 5);
+          let x = r * cos(ang) + graphics.width / 2;
+          let y = r * sin(ang) + graphics.height / 2;
+          graphics.point(x, y);
+        }
+      }
+
+      function strokeDot(graphics, x = 0, y = 0) {
+        graphics.push();
+        let brushGraphics = random(allBrushGraphics);
+        // graphics.imageMode(CENTER)
+        graphics.image(
+          brushGraphics,
+          x - brushGraphics.width / 2,
+          y - brushGraphics.height / 2
+        );
+        graphics.pop();
+      }
+
+      function strokeLine(
+        graphics,
+        x1,
+        y1,
+        x2,
+        y2,
+        noiseFreq = 0.1,
+        noiseAmp = 0.5
+      ) {
+        if (!(x1 && x2 && y1 && y2)) {
+          return;
+        }
+        let distSteps = dist(x1, y1, x2, y2) / 1.5; // Define the step size based on distance
+        for (let t = 0; t <= 1; t += 1 / distSteps) {
+          let x = lerp(x1, x2, t);
+          let y = lerp(y1, y2, t);
+
+          // Compute the amplitude using a smooth 0 -> 1 -> 0 transition
+          let amp = noiseAmp * sin(t * PI); // Smooth sinusoidal transition
+
+          // Calculate noise offset for (x, y)
+          let noiseOffsetX =
+            amp * noise(frameCount, x * noiseFreq, y * noiseFreq) * 10; // Adjust factor as needed
+          let noiseOffsetY =
+            amp *
+            noise(frameCount, x * noiseFreq + 100, y * noiseFreq + 100) *
+            10;
+
+          // Apply the noise to the current point
+          strokeDot(graphics, x + noiseOffsetX, y + noiseOffsetY);
+        }
+      }
+      function draw() {
+        if (frameCount % 100 == 0 && random() < 0.5) {
+          noteSpan = random([6, 8, 12, 16, 20]);
+        }
+        drawScore(
+          30,
+          height / 2 - height / 4,
+          random([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2])
+        );
+        drawScore(30, height / 2, random([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2]));
+        drawScore(
+          30,
+          height / 2 + height / 4,
+          random([2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1])
+        );
+
+        // Draw the subCanvas onto the main canvas
+        push();
+        blendMode(MULTIPLY);
+        image(subCanvas, 0, 0);
+        pop();
+
+        subCanvas.push();
+        if (random() < 0.001) {
+          subCanvas.translate(30, height / 2);
+          subCanvas.rotate((random(-1, 1) * PI) / random([12, 24, 48]));
+          subCanvas.translate(-30, -height / 2);
+        }
+
+        subCanvas.image(subCanvas, CANVAS_SPEED, 0);
+        subCanvas.fill(255);
+        subCanvas.noStroke();
+        subCanvas.rect(0, 0, 5, height);
+        globalDeltaX += CANVAS_SPEED;
+        canvasDeltaX = canvasDeltaX.map((k) => k + CANVAS_SPEED);
+        subCanvas.pop();
+
+        // Apply the texture
+        push();
+        blendMode(MULTIPLY);
+        drawingContext.globalAlpha = TEXTURE_ALPHA;
+        image(
+          overallTexture,
+          (globalDeltaX % width) - width,
+          0,
+          width,
+          width / 1.5
+        );
+        image(overallTexture, globalDeltaX % width, 0, width, width / 1.5);
+        image(
+          overallTexture,
+          (globalDeltaX % width) - width,
+          width / 1.5,
+          width,
+          width / 1.5
+        );
+        image(
+          overallTexture,
+          globalDeltaX % width,
+          width / 1.5,
+          width,
+          width / 1.5
+        );
+        pop();
+      }
+
+      function drawScore(
+        canvasStartX = 20,
+        canvasStartY = height / 2,
+        scoreLineId = 0
+      ) {
+        setupMousePosition();
+        background(255);
+
+        const grid = 200 / 10;
+        const mid = canvasStartY;
+        const scoreNoiseAmp = calculateNoiseAmplitude();
+
+        const params = {
+          canvasStartX,
+          mid,
+          grid,
+          scoreNoiseAmp,
+          scoreLineId,
+        };
+
+        if (scoreLineId == 2 && frameCount % 500 < 100) {
+          subCanvas.push();
+          subCanvas.fill(0);
+          subCanvas.translate(canvasStartX, mid - grid * 10);
+          let kFreq = int(map(noise(scoreLineId * 5000), 0, 1, 50, 500));
+          let k = (int(frameCount % kFreq) / kFreq) * 40;
+          strokeLine(subCanvas, 50, 50, 50, 50 + k);
+          subCanvas.pop();
+        }
+
+        drawStaffLines(params);
+        drawMusicNotes(params);
+      }
+
+      function setupMousePosition() {
+        mouseX = map(sin(frameCount / 100), -1, 1, 0, width);
+        mouseY = map(sin(frameCount / 140), -1, 1, 0, height);
+      }
+
+      function calculateNoiseAmplitude() {
+        return sin(frameCount / 10, 500) * map(mouseY, 0, height, 0, 1) * 4;
+      }
+
+      function drawStaffLines({ canvasStartX, mid, grid, scoreNoiseAmp }) {
+        subCanvas.push();
+        subCanvas.noStroke();
+
+        for (let i = 0; i < 50; i++) {
+          let cnoise = (mouseIsPressed ? sin : noise)(
+            frameCount / map(mouseX, 0, width, 20, 200),
+            i * 1
+          );
+          let y =
+            map(i, 0, 5, mid - grid * 2.5, mid + grid * 2.5) +
+            grid * map(cnoise, 0, 1, -1, 1) * scoreNoiseAmp;
+
+          subCanvas.fill(0);
+          subCanvas.push();
+          strokeDot(subCanvas, canvasStartX, y);
+          subCanvas.pop();
+        }
+
+        subCanvas.translate(5, mid);
+
+        if (scoreNoiseAmp < 0.2 && frameCount % 120 === 0) {
+          strokeLine(
+            subCanvas,
+            canvasStartX,
+            -grid * 2.5,
+            canvasStartX,
+            grid * 2
+          );
+        }
+
+        subCanvas.pop();
+      }
+
+      function drawMusicNotes({
+        canvasStartX,
+        mid,
+        grid,
+        scoreNoiseAmp,
+        scoreLineId,
+      }) {
+        subCanvas.push();
+
+        const notePossibility = map(sin(frameCount / 10), -1, 1, 0.25, 0.8);
+        const noteDirection =
+          random() < 0.2 ? lastNoteDirection[scoreLineId] : random([-1, 1]);
+        const noteId = int(random(0, 10) * random());
+        lastNoteId[scoreLineId] = noteId;
+
+        const noteExtraLine = noteId >= 5 && noteId % 2 == 1;
+        const canHasLine =
+          random() < 0.8
+            ? noteDirection == lastNoteDirection[scoreLineId]
+            : true;
+
+        const noteType = random(["", "sharp", "flat"]);
+        if (
+          canHasLine &&
+          random() < notePossibility &&
+          frameCount % noteSpan === 0
+        ) {
+          const noteParams = {
+            canvasStartX,
+            mid,
+            grid,
+            noteId,
+            noteDirection,
+            noteExtraLine,
+            scoreNoiseAmp,
+            scoreLineId,
+
+            sharp: noteType == "sharp",
+            flat: noteType == "flat",
+          };
+
+          drawNoteHead(noteParams);
+
+          const hasStraightLine = random() < 0.8;
+          if (hasStraightLine) {
+            drawNoteStem(noteParams);
+          }
+        }
+
+        subCanvas.pop();
+      }
+
+      function drawNoteHead({
+        canvasStartX,
+        mid,
+        grid,
+        noteId,
+        noteDirection,
+        sharp,
+        flat,
+      }) {
+        const yy = mid + (noteId / 2) * noteDirection * grid;
+
+        subCanvas.noFill();
+        subCanvas.strokeWeight(4);
+
+        subCanvas.push();
+        subCanvas.translate(canvasStartX, yy);
+        subCanvas.push();
+        subCanvas.rotate(-10);
+
+        const ellipseWidth = grid;
+        const ellipseHeight = grid * 0.7;
+        const numVertices = 100;
+
+        subCanvas.beginShape();
+        const noiseAmount = random([0, 0, 0, 0, 1, 1, 2]);
+
+        for (let i = 0; i <= TWO_PI; i += (TWO_PI / numVertices) * 2) {
+          const noiseAmp =
+            1 + noiseAmount * noise(i * 10, frameCount / 5) * 0.8;
+          const x = ((noiseAmp * ellipseWidth) / 2) * cos(i);
+          const y = ((noiseAmp * ellipseHeight) / 2) * sin(i);
+          subCanvas.vertex(x, y);
+          strokeDot(subCanvas, x, y);
+        }
+
+        if (random() < 0.8) {
+          subCanvas.fill(0);
+        }
+        subCanvas.endShape(CLOSE);
+
+        subCanvas.pop();
+        subCanvas.pop();
+
+        // Draw accidental symbols (sharp or flat)
+        if (sharp || flat) {
+          const symbolX = canvasStartX - grid * 1.2;
+          const symbolY = yy - grid * 0.7;
+
+          subCanvas.push();
+          subCanvas.translate(symbolX, symbolY);
+          subCanvas.strokeWeight(2);
+
+          if (sharp) {
+            // Draw sharp symbol (#)
+            // Vertical lines
+            const verticalLines = [
+              { x: -3, y1: -10, y2: 10 },
+              { x: 3, y1: -10, y2: 10 },
+            ];
+
+            for (const line of verticalLines) {
+              strokeLine(
+                subCanvas,
+                line.x,
+                line.y1,
+                line.x,
+                line.y2,
+                (noiseFreq = 0.1),
+                (noiseAmp = 0.1)
+              );
+            }
+
+            // Diagonal lines
+            const diagonalLines = [
+              { x1: -10, y1: -3, x2: 10, y2: -3 },
+              { x1: -10, y1: 3, x2: 10, y2: 3 },
+            ];
+
+            for (const line of diagonalLines) {
+              strokeLine(
+                subCanvas,
+                line.x1,
+                line.y1,
+                line.x2,
+                line.y2,
+                (noiseFreq = 0.1),
+                (noiseAmp = 0.1)
+              );
+            }
+          } else {
+            // Draw flat symbol (b)
+            // Vertical stem
+            strokeLine(
+              subCanvas,
+              -3,
+              -10,
+              -3,
+              8,
+              (noiseFreq = 0.1),
+              (noiseAmp = 0.1)
+            );
+
+            // Curved bowl shape
+            const bowlLines = [
+              { x1: -3, y1: 0, x2: -3, y2: 5 },
+              { x1: -3, y1: 5, x2: 5, y2: 5 },
+              { x1: 5, y1: 5, x2: 5, y2: 0 },
+              { x1: 5, y1: 0, x2: 5, y2: -5 },
+              { x1: 5, y1: -5, x2: -3, y2: -5 },
+              { x1: -3, y1: -5, x2: -3, y2: 0 },
+            ];
+
+            for (const line of bowlLines) {
+              strokeLine(
+                subCanvas,
+                line.x1,
+                line.y1,
+                line.x2,
+                line.y2,
+                (noiseFreq = 0.1),
+                (noiseAmp = 0.1)
+              );
+            }
+          }
+          subCanvas.pop();
+        }
+      }
+
+      function drawNoteStem({
+        mid,
+        grid,
+        noteId,
+        noteDirection,
+        noteExtraLine,
+        scoreNoiseAmp,
+        scoreLineId,
+      }) {
+        const noteX = grid * 2;
+        const yy = mid + (noteId / 2) * noteDirection * grid;
+
+        strokeLine(
+          subCanvas,
+          noteX,
+          yy,
+          noteX,
+          yy + 100 * noteDirection,
+          0.1,
+          scoreNoiseAmp / 3
+        );
+
+        if (noteExtraLine) {
+          const ellipseWidth = grid;
+          strokeLine(
+            subCanvas,
+            noteX - ellipseWidth - ellipseWidth / 2,
+            yy,
+            noteX + ellipseWidth / 2,
+            yy,
+            0.1,
+            scoreNoiseAmp / 3
+          );
+        }
+
+        const currentP = createVector(noteX, yy + 100 * noteDirection);
+
+        if (random() < 0.6 && lastP[scoreLineId]) {
+          drawConnectingLines({
+            currentP,
+            scoreLineId,
+            noteDirection,
+            scoreNoiseAmp,
+          });
+        }
+
+        lastP[scoreLineId] = currentP;
+        canvasDeltaX[scoreLineId] = 0;
+        lastNoteDirection[scoreLineId] = noteDirection;
+      }
+
+      function drawConnectingLines({
+        currentP,
+        scoreLineId,
+        noteDirection,
+        scoreNoiseAmp,
+      }) {
+        const lineType = random(["straight"]);
+
+        if (lineType == "straight") {
+          const crazy = random() < 0.1;
+          const lineCount = random([1, 2, 1, 2, 3]);
+
+          for (let j = 0; j < lineCount; j++) {
+            for (let k = 0; k < 50; k++) {
+              const yOffset =
+                k * 2 +
+                j * 20 +
+                (lineCount - 1) * (noteDirection == 1 ? -20 : 0);
+              strokeLine(
+                subCanvas,
+                currentP.x,
+                currentP.y + yOffset,
+                lastP[scoreLineId].x + canvasDeltaX[scoreLineId],
+                lastP[scoreLineId].y + yOffset,
+                0.1,
+                scoreNoiseAmp / 3 + (crazy ? 5 : 0)
+              );
+            }
+          }
+        }
+      }
+
+      function keyPressed() {
+        if (key == "s") {
+          save("241122 Generative Music Score Exp .jpg");
+        }
+      }
+    </script>
+  </body>
+</html>

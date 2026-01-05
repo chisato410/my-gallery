@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tangram Flow</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+        width: 500px !important;
+        height: 500px !important;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+        z-index: 10;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Tangram Flow”</div>
+    <script>
+      p5.disableFriendlyErrors = true;
+
+      let circles = [];
+      let minDistance = 4;
+      let minRadius = 15;
+      let currentStartRadius = 250;
+      let colors = ["#3A6EF6", "#04090F", "#FAF0EE", "#DB2719", "#F5CB1D"];
+      let bgColor = "#FAF0EE";
+
+      let mainCanvas;
+      let dotShader, bloomShader;
+
+      function setup() {
+        createCanvas(1000, 1000, WEBGL);
+        mainCanvas = createGraphics(1000, 1000);
+        mainCanvas.colorMode(HSB, 360, 100, 100, 100);
+        pixelDensity(1);
+
+        dotShader = createShader(vertShader, dotFilterShader);
+        bloomShader = createShader(vertShader, bloomFilterShader);
+
+        for (let i = 0; i < 6; i++) addSeed();
+      }
+
+      function draw() {
+        // 1. メイン描画処理 (2Dバッファへ)
+        mainCanvas.background(0, 0, 95); // 薄いグレー背景
+        drawGridBG(mainCanvas);
+
+        if (currentStartRadius > minRadius) {
+          currentStartRadius -= 0.8;
+        }
+
+        // パッキングとベクトル場による移動
+        for (let c of circles) {
+          if (c.active) {
+            growCircle(c);
+          } else {
+            // 成長が止まったらベクトル場に沿って少し流れる (yura yura)
+            let v = vector_field(c.x, c.y, 20);
+            c.x += v.x * 0.5;
+            c.y += v.y * 0.5;
+          }
+        }
+
+        if (frameCount % 2 === 0 && circles.length < 120) {
+          addSeed();
+        }
+
+        for (let c of circles) {
+          if (!c.parent) drawShapeRecursive(c, null);
+        }
+
+        // 2. シェーダー適用
+        background(0);
+        shader(bloomShader);
+        bloomShader.setUniform("tex0", mainCanvas);
+        bloomShader.setUniform("canvasSize", [width, height]);
+        bloomShader.setUniform("intensity", 0.4);
+        bloomShader.setUniform("glow", 1.2);
+        rect(0, 0, width, height);
+
+        shader(dotShader);
+        dotShader.setUniform("tex0", mainCanvas);
+        dotShader.setUniform("u_resolution", [width, height]);
+        dotShader.setUniform("dotSizePx", [6.0, 6.0]);
+        dotShader.setUniform("dotStrength", 0.2);
+        dotShader.setUniform("u_skipColor", [0.98, 0.94, 0.93]); // bgColorに近い色
+        dotShader.setUniform("u_skipTolerance", 0.05);
+        rect(0, 0, width, height);
+      }
+
+      function vector_field(x, y, myScale) {
+        let border = -300;
+        let vx = map(x, border, 1000 - border, 0, myScale);
+        let vy = map(y, border, 1000 - border, 0, myScale);
+        let k1 = 5,
+          k2 = 3;
+        let u = cos(k1 * vy) + cos(k2 * vy);
+        let v = sin(k2 * vx) - cos(k1 * vx);
+        return createVector(u, v);
+      }
+
+      function growCircle(c) {
+        let newRadius = c.radius + 2;
+        if (
+          c.x - newRadius < 0 ||
+          c.x + newRadius > 1000 ||
+          c.y - newRadius < 0 ||
+          c.y + newRadius > 1000
+        ) {
+          c.active = false;
+          return;
+        }
+        for (let other of circles) {
+          if (other === c) continue;
+          let d = dist(c.x, c.y, other.x, other.y);
+          let gap =
+            d + min(newRadius, other.radius) < max(newRadius, other.radius)
+              ? max(newRadius, other.radius) - d - min(newRadius, other.radius)
+              : d - (newRadius + other.radius);
+          if (gap < minDistance) {
+            c.active = false;
+            return;
+          }
+        }
+        c.radius = newRadius;
+      }
+
+      function addSeed() {
+        let retries = 0;
+        while (retries < 50) {
+          let x = random(1000);
+          let y = random(1000);
+          let r = currentStartRadius;
+          let valid = true;
+          for (let c of circles) {
+            let d = dist(x, y, c.x, c.y);
+            if (d < r + c.radius + minDistance) {
+              valid = false;
+              break;
+            }
+          }
+          if (valid) {
+            let newCircle = {
+              x,
+              y,
+              radius: 2,
+              active: true,
+              color: random(colors),
+              layer: 0,
+              parent: null,
+              children: [],
+              sides: floor(random(3, 7)),
+              angle: random(TWO_PI),
+              rotSpeed: random(0.01, 0.03),
+            };
+            circles.push(newCircle);
+            return true;
+          }
+          retries++;
+        }
+        return false;
+      }
+
+      function drawShapeRecursive(c, parent) {
+        mainCanvas.push();
+        mainCanvas.translate(c.x, c.y);
+        let steppedAngle = floor(c.angle * 8) / 8;
+        mainCanvas.rotate(steppedAngle);
+
+        mainCanvas.fill(c.color);
+        mainCanvas.stroke(0, 0, 95);
+        mainCanvas.strokeWeight(3);
+
+        mainCanvas.beginShape();
+        for (let i = 0; i < c.sides; i++) {
+          let a = (TWO_PI / c.sides) * i;
+          mainCanvas.vertex(c.radius * cos(a), c.radius * sin(a));
+        }
+        mainCanvas.endShape(CLOSE);
+        mainCanvas.pop();
+      }
+
+      function drawGridBG(pg) {
+        pg.stroke(0, 0, 90);
+        pg.strokeWeight(15);
+        for (let x = 20; x < 1000; x += 160) {
+          pg.line(0, x, 1000, x);
+          pg.line(x, 0, x, 1000);
+        }
+        pg.stroke(0, 0, 0, 10);
+        pg.strokeWeight(2);
+        for (let x = 20; x < 1000; x += 160) {
+          pg.line(20, x, 980, x);
+          pg.line(x, 20, x, 980);
+        }
+      }
+
+      const vertShader = `
+        attribute vec3 aPosition;
+        attribute vec2 aTexCoord;
+        varying vec2 vTexCoord;
+        void main() {
+          vTexCoord = aTexCoord;
+          vec4 positionVec4 = vec4(aPosition, 1.0);
+          positionVec4.xy = positionVec4.xy * 2.0 - 1.0;
+          gl_Position = positionVec4;
+        }
+      `;
+
+      const dotFilterShader = `
+        precision highp float;
+        varying vec2 vTexCoord;
+        uniform sampler2D tex0;
+        uniform vec2 u_resolution;
+        uniform vec2 dotSizePx;
+        uniform float dotStrength;
+        uniform vec3 u_skipColor;
+        uniform float u_skipTolerance;
+        void main() {
+          vec4 base = texture2D(tex0, vTexCoord);
+          vec2 pixel = vTexCoord * u_resolution;
+          vec2 dotCenterPx = (floor(pixel / dotSizePx) + 0.5) * dotSizePx;
+          float dist = length((pixel - dotCenterPx) / (dotSizePx * 0.5));
+          float mask = smoothstep(1.0, 0.0, dist);
+          float cd = length(base.rgb - u_skipColor);
+          float exclude = 1.0 - smoothstep(u_skipTolerance * 0.7, u_skipTolerance, cd);
+          gl_FragColor = vec4(base.rgb * (1.0 - mask * (1.0 - exclude) * dotStrength), base.a);
+        }
+      `;
+
+      const bloomFilterShader = `
+        precision highp float;
+        varying vec2 vTexCoord;
+        uniform sampler2D tex0;
+        uniform vec2 canvasSize;
+        uniform float intensity;
+        uniform float glow;
+        void main() {
+          vec4 ori = texture2D(tex0, vTexCoord);
+          vec4 blur = vec4(0.0);
+          for(float i=-4.0; i<=4.0; i++){
+            blur += texture2D(tex0, vTexCoord + vec2(i*glow/canvasSize.x, 0.0));
+            blur += texture2D(tex0, vTexCoord + vec2(0.0, i*glow/canvasSize.y));
+          }
+          blur /= 18.0;
+          gl_FragColor = 1.0 - (1.0 - ori) * (1.0 - blur * intensity);
+        }
+      `;
+    </script>
+  </body>
+</html>

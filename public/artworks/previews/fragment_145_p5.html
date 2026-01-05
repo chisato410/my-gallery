@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tangram Pack</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <link rel="icon" href="data:," />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+        z-index: 10;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Tangram Pack”</div>
+    <script>
+      p5.disableFriendlyErrors = true;
+
+      let circles = [];
+      let minDistance = 4;
+      let minRadius = 15;
+      let currentStartRadius = 200;
+      const palette = ["#2b2d42", "#8d99ae", "#edf2f4", "#ef233c", "#d90429"];
+      let bgColor = "#edf2f4";
+
+      function setup() {
+        // キャンバス解像度は1000x1000、表示はCSSで500x500
+        createCanvas(1000, 1000, WEBGL);
+        pixelDensity(1);
+        noStroke();
+
+        // 初期のシードを追加
+        for (let i = 0; i < 50; i++) addSeed();
+      }
+
+      function draw() {
+        // WEBGL座標系を中心から左上に合わせる補正
+        translate(-width / 2, -height / 2);
+        background(bgColor);
+
+        // 半径を徐々に小さくして密度を上げる
+        if (currentStartRadius > minRadius) {
+          currentStartRadius -= 0.5;
+        }
+
+        // パッキング処理
+        for (let c of circles) {
+          if (c.active) growCircle(c);
+        }
+
+        // 新しい図形の追加
+        if (frameCount % 2 === 0 && circles.length < 200) {
+          addSeed();
+        }
+
+        // 描画
+        for (let c of circles) {
+          drawTangram(c);
+        }
+      }
+
+      function growCircle(c) {
+        let newRadius = c.radius + 2;
+        // 画面端判定
+        if (
+          c.x - newRadius < 0 ||
+          c.x + newRadius > width ||
+          c.y - newRadius < 0 ||
+          c.y + newRadius > height
+        ) {
+          c.active = false;
+          return;
+        }
+        // 他の円との衝突判定
+        for (let other of circles) {
+          if (other === c) continue;
+          let d = dist(c.x, c.y, other.x, other.y);
+          if (d < newRadius + other.radius + minDistance) {
+            c.active = false;
+            return;
+          }
+        }
+        c.radius = newRadius;
+      }
+
+      function addSeed() {
+        let retries = 0;
+        while (retries < 50) {
+          let x = random(width);
+          let y = random(height);
+          let valid = true;
+          for (let c of circles) {
+            if (
+              dist(x, y, c.x, c.y) <
+              currentStartRadius + c.radius + minDistance
+            ) {
+              valid = false;
+              break;
+            }
+          }
+          if (valid) {
+            circles.push({
+              x: x,
+              y: y,
+              radius: 2,
+              active: true,
+              color: random(palette),
+              sides: floor(random(3, 6)),
+              angle: random(TWO_PI),
+              rotSpeed: random(-0.02, 0.02),
+            });
+            return true;
+          }
+          retries++;
+        }
+        return false;
+      }
+
+      function drawTangram(c) {
+        push();
+        translate(c.x, c.y);
+        c.angle += c.rotSpeed;
+        rotate(floor(c.angle * 8) / 8); // カチカチとした回転
+        fill(c.color);
+        stroke(bgColor);
+        strokeWeight(2);
+
+        beginShape();
+        for (let i = 0; i < c.sides; i++) {
+          let a = (TWO_PI / c.sides) * i;
+          vertex(c.radius * cos(a), c.radius * sin(a));
+        }
+        endShape(CLOSE);
+        pop();
+      }
+    </script>
+  </body>
+</html>

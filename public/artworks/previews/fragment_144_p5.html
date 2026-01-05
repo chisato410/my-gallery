@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tangram Pack</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <link rel="icon" href="data:," />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      canvas {
+        display: block;
+        width: 500px;
+        height: 500px;
+      }
+
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+        z-index: 10;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Tangram Pack”</div>
+    <script>
+      let circles = [];
+      let minDistance = 2;
+      let minRadius = 15;
+      let initialStartRadius = 250;
+      let currentStartRadius;
+      let radiusDecayRate = 1.5;
+      let growthRate = 2;
+      let newSeedInterval = 2;
+      let stoppedAddingSeeds = false;
+      let palettes = [
+        ["#fb6107", "#f3de2c", "#7cb518", "#5c8001", "#fbb02d"],
+        ["#f72585", "#7209b7", "#b6f500", "#000000", "#ffffff"],
+        ["#094074", "#3c6997", "#5adbff", "#ffdd4a", "#fe9000"],
+      ];
+      let palette, bgColor;
+      let rotationMode;
+      let dotShader, bloomShader;
+      let mainCanvas;
+
+      function setup() {
+        // シェーダーを使うためにWEBGLモードを使用
+        createCanvas(windowWidth, windowHeight, WEBGL);
+        pixelDensity(1);
+
+        // メインの描画を保持するバッファを作成（シェーダー適用用）
+        mainCanvas = createGraphics(windowWidth, windowHeight);
+
+        palette = random(palettes);
+        rotationMode = "alternating";
+
+        // 背景色
+        let rawBg = color(random(palette));
+        colorMode(HSB);
+        bgColor = color(
+          hue(rawBg),
+          saturation(rawBg) * 0.4,
+          brightness(rawBg) * 0.9
+        );
+        colorMode(RGB);
+
+        // createShader を使用してシェーダーを初期化
+        dotShader = createShader(vertShader, dotFilterShader);
+        bloomShader = createShader(vertShader, bloomFilterShader);
+
+        currentStartRadius = initialStartRadius;
+        for (let i = 0; i < 50; i++) addSeed();
+      }
+
+      function draw() {
+        // 1. メインの描画をバッファに対して行う
+        mainCanvas.background(bgColor);
+        mainCanvas.push();
+
+        if (currentStartRadius > minRadius) {
+          currentStartRadius = max(
+            minRadius,
+            currentStartRadius - radiusDecayRate
+          );
+        }
+
+        for (let c of circles) {
+          if (c.active) growCircle(c);
+        }
+
+        updateRotations();
+
+        if (!stoppedAddingSeeds && frameCount % newSeedInterval === 0) {
+          if (!addSeed()) {
+            if (circles.length > 50) stoppedAddingSeeds = true;
+          }
+        }
+
+        for (let c of circles) {
+          if (c.parent === null) drawShapeRecursive(c, null);
+        }
+        mainCanvas.pop();
+
+        // 2. シェーダーの適用
+        // Bloom Shader
+        shader(bloomShader);
+        bloomShader.setUniform("tex0", mainCanvas);
+        bloomShader.setUniform("canvasSize", [width, height]);
+        bloomShader.setUniform("intensity", 0.5);
+        bloomShader.setUniform("glow", 1.5);
+        rect(0, 0, width, height);
+
+        // Dot Shader
+        shader(dotShader);
+        dotShader.setUniform("tex0", mainCanvas);
+        dotShader.setUniform("u_resolution", [width, height]);
+        dotShader.setUniform("dotSizePx", [6.0, 6.0]);
+        dotShader.setUniform("dotStrength", 0.3);
+        let bgRgb = [
+          red(bgColor) / 255,
+          green(bgColor) / 255,
+          blue(bgColor) / 255,
+        ];
+        dotShader.setUniform("u_skipColor", bgRgb);
+        dotShader.setUniform("u_skipTolerance", 0.05);
+        rect(0, 0, width, height);
+      }
+
+      function growCircle(c) {
+        if (
+          c.x - c.radius <= 0 ||
+          c.x + c.radius >= width ||
+          c.y - c.radius <= 0 ||
+          c.y + c.radius >= height
+        ) {
+          c.active = false;
+          assignColor(c);
+          return;
+        }
+        let newRadius = c.radius + growthRate;
+        for (let other of circles) {
+          if (other === c) continue;
+          let d = dist(c.x, c.y, other.x, other.y);
+          if (!isValidCircleDistance(newRadius, other.radius, d)) {
+            c.active = false;
+            assignColor(c);
+            return;
+          }
+        }
+        c.radius = newRadius;
+      }
+
+      function assignColor(c) {
+        let col = color(random(palette));
+        let alpha = floor(map(c.layer, 0, 5, 255, 180, true));
+        c.color = color(red(col), green(col), blue(col), alpha);
+      }
+
+      function isValidCircleDistance(r1, r2, d) {
+        let rLarge = max(r1, r2),
+          rSmall = min(r1, r2);
+        let gap =
+          d + rSmall < rLarge
+            ? rLarge - d - rSmall
+            : d >= rLarge + rSmall
+            ? d - rLarge - rSmall
+            : -1;
+        return gap >= minDistance;
+      }
+
+      function addSeed() {
+        let retries = 0;
+        while (retries < 50) {
+          let x = random(width),
+            y = random(height);
+          let valid = true;
+          for (let c of circles) {
+            if (
+              !isValidCircleDistance(
+                currentStartRadius,
+                c.radius,
+                dist(x, y, c.x, c.y)
+              )
+            ) {
+              valid = false;
+              break;
+            }
+          }
+          if (valid) {
+            let layerInfo = calculateLayer(x, y, currentStartRadius);
+            let newCircle = {
+              x,
+              y,
+              radius: currentStartRadius,
+              active: true,
+              color: null,
+              layer: layerInfo.layer,
+              parent: layerInfo.parent,
+              children: [],
+              rotationAngle: 0,
+              rotationSpeed:
+                random(0.5, 2.0) * (layerInfo.layer % 2 == 0 ? 1 : -1),
+              seed: random(1000),
+              sides: floor(random(3, 7)),
+            };
+            if (layerInfo.parent) layerInfo.parent.children.push(newCircle);
+            circles.push(newCircle);
+            return true;
+          }
+          retries++;
+        }
+        return false;
+      }
+
+      function calculateLayer(x, y, radius) {
+        let maxLayer = -1,
+          parent = null;
+        for (let c of circles) {
+          if (dist(x, y, c.x, c.y) + radius < c.radius && c.layer > maxLayer) {
+            maxLayer = c.layer;
+            parent = c;
+          }
+        }
+        return { layer: maxLayer + 1, parent };
+      }
+
+      function updateRotations() {
+        for (let c of circles) {
+          if (c.children.length > 0) c.rotationAngle += c.rotationSpeed;
+        }
+      }
+
+      function drawShapeRecursive(c, parent) {
+        let tx = parent ? c.x - parent.x : c.x;
+        let ty = parent ? c.y - parent.y : c.y;
+        mainCanvas.push();
+        mainCanvas.translate(tx, ty);
+        let steppedAngle = floor(c.rotationAngle / 15) * 15;
+        mainCanvas.rotate(radians(steppedAngle));
+
+        if (c.color) {
+          mainCanvas.fill(c.color);
+          mainCanvas.stroke(bgColor);
+          mainCanvas.strokeWeight(2);
+          mainCanvas.beginShape();
+          for (let i = 0; i < c.sides; i++) {
+            let a = (TWO_PI / c.sides) * i;
+            let r = c.radius * (0.95 + noise(c.seed, i) * 0.1);
+            mainCanvas.vertex(r * cos(a), r * sin(a));
+          }
+          mainCanvas.endShape(CLOSE);
+        }
+        for (let child of c.children) drawShapeRecursive(child, c);
+        mainCanvas.pop();
+      }
+
+      // --- SHADER CODE ---
+      const vertShader = `attribute vec3 aPosition; attribute vec2 aTexCoord; varying vec2 vTexCoord; void main() { vTexCoord = aTexCoord; vec4 positionVec4 = vec4(aPosition, 1.0); positionVec4.xy = positionVec4.xy * 2.0 - 1.0; gl_Position = positionVec4; }`;
+
+      const dotFilterShader = `precision highp float; varying vec2 vTexCoord; uniform sampler2D tex0; uniform vec2 u_resolution; uniform vec2 dotSizePx; uniform float dotStrength; uniform vec3 u_skipColor; uniform float u_skipTolerance; void main() { vec4 base = texture2D(tex0, vTexCoord); vec2 pixel = vTexCoord * u_resolution; vec2 dotCenterPx = (floor(pixel / dotSizePx) + 0.5) * dotSizePx; float dist = length((pixel - dotCenterPx) / (dotSizePx * 0.5)); float mask = smoothstep(1.0, 0.0, dist); float cd = length(base.rgb - u_skipColor); float exclude = 1.0 - smoothstep(u_skipTolerance * 0.7, u_skipTolerance, cd); gl_FragColor = vec4(base.rgb * (1.0 - mask * (1.0 - exclude) * dotStrength), base.a); }`;
+
+      const bloomFilterShader = `precision highp float; varying vec2 vTexCoord; uniform sampler2D tex0; uniform vec2 canvasSize; uniform float intensity; uniform float glow; void main() { vec4 ori = texture2D(tex0, vTexCoord); vec4 blur = vec4(0.0); for(float i=-4.0; i<=4.0; i++){ blur += texture2D(tex0, vTexCoord + vec2(i*glow/canvasSize.x, 0.0)); blur += texture2D(tex0, vTexCoord + vec2(0.0, i*glow/canvasSize.y)); } blur /= 18.0; gl_FragColor = 1.0 - (1.0 - ori) * (1.0 - blur * intensity); }`;
+    </script>
+  </body>
+</html>

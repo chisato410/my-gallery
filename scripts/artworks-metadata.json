@@ -3584,5 +3584,205 @@
       "zen-vibe",
       "milestone-40"
     ]
+  },
+  {
+    "filename": "fragment_144_p5.html",
+    "title": "Tangram Pack",
+    "tech": "WEBGL",
+    "createdAt": "2026-01-05",
+    "tags": [
+      "p5js",
+      "webgl",
+      "glsl-shader",
+      "circle-packing-algorithm",
+      "recursive-tree-structure",
+      "post-processing",
+      "bloom-effect",
+      "dot-screen-filter",
+      "dynamic-palette",
+      "hierarchical-rotation",
+      "stochastic-generation",
+      "computational-geometry",
+      "custom-graphics-buffer",
+      "tangram-inspiration",
+      "masterpiece"
+    ]
+  },
+  {
+    "filename": "fragment_145_p5.html",
+    "title": "Tangram Pack (Advanced Packing)",
+    "tech": "WEBGL",
+    "createdAt": "2026-01-05",
+    "tags": [
+      "p5js",
+      "webgl",
+      "glsl-shader",
+      "circle-packing-algorithm",
+      "recursive-transformation",
+      "nested-geometry",
+      "spatial-filling",
+      "bloom-filter",
+      "halftone-dot-effect",
+      "dynamic-density",
+      "computational-design",
+      "stochastic-distribution",
+      "hierarchical-rotation",
+      "pixel-manipulation",
+      "algorithmic-art"
+    ]
+  },
+  {
+    "filename": "fragment_146_p5.html",
+    "title": "Tangram Flow",
+    "tech": "WEBGL",
+    "createdAt": "2026-01-05",
+    "tags": [
+      "p5js",
+      "webgl",
+      "glsl-shader",
+      "vector-field",
+      "flow-field",
+      "circle-packing",
+      "trigonometric-motion",
+      "grid-background",
+      "bloom-effect",
+      "halftone-dot-filter",
+      "dynamic-composition",
+      "hsb-color-mode",
+      "generative-design",
+      "autonomous-agents",
+      "visual-rhythm"
+    ]
+  },
+  {
+    "filename": "fragment_147_p5.html",
+    "title": "Tangram Flow2",
+    "tech": "p5.js",
+    "createdAt": "2026-01-05",
+    "tags": [
+      "p5js",
+      "vector-field",
+      "particle-system",
+      "flow-tracing",
+      "computational-design",
+      "geometric-abstraction",
+      "hsb-color-mode",
+      "grid-overlay",
+      "constructivism-style",
+      "trigonometric-functions",
+      "motion-trails",
+      "algorithmic-art",
+      "high-density-simulation",
+      "static-frame-composition",
+      "minimalist-aesthetic"
+    ]
+  },
+  {
+    "filename": "fragment_148_p5.html",
+    "title": "Rice Cake Ghost",
+    "tech": "p5.js",
+    "createdAt": "2026-01-05",
+    "tags": [
+      "p5js",
+      "generative-character",
+      "superellipse",
+      "bezier-curves",
+      "linear-gradient",
+      "noise-texture",
+      "harmonic-animation",
+      "kawaii-aesthetic",
+      "random-palette",
+      "composition-grid",
+      "squash-and-stretch",
+      "sinusoidal-motion",
+      "drawing-context-api",
+      "grain-effect"
+    ]
+  },
+  {
+    "filename": "fragment_149_p5.html",
+    "title": "dream",
+    "tech": "p5.js",
+    "createdAt": "2026-01-05",
+    "tags": [
+      "p5js",
+      "cellular-automata",
+      "neighborhood-logic",
+      "emergent-behavior",
+      "dreamcore-aesthetic",
+      "grid-simulation",
+      "soft-color-palette",
+      "object-oriented-programming",
+      "dynamic-background",
+      "autonomous-elements",
+      "state-transition",
+      "visual-poetry",
+      "interactive-reset",
+      "motion-graphics"
+    ]
+  },
+  {
+    "filename": "fragment_150_p5.html",
+    "title": "Music Score",
+    "tech": "p5.js",
+    "createdAt": "2026-01-05",
+    "tags": [
+      "p5js",
+      "generative-music-score",
+      "hand-drawn-texture",
+      "brush-simulation",
+      "automatic-scrolling",
+      "procedural-notation",
+      "perlin-noise",
+      "offscreen-graphics",
+      "blend-mode-multiply",
+      "pixel-density-high",
+      "canvas-manipulation",
+      "analog-aesthetic",
+      "musical-notation-art"
+    ]
+  },
+  {
+    "filename": "fragment_151_p5.html",
+    "title": "Music Score: Manuscript",
+    "tech": "p5.js",
+    "createdAt": "2026-01-05",
+    "tags": [
+      "p5js",
+      "generative-manuscript",
+      "musical-notation",
+      "brush-texture-simulation",
+      "scroll-animation",
+      "paper-texture-overlay",
+      "ink-bleed-effect",
+      "expression-marks",
+      "harmonic-composition",
+      "analog-digital-hybrid",
+      "procedural-generation",
+      "typography-in-art",
+      "manuscript-aesthetic",
+      "seraph-colors"
+    ]
+  },
+  {
+    "filename": "fragment_152_p5.html",
+    "title": "circle anime",
+    "tech": "p5.js",
+    "createdAt": "2026-01-05",
+    "tags": [
+      "p5js",
+      "motion-graphics",
+      "easing-functions",
+      "recursive-division",
+      "object-oriented-animation",
+      "pop-art-aesthetic",
+      "transition-effects",
+      "procedural-timing",
+      "harmonic-motion",
+      "scene-management",
+      "elastic-animation",
+      "dynamic-layout",
+      "flat-design"
+    ]
   }
 ]
