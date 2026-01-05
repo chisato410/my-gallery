@@ -41,3 +41,7 @@ select,
 a {
   transition: all 0.2s ease;
 }
+
+/* .virtuoso-grid-item {
+  aspect-ratio: 1/1;
+} */

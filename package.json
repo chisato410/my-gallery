@@ -14,12 +14,12 @@
     "test-firebase": "node scripts/test-firebase.js",
     "test-env": "node scripts/test-env.js",
     "update-artwork": "node scripts/update-artwork.js",
-    "export": "node scripts/exportFirebaseToJson.js"
+    "export": "node scripts/exportFirebaseToJson.js",
+    "generate-gifs": "node scripts/generate-gifs.js"
   },
   "dependencies": {
     "firebase": "^12.6.0",
     "lucide-react": "^0.555.0",
-    "puppeteer": "^24.32.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.10.1",
@@ -38,6 +38,7 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "postcss": "^8.5.6",
+    "puppeteer": "^24.34.0",
     "sass-embedded": "^1.96.0",
     "tailwindcss": "^4.1.17",
     "vite": "^7.2.4"
