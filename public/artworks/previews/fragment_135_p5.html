@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Squishy Bacteria</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px solid #00ff00;
+        border-radius: 50%;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Squishy Bacteria”</div>
+    <script>
+      let cells = [];
+      function setup() {
+        createCanvas(500, 500);
+        for (let i = 0; i < 50; i++) {
+          cells.push({
+            x: random(width),
+            y: random(height),
+            r: random(20, 40),
+            dx: random(-1, 1),
+            dy: random(-1, 1),
+          });
+        }
+      }
+      function draw() {
+        background(0, 20);
+        noStroke();
+        for (let c of cells) {
+          fill(random(100, 255), random(50, 200), random(150, 255), 150);
+          ellipse(c.x, c.y, c.r, c.r);
+          c.x += c.dx;
+          c.y += c.dy;
+          if (c.x < 0 || c.x > width) c.dx *= -1;
+          if (c.y < 0 || c.y > height) c.dy *= -1;
+        }
+      }
+    </script>
+  </body>
+</html>

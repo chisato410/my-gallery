@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tentacle Bacteria</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px dashed #ff00ff;
+        border-radius: 20px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Tentacle Bacteria”</div>
+    <script>
+      let cells = [];
+      function setup() {
+        createCanvas(500, 500);
+        for (let i = 0; i < 15; i++) {
+          cells.push({
+            x: random(width),
+            y: random(height),
+            r: random(20, 35),
+          });
+        }
+        strokeWeight(2);
+      }
+      function draw() {
+        background(0, 30);
+        for (let c of cells) {
+          fill(100, 200, 255, 150);
+          ellipse(c.x, c.y, c.r * 2);
+          stroke(255, 200, 100, 150);
+          for (let a = 0; a < TWO_PI; a += PI / 6) {
+            let len = c.r + 20 * sin(frameCount * 0.05 + a);
+            line(c.x, c.y, c.x + len * cos(a), c.y + len * sin(a));
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

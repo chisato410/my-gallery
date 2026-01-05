@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Wiggling Microbes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px dotted #ff8000;
+        border-radius: 50%;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Wiggling Microbes”</div>
+    <script>
+      let microbes = [];
+      function setup() {
+        createCanvas(500, 500);
+        for (let i = 0; i < 50; i++) {
+          microbes.push({
+            x: random(width),
+            y: random(height),
+            r: random(15, 40),
+            angle: random(TWO_PI),
+            speed: random(0.01, 0.05),
+          });
+        }
+      }
+      function draw() {
+        background(0, 25);
+        noStroke();
+        for (let m of microbes) {
+          fill(0, 200, 255, 150);
+          let offset = sin(frameCount * m.speed) * 10;
+          ellipse(
+            m.x + offset * cos(m.angle),
+            m.y + offset * sin(m.angle),
+            m.r
+          );
+        }
+      }
+    </script>
+  </body>
+</html>

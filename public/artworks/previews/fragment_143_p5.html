@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>yura yura</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #222;
+      }
+      canvas {
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #443;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“yura yura”</div>
+    <script>
+      let t = 0;
+
+      function setup() {
+        createCanvas(500, 500);
+        noFill();
+      }
+
+      function draw() {
+        // 背景をグラデーション風に
+        for (let y = 0; y < height; y++) {
+          let inter = map(y, 0, height, 0, 1);
+          stroke(lerpColor(color(220, 50, 50), color(50, 0, 50), inter));
+          line(0, y, width, y);
+        }
+
+        translate(width / 2, height / 2);
+
+        let lines = 80; // 放射線の本数
+        for (let i = 0; i < lines; i++) {
+          let angle = (TWO_PI / lines) * i + t;
+          let r1 = 50 + sin(t + i * 0.5) * 100;
+          let r2 = r1 + sin(t * 1.5 + i * 0.3) * 60;
+
+          // サイケデリックカラー
+          let hue = (i * 6 + frameCount * 2) % 360;
+          stroke(color(`hsla(${hue}, 90%, 60%, 0.7)`));
+
+          let thickness = map(sin(i + t), -1, 1, 1, 4);
+          strokeWeight(thickness);
+
+          beginShape();
+          for (let a = angle; a < angle + PI; a += 0.1) {
+            let r = map(sin(a * 3 + t * 2 + i), -1, 1, r1, r2);
+            let x = r * cos(a);
+            let y = r * sin(a);
+            vertex(x, y);
+          }
+          endShape();
+        }
+
+        // 中心にランダムドット追加
+        for (let i = 0; i < 50; i++) {
+          let angle = random(TWO_PI);
+          let radius = random(10, 100) + sin(frameCount * 0.05 + i) * 10;
+          let col = color(
+            random(200, 255),
+            random(50, 150),
+            random(0, 50),
+            180
+          );
+          fill(col);
+          noStroke();
+          ellipse(radius * cos(angle), radius * sin(angle), 4, 4);
+        }
+
+        t += 0.005; // 全体回転
+      }
+    </script>
+  </body>
+</html>

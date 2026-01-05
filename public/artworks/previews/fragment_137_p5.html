@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mouse-Responsive Bacteria</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px solid #00ffff;
+        border-radius: 25px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Mouse-Responsive Bacteria”</div>
+    <script>
+      function setup() {
+        createCanvas(500, 500);
+        noStroke();
+      }
+      function draw() {
+        background(0, 20);
+        let count = map(mouseX, 0, width, 5, 50);
+        for (let i = 0; i < count; i++) {
+          fill(random(50, 255), random(100, 255), random(150, 255), 120);
+          ellipse(
+            mouseX + random(-50, 50),
+            mouseY + random(-50, 50),
+            random(10, 30)
+          );
+        }
+      }
+    </script>
+  </body>
+</html>

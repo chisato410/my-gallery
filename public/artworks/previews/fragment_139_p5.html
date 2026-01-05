@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Glowing Cells</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px double #ffff00;
+        border-radius: 20px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Glowing Cells”</div>
+    <script>
+      let microbes = [];
+      function setup() {
+        createCanvas(500, 500);
+        for (let i = 0; i < 50; i++) {
+          microbes.push({
+            x: random(width),
+            y: random(height),
+            r: random(10, 25),
+          });
+        }
+      }
+      function draw() {
+        background(0, 20);
+        noStroke();
+        for (let m of microbes) {
+          fill(255, random(100, 255), 100, 150);
+          ellipse(
+            m.x + sin(frameCount * 0.05) * 10,
+            m.y + cos(frameCount * 0.05) * 10,
+            m.r
+          );
+        }
+      }
+    </script>
+  </body>
+</html>

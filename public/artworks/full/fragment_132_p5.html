@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ドット万華鏡</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+      body {
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      canvas {
+        border: 4px solid #ff8000;
+        border-radius: 25px;
+        width: 500px;
+        height: 500px;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“ドット万華鏡”</div>
+    <script>
+      let t = 0;
+      function setup() {
+        createCanvas(500, 500);
+        noStroke();
+      }
+      function draw() {
+        background(0, 20);
+        translate(width / 2, height / 2);
+        let sides = 12;
+        for (let i = 0; i < sides; i++) {
+          push();
+          rotate((i * TWO_PI) / sides);
+          fill(
+            (frameCount * 5 + i * 20) % 255,
+            255,
+            (i * 30 + frameCount) % 255,
+            150
+          );
+          ellipse(mouseX - 250, mouseY - 250, 15, 15);
+          pop();
+        }
+      }
+    </script>
+  </body>
+</html>
