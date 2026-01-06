@@ -2710,29 +2710,6 @@
     "filename": "fragment_036_three.html"
   },
   {
-    "id": 140,
-    "title": "Nebula",
-    "tech": "Three.js",
-    "createdAt": "2025-12-10",
-    "tags": [
-      "webgl",
-      "nebula",
-      "stars",
-      "space",
-      "particle-system",
-      "glow",
-      "gas-clouds",
-      "rotating",
-      "ambient-animation",
-      "fantasy",
-      "dreamy",
-      "cosmic"
-    ],
-    "url": "/artworks/full/fragment_037_three.html",
-    "previewUrl": "/artworks/previews/fragment_037_three.html",
-    "filename": "fragment_037_three.html"
-  },
-  {
     "id": 141,
     "title": "Magic Circle",
     "tech": "Three.js",

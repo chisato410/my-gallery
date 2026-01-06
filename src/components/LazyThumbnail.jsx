@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { VoteButton } from "./VoteButton";
 import styles from "./LazyThumbnail.module.scss";
 
-export function LazyThumbnail({ artwork, onSelect }) {
+export const LazyThumbnail = React.memo(({ artwork, onSelect }) => {
   const [hasError, setHasError] = useState(false);
 
   const gifPath = `/artworks/thumbnails/${artwork.filename.replace(
@@ -18,7 +18,11 @@ export function LazyThumbnail({ artwork, onSelect }) {
         <VoteButton artworkId={artwork.id} compact />
       </div>
 
-      <button onClick={() => onSelect(artwork)} className={styles.button}>
+      <button
+        onClick={() => onSelect(artwork)}
+        className={styles.button}
+        type="button"
+      >
         {!hasError ? (
           <img
             src={gifPath}
@@ -26,15 +30,19 @@ export function LazyThumbnail({ artwork, onSelect }) {
             loading="lazy"
             className={styles.media}
             onError={() => setHasError(true)}
+            draggable={false}
           />
         ) : (
           <iframe
             src={artwork.previewUrl}
             className={styles.media}
             title={artwork.title}
+            loading="lazy"
           />
         )}
       </button>
     </div>
   );
-}
+});
+
+LazyThumbnail.displayName = "LazyThumbnail";
