@@ -3770,5 +3770,26 @@
       "dynamic-layout",
       "flat-design"
     ]
+  },
+  {
+    "filename": "moire_circles.html",
+    "title": "Moiré Circles",
+    "tech": "p5.js",
+    "createdAt": "2026-01-06",
+    "tags": [
+      "p5js",
+      "moire-effect",
+      "recursive-geometry",
+      "interference-pattern",
+      "oscillation",
+      "mathematical-art",
+      "hsb-color-drift",
+      "dynamic-scaling",
+      "optical-illusion",
+      "minimalist-code",
+      "sinusoidal-mapping",
+      "generative-motion",
+      "zen-aesthetic"
+    ]
   }
 ]

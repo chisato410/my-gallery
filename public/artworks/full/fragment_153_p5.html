@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Moiré Circles</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="https://unpkg.com/p5.brush@1.0.3/dist/p5.brush.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+        z-index: 10;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Moiré Circles”</div>
+    <script>
+      let maxIterations = 80;
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        colorMode(HSB, 360, 100, 100, 100);
+        background(0, 0, 5);
+        noFill();
+      }
+
+      function draw() {
+        background(0, 0, 5, 12);
+
+        let centerX = width / 2;
+        let centerY = height / 2;
+
+        let ratioOscillate = sin(frameCount * 0.002);
+        let ratio = map(ratioOscillate, -1, 1, 0.0, 1.0);
+
+        let offsetOscillate = sin(frameCount * 0.009);
+        let centerOffset = map(offsetOscillate, -1, 1, 0.5, 1.0);
+
+        let angleOscillate = sin(frameCount * 0.009);
+        let baseAngle = map(angleOscillate, -1, 1, -PI, PI);
+
+        let phaseShift = frameCount * 0.01;
+
+        let currentR = min(width, height) * 0.45;
+        let x = centerX;
+        let y = centerY;
+
+        for (let i = 0; i < maxIterations; i++) {
+          let hue = (frameCount * 0.3 + i * 5) % 360;
+
+          let weight = map(i, 0, maxIterations, 1.2, 0.1);
+          let alpha = map(i, 0, maxIterations, 100, 20);
+
+          stroke(hue, 50, 100, alpha);
+          strokeWeight(weight);
+
+          ellipse(x, y, currentR * 2);
+
+          let nextR = currentR * ratio;
+
+          let distance = (currentR - nextR) * centerOffset;
+
+          let angle = baseAngle + i * 0.15 + phaseShift;
+
+          x += cos(angle) * distance;
+          y += sin(angle) * distance;
+
+          currentR = nextR;
+
+          if (currentR < 0.1) break;
+        }
+      }
+
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+      }
+    </script>
+  </body>
+</html>
