@@ -1856,37 +1856,6 @@
     "filename": "fragment_109_p5.html"
   },
   {
-    "id": 166,
-    "previewUrl": "/artworks/previews/fragment_109_p5.html",
-    "url": "/artworks/full/fragment_109_p5.html",
-    "tech": "p5.js",
-    "votes": 0,
-    "tags": [
-      "p5js",
-      "generative-art",
-      "sine-wave",
-      "mathematical-art",
-      "cyberpunk-aesthetic",
-      "neon-colors",
-      "liquid-motion",
-      "rhythmic-animation",
-      "waveform",
-      "dynamic-gradient",
-      "trailing-effect",
-      "trigonometry",
-      "interference-pattern",
-      "dark-mode",
-      "digital-ocean"
-    ],
-    "filename": "fragment_109_p5.html",
-    "title": "Wavy lines",
-    "createdAt": {
-      "type": "firestore/timestamp/1.0",
-      "seconds": 1767225600,
-      "nanoseconds": 0
-    }
-  },
-  {
     "id": 167,
     "votes": 0,
     "title": "ripples",
@@ -5179,28 +5148,6 @@
       "dynamic-collapse",
       "abstract-geometry",
       "light-leak"
-    ]
-  },
-  {
-    "id": 98,
-    "tech": "p5.js",
-    "url": "/artworks/full/fragment_097_p5.html",
-    "votes": 0,
-    "title": "Spectrum Flow (Refined)",
-    "createdAt": {
-      "type": "firestore/timestamp/1.0",
-      "seconds": 1763942400,
-      "nanoseconds": 0
-    },
-    "filename": "fragment_097_p5.html",
-    "previewUrl": "/artworks/previews/fragment_097_p5.html",
-    "tags": [
-      "prism",
-      "rainbow",
-      "refracted-light",
-      "wave-motion",
-      "glow",
-      "abstract-light"
     ]
   },
   {
