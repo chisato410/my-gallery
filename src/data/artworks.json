@@ -1,9 +1,8 @@
 [
   {
     "id": 1,
-    "title": "Fragment Template",
     "tech": "p5.js",
-    "createdAt": "2025-11-05",
+    "votes": 0,
     "tags": [
       "neon-colors",
       "dark-background",
@@ -14,183 +13,29 @@
       "centripetal-layout",
       "fragment-style"
     ],
+    "title": "Fragment Template",
     "url": "/artworks/full/fragment_000_p5.html",
-    "previewUrl": "/artworks/previews/fragment_000_p5.html",
-    "filename": "fragment_000_p5.html"
-  },
-  {
-    "id": 2,
-    "title": "Abstract",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "luminous-points",
-      "blue-tint",
-      "dark-canvas",
-      "constellation-like",
-      "sinusoidal-motion",
-      "waveform-orbits",
-      "oscillating-field",
-      "point-cloud",
-      "radial-abstraction",
-      "minimal-geometry"
-    ],
-    "url": "/artworks/full/fragment_001_p5.html",
-    "previewUrl": "/artworks/previews/fragment_001_p5.html",
-    "filename": "fragment_001_p5.html"
-  },
-  {
-    "id": 3,
-    "title": "Boids",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "flocking",
-      "boids",
-      "dark-canvas",
-      "triangles",
-      "particle-swarm",
-      "emergent-behavior",
-      "dynamic-patterns",
-      "interactive-motion",
-      "radial-drift",
-      "soft-trails"
-    ],
-    "url": "/artworks/full/fragment_002_p5.html",
-    "previewUrl": "/artworks/previews/fragment_002_p5.html",
-    "filename": "fragment_002_p5.html"
-  },
-  {
-    "id": 4,
-    "title": "Feel",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "interactive",
-      "particles",
-      "colorful",
-      "soft-motion",
-      "mouse-driven",
-      "emotional-expression",
-      "flowing-pattern",
-      "dynamic-color",
-      "translucent-trails",
-      "generative"
-    ],
-    "url": "/artworks/full/fragment_003_p5.html",
-    "previewUrl": "/artworks/previews/fragment_003_p5.html",
-    "filename": "fragment_003_p5.html"
-  },
-  {
-    "id": 5,
-    "title": "Grassland",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "nature-inspired",
-      "grass",
-      "wind-motion",
-      "gradient-sky",
-      "sunlight",
-      "procedural",
-      "soft-animation",
-      "interactive-wind",
-      "calm",
-      "generative"
-    ],
-    "url": "/artworks/full/fragment_004_p5.html",
-    "previewUrl": "/artworks/previews/fragment_004_p5.html",
-    "filename": "fragment_004_p5.html"
-  },
-  {
-    "id": 6,
-    "title": "Grid Motion",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "grid",
-      "geometric",
-      "noise-driven",
-      "rotation",
-      "flowing-pattern",
-      "abstract",
-      "minimal",
-      "interactive",
-      "procedural",
-      "generative"
-    ],
-    "url": "/artworks/full/fragment_005_p5.html",
-    "previewUrl": "/artworks/previews/fragment_005_p5.html",
-    "filename": "fragment_005_p5.html"
-  },
-  {
-    "id": 7,
-    "title": "Fancy Grid",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "grid",
-      "geometric",
-      "interactive",
-      "colorful",
-      "smooth-motion",
-      "wave-pattern",
-      "mouse-driven",
-      "generative",
-      "abstract",
-      "soft-light"
-    ],
-    "url": "/artworks/full/fragment_006_p5.html",
-    "previewUrl": "/artworks/previews/fragment_006_p5.html",
-    "filename": "fragment_006_p5.html"
-  },
-  {
-    "id": 8,
-    "title": "Moiré",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "moire",
-      "lines",
-      "layered",
-      "rotation",
-      "optical-illusion",
-      "abstract",
-      "geometric",
-      "procedural",
-      "minimal",
-      "generative"
-    ],
-    "url": "/artworks/full/fragment_007_p5.html",
-    "previewUrl": "/artworks/previews/fragment_007_p5.html",
-    "filename": "fragment_007_p5.html"
-  },
-  {
-    "id": 9,
-    "title": "Random Walk",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "random-walk",
-      "line-art",
-      "organic-motion",
-      "color-shifting",
-      "reflective",
-      "procedural",
-      "generative",
-      "abstract",
-      "minimal",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_008_p5.html",
-    "previewUrl": "/artworks/previews/fragment_008_p5.html",
-    "filename": "fragment_008_p5.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_000_p5.html",
+    "previewUrl": "/artworks/previews/fragment_000_p5.html"
   },
   {
     "id": 10,
-    "title": "Rotational Geometry",
+    "filename": "fragment_009_p5.html",
     "tech": "p5.js",
-    "createdAt": "2025-11-05",
+    "title": "Rotational Geometry",
+    "url": "/artworks/full/fragment_009_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_009_p5.html",
     "tags": [
       "rotation",
       "geometry",
@@ -202,16 +47,244 @@
       "procedural",
       "pattern",
       "minimal"
+    ]
+  },
+  {
+    "id": 100,
+    "previewUrl": "/artworks/previews/fragment_099_p5.html",
+    "url": "/artworks/full/fragment_099_p5.html",
+    "title": "Playground",
+    "tags": [
+      "dog",
+      "playground",
+      "trail-animation",
+      "interactive",
+      "mouse-follow",
+      "balls"
     ],
-    "url": "/artworks/full/fragment_009_p5.html",
-    "previewUrl": "/artworks/previews/fragment_009_p5.html",
-    "filename": "fragment_009_p5.html"
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763942400,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "filename": "fragment_099_p5.html"
+  },
+  {
+    "id": 101,
+    "votes": 0,
+    "url": "/artworks/full/fragment_100_p5.html",
+    "previewUrl": "/artworks/previews/fragment_100_p5.html",
+    "tags": [
+      "dog",
+      "breath",
+      "fog",
+      "click-interaction",
+      "winter-morning",
+      "soft-animation"
+    ],
+    "tech": "p5.js",
+    "filename": "fragment_100_p5.html",
+    "title": "Dog's Breath",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763942400,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 102,
+    "filename": "fragment_101_p5.html",
+    "url": "/artworks/full/fragment_101_p5.html",
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_101_p5.html",
+    "title": "Cosmic Dog",
+    "tags": [
+      "dog-silhouette",
+      "starfield",
+      "cosmic",
+      "tail-meteor",
+      "gradient-background",
+      "animated-light"
+    ],
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763942400,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 103,
+    "tags": [
+      "dog",
+      "bubbles",
+      "floating-particles",
+      "interactive",
+      "rainbow-reflection",
+      "soft-gradient"
+    ],
+    "votes": 0,
+    "filename": "fragment_102_p5.html",
+    "url": "/artworks/full/fragment_102_p5.html",
+    "title": "Bubble Pup",
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_102_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763942400,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 104,
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_103_p5.html",
+    "tags": [
+      "dog",
+      "shadow-casting",
+      "dynamic-light",
+      "standing-silhouette",
+      "soft-highlights",
+      "interactive-light"
+    ],
+    "filename": "fragment_103_p5.html",
+    "url": "/artworks/full/fragment_103_p5.html",
+    "votes": 0,
+    "title": "Shadow of Dog",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763942400,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 105,
+    "previewUrl": "/artworks/previews/fragment_000_three.html",
+    "tech": "three.js",
+    "title": "Three.js template",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765238400,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "filename": "fragment_000_three.html",
+    "tags": [
+      "webgl",
+      "geometry",
+      "torus-knot",
+      "mesh",
+      "rotation",
+      "3d-shape",
+      "interactive-canvas"
+    ],
+    "url": "/artworks/full/fragment_000_three.html"
+  },
+  {
+    "id": 106,
+    "previewUrl": "/artworks/previews/fragment_001_three.html",
+    "votes": 0,
+    "tags": [
+      "webgl",
+      "particles",
+      "buffer-geometry",
+      "points",
+      "rotation",
+      "3d-space",
+      "starfield"
+    ],
+    "filename": "fragment_001_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764028800,
+      "nanoseconds": 0
+    },
+    "tech": "Three.js",
+    "url": "/artworks/full/fragment_001_three.html",
+    "title": "Particle Field"
+  },
+  {
+    "id": 107,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764028800,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_002_three.html",
+    "title": "Noise Wave Surface",
+    "tags": [
+      "webgl",
+      "plane-geometry",
+      "mesh-standard-material",
+      "wireframe",
+      "simplex-noise",
+      "animated-surface",
+      "lighting"
+    ],
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_002_three.html",
+    "tech": "Three.js",
+    "url": "/artworks/full/fragment_002_three.html"
+  },
+  {
+    "id": 108,
+    "url": "/artworks/full/fragment_003_three.html",
+    "votes": 0,
+    "tags": [
+      "webgl",
+      "sphere-geometry",
+      "mesh-normal-material",
+      "flat-shading",
+      "simplex-noise",
+      "animated-deformation",
+      "rotation"
+    ],
+    "previewUrl": "/artworks/previews/fragment_003_three.html",
+    "tech": "Three.js",
+    "title": "Fractal Sphere",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764028800,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_003_three.html"
+  },
+  {
+    "id": 109,
+    "url": "/artworks/full/fragment_004_three.html",
+    "tags": [
+      "webgl",
+      "particles",
+      "buffer-geometry",
+      "points-material",
+      "simplex-noise",
+      "cloud-effect",
+      "3d-animation"
+    ],
+    "votes": 0,
+    "tech": "three.js",
+    "title": "Noise Cloud Particles",
+    "filename": "fragment_004_three.html",
+    "previewUrl": "/artworks/previews/fragment_004_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764028800,
+      "nanoseconds": 0
+    }
   },
   {
     "id": 11,
-    "title": "Starfield",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_010_p5.html",
     "tech": "p5.js",
-    "createdAt": "2025-11-05",
+    "filename": "fragment_010_p5.html",
+    "title": "Starfield",
     "tags": [
       "stars",
       "night-sky",
@@ -225,1833 +298,17 @@
       "procedural"
     ],
     "url": "/artworks/full/fragment_010_p5.html",
-    "previewUrl": "/artworks/previews/fragment_010_p5.html",
-    "filename": "fragment_010_p5.html"
+    "votes": 0
   },
   {
-    "id": 12,
-    "title": "TimeColor",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "color-cycle",
-      "time-based",
-      "sun-motion",
-      "gradient",
-      "sky",
-      "landscape",
-      "generative",
-      "ambient",
-      "light",
-      "abstract"
-    ],
-    "url": "/artworks/full/fragment_011_p5.html",
-    "previewUrl": "/artworks/previews/fragment_011_p5.html",
-    "filename": "fragment_011_p5.html"
-  },
-  {
-    "id": 13,
-    "title": "Boid Flow",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "boids",
-      "flocking",
-      "motion",
-      "triangle-agents",
-      "loop",
-      "generative",
-      "organic",
-      "movement",
-      "minimal",
-      "swarm"
-    ],
-    "url": "/artworks/full/fragment_012_p5.html",
-    "previewUrl": "/artworks/previews/fragment_012_p5.html",
-    "filename": "fragment_012_p5.html"
-  },
-  {
-    "id": 14,
-    "title": "Moiré",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "moire",
-      "interference",
-      "circles",
-      "rotation",
-      "geometric",
-      "layered",
-      "pattern",
-      "abstract",
-      "minimal",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_013_p5.html",
-    "previewUrl": "/artworks/previews/fragment_013_p5.html",
-    "filename": "fragment_013_p5.html"
-  },
-  {
-    "id": 15,
-    "title": "CircleMoiré",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "waves",
-      "moire",
-      "sin",
-      "dual-layer",
-      "oscillation",
-      "line-art",
-      "pattern",
-      "abstract",
-      "minimal",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_014_p5.html",
-    "previewUrl": "/artworks/previews/fragment_014_p5.html",
-    "filename": "fragment_014_p5.html"
-  },
-  {
-    "id": 16,
-    "title": "Grid Moiré",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "grid",
-      "moire",
-      "rotation",
-      "interference",
-      "lines",
-      "pattern",
-      "contrast",
-      "geometric",
-      "abstract",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_015_p5.html",
-    "previewUrl": "/artworks/previews/fragment_015_p5.html",
-    "filename": "fragment_015_p5.html"
-  },
-  {
-    "id": 17,
-    "title": "Dynamic Radial Moiré",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "radial",
-      "moire",
-      "rotation",
-      "lines",
-      "wave",
-      "interference",
-      "geometric",
-      "layered",
-      "abstract",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_016_p5.html",
-    "previewUrl": "/artworks/previews/fragment_016_p5.html",
-    "filename": "fragment_016_p5.html"
-  },
-  {
-    "id": 18,
-    "title": "Interference",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "interference",
-      "wave-fields",
-      "sin-cos",
-      "dual-layer",
-      "color-shift",
-      "motion",
-      "geometric",
-      "points",
-      "abstract",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_017_p5.html",
-    "previewUrl": "/artworks/previews/fragment_017_p5.html",
-    "filename": "fragment_017_p5.html"
-  },
-  {
-    "id": 19,
-    "title": "Resonant Interference",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "interference",
-      "resonance",
-      "multi-layer",
-      "color-cycle",
-      "radial-motion",
-      "pulse",
-      "generative",
-      "oscillation",
-      "abstract",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_018_p5.html",
-    "previewUrl": "/artworks/previews/fragment_018_p5.html",
-    "filename": "fragment_018_p5.html"
-  },
-  {
-    "id": 20,
-    "title": "Neo Boids",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "boids",
-      "hsb",
-      "swarm",
-      "color-motion",
-      "interactive",
-      "trail",
-      "generative",
-      "organic",
-      "agents",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_019_p5.html",
-    "previewUrl": "/artworks/previews/fragment_019_p5.html",
-    "filename": "fragment_019_p5.html"
-  },
-  {
-    "id": 21,
-    "title": "Wind Field",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "flow-field",
-      "noise",
-      "wind",
-      "boids",
-      "soft-motion",
-      "perlin",
-      "particles",
-      "ambient",
-      "generative",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_020_p5.html",
-    "previewUrl": "/artworks/previews/fragment_020_p5.html",
-    "filename": "fragment_020_p5.html"
-  },
-  {
-    "id": 22,
-    "title": "Predator’s Orbit",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "boids",
-      "predator-prey",
-      "orbit",
-      "flocking",
-      "chase",
-      "swarm",
-      "simulation",
-      "generative",
-      "dynamic",
-      "tension"
-    ],
-    "url": "/artworks/full/fragment_021_p5.html",
-    "previewUrl": "/artworks/previews/fragment_021_p5.html",
-    "filename": "fragment_021_p5.html"
-  },
-  {
-    "id": 23,
-    "title": "Celestial Flock (Reset)",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "boids",
-      "gravity",
-      "reset",
-      "swirl",
-      "celestial",
-      "particle",
-      "loop",
-      "generative",
-      "ambient",
-      "cosmic"
-    ],
-    "url": "/artworks/full/fragment_022_p5.html",
-    "previewUrl": "/artworks/previews/fragment_022_p5.html",
-    "filename": "fragment_022_p5.html"
-  },
-  {
-    "id": 24,
-    "title": "Symmetry Flow",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "symmetry",
-      "radial",
-      "boids",
-      "orbit",
-      "harmonic",
-      "geometric",
-      "pattern",
-      "generative",
-      "motion",
-      "abstract"
-    ],
-    "url": "/artworks/full/fragment_023_p5.html",
-    "previewUrl": "/artworks/previews/fragment_023_p5.html",
-    "filename": "fragment_023_p5.html"
-  },
-  {
-    "id": 25,
-    "title": "Particle Bloom",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "particles",
-      "bloom",
-      "explosion",
-      "burst",
-      "trail",
-      "generative",
-      "color",
-      "abstract",
-      "fade",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_024_p5.html",
-    "previewUrl": "/artworks/previews/fragment_024_p5.html",
-    "filename": "fragment_024_p5.html"
-  },
-  {
-    "id": 26,
-    "title": "Spiral Nebula",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "spiral",
-      "nebula",
-      "galaxy",
-      "rotation",
-      "color",
-      "particle",
-      "swirl",
-      "generative",
-      "cosmic",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_025_p5.html",
-    "previewUrl": "/artworks/previews/fragment_025_p5.html",
-    "filename": "fragment_025_p5.html"
-  },
-  {
-    "id": 27,
-    "title": "Modular Shapes Grid",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "grid",
-      "shapes",
-      "pastel",
-      "geometric",
-      "modular",
-      "pattern",
-      "generative",
-      "motion",
-      "interactive",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_026_p5.html",
-    "previewUrl": "/artworks/previews/fragment_026_p5.html",
-    "filename": "fragment_026_p5.html"
-  },
-  {
-    "id": 28,
-    "title": "Template",
-    "tech": "p5.js",
-    "createdAt": "2025-11-07",
-    "tags": [
-      "template",
-      "orbit",
-      "shapes",
-      "structure",
-      "generative",
-      "motion",
-      "centered",
-      "abstract",
-      "dynamic",
-      "scaffold"
-    ],
-    "url": "/artworks/full/fragment_027_p5.html",
-    "previewUrl": "/artworks/previews/fragment_027_p5.html",
-    "filename": "fragment_027_p5.html"
-  },
-  {
-    "id": 29,
-    "title": "Pulse Bloom",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "pulse",
-      "rings",
-      "bloom",
-      "wave",
-      "color-shift",
-      "generative",
-      "breathing",
-      "radial",
-      "ambient",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_028_p5.html",
-    "previewUrl": "/artworks/previews/fragment_028_p5.html",
-    "filename": "fragment_028_p5.html"
-  },
-  {
-    "id": 30,
-    "title": "Breathing Mandala",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "mandala",
-      "breathing",
-      "petals",
-      "radial",
-      "symmetry",
-      "generative",
-      "wave",
-      "pattern",
-      "color",
-      "dynamic"
-    ],
-    "url": "/artworks/full/fragment_029_p5.html",
-    "previewUrl": "/artworks/previews/fragment_029_p5.html",
-    "filename": "fragment_029_p5.html"
-  },
-  {
-    "id": 31,
-    "title": "Chromatic Orbit",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "orbit",
-      "color",
-      "chromatic",
-      "rotation",
-      "trail",
-      "generative",
-      "radial",
-      "light",
-      "dynamic",
-      "abstract"
-    ],
-    "url": "/artworks/full/fragment_030_p5.html",
-    "previewUrl": "/artworks/previews/fragment_030_p5.html",
-    "filename": "fragment_030_p5.html"
-  },
-  {
-    "id": 32,
-    "title": "Fractal Pulse",
-    "tech": "p5.js",
-    "createdAt": "2025-11-05",
-    "tags": [
-      "fractal",
-      "pulse",
-      "radial",
-      "layers",
-      "color-shift",
-      "generative",
-      "oscillation",
-      "abstract",
-      "dynamic",
-      "geometry"
-    ],
-    "url": "/artworks/full/fragment_031_p5.html",
-    "previewUrl": "/artworks/previews/fragment_031_p5.html",
-    "filename": "fragment_031_p5.html"
-  },
-  {
-    "id": 33,
-    "title": "GeoFlow",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "geometry",
-      "orbit",
-      "hsl-color",
-      "rotation",
-      "particle-motion",
-      "ellipse-field",
-      "flow",
-      "dynamic",
-      "minimal"
-    ],
-    "url": "/artworks/full/fragment_032_p5.html",
-    "previewUrl": "/artworks/previews/fragment_032_p5.html",
-    "filename": "fragment_032_p5.html"
-  },
-  {
-    "id": 34,
-    "title": "Yami Cute",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "cute",
-      "heart",
-      "bubble",
-      "glitter",
-      "hsb-color",
-      "floating",
-      "kawaii-dark",
-      "soft-motion",
-      "aesthetic"
-    ],
-    "url": "/artworks/full/fragment_033_p5.html",
-    "previewUrl": "/artworks/previews/fragment_033_p5.html",
-    "filename": "fragment_033_p5.html"
-  },
-  {
-    "id": 35,
-    "title": "Toxic Heart",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "heart",
-      "toxic",
-      "hsl-color",
-      "pulse",
-      "particles",
-      "dark-theme",
-      "glow",
-      "organic-motion"
-    ],
-    "url": "/artworks/full/fragment_034_p5.html",
-    "previewUrl": "/artworks/previews/fragment_034_p5.html",
-    "filename": "fragment_034_p5.html"
-  },
-  {
-    "id": 36,
-    "title": "Broken Doll",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "shards",
-      "triangle",
-      "fragmented",
-      "glow",
-      "pink-core",
-      "pulse",
-      "rotation",
-      "surreal",
-      "dark-pop"
-    ],
-    "url": "/artworks/full/fragment_035_p5.html",
-    "previewUrl": "/artworks/previews/fragment_035_p5.html",
-    "filename": "fragment_035_p5.html"
-  },
-  {
-    "id": 37,
-    "title": "Pink Overdose",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "pink",
-      "bubble",
-      "pulse",
-      "loop",
-      "5sec-loop",
-      "hsl-color",
-      "additive-blend",
-      "soft-glow"
-    ],
-    "url": "/artworks/full/fragment_036_p5.html",
-    "previewUrl": "/artworks/previews/fragment_036_p5.html",
-    "filename": "fragment_036_p5.html"
-  },
-  {
-    "id": 38,
-    "title": "Holy Sin",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "cross",
-      "red-glow",
-      "rotation",
-      "hsl-color",
-      "pulse",
-      "sacred",
-      "dark-aesthetic",
-      "symbolic"
-    ],
-    "url": "/artworks/full/fragment_037_p5.html",
-    "previewUrl": "/artworks/previews/fragment_037_p5.html",
-    "filename": "fragment_037_p5.html"
-  },
-  {
-    "id": 39,
-    "title": "Ghost Message",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "glyph",
-      "floating-text",
-      "noise-effect",
-      "purple-glow",
-      "hsl-color",
-      "ghostly",
-      "vertical-flow",
-      "ambient"
-    ],
-    "url": "/artworks/full/fragment_038_p5.html",
-    "previewUrl": "/artworks/previews/fragment_038_p5.html",
-    "filename": "fragment_038_p5.html"
-  },
-  {
-    "id": 40,
-    "title": "Fallen Halo",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "halo",
-      "ellipse",
-      "rotation",
-      "light-particles",
-      "sacred",
-      "yellow-glow",
-      "soft-motion",
-      "aura"
-    ],
-    "url": "/artworks/full/fragment_039_p5.html",
-    "previewUrl": "/artworks/previews/fragment_039_p5.html",
-    "filename": "fragment_039_p5.html"
-  },
-  {
-    "id": 41,
-    "title": "Feather Drift",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "feather",
-      "drift",
-      "floating",
-      "hsl-color",
-      "soft-motion",
-      "lightness",
-      "gentle-flow",
-      "minimal"
-    ],
-    "url": "/artworks/full/fragment_040_p5.html",
-    "previewUrl": "/artworks/previews/fragment_040_p5.html",
-    "filename": "fragment_040_p5.html"
-  },
-  {
-    "id": 42,
-    "title": "Heaven Noise",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "white-noise",
-      "luminous",
-      "soft-glow",
-      "subtle-randomness",
-      "pixel-shimmer",
-      "ambient",
-      "ethereal",
-      "light-grain"
-    ],
-    "url": "/artworks/full/fragment_041_p5.html",
-    "previewUrl": "/artworks/previews/fragment_041_p5.html",
-    "filename": "fragment_041_p5.html"
-  },
-  {
-    "id": 43,
-    "title": "Cotton Candy Dream",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "pastel-cloud",
-      "soft-motion",
-      "dreamy",
-      "floating-forms",
-      "cotton-fog",
-      "hsl-palette",
-      "soothing",
-      "pastel-vapor"
-    ],
-    "url": "/artworks/full/fragment_042_p5.html",
-    "previewUrl": "/artworks/previews/fragment_042_p5.html",
-    "filename": "fragment_042_p5.html"
-  },
-  {
-    "id": 44,
-    "title": "Dream Bubble",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "bubble-field",
-      "vertical-flow",
-      "soft-rise",
-      "translucent-layers",
-      "gentle-motion",
-      "color-float",
-      "dreamlike",
-      "hsl-glow"
-    ],
-    "url": "/artworks/full/fragment_043_p5.html",
-    "previewUrl": "/artworks/previews/fragment_043_p5.html",
-    "filename": "fragment_043_p5.html"
-  },
-  {
-    "id": 45,
-    "title": "Sweet Static",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "pink-noise",
-      "static-field",
-      "sugar-tone",
-      "pixel-random",
-      "heart-wave",
-      "cute-chaos",
-      "romantic-glitch",
-      "sweet-aesthetic"
-    ],
-    "url": "/artworks/full/fragment_044_p5.html",
-    "previewUrl": "/artworks/previews/fragment_044_p5.html",
-    "filename": "fragment_044_p5.html"
-  },
-  {
-    "id": 46,
-    "title": "Nyan Rain (Chaotic)",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "emoji-rain",
-      "falling-objects",
-      "chaotic-motion",
-      "emoji-chaos",
-      "rainfield",
-      "text-particles",
-      "wobble-physics",
-      "humor"
-    ],
-    "url": "/artworks/full/fragment_045_p5.html",
-    "previewUrl": "/artworks/previews/fragment_045_p5.html",
-    "filename": "fragment_045_p5.html"
-  },
-  {
-    "id": 47,
-    "title": "Broken Language",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "text-stream",
-      "glyph-fall",
-      "coded-chaos",
-      "fragmented-text",
-      "symbolic-rain",
-      "language-noise",
-      "glitch-cascade",
-      "syntax-drift"
-    ],
-    "url": "/artworks/full/fragment_046_p5.html",
-    "previewUrl": "/artworks/previews/fragment_046_p5.html",
-    "filename": "fragment_046_p5.html"
-  },
-  {
-    "id": 48,
-    "title": "Glitch Bloom",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "pixel-bloom",
-      "color-distortion",
-      "noise-grid",
-      "glitch-shift",
-      "distorted-field",
-      "grid-pixels",
-      "bloom-effect",
-      "visual-noise"
-    ],
-    "url": "/artworks/full/fragment_047_p5.html",
-    "previewUrl": "/artworks/previews/fragment_047_p5.html",
-    "filename": "fragment_047_p5.html"
-  },
-  {
-    "id": 49,
-    "title": "Emotional Overdrive",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "heart-burst",
-      "emotional-motion",
-      "burst-effect",
-      "symbolic-explosion",
-      "impulse-motion",
-      "hsl-heart",
-      "intense-glow",
-      "kinetic-expression"
-    ],
-    "url": "/artworks/full/fragment_048_p5.html",
-    "previewUrl": "/artworks/previews/fragment_048_p5.html",
-    "filename": "fragment_048_p5.html"
-  },
-  {
-    "id": 50,
-    "title": "Orbiting Distortions",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "orbital-waves",
-      "perlin-warp",
-      "chaotic-rotation",
-      "time-fragment",
-      "glitch-aura",
-      "hsl-spectrum",
-      "ring-evolution",
-      "interactive-chaos"
-    ],
-    "url": "/artworks/full/fragment_049_p5.html",
-    "previewUrl": "/artworks/previews/fragment_049_p5.html",
-    "filename": "fragment_049_p5.html"
-  },
-  {
-    "id": 51,
-    "title": "Dream Debris",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "floating-fragments",
-      "emoji-particles",
-      "hsl-glow",
-      "soft-trails",
-      "wobble-motion",
-      "rotational-drift",
-      "glitch-interaction",
-      "dreamlike-fall",
-      "time-fragment"
-    ],
-    "url": "/artworks/full/fragment_050_p5.html",
-    "previewUrl": "/artworks/previews/fragment_050_p5.html",
-    "filename": "fragment_050_p5.html"
-  },
-  {
-    "id": 52,
-    "title": "Meltdown Cat",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "noise-mosaic",
-      "emoji-fragments",
-      "melt-distortion",
-      "slice-smear",
-      "vertical-warp",
-      "glitch-overlay",
-      "hsl-texture",
-      "interactive-melt"
-    ],
-    "url": "/artworks/full/fragment_051_p5.html",
-    "previewUrl": "/artworks/previews/fragment_051_p5.html",
-    "filename": "fragment_051_p5.html"
-  },
-  {
-    "id": 53,
-    "title": "Blue Current",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "wave-lines",
-      "hsl-gradient",
-      "oscillating-flow",
-      "sinusoidal-bands",
-      "blue-spectrum",
-      "minimal-motion",
-      "line-field",
-      "liquid-motion"
-    ],
-    "url": "/artworks/full/fragment_052_p5.html",
-    "previewUrl": "/artworks/previews/fragment_052_p5.html",
-    "filename": "fragment_052_p5.html"
-  },
-  {
-    "id": 54,
-    "title": "Bubble Drift",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "bubble-system",
-      "floating-orbs",
-      "hsl-soft",
-      "vertical-drift",
-      "water-atmosphere",
-      "sway-motion",
-      "particle-loop",
-      "ambient-floating"
-    ],
-    "url": "/artworks/full/fragment_053_p5.html",
-    "previewUrl": "/artworks/previews/fragment_053_p5.html",
-    "filename": "fragment_053_p5.html"
-  },
-  {
-    "id": 55,
-    "title": "Deep Abyss",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "abyss-particles",
-      "vertical-gravity",
-      "dark-ocean",
-      "hsl-blue",
-      "sin-acceleration",
-      "depth-field",
-      "radial-origin",
-      "slow-sink"
-    ],
-    "url": "/artworks/full/fragment_054_p5.html",
-    "previewUrl": "/artworks/previews/fragment_054_p5.html",
-    "filename": "fragment_054_p5.html"
-  },
-  {
-    "id": 56,
-    "title": "Coral Bloom",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "coral-rings",
-      "noise-radius",
-      "organic-expansion",
-      "vibrating-shapes",
-      "hsl-coral",
-      "radial-bloom",
-      "wave-perturbation",
-      "circular-evolution"
-    ],
-    "url": "/artworks/full/fragment_055_p5.html",
-    "previewUrl": "/artworks/previews/fragment_055_p5.html",
-    "filename": "fragment_055_p5.html"
-  },
-  {
-    "id": 57,
-    "title": "Tide Mirror",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "split-gradient",
-      "mirror-ocean",
-      "horizontal-lines",
-      "tide-motion",
-      "sun-bob",
-      "blue-horizon",
-      "layered-water",
-      "minimal-seascape"
-    ],
-    "url": "/artworks/full/fragment_056_p5.html",
-    "previewUrl": "/artworks/previews/fragment_056_p5.html",
-    "filename": "fragment_056_p5.html"
-  },
-  {
-    "id": 58,
-    "title": "Whale Dream",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "whale-sprites",
-      "ocean-drift",
-      "sin-wave-body",
-      "dream-motion",
-      "soft-blue",
-      "side-scrolling",
-      "hsl-sea",
-      "gentle-animals"
-    ],
-    "url": "/artworks/full/fragment_057_p5.html",
-    "previewUrl": "/artworks/previews/fragment_057_p5.html",
-    "filename": "fragment_057_p5.html"
-  },
-  {
-    "id": 59,
-    "title": "Spring Field",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "grass-blades",
-      "wind-sway",
-      "soft-green",
-      "field-motion",
-      "nature-simulation",
-      "morning-light",
-      "layered-sway",
-      "spring-atmosphere"
-    ],
-    "url": "/artworks/full/fragment_058_p5.html",
-    "previewUrl": "/artworks/previews/fragment_058_p5.html",
-    "filename": "fragment_058_p5.html"
-  },
-  {
-    "id": 60,
-    "title": "Sun Bloom",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "rotating-petals",
-      "sunburst",
-      "hsl-yellow",
-      "flower-wheel",
-      "oscillating-radius",
-      "geometric-flower",
-      "circular-bloom",
-      "bright-aura"
-    ],
-    "url": "/artworks/full/fragment_059_p5.html",
-    "previewUrl": "/artworks/previews/fragment_059_p5.html",
-    "filename": "fragment_059_p5.html"
-  },
-  {
-    "id": 61,
-    "title": "Leaf Pulse",
-    "tech": "p5.js",
-    "createdAt": "2025-11-10",
-    "tags": [
-      "radial-leaves",
-      "organic-bezier",
-      "pulsing-petals",
-      "hsl-green",
-      "nature-rhythm",
-      "symmetry-wheel",
-      "breathing-motion",
-      "soft-growth"
-    ],
-    "url": "/artworks/full/fragment_060_p5.html",
-    "previewUrl": "/artworks/previews/fragment_060_p5.html",
-    "filename": "fragment_060_p5.html"
-  },
-  {
-    "id": 62,
-    "title": "Rain Memory",
-    "tech": "p5.js",
-    "createdAt": "2025-11-21",
-    "tags": [
-      "rainfall-simulation",
-      "minimal-motion",
-      "vertical-flow",
-      "memory-fragment",
-      "seasonal-atmosphere",
-      "cool-palette"
-    ],
-    "url": "/artworks/full/fragment_061_p5.html",
-    "previewUrl": "/artworks/previews/fragment_061_p5.html",
-    "filename": "fragment_061_p5.html"
-  },
-  {
-    "id": 63,
-    "title": "Mountain Breath",
-    "tech": "p5.js",
-    "createdAt": "2025-11-21",
-    "tags": [
-      "layered-noise",
-      "terrain-waves",
-      "breathing-landscape",
-      "organic-motion",
-      "calm-horizon",
-      "nature-fragment"
-    ],
-    "url": "/artworks/full/fragment_062_p5.html",
-    "previewUrl": "/artworks/previews/fragment_062_p5.html",
-    "filename": "fragment_062_p5.html"
-  },
-  {
-    "id": 64,
-    "title": "Aurora Mist",
-    "tech": "p5.js",
-    "createdAt": "2025-11-21",
-    "tags": [
-      "aurora-effect",
-      "soft-blending",
-      "elliptic-waves",
-      "hsl-glow",
-      "mist-motion",
-      "ethereal-fragment"
-    ],
-    "url": "/artworks/full/fragment_063_p5.html",
-    "previewUrl": "/artworks/previews/fragment_063_p5.html",
-    "filename": "fragment_063_p5.html"
-  },
-  {
-    "id": 65,
-    "title": "Spring Whisper",
-    "tech": "p5.js",
-    "createdAt": "2025-11-21",
-    "tags": [
-      "petal-fall",
-      "seasonal-breeze",
-      "soft-motion",
-      "spring-fragment",
-      "pink-aesthetic",
-      "oscillation-flow"
-    ],
-    "url": "/artworks/full/fragment_064_p5.html",
-    "previewUrl": "/artworks/previews/fragment_064_p5.html",
-    "filename": "fragment_064_p5.html"
-  },
-  {
-    "id": 66,
-    "title": "Summer Radiance",
-    "tech": "p5.js",
-    "createdAt": "2025-11-21",
-    "tags": [
-      "bubble-field",
-      "summer-glow",
-      "hsl-light",
-      "floating-motion",
-      "inner-sun",
-      "seasonal-fragment"
-    ],
-    "url": "/artworks/full/fragment_065_p5.html",
-    "previewUrl": "/artworks/previews/fragment_065_p5.html",
-    "filename": "fragment_065_p5.html"
-  },
-  {
-    "id": 67,
-    "title": "Autumn Veil",
-    "tech": "p5.js",
-    "createdAt": "2025-11-21",
-    "tags": [
-      "falling-leaves",
-      "autumn-palette",
-      "seasonal-motion",
-      "warm-tone",
-      "light-rotation",
-      "veil-layer"
-    ],
-    "url": "/artworks/full/fragment_066_p5.html",
-    "previewUrl": "/artworks/previews/fragment_066_p5.html",
-    "filename": "fragment_066_p5.html"
-  },
-  {
-    "id": 68,
-    "title": "Winter Silence",
-    "tech": "p5.js",
-    "createdAt": "2025-11-21",
-    "tags": [
-      "snowfall-simulation",
-      "winter-fragment",
-      "soft-random-walk",
-      "quiet-motion",
-      "cool-white",
-      "seasonal-calm"
-    ],
-    "url": "/artworks/full/fragment_067_p5.html",
-    "previewUrl": "/artworks/previews/fragment_067_p5.html",
-    "filename": "fragment_067_p5.html"
-  },
-  {
-    "id": 69,
-    "title": "Solar Pulse",
-    "tech": "p5.js",
-    "createdAt": "2025-11-21",
-    "tags": [
-      "circular-waves",
-      "solar-resonance",
-      "pulse-motion",
-      "hsl-orbit",
-      "cosmic-fragment",
-      "dark-background"
-    ],
-    "url": "/artworks/full/fragment_068_p5.html",
-    "previewUrl": "/artworks/previews/fragment_068_p5.html",
-    "filename": "fragment_068_p5.html"
-  },
-  {
-    "id": 70,
-    "title": "Burning Halo",
-    "tech": "p5.js",
-    "createdAt": "2025-11-21",
-    "tags": [
-      "particle-ring",
-      "fire-aura",
-      "chaotic-radiance",
-      "halo-flare",
-      "high-energy",
-      "cosmic-fire"
-    ],
-    "url": "/artworks/full/fragment_069_p5.html",
-    "previewUrl": "/artworks/previews/fragment_069_p5.html",
-    "filename": "fragment_069_p5.html"
-  },
-  {
-    "id": 71,
-    "title": "Solar Orbit",
-    "tech": "p5.js",
-    "createdAt": "2025-11-21",
-    "tags": [
-      "planetary-motion",
-      "orbital-system",
-      "hsl-sun",
-      "celestial-animation",
-      "multi-orbit",
-      "space-fragment"
-    ],
-    "url": "/artworks/full/fragment_070_p5.html",
-    "previewUrl": "/artworks/previews/fragment_070_p5.html",
-    "filename": "fragment_070_p5.html"
-  },
-  {
-    "id": 72,
-    "title": "Dawn Spiral",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "spiral-motion",
-      "radiant-points",
-      "dawn-colors",
-      "rotational-flow",
-      "hsl-spectrum",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_071_p5.html",
-    "previewUrl": "/artworks/previews/fragment_071_p5.html",
-    "filename": "fragment_071_p5.html"
-  },
-  {
-    "id": 73,
-    "title": "Sunburst Geometry",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "radial-lines",
-      "geometric-sunburst",
-      "dynamic-length",
-      "wave-oscillation",
-      "bright-core",
-      "solar-fragment"
-    ],
-    "url": "/artworks/full/fragment_072_p5.html",
-    "previewUrl": "/artworks/previews/fragment_072_p5.html",
-    "filename": "fragment_072_p5.html"
-  },
-  {
-    "id": 74,
-    "title": "Lunar Drift",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "starfield-animation",
-      "lunar-pulse",
-      "soft-flicker",
-      "night-atmosphere",
-      "celestial-fragment",
-      "hsl-lights"
-    ],
-    "url": "/artworks/full/fragment_073_p5.html",
-    "previewUrl": "/artworks/previews/fragment_073_p5.html",
-    "filename": "fragment_073_p5.html"
-  },
-  {
-    "id": 75,
-    "title": "Shadow Orbit",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "dark-orbit",
-      "minimal-geometry",
-      "ring-motion",
-      "shadow-core",
-      "orbital-path",
-      "monochrome-space"
-    ],
-    "url": "/artworks/full/fragment_074_p5.html",
-    "previewUrl": "/artworks/previews/fragment_074_p5.html",
-    "filename": "fragment_074_p5.html"
-  },
-  {
-    "id": 76,
-    "title": "Silver Veil",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "wave-contours",
-      "silver-motion",
-      "veil-pattern",
-      "circular-warp",
-      "layered-oscillation",
-      "elegant-flow"
-    ],
-    "url": "/artworks/full/fragment_075_p5.html",
-    "previewUrl": "/artworks/previews/fragment_075_p5.html",
-    "filename": "fragment_075_p5.html"
-  },
-  {
-    "id": 77,
-    "title": "Tidal Reflection",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "tidal-waves",
-      "reflection-ring",
-      "upper-lower-duality",
-      "ocean-motion",
-      "hsl-water",
-      "calm-fragment"
-    ],
-    "url": "/artworks/full/fragment_076_p5.html",
-    "previewUrl": "/artworks/previews/fragment_076_p5.html",
-    "filename": "fragment_076_p5.html"
-  },
-  {
-    "id": 78,
-    "title": "Wax and Wane",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "moon-phase",
-      "dynamic-eclipse",
-      "blackout-motion",
-      "celestial-cycle",
-      "lunar-fragment",
-      "minimal-contrast"
-    ],
-    "url": "/artworks/full/fragment_077_p5.html",
-    "previewUrl": "/artworks/previews/fragment_077_p5.html",
-    "filename": "fragment_077_p5.html"
-  },
-  {
-    "id": 79,
-    "title": "Lunar Bloom",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "pulsing-rings",
-      "moon-bloom",
-      "soft-expansion",
-      "hsl-luminescence",
-      "radial-growth",
-      "night-fragment"
-    ],
-    "url": "/artworks/full/fragment_078_p5.html",
-    "previewUrl": "/artworks/previews/fragment_078_p5.html",
-    "filename": "fragment_078_p5.html"
-  },
-  {
-    "id": 80,
-    "title": "Dual Flow",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "dual-waves",
-      "horizontal-flow",
-      "mirror-motion",
-      "line-oscillation",
-      "structured-rhythm",
-      "monochrome-energy"
-    ],
-    "url": "/artworks/full/fragment_079_p5.html",
-    "previewUrl": "/artworks/previews/fragment_079_p5.html",
-    "filename": "fragment_079_p5.html"
-  },
-  {
-    "id": 81,
-    "title": "Symmetry Pulse",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "wave-symmetry",
-      "pulse-deformation",
-      "mirror-waves",
-      "line-field",
-      "energy-pattern",
-      "abstract-vibration"
-    ],
-    "url": "/artworks/full/fragment_080_p5.html",
-    "previewUrl": "/artworks/previews/fragment_080_p5.html",
-    "filename": "fragment_080_p5.html"
-  },
-  {
-    "id": 82,
-    "title": "Mirror Mind",
-    "tech": "p5.js",
-    "createdAt": "2025-11-23",
-    "tags": [
-      "mirror-pattern",
-      "symmetric-ellipses",
-      "dynamic-radius",
-      "hsl-colors",
-      "centered-design",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_081_p5.html",
-    "previewUrl": "/artworks/previews/fragment_081_p5.html",
-    "filename": "fragment_081_p5.html"
-  },
-  {
-    "id": 83,
-    "title": "Split Light",
-    "tech": "p5.js",
-    "createdAt": "2025-11-™23",
-    "tags": [
-      "split-gradient",
-      "color-hue",
-      "vertical-divide",
-      "hsl-colors",
-      "minimalist",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_082_p5.html",
-    "previewUrl": "/artworks/previews/fragment_082_p5.html",
-    "filename": "fragment_082_p5.html"
-  },
-  {
-    "id": 84,
-    "title": "Echo Self",
-    "tech": "p5.js",
-    "createdAt": "2025-11-23",
-    "tags": [
-      "mouse-trail",
-      "fading-ellipse",
-      "motion-echo",
-      "hsl-colors",
-      "interactive",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_083_p5.html",
-    "previewUrl": "/artworks/previews/fragment_083_p5.html",
-    "filename": "fragment_083_p5.html"
-  },
-  {
-    "id": 85,
-    "title": "Inverted Soul",
-    "tech": "p5.js",
-    "createdAt": "2025-11-23",
-    "tags": [
-      "vertical-symmetry",
-      "wave-ellipses",
-      "inverted-pattern",
-      "hsl-colors",
-      "animated-oscillation",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_084_p5.html",
-    "previewUrl": "/artworks/previews/fragment_084_p5.html",
-    "filename": "fragment_084_p5.html"
-  },
-  {
-    "id": 86,
-    "title": "Whisper Wind",
-    "tech": "p5.js",
-    "createdAt": "2025-11-23",
-    "tags": [
-      "noise-wave",
-      "horizontal-lines",
-      "gentle-motion",
-      "hsl-colors",
-      "flowing-pattern",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_085_p5.html",
-    "previewUrl": "/artworks/previews/fragment_085_p5.html",
-    "filename": "fragment_085_p5.html"
-  },
-  {
-    "id": 87,
-    "title": "Gale Form",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "rotating-waves",
-      "multi-layered-shape",
-      "dynamic-radius",
-      "hsl-colors",
-      "circular-motion",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_086_p5.html",
-    "previewUrl": "/artworks/previews/fragment_086_p5.html",
-    "filename": "fragment_086_p5.html"
-  },
-  {
-    "id": 88,
-    "title": "Breeze Lines",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "particle-noise",
-      "drifting-points",
-      "wind-effect",
-      "hsl-colors",
-      "animated-scatter",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_087_p5.html",
-    "previewUrl": "/artworks/previews/fragment_087_p5.html",
-    "filename": "fragment_087_p5.html"
-  },
-  {
-    "id": 89,
-    "title": "Cyclone Loop",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "rotating-cyclone",
-      "wave-radius",
-      "circular-motion",
-      "hsl-colors",
-      "multi-layered-loop",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_088_p5.html",
-    "previewUrl": "/artworks/previews/fragment_088_p5.html",
-    "filename": "fragment_088_p5.html"
-  },
-  {
-    "id": 90,
-    "title": "Wind Memory",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "mouse-trail",
-      "fading-ellipse",
-      "wind-effect",
-      "hsl-colors",
-      "interactive",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_089_p5.html",
-    "previewUrl": "/artworks/previews/fragment_089_p5.html",
-    "filename": "fragment_089_p5.html"
-  },
-  {
-    "id": 91,
-    "title": "Invisible Dance",
-    "tech": "p5.js",
-    "createdAt": "2025-11-22",
-    "tags": [
-      "radiating-lines",
-      "dynamic-angle",
-      "central-motion",
-      "hsl-colors",
-      "animated-pattern",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_090_p5.html",
-    "previewUrl": "/artworks/previews/fragment_090_p5.html",
-    "filename": "fragment_090_p5.html"
-  },
-  {
-    "id": 92,
-    "title": "Spectrum Flow",
-    "tech": "p5.js",
-    "createdAt": "2025-11-23",
-    "tags": [
-      "prism-light",
-      "rainbow-lines",
-      "dynamic-wave",
-      "hsl-colors",
-      "central-focus",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_091_p5.html",
-    "previewUrl": "/artworks/previews/fragment_091_p5.html",
-    "filename": "fragment_091_p5.html"
-  },
-  {
-    "id": 93,
-    "title": "Time Echo",
-    "tech": "p5.js",
-    "createdAt": "2025-11-23",
-    "tags": [
-      "concentric-ripples",
-      "rotating-hands",
-      "time-motion",
-      "hsl-colors",
-      "interactive-pattern",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_092_p5.html",
-    "previewUrl": "/artworks/previews/fragment_092_p5.html",
-    "filename": "fragment_092_p5.html"
-  },
-  {
-    "id": 94,
-    "title": "Breathe",
-    "tech": "p5.js",
-    "createdAt": "2025-11-23",
-    "tags": [
-      "pulsing-glow",
-      "soft-rings",
-      "gentle-motion",
-      "hsl-colors",
-      "ambient-pattern",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_093_p5.html",
-    "previewUrl": "/artworks/previews/fragment_093_p5.html",
-    "filename": "fragment_093_p5.html"
-  },
-  {
-    "id": 95,
-    "title": "Division",
-    "tech": "p5.js",
-    "createdAt": "2025-11-23",
-    "tags": [
-      "mirrored-shapes",
-      "bezier-profiles",
-      "dynamic-noise",
-      "hsl-colors",
-      "abstract-pattern",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_094_p5.html",
-    "previewUrl": "/artworks/previews/fragment_094_p5.html",
-    "filename": "fragment_094_p5.html"
-  },
-  {
-    "id": 96,
-    "title": "Eclipse",
-    "tech": "p5.js",
-    "createdAt": "2025-11-23",
-    "tags": [
-      "rotating-rings",
-      "additive-burst",
-      "color-harmony",
-      "hsl-colors",
-      "celestial-pattern",
-      "cosmic-fragment"
-    ],
-    "url": "/artworks/full/fragment_095_p5.html",
-    "previewUrl": "/artworks/previews/fragment_095_p5.html",
-    "filename": "fragment_095_p5.html"
-  },
-  {
-    "id": 97,
-    "title": "The Wall",
-    "tech": "p5.js",
-    "createdAt": "2025-11-24",
-    "tags": [
-      "grid",
-      "falling-blocks",
-      "wobble-animation",
-      "dynamic-collapse",
-      "abstract-geometry",
-      "light-leak"
-    ],
-    "url": "/artworks/full/fragment_096_p5.html",
-    "previewUrl": "/artworks/previews/fragment_096_p5.html",
-    "filename": "fragment_096_p5.html"
-  },
-  {
-    "id": 98,
-    "title": "Dreaming Dog",
-    "tech": "p5.js",
-    "createdAt": "2025-11-24",
-    "tags": [
-      "dog",
-      "dream",
-      "floating-objects",
-      "bones-stars-moon",
-      "night-sky",
-      "soft-glow"
-    ],
-    "url": "/artworks/full/fragment_098_p5.html",
-    "previewUrl": "/artworks/previews/fragment_098_p5.html",
-    "filename": "fragment_098_p5.html"
-  },
-  {
-    "id": 99,
-    "title": "Playground",
-    "tech": "p5.js",
-    "createdAt": "2025-11-24",
-    "tags": [
-      "dog",
-      "playground",
-      "trail-animation",
-      "interactive",
-      "mouse-follow",
-      "balls"
-    ],
-    "url": "/artworks/full/fragment_099_p5.html",
-    "previewUrl": "/artworks/previews/fragment_099_p5.html",
-    "filename": "fragment_099_p5.html"
-  },
-  {
-    "id": 100,
-    "title": "Dog's Breath",
-    "tech": "p5.js",
-    "createdAt": "2025-11-24",
-    "tags": [
-      "dog",
-      "breath",
-      "fog",
-      "click-interaction",
-      "winter-morning",
-      "soft-animation"
-    ],
-    "url": "/artworks/full/fragment_100_p5.html",
-    "previewUrl": "/artworks/previews/fragment_100_p5.html",
-    "filename": "fragment_100_p5.html"
-  },
-  {
-    "id": 101,
-    "title": "Cosmic Dog",
-    "tech": "p5.js",
-    "createdAt": "2025-11-24",
-    "tags": [
-      "dog-silhouette",
-      "starfield",
-      "cosmic",
-      "tail-meteor",
-      "gradient-background",
-      "animated-light"
-    ],
-    "url": "/artworks/full/fragment_101_p5.html",
-    "previewUrl": "/artworks/previews/fragment_101_p5.html",
-    "filename": "fragment_101_p5.html"
-  },
-  {
-    "id": 102,
-    "title": "Bubble Pup",
-    "tech": "p5.js",
-    "createdAt": "2025-11-24",
-    "tags": [
-      "dog",
-      "bubbles",
-      "floating-particles",
-      "interactive",
-      "rainbow-reflection",
-      "soft-gradient"
-    ],
-    "url": "/artworks/full/fragment_102_p5.html",
-    "previewUrl": "/artworks/previews/fragment_102_p5.html",
-    "filename": "fragment_102_p5.html"
-  },
-  {
-    "id": 103,
-    "title": "Shadow of Dog",
-    "tech": "p5.js",
-    "createdAt": "2025-11-24",
-    "tags": [
-      "dog",
-      "shadow-casting",
-      "dynamic-light",
-      "standing-silhouette",
-      "soft-highlights",
-      "interactive-light"
-    ],
-    "url": "/artworks/full/fragment_103_p5.html",
-    "previewUrl": "/artworks/previews/fragment_103_p5.html",
-    "filename": "fragment_103_p5.html"
-  },
-  {
-    "id": 104,
-    "title": "Three.js template",
-    "tech": "Three.js",
-    "createdAt": "2025-11-25",
-    "tags": [
-      "webgl",
-      "geometry",
-      "torus-knot",
-      "mesh",
-      "rotation",
-      "3d-shape",
-      "interactive-canvas"
-    ],
-    "url": "/artworks/full/fragment_000_three.html",
-    "previewUrl": "/artworks/previews/fragment_000_three.html",
-    "filename": "fragment_000_three.html"
-  },
-  {
-    "id": 105,
-    "title": "Particle Field",
-    "tech": "Three.js",
-    "createdAt": "2025-11-25",
-    "tags": [
-      "webgl",
-      "particles",
-      "buffer-geometry",
-      "points",
-      "rotation",
-      "3d-space",
-      "starfield"
-    ],
-    "url": "/artworks/full/fragment_001_three.html",
-    "previewUrl": "/artworks/previews/fragment_001_three.html",
-    "filename": "fragment_001_three.html"
-  },
-  {
-    "id": 106,
-    "title": "Noise Wave Surface",
-    "tech": "Three.js",
-    "createdAt": "2025-11-25",
-    "tags": [
-      "webgl",
-      "plane-geometry",
-      "mesh-standard-material",
-      "wireframe",
-      "simplex-noise",
-      "animated-surface",
-      "lighting"
-    ],
-    "url": "/artworks/full/fragment_002_three.html",
-    "previewUrl": "/artworks/previews/fragment_002_three.html",
-    "filename": "fragment_002_three.html"
-  },
-  {
-    "id": 107,
-    "title": "Fractal Sphere",
-    "tech": "Three.js",
-    "createdAt": "2025-11-25",
-    "tags": [
-      "webgl",
-      "sphere-geometry",
-      "mesh-normal-material",
-      "flat-shading",
-      "simplex-noise",
-      "animated-deformation",
-      "rotation"
-    ],
-    "url": "/artworks/full/fragment_003_three.html",
-    "previewUrl": "/artworks/previews/fragment_003_three.html",
-    "filename": "fragment_003_three.html"
-  },
-  {
-    "id": 108,
-    "title": "Noise Cloud Particles",
-    "tech": "three.js",
-    "createdAt": "2025-11-25",
-    "tags": [
-      "webgl",
-      "particles",
-      "buffer-geometry",
-      "points-material",
-      "simplex-noise",
-      "cloud-effect",
-      "3d-animation"
-    ],
-    "url": "/artworks/full/fragment_004_three.html",
-    "previewUrl": "/artworks/previews/fragment_004_three.html",
-    "filename": "fragment_004_three.html"
-  },
-  {
-    "id": 109,
-    "title": "Noise Cloud Particles",
-    "tech": "Three.js",
-    "createdAt": "2025-11-26",
-    "tags": [
-      "webgl",
-      "particles",
-      "simplex-noise",
-      "buffer-geometry",
-      "points-material",
-      "cloud-effect",
-      "rotation",
-      "3d-animation"
-    ],
-    "url": "/artworks/full/fragment_005_three.html",
-    "previewUrl": "/artworks/previews/fragment_005_three.html",
-    "filename": "fragment_005_three.html"
-  },
-  {
-    "id": 110,
+    "id": 111,
     "title": "Fractal Noise Line",
-    "tech": "Three.js",
-    "createdAt": "2025-11-26",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764115200,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_006_three.html",
     "tags": [
       "webgl",
       "perlin-noise",
@@ -2062,15 +319,16 @@
       "camera-animation",
       "3d-line-art"
     ],
-    "url": "/artworks/full/fragment_006_three.html",
+    "filename": "fragment_006_three.html",
     "previewUrl": "/artworks/previews/fragment_006_three.html",
-    "filename": "fragment_006_three.html"
+    "votes": 0,
+    "tech": "three.js"
   },
   {
-    "id": 111,
-    "title": "Noise Terrain",
+    "id": 112,
+    "votes": 0,
+    "filename": "fragment_007_three.html",
     "tech": "Three.js",
-    "createdAt": "2025-11-26",
     "tags": [
       "webgl",
       "perlin-noise",
@@ -2081,15 +339,27 @@
       "point-light",
       "camera-orbit"
     ],
+    "title": "Noise Terrain",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764115200,
+      "nanoseconds": 0
+    },
     "url": "/artworks/full/fragment_007_three.html",
-    "previewUrl": "/artworks/previews/fragment_007_three.html",
-    "filename": "fragment_007_three.html"
+    "previewUrl": "/artworks/previews/fragment_007_three.html"
   },
   {
-    "id": 112,
+    "id": 113,
     "title": "Metaballs / Liquid",
     "tech": "Three.js",
-    "createdAt": "2025-11-26",
+    "previewUrl": "/artworks/previews/fragment_008_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764115200,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "filename": "fragment_008_three.html",
     "tags": [
       "webgl",
       "metaballs",
@@ -2100,15 +370,12 @@
       "group-animation",
       "dynamic-blobs"
     ],
-    "url": "/artworks/full/fragment_008_three.html",
-    "previewUrl": "/artworks/previews/fragment_008_three.html",
-    "filename": "fragment_008_three.html"
+    "url": "/artworks/full/fragment_008_three.html"
   },
   {
-    "id": 113,
-    "title": "Geometric Art",
-    "tech": "Three.js",
-    "createdAt": "2025-11-26",
+    "id": 114,
+    "previewUrl": "/artworks/previews/fragment_009_three.html",
+    "url": "/artworks/full/fragment_009_three.html",
     "tags": [
       "webgl",
       "line-geometry",
@@ -2118,15 +385,29 @@
       "abstract-art",
       "3d-geometry"
     ],
-    "url": "/artworks/full/fragment_009_three.html",
-    "previewUrl": "/artworks/previews/fragment_009_three.html",
-    "filename": "fragment_009_three.html"
+    "filename": "fragment_009_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764115200,
+      "nanoseconds": 0
+    },
+    "title": "Geometric Art",
+    "tech": "Three.js",
+    "votes": 0
   },
   {
-    "id": 114,
-    "title": "3D Line Sculpture",
+    "id": 115,
+    "previewUrl": "/artworks/previews/fragment_010_three.html",
+    "url": "/artworks/full/fragment_010_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764115200,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_010_three.html",
     "tech": "Three.js",
-    "createdAt": "2025-11-26",
+    "votes": 0,
+    "title": "3D Line Sculpture",
     "tags": [
       "webgl",
       "tube-geometry",
@@ -2136,16 +417,12 @@
       "3d-sculpture",
       "particles",
       "camera-motion"
-    ],
-    "url": "/artworks/full/fragment_010_three.html",
-    "previewUrl": "/artworks/previews/fragment_010_three.html",
-    "filename": "fragment_010_three.html"
+    ]
   },
   {
-    "id": 115,
+    "id": 116,
     "title": "Abstract Object",
-    "tech": "Three.js",
-    "createdAt": "2025-11-27",
+    "previewUrl": "/artworks/previews/fragment_011_three.html",
     "tags": [
       "webgl",
       "icosahedron",
@@ -2158,15 +435,19 @@
       "particles",
       "dynamic-geometry"
     ],
+    "tech": "Three.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764201600,
+      "nanoseconds": 0
+    },
     "url": "/artworks/full/fragment_011_three.html",
-    "previewUrl": "/artworks/previews/fragment_011_three.html",
+    "votes": 0,
     "filename": "fragment_011_three.html"
   },
   {
-    "id": 116,
-    "title": "GLSL Shader Art",
-    "tech": "Three.js",
-    "createdAt": "2025-11-27",
+    "id": 117,
+    "votes": 0,
     "tags": [
       "webgl",
       "glsl",
@@ -2179,15 +460,20 @@
       "vignette",
       "glow-effect"
     ],
-    "url": "/artworks/full/fragment_012_three.html",
+    "tech": "Three.js",
+    "filename": "fragment_012_three.html",
     "previewUrl": "/artworks/previews/fragment_012_three.html",
-    "filename": "fragment_012_three.html"
+    "url": "/artworks/full/fragment_012_three.html",
+    "title": "GLSL Shader Art",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764201600,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 117,
-    "title": "Light Trails",
-    "tech": "Three.js",
-    "createdAt": "2025-11-27",
+    "id": 118,
+    "filename": "fragment_013_three.html",
     "tags": [
       "webgl",
       "light-trails",
@@ -2200,15 +486,28 @@
       "particles",
       "glow-effect"
     ],
-    "url": "/artworks/full/fragment_013_three.html",
+    "title": "Light Trails",
+    "tech": "Three.js",
     "previewUrl": "/artworks/previews/fragment_013_three.html",
-    "filename": "fragment_013_three.html"
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_013_three.html"
   },
   {
-    "id": 118,
+    "id": 119,
+    "filename": "fragment_014_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
+    "votes": 0,
     "title": "Dream World",
-    "tech": "Three.js",
-    "createdAt": "2025-11-27",
+    "url": "/artworks/full/fragment_014_three.html",
     "tags": [
       "webgl",
       "floating-islands",
@@ -2222,15 +521,42 @@
       "bridges",
       "procedural-geometry"
     ],
-    "url": "/artworks/full/fragment_014_three.html",
     "previewUrl": "/artworks/previews/fragment_014_three.html",
-    "filename": "fragment_014_three.html"
+    "tech": "Three.js"
   },
   {
-    "id": 119,
-    "title": "Möbius Strip",
-    "tech": "Three.js",
-    "createdAt": "2025-11-27",
+    "id": 12,
+    "votes": 0,
+    "tags": [
+      "color-cycle",
+      "time-based",
+      "sun-motion",
+      "gradient",
+      "sky",
+      "landscape",
+      "generative",
+      "ambient",
+      "light",
+      "abstract"
+    ],
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_011_p5.html",
+    "filename": "fragment_011_p5.html",
+    "previewUrl": "/artworks/previews/fragment_011_p5.html",
+    "title": "TimeColor"
+  },
+  {
+    "id": 120,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
     "tags": [
       "webgl",
       "mobius-strip",
@@ -2243,15 +569,23 @@
       "fog",
       "additive-blending"
     ],
-    "url": "/artworks/full/fragment_016_three.html",
+    "title": "Möbius Strip",
     "previewUrl": "/artworks/previews/fragment_016_three.html",
+    "votes": 0,
+    "url": "/artworks/full/fragment_016_three.html",
+    "tech": "Three.js",
     "filename": "fragment_016_three.html"
   },
   {
-    "id": 120,
-    "title": "Boy Surface",
+    "id": 121,
+    "filename": "fragment_017_three.html",
+    "previewUrl": "/artworks/previews/fragment_017_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764201600,
+      "nanoseconds": 0
+    },
     "tech": "Three.js",
-    "createdAt": "2025-11-27",
     "tags": [
       "webgl",
       "boy-surface",
@@ -2265,14 +599,22 @@
       "additive-blending"
     ],
     "url": "/artworks/full/fragment_017_three.html",
-    "previewUrl": "/artworks/previews/fragment_017_three.html",
-    "filename": "fragment_017_three.html"
+    "title": "Boy Surface",
+    "votes": 0
   },
   {
-    "id": 121,
+    "id": 122,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764201600,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_018_three.html",
+    "url": "/artworks/full/fragment_018_three.html",
     "title": "Torus Knot",
+    "filename": "fragment_018_three.html",
     "tech": "Three.js",
-    "createdAt": "2025-11-27",
     "tags": [
       "webgl",
       "torus-knot",
@@ -2284,16 +626,11 @@
       "color-animation",
       "fog",
       "additive-blending"
-    ],
-    "url": "/artworks/full/fragment_018_three.html",
-    "previewUrl": "/artworks/previews/fragment_018_three.html",
-    "filename": "fragment_018_three.html"
+    ]
   },
   {
-    "id": 122,
-    "title": "Shell Surface",
+    "id": 123,
     "tech": "Three.js",
-    "createdAt": "2025-11-27",
     "tags": [
       "webgl",
       "shell-surface",
@@ -2306,15 +643,20 @@
       "fog",
       "additive-blending"
     ],
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764201600,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "filename": "fragment_019_three.html",
     "url": "/artworks/full/fragment_019_three.html",
-    "previewUrl": "/artworks/previews/fragment_019_three.html",
-    "filename": "fragment_019_three.html"
+    "title": "Shell Surface",
+    "previewUrl": "/artworks/previews/fragment_019_three.html"
   },
   {
-    "id": 123,
-    "title": "Dini Surface",
-    "tech": "Three.js",
-    "createdAt": "2025-11-27",
+    "id": 124,
+    "previewUrl": "/artworks/previews/fragment_020_three.html",
     "tags": [
       "webgl",
       "dini-surface",
@@ -2328,14 +670,20 @@
       "additive-blending"
     ],
     "url": "/artworks/full/fragment_020_three.html",
-    "previewUrl": "/artworks/previews/fragment_020_three.html",
-    "filename": "fragment_020_three.html"
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764201600,
+      "nanoseconds": 0
+    },
+    "title": "Dini Surface",
+    "filename": "fragment_020_three.html",
+    "tech": "Three.js"
   },
   {
-    "id": 124,
-    "title": "Cute Floating Bubbles",
+    "id": 125,
     "tech": "Three.js",
-    "createdAt": "2025-11-28",
+    "previewUrl": "/artworks/previews/fragment_021_three.html",
     "tags": [
       "webgl",
       "bubbles",
@@ -2351,15 +699,28 @@
       "glow",
       "soft-lighting"
     ],
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764288000,
+      "nanoseconds": 0
+    },
     "url": "/artworks/full/fragment_021_three.html",
-    "previewUrl": "/artworks/previews/fragment_021_three.html",
-    "filename": "fragment_021_three.html"
+    "title": "Cute Floating Bubbles",
+    "filename": "fragment_021_three.html",
+    "votes": 0
   },
   {
-    "id": 125,
+    "id": 126,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764288000,
+      "nanoseconds": 0
+    },
     "title": "Pastel Candy Land",
+    "url": "/artworks/full/fragment_022_three.html",
     "tech": "Three.js",
-    "createdAt": "2025-11-28",
+    "previewUrl": "/artworks/previews/fragment_022_three.html",
+    "filename": "fragment_022_three.html",
     "tags": [
       "webgl",
       "candy",
@@ -2375,15 +736,12 @@
       "soft-lighting",
       "fantasy"
     ],
-    "url": "/artworks/full/fragment_022_three.html",
-    "previewUrl": "/artworks/previews/fragment_022_three.html",
-    "filename": "fragment_022_three.html"
+    "votes": 0
   },
   {
-    "id": 126,
-    "title": "Fluffy Cloud Garden",
+    "id": 127,
     "tech": "Three.js",
-    "createdAt": "2025-11-28",
+    "previewUrl": "/artworks/previews/fragment_023_three.html",
     "tags": [
       "webgl",
       "clouds",
@@ -2401,14 +759,17 @@
       "daylight-fantasy"
     ],
     "url": "/artworks/full/fragment_023_three.html",
-    "previewUrl": "/artworks/previews/fragment_023_three.html",
-    "filename": "fragment_023_three.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764288000,
+      "nanoseconds": 0
+    },
+    "title": "Fluffy Cloud Garden",
+    "filename": "fragment_023_three.html",
+    "votes": 0
   },
   {
-    "id": 127,
-    "title": "Dreamy Flower Garden",
-    "tech": "Three.js",
-    "createdAt": "2025-11-28",
+    "id": 128,
     "tags": [
       "webgl",
       "flowers",
@@ -2424,15 +785,22 @@
       "soft-lighting",
       "ambient-animation"
     ],
-    "url": "/artworks/full/fragment_024_three.html",
+    "votes": 0,
     "previewUrl": "/artworks/previews/fragment_024_three.html",
-    "filename": "fragment_024_three.html"
+    "filename": "fragment_024_three.html",
+    "title": "Dreamy Flower Garden",
+    "url": "/artworks/full/fragment_024_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764288000,
+      "nanoseconds": 0
+    },
+    "tech": "Three.js"
   },
   {
-    "id": 128,
-    "title": "Sparkling Jewel Box",
+    "id": 129,
+    "previewUrl": "/artworks/previews/fragment_025_three.html",
     "tech": "Three.js",
-    "createdAt": "2025-11-28",
     "tags": [
       "webgl",
       "jewels",
@@ -2448,14 +816,47 @@
       "ambient-animation"
     ],
     "url": "/artworks/full/fragment_025_three.html",
-    "previewUrl": "/artworks/previews/fragment_025_three.html",
-    "filename": "fragment_025_three.html"
+    "filename": "fragment_025_three.html",
+    "title": "Sparkling Jewel Box",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764288000,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 129,
-    "title": "Macaron Party",
+    "id": 13,
+    "votes": 0,
+    "title": "Boid Flow",
+    "filename": "fragment_012_p5.html",
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_012_p5.html",
+    "tags": [
+      "boids",
+      "flocking",
+      "motion",
+      "triangle-agents",
+      "loop",
+      "generative",
+      "organic",
+      "movement",
+      "minimal",
+      "swarm"
+    ],
+    "url": "/artworks/full/fragment_012_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 130,
+    "filename": "fragment_026_three.html",
+    "votes": 0,
     "tech": "Three.js",
-    "createdAt": "2025-11-28",
+    "title": "Macaron Party",
     "tags": [
       "webgl",
       "macarons",
@@ -2471,15 +872,27 @@
       "soft-lighting",
       "ambient-animation"
     ],
-    "url": "/artworks/full/fragment_026_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764288000,
+      "nanoseconds": 0
+    },
     "previewUrl": "/artworks/previews/fragment_026_three.html",
-    "filename": "fragment_026_three.html"
+    "url": "/artworks/full/fragment_026_three.html"
   },
   {
-    "id": 130,
+    "id": 131,
+    "filename": "fragment_027_three.html",
+    "votes": 0,
+    "url": "/artworks/full/fragment_027_three.html",
     "title": "Plushie Friends",
+    "previewUrl": "/artworks/previews/fragment_027_three.html",
     "tech": "Three.js",
-    "createdAt": "2025-11-28",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764288000,
+      "nanoseconds": 0
+    },
     "tags": [
       "webgl",
       "plushies",
@@ -2494,16 +907,21 @@
       "soft-lighting",
       "ambient-animation",
       "character-modeling"
-    ],
-    "url": "/artworks/full/fragment_027_three.html",
-    "previewUrl": "/artworks/previews/fragment_027_three.html",
-    "filename": "fragment_027_three.html"
+    ]
   },
   {
-    "id": 131,
+    "id": 132,
+    "filename": "fragment_028_three.html",
     "title": "Dreamy Carousel",
+    "url": "/artworks/full/fragment_028_three.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764288000,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_028_three.html",
     "tech": "Three.js",
-    "createdAt": "2025-11-28",
     "tags": [
       "webgl",
       "carousel",
@@ -2518,16 +936,21 @@
       "soft-lighting",
       "ambient-animation",
       "decorative-objects"
-    ],
-    "url": "/artworks/full/fragment_028_three.html",
-    "previewUrl": "/artworks/previews/fragment_028_three.html",
-    "filename": "fragment_028_three.html"
+    ]
   },
   {
-    "id": 132,
+    "id": 133,
     "title": "Floating Lanterns",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764288000,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_029_three.html",
+    "url": "/artworks/full/fragment_029_three.html",
     "tech": "Three.js",
-    "createdAt": "2025-11-28",
+    "filename": "fragment_029_three.html",
+    "votes": 0,
     "tags": [
       "webgl",
       "lanterns",
@@ -2541,16 +964,21 @@
       "fantasy",
       "lantern-festival",
       "dreamy"
-    ],
-    "url": "/artworks/full/fragment_029_three.html",
-    "previewUrl": "/artworks/previews/fragment_029_three.html",
-    "filename": "fragment_029_three.html"
+    ]
   },
   {
-    "id": 133,
-    "title": "Crystal Garden",
+    "id": 134,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764288000,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_030_three.html",
     "tech": "Three.js",
-    "createdAt": "2025-11-29",
+    "previewUrl": "/artworks/previews/fragment_030_three.html",
+    "url": "/artworks/full/fragment_030_three.html",
+    "title": "Crystal Garden",
+    "votes": 0,
     "tags": [
       "webgl",
       "crystals",
@@ -2564,16 +992,10 @@
       "ambient-animation",
       "colorful-lights",
       "pulsing-effects"
-    ],
-    "url": "/artworks/full/fragment_030_three.html",
-    "previewUrl": "/artworks/previews/fragment_030_three.html",
-    "filename": "fragment_030_three.html"
+    ]
   },
   {
-    "id": 134,
-    "title": "Starry Whale",
-    "tech": "Three.js",
-    "createdAt": "2025-11-29",
+    "id": 135,
     "tags": [
       "webgl",
       "whale",
@@ -2588,15 +1010,20 @@
       "dreamy",
       "floating"
     ],
+    "tech": "Three.js",
+    "filename": "fragment_031_three.html",
     "url": "/artworks/full/fragment_031_three.html",
-    "previewUrl": "/artworks/previews/fragment_031_three.html",
-    "filename": "fragment_031_three.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764374400,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "title": "Starry Whale",
+    "previewUrl": "/artworks/previews/fragment_031_three.html"
   },
   {
-    "id": 135,
-    "title": "Music Box Galaxy",
-    "tech": "Three.js",
-    "createdAt": "2025-11-29",
+    "id": 136,
     "tags": [
       "webgl",
       "music-notes",
@@ -2614,13 +1041,19 @@
     ],
     "url": "/artworks/full/fragment_032_three.html",
     "previewUrl": "/artworks/previews/fragment_032_three.html",
-    "filename": "fragment_032_three.html"
+    "filename": "fragment_032_three.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764288000,
+      "nanoseconds": 0
+    },
+    "title": "Music Box Galaxy",
+    "tech": "Three.js"
   },
   {
-    "id": 136,
-    "title": "Moonlight Forest",
-    "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "id": 137,
+    "url": "/artworks/full/fragment_033_three.html",
     "tags": [
       "webgl",
       "forest",
@@ -2636,15 +1069,20 @@
       "fantasy",
       "dreamy"
     ],
-    "url": "/artworks/full/fragment_033_three.html",
+    "votes": 0,
     "previewUrl": "/artworks/previews/fragment_033_three.html",
-    "filename": "fragment_033_three.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_033_three.html",
+    "tech": "Three.js",
+    "title": "Moonlight Forest"
   },
   {
-    "id": 137,
-    "title": "Time Bubbles",
-    "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "id": 138,
+    "votes": 0,
     "tags": [
       "webgl",
       "bubbles",
@@ -2659,15 +1097,29 @@
       "dreamy",
       "glow"
     ],
-    "url": "/artworks/full/fragment_034_three.html",
     "previewUrl": "/artworks/previews/fragment_034_three.html",
-    "filename": "fragment_034_three.html"
+    "title": "Time Bubbles",
+    "filename": "fragment_034_three.html",
+    "url": "/artworks/full/fragment_034_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
+    "tech": "Three.js"
   },
   {
-    "id": 138,
+    "id": 139,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_035_three.html",
     "title": "Aurora",
-    "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "previewUrl": "/artworks/previews/fragment_035_three.html",
+    "votes": 0,
+    "url": "/artworks/full/fragment_035_three.html",
     "tags": [
       "webgl",
       "aurora",
@@ -2682,15 +1134,39 @@
       "fantasy",
       "ambient-animation"
     ],
-    "url": "/artworks/full/fragment_035_three.html",
-    "previewUrl": "/artworks/previews/fragment_035_three.html",
-    "filename": "fragment_035_three.html"
+    "tech": "Three.js"
   },
   {
-    "id": 139,
-    "title": "Nebula",
+    "id": 14,
+    "url": "/artworks/full/fragment_013_p5.html",
+    "filename": "fragment_013_p5.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764633600,
+      "nanoseconds": 0
+    },
+    "title": "Moiré",
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_013_p5.html",
+    "tags": [
+      "moire",
+      "interference",
+      "circles",
+      "rotation",
+      "geometric",
+      "layered",
+      "pattern",
+      "abstract",
+      "minimal",
+      "dynamic"
+    ]
+  },
+  {
+    "id": 141,
+    "previewUrl": "/artworks/previews/fragment_037_three.html",
+    "filename": "fragment_037_three.html",
     "tech": "Three.js",
-    "createdAt": "2025-12-10",
     "tags": [
       "webgl",
       "nebula",
@@ -2705,38 +1181,23 @@
       "dreamy",
       "cosmic"
     ],
-    "url": "/artworks/full/fragment_036_three.html",
-    "previewUrl": "/artworks/previews/fragment_036_three.html",
-    "filename": "fragment_036_three.html"
+    "url": "/artworks/full/fragment_037_three.html",
+    "title": "Nebula",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 141,
-    "title": "Magic Circle",
-    "tech": "Three.js",
-    "createdAt": "2025-12-10",
-    "tags": [
-      "webgl",
-      "magic-circle",
-      "runes",
-      "fantasy",
-      "glow",
-      "particles",
-      "rotating",
-      "geometric-pattern",
-      "energy-orbs",
-      "ambient-animation",
-      "mystical",
-      "spiral"
-    ],
-    "url": "/artworks/full/fragment_038_three.html",
-    "previewUrl": "/artworks/previews/fragment_038_three.html",
-    "filename": "fragment_038_three.html"
-  },
-  {
-    "id": 142,
-    "title": "Kaleidoscope",
-    "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "id": 143,
+    "previewUrl": "/artworks/previews/fragment_039_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
     "tags": [
       "webgl",
       "kaleidoscope",
@@ -2751,15 +1212,17 @@
       "dynamic-lighting",
       "pulsating"
     ],
+    "title": "Kaleidoscope",
+    "filename": "fragment_039_three.html",
+    "tech": "Three.js",
     "url": "/artworks/full/fragment_039_three.html",
-    "previewUrl": "/artworks/previews/fragment_039_three.html",
-    "filename": "fragment_039_three.html"
+    "votes": 0
   },
   {
-    "id": 143,
-    "title": "Fractal Tunnel",
+    "id": 144,
+    "filename": "fragment_040_three.html",
+    "votes": 0,
     "tech": "Three.js",
-    "createdAt": "2025-12-10",
     "tags": [
       "webgl",
       "fractal",
@@ -2775,14 +1238,24 @@
       "additive-blending"
     ],
     "url": "/artworks/full/fragment_040_three.html",
+    "title": "Fractal Tunnel",
     "previewUrl": "/artworks/previews/fragment_040_three.html",
-    "filename": "fragment_040_three.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 144,
+    "id": 145,
+    "previewUrl": "/artworks/previews/fragment_041_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
     "title": "Liquid Geometry",
-    "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "url": "/artworks/full/fragment_041_three.html",
     "tags": [
       "webgl",
       "3d-shapes",
@@ -2796,15 +1269,14 @@
       "lights",
       "additive-blending"
     ],
-    "url": "/artworks/full/fragment_041_three.html",
-    "previewUrl": "/artworks/previews/fragment_041_three.html",
-    "filename": "fragment_041_three.html"
+    "filename": "fragment_041_three.html",
+    "tech": "Three.js",
+    "votes": 0
   },
   {
-    "id": 145,
-    "title": "Psychedelic Waves",
-    "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "id": 146,
+    "previewUrl": "/artworks/previews/fragment_042_three.html",
+    "url": "/artworks/full/fragment_042_three.html",
     "tags": [
       "webgl",
       "wave-simulation",
@@ -2818,15 +1290,23 @@
       "animated-plane",
       "3d-animation"
     ],
-    "url": "/artworks/full/fragment_042_three.html",
-    "previewUrl": "/artworks/previews/fragment_042_three.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
+    "title": "Psychedelic Waves",
+    "tech": "Three.js",
     "filename": "fragment_042_three.html"
   },
   {
-    "id": 146,
+    "id": 147,
     "title": "Rainbow Vortex",
+    "previewUrl": "/artworks/previews/fragment_043_three.html",
+    "votes": 0,
     "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "filename": "fragment_043_three.html",
     "tags": [
       "webgl",
       "vortex",
@@ -2840,14 +1320,17 @@
       "rotating-camera"
     ],
     "url": "/artworks/full/fragment_043_three.html",
-    "previewUrl": "/artworks/previews/fragment_043_three.html",
-    "filename": "fragment_043_three.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 147,
-    "title": "Neon Mandala",
+    "id": 148,
+    "filename": "fragment_044_three.html",
     "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "votes": 0,
     "tags": [
       "webgl",
       "mandala",
@@ -2861,14 +1344,18 @@
       "rotating-camera"
     ],
     "url": "/artworks/full/fragment_044_three.html",
+    "title": "Neon Mandala",
     "previewUrl": "/artworks/previews/fragment_044_three.html",
-    "filename": "fragment_044_three.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 148,
-    "title": "Melting Psychedelic",
+    "id": 149,
     "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "previewUrl": "/artworks/previews/fragment_045_three.html",
     "tags": [
       "webgl",
       "3d-animation",
@@ -2882,14 +1369,54 @@
       "additive-blending"
     ],
     "url": "/artworks/full/fragment_045_three.html",
-    "previewUrl": "/artworks/previews/fragment_045_three.html",
-    "filename": "fragment_045_three.html"
+    "title": "Melting Psychedelic",
+    "filename": "fragment_045_three.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 149,
+    "id": 15,
+    "tags": [
+      "waves",
+      "moire",
+      "sin",
+      "dual-layer",
+      "oscillation",
+      "line-art",
+      "pattern",
+      "abstract",
+      "minimal",
+      "dynamic"
+    ],
+    "previewUrl": "/artworks/previews/fragment_014_p5.html",
+    "url": "/artworks/full/fragment_014_p5.html",
+    "votes": 0,
+    "tech": "p5.js",
+    "filename": "fragment_014_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "title": "CircleMoiré"
+  },
+  {
+    "id": 150,
+    "filename": "fragment_046_three.html",
+    "previewUrl": "/artworks/previews/fragment_046_three.html",
+    "url": "/artworks/full/fragment_046_three.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
     "title": "Melting Chocolate",
     "tech": "Three.js",
-    "createdAt": "2025-12-10",
     "tags": [
       "webgl",
       "3d-animation",
@@ -2901,16 +1428,18 @@
       "dynamic-lights",
       "wave-deformation",
       "falling-chunks"
-    ],
-    "url": "/artworks/full/fragment_046_three.html",
-    "previewUrl": "/artworks/previews/fragment_046_three.html",
-    "filename": "fragment_046_three.html"
+    ]
   },
   {
-    "id": 150,
-    "title": "Melting Ice Cream",
+    "id": 151,
     "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_047_three.html",
+    "title": "Melting Ice Cream",
     "tags": [
       "webgl",
       "3d-animation",
@@ -2923,15 +1452,15 @@
       "sun-glow",
       "camera-orbit"
     ],
-    "url": "/artworks/full/fragment_047_three.html",
+    "votes": 0,
     "previewUrl": "/artworks/previews/fragment_047_three.html",
     "filename": "fragment_047_three.html"
   },
   {
-    "id": 151,
-    "title": "Melting Ice",
-    "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "id": 152,
+    "filename": "fragment_048_three.html",
+    "url": "/artworks/full/fragment_048_three.html",
+    "previewUrl": "/artworks/previews/fragment_048_three.html",
     "tags": [
       "webgl",
       "3d-animation",
@@ -2944,15 +1473,22 @@
       "dynamic-lights",
       "camera-orbit"
     ],
-    "url": "/artworks/full/fragment_048_three.html",
-    "previewUrl": "/artworks/previews/fragment_048_three.html",
-    "filename": "fragment_048_three.html"
+    "tech": "Three.js",
+    "title": "Melting Ice",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 152,
+    "id": 153,
+    "url": "/artworks/full/fragment_049_three.html",
     "title": "Melting Clock",
     "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "previewUrl": "/artworks/previews/fragment_049_three.html",
+    "votes": 0,
     "tags": [
       "webgl",
       "3d-animation",
@@ -2965,15 +1501,26 @@
       "dynamic-lights",
       "camera-orbit"
     ],
-    "url": "/artworks/full/fragment_049_three.html",
-    "previewUrl": "/artworks/previews/fragment_049_three.html",
-    "filename": "fragment_049_three.html"
+    "filename": "fragment_049_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 153,
+    "id": 154,
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_050_three.html",
+    "filename": "fragment_050_three.html",
     "title": "Melting Brain",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_050_three.html",
     "tech": "Three.js",
-    "createdAt": "2025-12-10",
     "tags": [
       "webgl",
       "3d-animation",
@@ -2986,38 +1533,10 @@
       "particles",
       "dynamic-lights",
       "camera-orbit"
-    ],
-    "url": "/artworks/full/fragment_050_three.html",
-    "previewUrl": "/artworks/previews/fragment_050_three.html",
-    "filename": "fragment_050_three.html"
+    ]
   },
   {
-    "id": 154,
-    "title": "Haunted Mansion",
-    "tech": "Three.js",
-    "createdAt": "2025-12-10",
-    "tags": [
-      "webgl",
-      "3d-animation",
-      "haunted-house",
-      "ghosts",
-      "bats",
-      "moon",
-      "fog",
-      "glowing-windows",
-      "tombstones",
-      "dynamic-lights",
-      "camera-sway"
-    ],
-    "url": "/artworks/full/fragment_051_three.html",
-    "previewUrl": "/artworks/previews/fragment_051_three.html",
-    "filename": "fragment_051_three.html"
-  },
-  {
-    "id": 155,
-    "title": "Dark Forest",
-    "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "id": 156,
     "tags": [
       "webgl",
       "3d-animation",
@@ -3031,15 +1550,25 @@
       "tree-sway",
       "camera-movement"
     ],
-    "url": "/artworks/full/fragment_052_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
     "previewUrl": "/artworks/previews/fragment_052_three.html",
-    "filename": "fragment_052_three.html"
+    "filename": "fragment_052_three.html",
+    "votes": 0,
+    "url": "/artworks/full/fragment_052_three.html",
+    "tech": "Three.js",
+    "title": "Dark Forest"
   },
   {
-    "id": 156,
-    "title": "Cursed Hospital",
+    "id": 157,
     "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "filename": "fragment_053_three.html",
+    "title": "Cursed Hospital",
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_053_three.html",
     "tags": [
       "webgl",
       "3d-animation",
@@ -3054,15 +1583,20 @@
       "fog",
       "camera-sway"
     ],
-    "url": "/artworks/full/fragment_053_three.html",
-    "previewUrl": "/artworks/previews/fragment_053_three.html",
-    "filename": "fragment_053_three.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_053_three.html"
   },
   {
-    "id": 157,
+    "id": 158,
+    "filename": "fragment_054_three.html",
+    "url": "/artworks/full/fragment_054_three.html",
+    "votes": 0,
     "title": "Ancient Catacombs",
     "tech": "Three.js",
-    "createdAt": "2025-12-10",
     "tags": [
       "webgl",
       "3d-animation",
@@ -3078,15 +1612,15 @@
       "camera-sway",
       "red-glowing-eyes"
     ],
-    "url": "/artworks/full/fragment_054_three.html",
     "previewUrl": "/artworks/previews/fragment_054_three.html",
-    "filename": "fragment_054_three.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 158,
-    "title": "Demonic Ritual",
-    "tech": "Three.js",
-    "createdAt": "2025-12-10",
+    "id": 159,
     "tags": [
       "webgl",
       "3d-animation",
@@ -3103,15 +1637,46 @@
       "camera-orbit",
       "red-glow"
     ],
-    "url": "/artworks/full/fragment_055_three.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
     "previewUrl": "/artworks/previews/fragment_055_three.html",
-    "filename": "fragment_055_three.html"
+    "filename": "fragment_055_three.html",
+    "votes": 0,
+    "url": "/artworks/full/fragment_055_three.html",
+    "tech": "Three.js",
+    "title": "Demonic Ritual"
   },
   {
-    "id": 159,
-    "title": "Shadow of Sakura",
+    "id": 16,
     "tech": "p5.js",
-    "createdAt": "2026-01-01",
+    "previewUrl": "/artworks/previews/fragment_015_p5.html",
+    "tags": [
+      "grid",
+      "moire",
+      "rotation",
+      "interference",
+      "lines",
+      "pattern",
+      "contrast",
+      "geometric",
+      "abstract",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_015_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "title": "Grid Moiré",
+    "filename": "fragment_015_p5.html",
+    "votes": 0
+  },
+  {
+    "id": 160,
     "tags": [
       "p5js",
       "creative-coding",
@@ -3127,15 +1692,29 @@
       "zen",
       "nature-inspired"
     ],
+    "title": "Shadow of Sakura",
     "url": "/artworks/full/fragment_104_p5.html",
+    "votes": 0,
     "previewUrl": "/artworks/previews/fragment_104_p5.html",
-    "filename": "fragment_104_p5.html"
+    "tech": "p5.js",
+    "filename": "fragment_104_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767225600,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 160,
-    "title": "Butterfly Noon",
+    "id": 161,
     "tech": "p5.js",
-    "createdAt": "2026-01-01",
+    "title": "Butterfly Noon",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767225600,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_105_p5.html",
+    "filename": "fragment_105_p5.html",
     "tags": [
       "p5js",
       "generative-art",
@@ -3152,15 +1731,20 @@
       "looping-animation",
       "soft-shadows"
     ],
-    "url": "/artworks/full/fragment_105_p5.html",
     "previewUrl": "/artworks/previews/fragment_105_p5.html",
-    "filename": "fragment_105_p5.html"
+    "votes": 0
   },
   {
-    "id": 161,
-    "title": "Sprout",
-    "tech": "p5.js",
-    "createdAt": "2026-01-01",
+    "id": 162,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767225600,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "filename": "fragment_106_p5.html",
+    "url": "/artworks/full/fragment_106_p5.html",
+    "previewUrl": "/artworks/previews/fragment_106_p5.html",
     "tags": [
       "p5js",
       "creative-coding",
@@ -3178,15 +1762,20 @@
       "flat-design",
       "zen"
     ],
-    "url": "/artworks/full/fragment_106_p5.html",
-    "previewUrl": "/artworks/previews/fragment_106_p5.html",
-    "filename": "fragment_106_p5.html"
+    "title": "Sprout",
+    "tech": "p5.js"
   },
   {
-    "id": 162,
-    "title": "Cat in Warm Wind",
+    "id": 163,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767225600,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "filename": "fragment_107_p5.html",
     "tech": "p5.js",
-    "createdAt": "2026-01-01",
+    "url": "/artworks/full/fragment_107_p5.html",
     "tags": [
       "p5js",
       "generative-art",
@@ -3204,41 +1793,19 @@
       "serene",
       "geometric-shapes"
     ],
-    "url": "/artworks/full/fragment_107_p5.html",
-    "previewUrl": "/artworks/previews/fragment_107_p5.html",
-    "filename": "fragment_107_p5.html"
+    "title": "Cat in Warm Wind",
+    "previewUrl": "/artworks/previews/fragment_107_p5.html"
   },
   {
-    "id": 163,
-    "title": "Rotating Line",
-    "tech": "p5.js",
-    "createdAt": "2026-01-01",
-    "tags": [
-      "p5js",
-      "generative-art",
-      "abstract",
-      "kinetic-art",
-      "dark-mode",
-      "neon-aesthetic",
-      "radial-symmetry",
-      "trailing-effect",
-      "motion-blur",
-      "random-colors",
-      "trigonometry",
-      "rotation",
-      "geometry",
-      "minimal-code",
-      "hypnotic"
-    ],
-    "url": "/artworks/full/fragment_108_p5.html",
-    "previewUrl": "/artworks/previews/fragment_108_p5.html",
-    "filename": "fragment_108_p5.html"
-  },
-  {
-    "id": 164,
+    "id": 165,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767225600,
+      "nanoseconds": 0
+    },
+    "votes": 0,
     "title": "Wavy lines",
-    "tech": "p5.js",
-    "createdAt": "2026-01-01",
+    "previewUrl": "/artworks/previews/fragment_109_p5.html",
     "tags": [
       "p5js",
       "generative-art",
@@ -3256,41 +1823,13 @@
       "dark-mode",
       "digital-ocean"
     ],
-    "url": "/artworks/full/fragment_109_p5.html",
-    "previewUrl": "/artworks/previews/fragment_109_p5.html",
-    "filename": "fragment_109_p5.html"
-  },
-  {
-    "id": 165,
-    "title": "Spiral particles",
+    "filename": "fragment_109_p5.html",
     "tech": "p5.js",
-    "createdAt": "2026-01-01",
-    "tags": [
-      "p5js",
-      "generative-art",
-      "particle-art",
-      "archimedean-spiral",
-      "mathematical-art",
-      "trigonometry",
-      "point-rendering",
-      "color-cycling",
-      "trailing-effect",
-      "dark-mode",
-      "hypnotic",
-      "rotational-motion",
-      "minimalism",
-      "geometry",
-      "cosmic-aesthetic"
-    ],
-    "url": "/artworks/full/fragment_110_p5.html",
-    "previewUrl": "/artworks/previews/fragment_110_p5.html",
-    "filename": "fragment_110_p5.html"
+    "url": "/artworks/full/fragment_109_p5.html"
   },
   {
-    "id": 166,
+    "id": 167,
     "title": "ripples",
-    "tech": "p5.js",
-    "createdAt": "2026-01-01",
     "tags": [
       "p5js",
       "generative-art",
@@ -3308,14 +1847,20 @@
       "neon-aesthetic"
     ],
     "url": "/artworks/full/fragment_111_p5.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767225600,
+      "nanoseconds": 0
+    },
+    "tech": "p5.js",
     "previewUrl": "/artworks/previews/fragment_111_p5.html",
     "filename": "fragment_111_p5.html"
   },
   {
-    "id": 167,
-    "title": "Random Triangles",
+    "id": 168,
     "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "filename": "fragment_112_p5.html",
     "tags": [
       "p5js",
       "generative-art",
@@ -3332,15 +1877,22 @@
       "transparency",
       "layered-design"
     ],
+    "title": "Random Triangles",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    },
     "url": "/artworks/full/fragment_112_p5.html",
-    "previewUrl": "/artworks/previews/fragment_112_p5.html",
-    "filename": "fragment_112_p5.html"
+    "previewUrl": "/artworks/previews/fragment_112_p5.html"
   },
   {
-    "id": 168,
+    "id": 169,
     "title": "Colorful Spiral",
-    "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "previewUrl": "/artworks/previews/fragment_113_p5.html",
+    "votes": 0,
+    "url": "/artworks/full/fragment_113_p5.html",
     "tags": [
       "p5js",
       "generative-art",
@@ -3358,15 +1910,53 @@
       "radial-composition",
       "optical-art"
     ],
-    "url": "/artworks/full/fragment_113_p5.html",
-    "previewUrl": "/artworks/previews/fragment_113_p5.html",
-    "filename": "fragment_113_p5.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_113_p5.html",
+    "tech": "p5.js"
   },
   {
-    "id": 169,
-    "title": "Colorful Noise",
+    "id": 17,
+    "previewUrl": "/artworks/previews/fragment_016_p5.html",
+    "filename": "fragment_016_p5.html",
+    "url": "/artworks/full/fragment_016_p5.html",
+    "tags": [
+      "interference",
+      "wave-fields",
+      "sin-cos",
+      "dual-layer",
+      "color-shift",
+      "motion",
+      "geometric",
+      "points",
+      "abstract",
+      "dynamic"
+    ],
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764633600,
+      "nanoseconds": 0
+    },
+    "title": "Interference",
     "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "votes": 0
+  },
+  {
+    "id": 170,
+    "title": "Colorful Noise",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    },
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_114_p5.html",
+    "url": "/artworks/full/fragment_114_p5.html",
+    "filename": "fragment_114_p5.html",
+    "votes": 0,
     "tags": [
       "p5js",
       "pixel-manipulation",
@@ -3383,16 +1973,10 @@
       "dark-mode",
       "computational-art",
       "abstract"
-    ],
-    "url": "/artworks/full/fragment_114_p5.html",
-    "previewUrl": "/artworks/previews/fragment_114_p5.html",
-    "filename": "fragment_114_p5.html"
+    ]
   },
   {
-    "id": 170,
-    "title": "Spiral Dot",
-    "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "id": 171,
     "tags": [
       "p5js",
       "generative-art",
@@ -3410,15 +1994,20 @@
       "radar-aesthetic",
       "optical-illusion"
     ],
+    "title": "Spiral Dot",
     "url": "/artworks/full/fragment_115_p5.html",
+    "votes": 0,
     "previewUrl": "/artworks/previews/fragment_115_p5.html",
-    "filename": "fragment_115_p5.html"
+    "filename": "fragment_115_p5.html",
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 171,
-    "title": "ゴゴゴゴ円舞 (Gogogogo Enbu)",
-    "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "id": 172,
     "tags": [
       "p5js",
       "generative-art",
@@ -3437,40 +2026,21 @@
       "visual-noise"
     ],
     "url": "/artworks/full/fragment_116_p5.html",
+    "votes": 0,
+    "tech": "p5.js",
+    "title": "ゴゴゴゴ円舞 (Gogogogo Enbu)",
+    "filename": "fragment_116_p5.html",
     "previewUrl": "/artworks/previews/fragment_116_p5.html",
-    "filename": "fragment_116_p5.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 172,
-    "title": "斜め縞ドドド (Diagonal Stripes Dododo)",
-    "tech": "p5.js",
-    "createdAt": "2026-01-02",
-    "tags": [
-      "p5js",
-      "generative-art",
-      "manga-aesthetic",
-      "speed-lines",
-      "diagonal-stripes",
-      "kinetic-pattern",
-      "high-contrast",
-      "vibrant-colors",
-      "looping-animation",
-      "stroboscopic-effect",
-      "optical-motion",
-      "pop-art",
-      "action-lines",
-      "trailing-effect",
-      "geometric-repetition"
-    ],
-    "url": "/artworks/full/fragment_117_p5.html",
-    "previewUrl": "/artworks/previews/fragment_117_p5.html",
-    "filename": "fragment_117_p5.html"
-  },
-  {
-    "id": 173,
+    "id": 174,
+    "votes": 0,
     "title": "ポップアート円 (Pop Art Circle)",
-    "tech": "p5.js",
-    "createdAt": "2026-01-02",
     "tags": [
       "p5js",
       "generative-art",
@@ -3488,15 +2058,20 @@
       "neon-aesthetic",
       "visual-noise"
     ],
-    "url": "/artworks/full/fragment_118_p5.html",
-    "previewUrl": "/artworks/previews/fragment_118_p5.html",
-    "filename": "fragment_118_p5.html"
+    "previewUrl": "/artworks/previews/fragment_117_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    },
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_117_p5.html",
+    "filename": "fragment_117_p5.html"
   },
   {
-    "id": 174,
-    "title": "ド派手波紋 (Extravagant Ripples)",
+    "id": 175,
     "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "previewUrl": "/artworks/previews/fragment_118_p5.html",
     "tags": [
       "p5js",
       "generative-art",
@@ -3514,15 +2089,26 @@
       "dark-mode",
       "neon-aesthetic"
     ],
-    "url": "/artworks/full/fragment_119_p5.html",
-    "previewUrl": "/artworks/previews/fragment_119_p5.html",
-    "filename": "fragment_119_p5.html"
+    "url": "/artworks/full/fragment_118_p5.html",
+    "title": "ド派手波紋 (Extravagant Ripples)",
+    "filename": "fragment_118_p5.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 175,
+    "id": 176,
+    "url": "/artworks/full/fragment_119_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    },
     "title": "カラフル螺旋 (Colorful Rasen)",
     "tech": "p5.js",
-    "createdAt": "2026-01-02",
     "tags": [
       "p5js",
       "generative-art",
@@ -3540,15 +2126,14 @@
       "mathematical-design",
       "high-speed-animation"
     ],
-    "url": "/artworks/full/fragment_120_p5.html",
-    "previewUrl": "/artworks/previews/fragment_120_p5.html",
-    "filename": "fragment_120_p5.html"
+    "votes": 0,
+    "filename": "fragment_119_p5.html",
+    "previewUrl": "/artworks/previews/fragment_119_p5.html"
   },
   {
-    "id": 176,
+    "id": 177,
+    "previewUrl": "/artworks/previews/fragment_121_p5.html",
     "title": "擬音文字ゴゴゴ (Onomatopoeia Gogogo)",
-    "tech": "p5.js",
-    "createdAt": "2026-01-02",
     "tags": [
       "p5js",
       "generative-typography",
@@ -3566,15 +2151,18 @@
       "dynamic-text",
       "dark-mode"
     ],
+    "tech": "p5.js",
     "url": "/artworks/full/fragment_121_p5.html",
-    "previewUrl": "/artworks/previews/fragment_121_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    },
+    "votes": 0,
     "filename": "fragment_121_p5.html"
   },
   {
-    "id": 177,
-    "title": "斜め線ポップ (Diagonal Line Pop)",
-    "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "id": 178,
     "tags": [
       "p5js",
       "generative-art",
@@ -3593,14 +2181,19 @@
       "neon-palette"
     ],
     "url": "/artworks/full/fragment_122_p5.html",
+    "title": "斜め線ポップ (Diagonal Line Pop)",
+    "tech": "p5.js",
     "previewUrl": "/artworks/previews/fragment_122_p5.html",
-    "filename": "fragment_122_p5.html"
+    "filename": "fragment_122_p5.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 178,
-    "title": "放射線オーラ (Radiant Aura)",
-    "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "id": 179,
     "tags": [
       "p5js",
       "generative-art",
@@ -3619,14 +2212,45 @@
       "energy-visual"
     ],
     "url": "/artworks/full/fragment_123_p5.html",
+    "filename": "fragment_123_p5.html",
+    "tech": "p5.js",
+    "title": "放射線オーラ (Radiant Aura)",
     "previewUrl": "/artworks/previews/fragment_123_p5.html",
-    "filename": "fragment_123_p5.html"
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 179,
-    "title": "サイケドット (Psychedelic Dot)",
+    "id": 18,
+    "tags": [
+      "interference",
+      "resonance",
+      "multi-layer",
+      "color-cycle",
+      "radial-motion",
+      "pulse",
+      "generative",
+      "oscillation",
+      "abstract",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_017_p5.html",
     "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "filename": "fragment_017_p5.html",
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_017_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764633600,
+      "nanoseconds": 0
+    },
+    "title": "Resonant Interference"
+  },
+  {
+    "id": 180,
     "tags": [
       "p5js",
       "generative-art",
@@ -3645,14 +2269,19 @@
       "optical-shimmer"
     ],
     "url": "/artworks/full/fragment_124_p5.html",
+    "filename": "fragment_124_p5.html",
+    "tech": "p5.js",
+    "votes": 0,
     "previewUrl": "/artworks/previews/fragment_124_p5.html",
-    "filename": "fragment_124_p5.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    },
+    "title": "サイケドット (Psychedelic Dot)"
   },
   {
-    "id": 180,
-    "title": "波打つ螺旋円 (Wavy Spiral Circle)",
-    "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "id": 181,
     "tags": [
       "p5js",
       "generative-art",
@@ -3670,15 +2299,30 @@
       "hypnotic",
       "mathematical-art"
     ],
+    "filename": "fragment_125_p5.html",
+    "tech": "p5.js",
     "url": "/artworks/full/fragment_125_p5.html",
-    "previewUrl": "/artworks/previews/fragment_125_p5.html",
-    "filename": "fragment_125_p5.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "title": "波打つ螺旋円 (Wavy Spiral Circle)",
+    "previewUrl": "/artworks/previews/fragment_125_p5.html"
   },
   {
-    "id": 181,
+    "id": 182,
     "title": "万華鏡回転 (Kaleidoscope Rotation)",
     "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "previewUrl": "/artworks/previews/fragment_126_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "filename": "fragment_126_p5.html",
     "tags": [
       "p5js",
       "generative-art",
@@ -3696,15 +2340,13 @@
       "dynamic-geometry",
       "meditative"
     ],
-    "url": "/artworks/full/fragment_126_p5.html",
-    "previewUrl": "/artworks/previews/fragment_126_p5.html",
-    "filename": "fragment_126_p5.html"
+    "url": "/artworks/full/fragment_126_p5.html"
   },
   {
-    "id": 182,
+    "id": 183,
+    "url": "/artworks/full/fragment_127_p5.html",
     "title": "光の花 (Flower of Light)",
-    "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "votes": 0,
     "tags": [
       "p5js",
       "generative-art",
@@ -3722,15 +2364,17 @@
       "digital-nature",
       "kaleidoscope-effect"
     ],
-    "url": "/artworks/full/fragment_127_p5.html",
+    "tech": "p5.js",
     "previewUrl": "/artworks/previews/fragment_127_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    },
     "filename": "fragment_127_p5.html"
   },
   {
-    "id": 183,
-    "title": "螺旋万華鏡 (Spiral Kaleidoscope)",
-    "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "id": 184,
     "tags": [
       "p5js",
       "generative-art",
@@ -3748,15 +2392,21 @@
       "dark-mode",
       "visual-rhythm"
     ],
+    "title": "螺旋万華鏡 (Spiral Kaleidoscope)",
+    "filename": "fragment_128_p5.html",
     "url": "/artworks/full/fragment_128_p5.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    },
     "previewUrl": "/artworks/previews/fragment_128_p5.html",
-    "filename": "fragment_128_p5.html"
+    "tech": "p5.js"
   },
   {
-    "id": 184,
+    "id": 185,
     "title": "波紋万華鏡 (Ripple Kaleidoscope)",
-    "tech": "p5.js",
-    "createdAt": "2026-01-02",
     "tags": [
       "p5js",
       "generative-art",
@@ -3774,15 +2424,30 @@
       "meditative",
       "circular-harmonics"
     ],
-    "url": "/artworks/full/fragment_129_p5.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    },
+    "tech": "p5.js",
+    "filename": "fragment_129_p5.html",
     "previewUrl": "/artworks/previews/fragment_129_p5.html",
-    "filename": "fragment_129_p5.html"
+    "url": "/artworks/full/fragment_129_p5.html"
   },
   {
-    "id": 185,
+    "id": 186,
     "title": "光の螺旋 (Spiral of Light)",
     "tech": "p5.js",
-    "createdAt": "2026-01-02",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767312000,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_130_p5.html",
+    "previewUrl": "/artworks/previews/fragment_130_p5.html",
+    "votes": 0,
+    "url": "/artworks/full/fragment_130_p5.html",
     "tags": [
       "p5js",
       "generative-art",
@@ -3799,16 +2464,10 @@
       "radial-lines",
       "dark-mode",
       "visual-rhythm"
-    ],
-    "url": "/artworks/full/fragment_130_p5.html",
-    "previewUrl": "/artworks/previews/fragment_130_p5.html",
-    "filename": "fragment_130_p5.html"
+    ]
   },
   {
-    "id": 186,
-    "title": "色変化フラワー (Color Shift Flower)",
-    "tech": "p5.js",
-    "createdAt": "2026-01-05",
+    "id": 187,
     "tags": [
       "p5js",
       "generative-art",
@@ -3826,15 +2485,30 @@
       "smooth-transitions",
       "rhythmic-visual"
     ],
+    "votes": 0,
+    "tech": "p5.js",
+    "filename": "fragment_131_p5.html",
     "url": "/artworks/full/fragment_131_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
     "previewUrl": "/artworks/previews/fragment_131_p5.html",
-    "filename": "fragment_131_p5.html"
+    "title": "色変化フラワー (Color Shift Flower)"
   },
   {
-    "id": 187,
+    "id": 188,
+    "url": "/artworks/full/fragment_132_p5.html",
+    "filename": "fragment_132_p5.html",
     "title": "ドット万華鏡 (Dot Kaleidoscope)",
     "tech": "p5.js",
-    "createdAt": "2026-01-05",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_132_p5.html",
     "tags": [
       "p5js",
       "generative-art",
@@ -3852,15 +2526,16 @@
       "minimalist-interaction",
       "optical-shimmer"
     ],
-    "url": "/artworks/full/fragment_132_p5.html",
-    "previewUrl": "/artworks/previews/fragment_132_p5.html",
-    "filename": "fragment_132_p5.html"
+    "votes": 0
   },
   {
-    "id": 188,
-    "title": "波動螺旋 (Wave Spiral)",
-    "tech": "p5.js",
-    "createdAt": "2026-01-05",
+    "id": 189,
+    "previewUrl": "/artworks/previews/fragment_133_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
     "tags": [
       "p5js",
       "generative-art",
@@ -3878,15 +2553,49 @@
       "mathematical-beauty",
       "milestone-30"
     ],
+    "filename": "fragment_133_p5.html",
+    "tech": "p5.js",
     "url": "/artworks/full/fragment_133_p5.html",
-    "previewUrl": "/artworks/previews/fragment_133_p5.html",
-    "filename": "fragment_133_p5.html"
+    "title": "波動螺旋 (Wave Spiral)",
+    "votes": 0
   },
   {
-    "id": 189,
-    "title": "マウス反応カレイド (Mouse Reaction Kaleido)",
+    "id": 19,
+    "url": "/artworks/full/fragment_018_p5.html",
     "tech": "p5.js",
-    "createdAt": "2026-01-05",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_018_p5.html",
+    "votes": 0,
+    "title": "Neo Boids",
+    "tags": [
+      "boids",
+      "hsb",
+      "swarm",
+      "color-motion",
+      "interactive",
+      "trail",
+      "generative",
+      "organic",
+      "agents",
+      "dynamic"
+    ],
+    "filename": "fragment_018_p5.html"
+  },
+  {
+    "id": 190,
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_134_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_134_p5.html",
+    "votes": 0,
     "tags": [
       "p5js",
       "generative-art",
@@ -3905,14 +2614,17 @@
       "geometry-play"
     ],
     "url": "/artworks/full/fragment_134_p5.html",
-    "previewUrl": "/artworks/previews/fragment_134_p5.html",
-    "filename": "fragment_134_p5.html"
+    "title": "マウス反応カレイド (Mouse Reaction Kaleido)"
   },
   {
-    "id": 190,
+    "id": 191,
+    "url": "/artworks/full/fragment_135_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
     "title": "Squishy Bacteria",
-    "tech": "p5.js",
-    "createdAt": "2026-01-05",
     "tags": [
       "p5js",
       "generative-art",
@@ -3930,15 +2642,13 @@
       "dark-mode",
       "neon-cells"
     ],
-    "url": "/artworks/full/fragment_135_p5.html",
+    "votes": 0,
+    "filename": "fragment_135_p5.html",
     "previewUrl": "/artworks/previews/fragment_135_p5.html",
-    "filename": "fragment_135_p5.html"
+    "tech": "p5.js"
   },
   {
-    "id": 191,
-    "title": "Tentacle Bacteria",
-    "tech": "p5.js",
-    "createdAt": "2026-01-05",
+    "id": 192,
     "tags": [
       "p5js",
       "generative-art",
@@ -3958,13 +2668,22 @@
     ],
     "url": "/artworks/full/fragment_136_p5.html",
     "previewUrl": "/artworks/previews/fragment_136_p5.html",
-    "filename": "fragment_136_p5.html"
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_136_p5.html",
+    "votes": 0,
+    "title": "Tentacle Bacteria"
   },
   {
-    "id": 192,
-    "title": "Mouse-Responsive Bacteria",
+    "id": 193,
+    "filename": "fragment_137_p5.html",
+    "url": "/artworks/full/fragment_137_p5.html",
+    "votes": 0,
     "tech": "p5.js",
-    "createdAt": "2026-01-05",
     "tags": [
       "p5js",
       "generative-art",
@@ -3982,41 +2701,16 @@
       "organic-shapes",
       "cursor-interaction"
     ],
-    "url": "/artworks/full/fragment_137_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
     "previewUrl": "/artworks/previews/fragment_137_p5.html",
-    "filename": "fragment_137_p5.html"
+    "title": "Mouse-Responsive Bacteria"
   },
   {
-    "id": 193,
-    "title": "Wiggling Microbes",
-    "tech": "p5.js",
-    "createdAt": "2026-01-05",
-    "tags": [
-      "p5js",
-      "generative-art",
-      "microscopic-aesthetic",
-      "harmonic-oscillation",
-      "independent-agents",
-      "stochastic-motion",
-      "sinusoidal-vibration",
-      "underwater-vibe",
-      "biological-simulation",
-      "trailing-effect",
-      "organic-movement",
-      "random-distribution",
-      "minimalist-design",
-      "dark-mode",
-      "fluid-dynamics-inspiration"
-    ],
-    "url": "/artworks/full/fragment_138_p5.html",
-    "previewUrl": "/artworks/previews/fragment_138_p5.html",
-    "filename": "fragment_138_p5.html"
-  },
-  {
-    "id": 194,
-    "title": "Cosmic Circles",
-    "tech": "p5.js",
-    "createdAt": "2026-01-05",
+    "id": 196,
     "tags": [
       "p5js",
       "generative-art",
@@ -4034,41 +2728,27 @@
       "complex-geometry",
       "motion-graphics"
     ],
-    "url": "/artworks/full/fragment_139_p5.html",
     "previewUrl": "/artworks/previews/fragment_139_p5.html",
-    "filename": "fragment_139_p5.html"
-  },
-  {
-    "id": 195,
     "title": "Cosmic Circles",
     "tech": "p5.js",
-    "createdAt": "2026-01-05",
-    "tags": [
-      "p5js",
-      "generative-art",
-      "object-oriented-programming",
-      "particle-system",
-      "trigonometry",
-      "hsb-color-mode",
-      "mathematical-curves",
-      "harmonic-interference",
-      "hypnotic-visual",
-      "cosmic-aesthetic",
-      "dynamic-scaling",
-      "high-density-particles",
-      "complex-geometry",
-      "motion-graphics",
-      "procedural-generation"
-    ],
-    "url": "/artworks/full/fragment_140_p5.html",
-    "previewUrl": "/artworks/previews/fragment_140_p5.html",
-    "filename": "fragment_140_p5.html"
+    "filename": "fragment_139_p5.html",
+    "votes": 0,
+    "url": "/artworks/full/fragment_139_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 196,
-    "title": "Crystal Fractal Tree",
-    "tech": "WEBGL",
-    "createdAt": "2026-01-05",
+    "id": 197,
+    "previewUrl": "/artworks/previews/fragment_141_p5.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
     "tags": [
       "p5js",
       "webgl",
@@ -4086,15 +2766,20 @@
       "ambient-and-directional-light",
       "recursive-branching"
     ],
+    "filename": "fragment_141_p5.html",
+    "tech": "WEBGL",
     "url": "/artworks/full/fragment_141_p5.html",
-    "previewUrl": "/artworks/previews/fragment_141_p5.html",
-    "filename": "fragment_141_p5.html"
+    "title": "Crystal Fractal Tree"
   },
   {
-    "id": 197,
+    "id": 198,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_142_p5.html",
     "title": "Noise Circle Flow",
-    "tech": "p5.js",
-    "createdAt": "2026-01-05",
     "tags": [
       "p5js",
       "generative-art",
@@ -4112,15 +2797,22 @@
       "gradient-stroke",
       "zen-aesthetic"
     ],
-    "url": "/artworks/full/fragment_142_p5.html",
+    "votes": 0,
     "previewUrl": "/artworks/previews/fragment_142_p5.html",
-    "filename": "fragment_142_p5.html"
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_142_p5.html"
   },
   {
-    "id": 198,
+    "id": 199,
+    "filename": "fragment_143_p5.html",
+    "url": "/artworks/full/fragment_143_p5.html",
     "title": "yura yura",
-    "tech": "p5.js",
-    "createdAt": "2026-01-05",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_143_p5.html",
     "tags": [
       "p5js",
       "generative-art",
@@ -4138,15 +2830,63 @@
       "zen-vibe",
       "milestone-40"
     ],
-    "url": "/artworks/full/fragment_143_p5.html",
-    "previewUrl": "/artworks/previews/fragment_143_p5.html",
-    "filename": "fragment_143_p5.html"
+    "votes": 0,
+    "tech": "p5.js"
   },
   {
-    "id": 199,
-    "title": "Tangram Pack",
-    "tech": "WEBGL",
-    "createdAt": "2026-01-05",
+    "id": 2,
+    "previewUrl": "/artworks/previews/fragment_001_p5.html",
+    "tech": "p5.js",
+    "votes": 0,
+    "filename": "fragment_001_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "title": "Abstract",
+    "url": "/artworks/full/fragment_001_p5.html",
+    "tags": [
+      "luminous-points",
+      "blue-tint",
+      "dark-canvas",
+      "constellation-like",
+      "sinusoidal-motion",
+      "waveform-orbits",
+      "oscillating-field",
+      "point-cloud",
+      "radial-abstraction",
+      "minimal-geometry"
+    ]
+  },
+  {
+    "id": 20,
+    "url": "/artworks/full/fragment_019_p5.html",
+    "previewUrl": "/artworks/previews/fragment_019_p5.html",
+    "filename": "fragment_019_p5.html",
+    "title": "Neo Boids",
+    "votes": 0,
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "tags": [
+      "boids",
+      "hsb",
+      "swarm",
+      "color-motion",
+      "interactive",
+      "trail",
+      "generative",
+      "organic",
+      "agents",
+      "dynamic"
+    ]
+  },
+  {
+    "id": 200,
     "tags": [
       "p5js",
       "webgl",
@@ -4164,15 +2904,23 @@
       "tangram-inspiration",
       "masterpiece"
     ],
-    "url": "/artworks/full/fragment_144_p5.html",
     "previewUrl": "/artworks/previews/fragment_144_p5.html",
-    "filename": "fragment_144_p5.html"
+    "url": "/artworks/full/fragment_144_p5.html",
+    "votes": 0,
+    "tech": "p5.js (WEBGL + GLSL Shader)",
+    "filename": "fragment_144_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
+    "title": "Tangram Pack"
   },
   {
-    "id": 200,
-    "title": "Tangram Pack (Advanced Packing)",
+    "id": 201,
     "tech": "WEBGL",
-    "createdAt": "2026-01-05",
+    "title": "Tangram Pack (Advanced Packing)",
+    "previewUrl": "/artworks/previews/fragment_145_p5.html",
     "tags": [
       "p5js",
       "webgl",
@@ -4190,15 +2938,19 @@
       "pixel-manipulation",
       "algorithmic-art"
     ],
+    "votes": 0,
+    "filename": "fragment_145_p5.html",
     "url": "/artworks/full/fragment_145_p5.html",
-    "previewUrl": "/artworks/previews/fragment_145_p5.html",
-    "filename": "fragment_145_p5.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 201,
+    "id": 202,
     "title": "Tangram Flow",
-    "tech": "WEBGL",
-    "createdAt": "2026-01-05",
+    "votes": 0,
     "tags": [
       "p5js",
       "webgl",
@@ -4216,15 +2968,18 @@
       "autonomous-agents",
       "visual-rhythm"
     ],
-    "url": "/artworks/full/fragment_146_p5.html",
     "previewUrl": "/artworks/previews/fragment_146_p5.html",
-    "filename": "fragment_146_p5.html"
+    "tech": "WEBGL",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_146_p5.html",
+    "url": "/artworks/full/fragment_146_p5.html"
   },
   {
-    "id": 202,
-    "title": "Tangram Flow2",
-    "tech": "p5.js",
-    "createdAt": "2026-01-05",
+    "id": 203,
     "tags": [
       "p5js",
       "vector-field",
@@ -4242,15 +2997,31 @@
       "static-frame-composition",
       "minimalist-aesthetic"
     ],
-    "url": "/artworks/full/fragment_147_p5.html",
     "previewUrl": "/artworks/previews/fragment_147_p5.html",
-    "filename": "fragment_147_p5.html"
+    "tech": "p5.js",
+    "title": "Tangram Flow2",
+    "votes": 0,
+    "filename": "fragment_147_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_147_p5.html"
   },
   {
-    "id": 203,
-    "title": "Rice Cake Ghost",
+    "id": 204,
+    "previewUrl": "/artworks/previews/fragment_148_p5.html",
+    "url": "/artworks/full/fragment_148_p5.html",
     "tech": "p5.js",
-    "createdAt": "2026-01-05",
+    "votes": 0,
+    "title": "Rice Cake Ghost",
+    "filename": "fragment_148_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
     "tags": [
       "p5js",
       "generative-character",
@@ -4266,16 +3037,18 @@
       "sinusoidal-motion",
       "drawing-context-api",
       "grain-effect"
-    ],
-    "url": "/artworks/full/fragment_148_p5.html",
-    "previewUrl": "/artworks/previews/fragment_148_p5.html",
-    "filename": "fragment_148_p5.html"
+    ]
   },
   {
-    "id": 204,
-    "title": "dream",
+    "id": 205,
+    "previewUrl": "/artworks/previews/fragment_149_p5.html",
+    "votes": 0,
     "tech": "p5.js",
-    "createdAt": "2026-01-05",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
     "tags": [
       "p5js",
       "cellular-automata",
@@ -4292,15 +3065,23 @@
       "interactive-reset",
       "motion-graphics"
     ],
-    "url": "/artworks/full/fragment_149_p5.html",
-    "previewUrl": "/artworks/previews/fragment_149_p5.html",
-    "filename": "fragment_149_p5.html"
+    "filename": "fragment_149_p5.html",
+    "title": "dream",
+    "url": "/artworks/full/fragment_149_p5.html"
   },
   {
-    "id": 205,
-    "title": "Music Score",
+    "id": 206,
     "tech": "p5.js",
-    "createdAt": "2026-01-05",
+    "title": "Music Score",
+    "url": "/artworks/full/fragment_150_p5.html",
+    "filename": "fragment_150_p5.html",
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_150_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
     "tags": [
       "p5js",
       "generative-music-score",
@@ -4315,16 +3096,14 @@
       "canvas-manipulation",
       "analog-aesthetic",
       "musical-notation-art"
-    ],
-    "url": "/artworks/full/fragment_150_p5.html",
-    "previewUrl": "/artworks/previews/fragment_150_p5.html",
-    "filename": "fragment_150_p5.html"
+    ]
   },
   {
-    "id": 206,
+    "id": 207,
+    "filename": "fragment_151_p5.html",
     "title": "Music Score: Manuscript",
     "tech": "p5.js",
-    "createdAt": "2026-01-05",
+    "previewUrl": "/artworks/previews/fragment_151_p5.html",
     "tags": [
       "p5js",
       "generative-manuscript",
@@ -4341,15 +3120,17 @@
       "manuscript-aesthetic",
       "seraph-colors"
     ],
+    "votes": 0,
     "url": "/artworks/full/fragment_151_p5.html",
-    "previewUrl": "/artworks/previews/fragment_151_p5.html",
-    "filename": "fragment_151_p5.html"
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    }
   },
   {
-    "id": 207,
-    "title": "circle anime",
-    "tech": "p5.js",
-    "createdAt": "2026-01-05",
+    "id": 208,
+    "previewUrl": "/artworks/previews/fragment_152_p5.html",
     "tags": [
       "p5js",
       "motion-graphics",
@@ -4365,32 +3146,2114 @@
       "dynamic-layout",
       "flat-design"
     ],
-    "url": "/artworks/full/fragment_152_p5.html",
-    "previewUrl": "/artworks/previews/fragment_152_p5.html",
-    "filename": "fragment_152_p5.html"
+    "title": "circle anime",
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767571200,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "filename": "fragment_152_p5.html",
+    "url": "/artworks/full/fragment_152_p5.html"
   },
   {
-    "id": 208,
-    "title": "Moiré Circles",
+    "id": 209,
+    "title": "Abstract",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767657600,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_154_p5.html",
+    "votes": 0,
     "tech": "p5.js",
-    "createdAt": "2026-01-06",
     "tags": [
       "p5js",
-      "moire-effect",
-      "recursive-geometry",
-      "interference-pattern",
-      "oscillation",
-      "mathematical-art",
-      "hsb-color-drift",
-      "dynamic-scaling",
-      "optical-illusion",
-      "minimalist-code",
-      "sinusoidal-mapping",
-      "generative-motion",
-      "zen-aesthetic"
+      "code-golf",
+      "recursion",
+      "chaos-theory",
+      "mathematical-abstraction",
+      "per-pixel-rendering",
+      "recursive-mapping",
+      "dynamic-range-color",
+      "minimalist-syntax",
+      "generative-landscape",
+      "fractal-dimension",
+      "non-linear-dynamics"
     ],
-    "url": "/artworks/full/fragment_153_p5.html",
-    "previewUrl": "/artworks/previews/fragment_153_p5.html",
-    "filename": "fragment_153_p5.html"
+    "filename": "fragment_154_p5.html",
+    "url": "/artworks/full/fragment_154_p5.html"
+  },
+  {
+    "id": 21,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_020_p5.html",
+    "previewUrl": "/artworks/previews/fragment_020_p5.html",
+    "title": "Wind Field",
+    "tags": [
+      "flow-field",
+      "noise",
+      "wind",
+      "boids",
+      "soft-motion",
+      "perlin",
+      "particles",
+      "ambient",
+      "generative",
+      "dynamic"
+    ],
+    "url": "/artworks/full/fragment_020_p5.html",
+    "votes": 0,
+    "tech": "p5.js"
+  },
+  {
+    "id": 210,
+    "tech": "p5.js",
+    "title": "fire flower",
+    "tags": [
+      "p5js",
+      "recursive-subdivision",
+      "object-oriented-programming",
+      "blend-mode-add",
+      "noise-geometry",
+      "kaleidoscope-effect",
+      "neon-aesthetic",
+      "dynamic-palette",
+      "offscreen-graphics",
+      "perlin-noise",
+      "generative-flora",
+      "texture-mapping"
+    ],
+    "filename": "fragment_155_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767657600,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_155_p5.html",
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_155_p5.html"
+  },
+  {
+    "id": 211,
+    "title": "Blob",
+    "votes": 0,
+    "tags": [
+      "p5js",
+      "op-art",
+      "truchet-tiles",
+      "geometric-abstraction",
+      "arc-composition",
+      "modular-design",
+      "palette-shuffling",
+      "checkerboard-logic",
+      "minimalist-flat-design",
+      "generative-pattern",
+      "webgl-rendering",
+      "organic-connectivity"
+    ],
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767657600,
+      "nanoseconds": 0
+    },
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_156_p5.html",
+    "filename": "fragment_156_p5.html",
+    "previewUrl": "/artworks/previews/fragment_156_p5.html"
+  },
+  {
+    "id": 212,
+    "url": "/artworks/full/fragment_157_p5.html",
+    "previewUrl": "/artworks/previews/fragment_157_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1767657600,
+      "nanoseconds": 0
+    },
+    "tech": "WEBGL",
+    "votes": 0,
+    "tags": [
+      "p5js",
+      "webgl",
+      "concentric-circles",
+      "bezier-easing",
+      "sinusoidal-oscillation",
+      "phase-shift",
+      "3d-transformation",
+      "hsb-cycling",
+      "mathematical-motion",
+      "kinetic-art",
+      "orbit-control",
+      "recursive-rotation"
+    ],
+    "title": "Ellipse Slips",
+    "filename": "fragment_157_p5.html"
+  },
+  {
+    "id": 22,
+    "votes": 0,
+    "filename": "fragment_021_p5.html",
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_021_p5.html",
+    "title": "Predator’s Orbit",
+    "tags": [
+      "boids",
+      "predator-prey",
+      "orbit",
+      "flocking",
+      "chase",
+      "swarm",
+      "simulation",
+      "generative",
+      "dynamic",
+      "tension"
+    ],
+    "previewUrl": "/artworks/previews/fragment_021_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764633600,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 23,
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764633600,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_022_p5.html",
+    "url": "/artworks/full/fragment_022_p5.html",
+    "filename": "fragment_022_p5.html",
+    "tags": [
+      "boids",
+      "gravity",
+      "reset",
+      "swirl",
+      "celestial",
+      "particle",
+      "loop",
+      "generative",
+      "ambient",
+      "cosmic"
+    ],
+    "votes": 0,
+    "title": "Celestial Flock (Reset)"
+  },
+  {
+    "id": 24,
+    "filename": "fragment_023_p5.html",
+    "title": "Symmetry Flow",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_023_p5.html",
+    "votes": 0,
+    "tags": [
+      "symmetry",
+      "radial",
+      "boids",
+      "orbit",
+      "harmonic",
+      "geometric",
+      "pattern",
+      "generative",
+      "motion",
+      "abstract"
+    ],
+    "previewUrl": "/artworks/previews/fragment_023_p5.html",
+    "tech": "p5.js"
+  },
+  {
+    "id": 25,
+    "filename": "fragment_024_p5.html",
+    "previewUrl": "/artworks/previews/fragment_024_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "tags": [
+      "particles",
+      "bloom",
+      "explosion",
+      "burst",
+      "trail",
+      "generative",
+      "color",
+      "abstract",
+      "fade",
+      "dynamic"
+    ],
+    "title": "Particle Bloom",
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_024_p5.html"
+  },
+  {
+    "id": 26,
+    "filename": "fragment_025_p5.html",
+    "votes": 0,
+    "url": "/artworks/full/fragment_025_p5.html",
+    "description": "Multiple spirals rotate inward, forming a layered nebula of colored trails.",
+    "tech": "p5.js",
+    "tags": [
+      "spiral",
+      "nebula",
+      "galaxy",
+      "rotation",
+      "color",
+      "particle",
+      "swirl",
+      "generative",
+      "cosmic",
+      "dynamic"
+    ],
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_025_p5.html",
+    "title": "Spiral Nebula"
+  },
+  {
+    "id": 27,
+    "filename": "fragment_026_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "tags": [
+      "grid",
+      "shapes",
+      "pastel",
+      "geometric",
+      "modular",
+      "pattern",
+      "generative",
+      "motion",
+      "interactive",
+      "dynamic"
+    ],
+    "title": "Modular Shapes Grid",
+    "previewUrl": "/artworks/previews/fragment_026_p5.html",
+    "votes": 0,
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_026_p5.html"
+  },
+  {
+    "id": 28,
+    "previewUrl": "/artworks/previews/fragment_027_p5.html",
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_027_p5.html",
+    "tags": [
+      "template",
+      "orbit",
+      "shapes",
+      "structure",
+      "generative",
+      "motion",
+      "centered",
+      "abstract",
+      "dynamic",
+      "scaffold"
+    ],
+    "votes": 0,
+    "title": "Template",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762473600,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_027_p5.html"
+  },
+  {
+    "id": 29,
+    "filename": "fragment_028_p5.html",
+    "url": "/artworks/full/fragment_028_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "title": "Pulse Bloom",
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_028_p5.html",
+    "votes": 0,
+    "tags": [
+      "pulse",
+      "rings",
+      "bloom",
+      "wave",
+      "color-shift",
+      "generative",
+      "breathing",
+      "radial",
+      "ambient",
+      "dynamic"
+    ]
+  },
+  {
+    "id": 3,
+    "tags": [
+      "flocking",
+      "boids",
+      "dark-canvas",
+      "triangles",
+      "particle-swarm",
+      "emergent-behavior",
+      "dynamic-patterns",
+      "interactive-motion",
+      "radial-drift",
+      "soft-trails"
+    ],
+    "previewUrl": "/artworks/previews/fragment_002_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "filename": "fragment_002_p5.html",
+    "title": "Boids",
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_002_p5.html"
+  },
+  {
+    "id": 30,
+    "tags": [
+      "mandala",
+      "breathing",
+      "petals",
+      "radial",
+      "symmetry",
+      "generative",
+      "wave",
+      "pattern",
+      "color",
+      "dynamic"
+    ],
+    "votes": 0,
+    "title": "Breathing Mandala",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_029_p5.html",
+    "previewUrl": "/artworks/previews/fragment_029_p5.html",
+    "filename": "fragment_029_p5.html",
+    "tech": "p5.js"
+  },
+  {
+    "id": 31,
+    "filename": "fragment_030_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_030_p5.html",
+    "previewUrl": "/artworks/previews/fragment_030_p5.html",
+    "votes": 0,
+    "tags": [
+      "orbit",
+      "color",
+      "chromatic",
+      "rotation",
+      "trail",
+      "generative",
+      "radial",
+      "light",
+      "dynamic",
+      "abstract"
+    ],
+    "title": "Chromatic Orbit"
+  },
+  {
+    "id": 32,
+    "url": "/artworks/full/fragment_031_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "tags": [
+      "fractal",
+      "pulse",
+      "radial",
+      "layers",
+      "color-shift",
+      "generative",
+      "oscillation",
+      "abstract",
+      "dynamic",
+      "geometry"
+    ],
+    "filename": "fragment_031_p5.html",
+    "previewUrl": "/artworks/previews/fragment_031_p5.html",
+    "title": "Fractal Pulse",
+    "tech": "p5.js"
+  },
+  {
+    "id": 33,
+    "votes": 0,
+    "filename": "fragment_032_p5.html",
+    "tech": "p5.js",
+    "tags": [
+      "geometry",
+      "orbit",
+      "hsl-color",
+      "rotation",
+      "particle-motion",
+      "ellipse-field",
+      "flow",
+      "dynamic",
+      "minimal"
+    ],
+    "url": "/artworks/full/fragment_032_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "title": "GeoFlow",
+    "previewUrl": "/artworks/previews/fragment_032_p5.html"
+  },
+  {
+    "id": 34,
+    "tags": [
+      "cute",
+      "heart",
+      "bubble",
+      "glitter",
+      "hsb-color",
+      "floating",
+      "kawaii-dark",
+      "soft-motion",
+      "aesthetic"
+    ],
+    "votes": 0,
+    "title": "Yami Cute",
+    "tech": "p5.js",
+    "filename": "fragment_033_p5.html",
+    "url": "/artworks/full/fragment_033_p5.html",
+    "previewUrl": "/artworks/previews/fragment_033_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 35,
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_034_p5.html",
+    "votes": 0,
+    "title": "Toxic Heart",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_034_p5.html",
+    "tags": [
+      "heart",
+      "toxic",
+      "hsl-color",
+      "pulse",
+      "particles",
+      "dark-theme",
+      "glow",
+      "organic-motion"
+    ],
+    "url": "/artworks/full/fragment_034_p5.html"
+  },
+  {
+    "id": 36,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "title": "Broken Doll",
+    "url": "/artworks/full/fragment_035_p5.html",
+    "tags": [
+      "shards",
+      "triangle",
+      "fragmented",
+      "glow",
+      "pink-core",
+      "pulse",
+      "rotation",
+      "surreal",
+      "dark-pop"
+    ],
+    "filename": "fragment_035_p5.html",
+    "previewUrl": "/artworks/previews/fragment_035_p5.html",
+    "votes": 0,
+    "tech": "p5.js"
+  },
+  {
+    "id": 37,
+    "url": "/artworks/full/fragment_036_p5.html",
+    "filename": "fragment_036_p5.html",
+    "tags": [
+      "pink",
+      "bubble",
+      "pulse",
+      "loop",
+      "5sec-loop",
+      "hsl-color",
+      "additive-blend",
+      "soft-glow"
+    ],
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_036_p5.html",
+    "tech": "p5.js",
+    "title": "Pink Overdose",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 38,
+    "title": "Holy Sin",
+    "tags": [
+      "cross",
+      "red-glow",
+      "rotation",
+      "hsl-color",
+      "pulse",
+      "sacred",
+      "dark-aesthetic",
+      "symbolic"
+    ],
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_037_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_037_p5.html",
+    "previewUrl": "/artworks/previews/fragment_037_p5.html",
+    "votes": 0
+  },
+  {
+    "id": 39,
+    "previewUrl": "/artworks/previews/fragment_038_p5.html",
+    "votes": 0,
+    "filename": "fragment_038_p5.html",
+    "tech": "p5.js",
+    "tags": [
+      "glyph",
+      "floating-text",
+      "noise-effect",
+      "purple-glow",
+      "hsl-color",
+      "ghostly",
+      "vertical-flow",
+      "ambient"
+    ],
+    "url": "/artworks/full/fragment_038_p5.html",
+    "title": "Ghost Message",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 4,
+    "tags": [
+      "interactive",
+      "particles",
+      "colorful",
+      "soft-motion",
+      "mouse-driven",
+      "emotional-expression",
+      "flowing-pattern",
+      "dynamic-color",
+      "translucent-trails",
+      "generative"
+    ],
+    "previewUrl": "/artworks/previews/fragment_003_p5.html",
+    "url": "/artworks/full/fragment_003_p5.html",
+    "filename": "fragment_003_p5.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764633600,
+      "nanoseconds": 0
+    },
+    "title": "Feel",
+    "tech": "p5.js"
+  },
+  {
+    "id": 40,
+    "previewUrl": "/artworks/previews/fragment_039_p5.html",
+    "url": "/artworks/full/fragment_039_p5.html",
+    "tags": [
+      "halo",
+      "ellipse",
+      "rotation",
+      "light-particles",
+      "sacred",
+      "yellow-glow",
+      "soft-motion",
+      "aura"
+    ],
+    "tech": "p5.js",
+    "title": "Fallen Halo",
+    "votes": 0,
+    "filename": "fragment_039_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 41,
+    "previewUrl": "/artworks/previews/fragment_040_p5.html",
+    "tags": [
+      "feather",
+      "drift",
+      "floating",
+      "hsl-color",
+      "soft-motion",
+      "lightness",
+      "gentle-flow",
+      "minimal"
+    ],
+    "url": "/artworks/full/fragment_040_p5.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "tech": "p5.js",
+    "filename": "fragment_040_p5.html",
+    "title": "Feather Drift"
+  },
+  {
+    "id": 42,
+    "tags": [
+      "white-noise",
+      "luminous",
+      "soft-glow",
+      "subtle-randomness",
+      "pixel-shimmer",
+      "ambient",
+      "ethereal",
+      "light-grain"
+    ],
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_041_p5.html",
+    "filename": "fragment_041_p5.html",
+    "title": "Heaven Noise",
+    "previewUrl": "/artworks/previews/fragment_041_p5.html",
+    "votes": 0
+  },
+  {
+    "id": 43,
+    "previewUrl": "/artworks/previews/fragment_042_p5.html",
+    "tech": "p5.js",
+    "votes": 0,
+    "title": "Cotton Candy Dream",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764633600,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_042_p5.html",
+    "filename": "fragment_042_p5.html",
+    "tags": [
+      "pastel-cloud",
+      "soft-motion",
+      "dreamy",
+      "floating-forms",
+      "cotton-fog",
+      "hsl-palette",
+      "soothing",
+      "pastel-vapor"
+    ]
+  },
+  {
+    "id": 44,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_043_p5.html",
+    "url": "/artworks/full/fragment_043_p5.html",
+    "filename": "fragment_043_p5.html",
+    "votes": 0,
+    "tech": "p5.js",
+    "tags": [
+      "bubble-field",
+      "vertical-flow",
+      "soft-rise",
+      "translucent-layers",
+      "gentle-motion",
+      "color-float",
+      "dreamlike",
+      "hsl-glow"
+    ],
+    "title": "Dream Bubble"
+  },
+  {
+    "id": 45,
+    "tech": "p5.js",
+    "filename": "fragment_044_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_044_p5.html",
+    "url": "/artworks/full/fragment_044_p5.html",
+    "tags": [
+      "pink-noise",
+      "static-field",
+      "sugar-tone",
+      "pixel-random",
+      "heart-wave",
+      "cute-chaos",
+      "romantic-glitch",
+      "sweet-aesthetic"
+    ],
+    "votes": 0,
+    "title": "Sweet Static"
+  },
+  {
+    "id": 46,
+    "tags": [
+      "emoji-rain",
+      "falling-objects",
+      "chaotic-motion",
+      "emoji-chaos",
+      "rainfield",
+      "text-particles",
+      "wobble-physics",
+      "humor"
+    ],
+    "filename": "fragment_045_p5.html",
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_045_p5.html",
+    "votes": 0,
+    "title": "Nyan Rain (Chaotic)",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_045_p5.html"
+  },
+  {
+    "id": 47,
+    "votes": 0,
+    "tags": [
+      "text-stream",
+      "glyph-fall",
+      "coded-chaos",
+      "fragmented-text",
+      "symbolic-rain",
+      "language-noise",
+      "glitch-cascade",
+      "syntax-drift"
+    ],
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_046_p5.html",
+    "previewUrl": "/artworks/previews/fragment_046_p5.html",
+    "filename": "fragment_046_p5.html",
+    "tech": "p5.js",
+    "title": "Broken Language"
+  },
+  {
+    "id": 48,
+    "url": "/artworks/full/fragment_047_p5.html",
+    "filename": "fragment_047_p5.html",
+    "title": "Glitch Bloom",
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_047_p5.html",
+    "tags": [
+      "pixel-bloom",
+      "color-distortion",
+      "noise-grid",
+      "glitch-shift",
+      "distorted-field",
+      "grid-pixels",
+      "bloom-effect",
+      "visual-noise"
+    ],
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "votes": 0
+  },
+  {
+    "id": 49,
+    "tags": [
+      "heart-burst",
+      "emotional-motion",
+      "burst-effect",
+      "symbolic-explosion",
+      "impulse-motion",
+      "hsl-heart",
+      "intense-glow",
+      "kinetic-expression"
+    ],
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_048_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_048_p5.html",
+    "votes": 0,
+    "url": "/artworks/full/fragment_048_p5.html",
+    "title": "Emotional Overdrive"
+  },
+  {
+    "id": 5,
+    "url": "/artworks/full/fragment_004_p5.html",
+    "tags": [
+      "nature-inspired",
+      "grass",
+      "wind-motion",
+      "gradient-sky",
+      "sunlight",
+      "procedural",
+      "soft-animation",
+      "interactive-wind",
+      "calm",
+      "generative"
+    ],
+    "previewUrl": "/artworks/previews/fragment_004_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764633600,
+      "nanoseconds": 0
+    },
+    "title": "Grassland",
+    "tech": "p5.js",
+    "filename": "fragment_004_p5.html",
+    "votes": 0
+  },
+  {
+    "id": 50,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_049_p5.html",
+    "votes": 0,
+    "title": "Orbiting Distortions",
+    "url": "/artworks/full/fragment_049_p5.html",
+    "tags": [
+      "orbital-waves",
+      "perlin-warp",
+      "chaotic-rotation",
+      "time-fragment",
+      "glitch-aura",
+      "hsl-spectrum",
+      "ring-evolution",
+      "interactive-chaos"
+    ],
+    "filename": "fragment_049_p5.html"
+  },
+  {
+    "id": 51,
+    "title": "Dream Debris",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "filename": "fragment_050_p5.html",
+    "tags": [
+      "floating-fragments",
+      "emoji-particles",
+      "hsl-glow",
+      "soft-trails",
+      "wobble-motion",
+      "rotational-drift",
+      "glitch-interaction",
+      "dreamlike-fall",
+      "time-fragment"
+    ],
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_050_p5.html",
+    "url": "/artworks/full/fragment_050_p5.html"
+  },
+  {
+    "id": 52,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_051_p5.html",
+    "tech": "p5.js",
+    "filename": "fragment_051_p5.html",
+    "previewUrl": "/artworks/previews/fragment_051_p5.html",
+    "votes": 0,
+    "tags": [
+      "noise-mosaic",
+      "emoji-fragments",
+      "melt-distortion",
+      "slice-smear",
+      "vertical-warp",
+      "glitch-overlay",
+      "hsl-texture",
+      "interactive-melt"
+    ],
+    "title": "Meltdown Cat"
+  },
+  {
+    "id": 53,
+    "url": "/artworks/full/fragment_052_p5.html",
+    "filename": "fragment_052_p5.html",
+    "tags": [
+      "wave-lines",
+      "hsl-gradient",
+      "oscillating-flow",
+      "sinusoidal-bands",
+      "blue-spectrum",
+      "minimal-motion",
+      "line-field",
+      "liquid-motion"
+    ],
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_052_p5.html",
+    "votes": 0,
+    "title": "Blue Current"
+  },
+  {
+    "id": 54,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_053_p5.html",
+    "url": "/artworks/full/fragment_053_p5.html",
+    "filename": "fragment_053_p5.html",
+    "votes": 0,
+    "tags": [
+      "bubble-system",
+      "floating-orbs",
+      "hsl-soft",
+      "vertical-drift",
+      "water-atmosphere",
+      "sway-motion",
+      "particle-loop",
+      "ambient-floating"
+    ],
+    "title": "Bubble Drift",
+    "tech": "p5.js"
+  },
+  {
+    "id": 55,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_054_p5.html",
+    "title": "Deep Abyss",
+    "tech": "p5.js",
+    "votes": 0,
+    "tags": [
+      "abyss-particles",
+      "vertical-gravity",
+      "dark-ocean",
+      "hsl-blue",
+      "sin-acceleration",
+      "depth-field",
+      "radial-origin",
+      "slow-sink"
+    ],
+    "previewUrl": "/artworks/previews/fragment_054_p5.html",
+    "filename": "fragment_054_p5.html"
+  },
+  {
+    "id": 56,
+    "url": "/artworks/full/fragment_055_p5.html",
+    "title": "Coral Bloom",
+    "votes": 0,
+    "tags": [
+      "coral-rings",
+      "noise-radius",
+      "organic-expansion",
+      "vibrating-shapes",
+      "hsl-coral",
+      "radial-bloom",
+      "wave-perturbation",
+      "circular-evolution"
+    ],
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_055_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_055_p5.html"
+  },
+  {
+    "id": 57,
+    "title": "Tide Mirror",
+    "votes": 0,
+    "filename": "fragment_056_p5.html",
+    "previewUrl": "/artworks/previews/fragment_056_p5.html",
+    "url": "/artworks/full/fragment_056_p5.html",
+    "tags": [
+      "split-gradient",
+      "mirror-ocean",
+      "horizontal-lines",
+      "tide-motion",
+      "sun-bob",
+      "blue-horizon",
+      "layered-water",
+      "minimal-seascape"
+    ],
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765238400,
+      "nanoseconds": 0
+    },
+    "tech": "p5.js"
+  },
+  {
+    "id": 58,
+    "url": "/artworks/full/fragment_057_p5.html",
+    "filename": "fragment_057_p5.html",
+    "tech": "p5.js",
+    "title": "Whale Dream",
+    "previewUrl": "/artworks/previews/fragment_057_p5.html",
+    "tags": [
+      "whale-sprites",
+      "ocean-drift",
+      "sin-wave-body",
+      "dream-motion",
+      "soft-blue",
+      "side-scrolling",
+      "hsl-sea",
+      "gentle-animals"
+    ],
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 59,
+    "url": "/artworks/full/fragment_058_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_058_p5.html",
+    "filename": "fragment_058_p5.html",
+    "tech": "p5.js",
+    "votes": 0,
+    "tags": [
+      "grass-blades",
+      "wind-sway",
+      "soft-green",
+      "field-motion",
+      "nature-simulation",
+      "morning-light",
+      "layered-sway",
+      "spring-atmosphere"
+    ],
+    "title": "Spring Field"
+  },
+  {
+    "id": 6,
+    "tags": [
+      "grid",
+      "geometric",
+      "noise-driven",
+      "rotation",
+      "flowing-pattern",
+      "abstract",
+      "minimal",
+      "interactive",
+      "procedural",
+      "generative"
+    ],
+    "previewUrl": "/artworks/previews/fragment_005_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764633600,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "filename": "fragment_005_p5.html",
+    "title": "Grid Motion",
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_005_p5.html"
+  },
+  {
+    "id": 60,
+    "title": "Sun Bloom",
+    "tags": [
+      "rotating-petals",
+      "sunburst",
+      "hsl-yellow",
+      "flower-wheel",
+      "oscillating-radius",
+      "geometric-flower",
+      "circular-bloom",
+      "bright-aura"
+    ],
+    "filename": "fragment_059_p5.html",
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_059_p5.html",
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_059_p5.html"
+  },
+  {
+    "id": 61,
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_060_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762732800,
+      "nanoseconds": 0
+    },
+    "title": "Leaf Pulse",
+    "tags": [
+      "radial-leaves",
+      "organic-bezier",
+      "pulsing-petals",
+      "hsl-green",
+      "nature-rhythm",
+      "symmetry-wheel",
+      "breathing-motion",
+      "soft-growth"
+    ],
+    "previewUrl": "/artworks/previews/fragment_060_p5.html",
+    "filename": "fragment_060_p5.html",
+    "votes": 0
+  },
+  {
+    "id": 62,
+    "title": "Rain Memory",
+    "votes": 0,
+    "tags": [
+      "rainfall-simulation",
+      "minimal-motion",
+      "vertical-flow",
+      "memory-fragment",
+      "seasonal-atmosphere",
+      "cool-palette"
+    ],
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763683200,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_061_p5.html",
+    "filename": "fragment_061_p5.html",
+    "previewUrl": "/artworks/previews/fragment_061_p5.html"
+  },
+  {
+    "id": 63,
+    "tags": [
+      "layered-noise",
+      "terrain-waves",
+      "breathing-landscape",
+      "organic-motion",
+      "calm-horizon",
+      "nature-fragment"
+    ],
+    "title": "Mountain Breath",
+    "filename": "fragment_062_p5.html",
+    "previewUrl": "/artworks/previews/fragment_062_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763683200,
+      "nanoseconds": 0
+    },
+    "tech": "p5.js",
+    "votes": 0,
+    "url": "/artworks/full/fragment_062_p5.html"
+  },
+  {
+    "id": 64,
+    "title": "Aurora Mist",
+    "filename": "fragment_063_p5.html",
+    "url": "/artworks/full/fragment_063_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763683200,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_063_p5.html",
+    "tags": [
+      "aurora-effect",
+      "soft-blending",
+      "elliptic-waves",
+      "hsl-glow",
+      "mist-motion",
+      "ethereal-fragment"
+    ]
+  },
+  {
+    "id": 65,
+    "tags": [
+      "petal-fall",
+      "seasonal-breeze",
+      "soft-motion",
+      "spring-fragment",
+      "pink-aesthetic",
+      "oscillation-flow"
+    ],
+    "title": "Spring Whisper",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763683200,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_064_p5.html",
+    "votes": 0,
+    "filename": "fragment_064_p5.html",
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_064_p5.html"
+  },
+  {
+    "id": 66,
+    "filename": "fragment_065_p5.html",
+    "tech": "p5.js",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763683200,
+      "nanoseconds": 0
+    },
+    "tags": [
+      "bubble-field",
+      "summer-glow",
+      "hsl-light",
+      "floating-motion",
+      "inner-sun",
+      "seasonal-fragment"
+    ],
+    "title": "Summer Radiance",
+    "url": "/artworks/full/fragment_065_p5.html",
+    "previewUrl": "/artworks/previews/fragment_065_p5.html"
+  },
+  {
+    "id": 67,
+    "filename": "fragment_066_p5.html",
+    "tags": [
+      "falling-leaves",
+      "autumn-palette",
+      "seasonal-motion",
+      "warm-tone",
+      "light-rotation",
+      "veil-layer"
+    ],
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763683200,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_066_p5.html",
+    "previewUrl": "/artworks/previews/fragment_066_p5.html",
+    "votes": 0,
+    "title": "Autumn Veil",
+    "tech": "p5.js"
+  },
+  {
+    "id": 68,
+    "title": "Winter Silence",
+    "previewUrl": "/artworks/previews/fragment_067_p5.html",
+    "filename": "fragment_067_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763683200,
+      "nanoseconds": 0
+    },
+    "tags": [
+      "snowfall-simulation",
+      "winter-fragment",
+      "soft-random-walk",
+      "quiet-motion",
+      "cool-white",
+      "seasonal-calm"
+    ],
+    "url": "/artworks/full/fragment_067_p5.html",
+    "tech": "p5.js",
+    "votes": 0
+  },
+  {
+    "id": 69,
+    "previewUrl": "/artworks/previews/fragment_068_p5.html",
+    "votes": 0,
+    "filename": "fragment_068_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763683200,
+      "nanoseconds": 0
+    },
+    "title": "Solar Pulse",
+    "url": "/artworks/full/fragment_068_p5.html",
+    "tags": [
+      "circular-waves",
+      "solar-resonance",
+      "pulse-motion",
+      "hsl-orbit",
+      "cosmic-fragment",
+      "dark-background"
+    ],
+    "tech": "p5.js"
+  },
+  {
+    "id": 7,
+    "tags": [
+      "grid",
+      "geometric",
+      "interactive",
+      "colorful",
+      "smooth-motion",
+      "wave-pattern",
+      "mouse-driven",
+      "generative",
+      "abstract",
+      "soft-light"
+    ],
+    "title": "Fancy Grid",
+    "url": "/artworks/full/fragment_006_p5.html",
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_006_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_006_p5.html",
+    "tech": "p5.js"
+  },
+  {
+    "id": 70,
+    "filename": "fragment_069_p5.html",
+    "url": "/artworks/full/fragment_069_p5.html",
+    "tags": [
+      "particle-ring",
+      "fire-aura",
+      "chaotic-radiance",
+      "halo-flare",
+      "high-energy",
+      "cosmic-fire"
+    ],
+    "title": "Burning Halo",
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763683200,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_069_p5.html"
+  },
+  {
+    "id": 71,
+    "tech": "p5.js",
+    "tags": [
+      "planetary-motion",
+      "orbital-system",
+      "hsl-sun",
+      "celestial-animation",
+      "multi-orbit",
+      "space-fragment"
+    ],
+    "title": "Solar Orbit",
+    "url": "/artworks/full/fragment_070_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763683200,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "filename": "fragment_070_p5.html",
+    "previewUrl": "/artworks/previews/fragment_070_p5.html"
+  },
+  {
+    "id": 73,
+    "votes": 0,
+    "title": "Sunburst Geometry",
+    "tags": [
+      "radial-lines",
+      "geometric-sunburst",
+      "dynamic-length",
+      "wave-oscillation",
+      "bright-core",
+      "solar-fragment"
+    ],
+    "filename": "fragment_072_p5.html",
+    "previewUrl": "/artworks/previews/fragment_072_p5.html",
+    "url": "/artworks/full/fragment_072_p5.html",
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 74,
+    "tags": [
+      "starfield-animation",
+      "lunar-pulse",
+      "soft-flicker",
+      "night-atmosphere",
+      "celestial-fragment",
+      "hsl-lights"
+    ],
+    "tech": "p5.js",
+    "votes": 0,
+    "title": "Lunar Drift",
+    "previewUrl": "/artworks/previews/fragment_073_p5.html",
+    "filename": "fragment_073_p5.html",
+    "url": "/artworks/full/fragment_073_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 75,
+    "filename": "fragment_074_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "tags": [
+      "dark-orbit",
+      "minimal-geometry",
+      "ring-motion",
+      "shadow-core",
+      "orbital-path",
+      "monochrome-space"
+    ],
+    "title": "Shadow Orbit",
+    "url": "/artworks/full/fragment_074_p5.html",
+    "previewUrl": "/artworks/previews/fragment_074_p5.html",
+    "tech": "p5.js"
+  },
+  {
+    "id": 76,
+    "filename": "fragment_075_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "tags": [
+      "wave-contours",
+      "silver-motion",
+      "veil-pattern",
+      "circular-warp",
+      "layered-oscillation",
+      "elegant-flow"
+    ],
+    "title": "Silver Veil",
+    "previewUrl": "/artworks/previews/fragment_075_p5.html",
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_075_p5.html"
+  },
+  {
+    "id": 77,
+    "filename": "fragment_076_p5.html",
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_076_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    },
+    "tags": [
+      "tidal-waves",
+      "reflection-ring",
+      "upper-lower-duality",
+      "ocean-motion",
+      "hsl-water",
+      "calm-fragment"
+    ],
+    "votes": 0,
+    "url": "/artworks/full/fragment_076_p5.html",
+    "title": "Tidal Reflection"
+  },
+  {
+    "id": 78,
+    "filename": "fragment_077_p5.html",
+    "url": "/artworks/full/fragment_077_p5.html",
+    "votes": 0,
+    "tech": "p5.js",
+    "tags": [
+      "moon-phase",
+      "dynamic-eclipse",
+      "blackout-motion",
+      "celestial-cycle",
+      "lunar-fragment",
+      "minimal-contrast"
+    ],
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_077_p5.html",
+    "title": "Wax and Wane"
+  },
+  {
+    "id": 79,
+    "filename": "fragment_078_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    },
+    "tags": [
+      "pulsing-rings",
+      "moon-bloom",
+      "soft-expansion",
+      "hsl-luminescence",
+      "radial-growth",
+      "night-fragment"
+    ],
+    "title": "Lunar Bloom",
+    "previewUrl": "/artworks/previews/fragment_078_p5.html",
+    "url": "/artworks/full/fragment_078_p5.html",
+    "votes": 0,
+    "tech": "p5.js"
+  },
+  {
+    "id": 8,
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_007_p5.html",
+    "url": "/artworks/full/fragment_007_p5.html",
+    "tags": [
+      "moire",
+      "lines",
+      "layered",
+      "rotation",
+      "optical-illusion",
+      "abstract",
+      "geometric",
+      "procedural",
+      "minimal",
+      "generative"
+    ],
+    "title": "Moiré",
+    "filename": "fragment_007_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764633600,
+      "nanoseconds": 0
+    },
+    "votes": 0
+  },
+  {
+    "id": 80,
+    "title": "Dual Flow",
+    "filename": "fragment_079_p5.html",
+    "url": "/artworks/full/fragment_079_p5.html",
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_079_p5.html",
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    },
+    "tags": [
+      "dual-waves",
+      "horizontal-flow",
+      "mirror-motion",
+      "line-oscillation",
+      "structured-rhythm",
+      "monochrome-energy"
+    ]
+  },
+  {
+    "id": 81,
+    "votes": 0,
+    "title": "Symmetry Pulse",
+    "filename": "fragment_080_p5.html",
+    "previewUrl": "/artworks/previews/fragment_080_p5.html",
+    "tags": [
+      "wave-symmetry",
+      "pulse-deformation",
+      "mirror-waves",
+      "line-field",
+      "energy-pattern",
+      "abstract-vibration"
+    ],
+    "url": "/artworks/full/fragment_080_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1765324800,
+      "nanoseconds": 0
+    },
+    "tech": "p5.js"
+  },
+  {
+    "id": 82,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763856000,
+      "nanoseconds": 0
+    },
+    "tech": "p5.js",
+    "filename": "fragment_081_p5.html",
+    "url": "/artworks/full/fragment_081_p5.html",
+    "tags": [
+      "mirror-pattern",
+      "symmetric-ellipses",
+      "dynamic-radius",
+      "hsl-colors",
+      "centered-design",
+      "cosmic-fragment"
+    ],
+    "previewUrl": "/artworks/previews/fragment_081_p5.html",
+    "title": "Mirror Mind",
+    "votes": 0
+  },
+  {
+    "id": 83,
+    "tags": [
+      "split-gradient",
+      "color-hue",
+      "vertical-divide",
+      "hsl-colors",
+      "minimalist",
+      "cosmic-fragment"
+    ],
+    "title": "Split Light",
+    "tech": "p5.js",
+    "votes": 0,
+    "filename": "fragment_082_p5.html",
+    "url": "/artworks/full/fragment_082_p5.html",
+    "previewUrl": "/artworks/previews/fragment_082_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1764547200,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 84,
+    "url": "/artworks/full/fragment_083_p5.html",
+    "tags": [
+      "mouse-trail",
+      "fading-ellipse",
+      "motion-echo",
+      "hsl-colors",
+      "interactive",
+      "cosmic-fragment"
+    ],
+    "title": "Echo Self",
+    "previewUrl": "/artworks/previews/fragment_083_p5.html",
+    "filename": "fragment_083_p5.html",
+    "tech": "p5.js",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763856000,
+      "nanoseconds": 0
+    }
+  },
+  {
+    "id": 85,
+    "previewUrl": "/artworks/previews/fragment_084_p5.html",
+    "filename": "fragment_084_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763856000,
+      "nanoseconds": 0
+    },
+    "tech": "p5.js",
+    "tags": [
+      "vertical-symmetry",
+      "wave-ellipses",
+      "inverted-pattern",
+      "hsl-colors",
+      "animated-oscillation",
+      "cosmic-fragment"
+    ],
+    "title": "Inverted Soul",
+    "url": "/artworks/full/fragment_084_p5.html",
+    "votes": 0
+  },
+  {
+    "id": 86,
+    "title": "Whisper Wind",
+    "previewUrl": "/artworks/previews/fragment_085_p5.html",
+    "filename": "fragment_085_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763856000,
+      "nanoseconds": 0
+    },
+    "tags": [
+      "noise-wave",
+      "horizontal-lines",
+      "gentle-motion",
+      "hsl-colors",
+      "flowing-pattern",
+      "cosmic-fragment"
+    ],
+    "url": "/artworks/full/fragment_085_p5.html",
+    "tech": "p5.js",
+    "votes": 0
+  },
+  {
+    "id": 87,
+    "filename": "fragment_086_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    },
+    "tags": [
+      "rotating-waves",
+      "multi-layered-shape",
+      "dynamic-radius",
+      "hsl-colors",
+      "circular-motion",
+      "cosmic-fragment"
+    ],
+    "previewUrl": "/artworks/previews/fragment_086_p5.html",
+    "title": "Gale Form",
+    "url": "/artworks/full/fragment_086_p5.html",
+    "votes": 0,
+    "tech": "p5.js"
+  },
+  {
+    "id": 88,
+    "tech": "p5.js",
+    "votes": 0,
+    "url": "/artworks/full/fragment_087_p5.html",
+    "filename": "fragment_087_p5.html",
+    "previewUrl": "/artworks/previews/fragment_087_p5.html",
+    "title": "Breeze Lines",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    },
+    "tags": [
+      "particle-noise",
+      "drifting-points",
+      "wind-effect",
+      "hsl-colors",
+      "animated-scatter",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "id": 89,
+    "title": "Cyclone Loop",
+    "tech": "p5.js",
+    "previewUrl": "/artworks/previews/fragment_088_p5.html",
+    "tags": [
+      "rotating-cyclone",
+      "wave-radius",
+      "circular-motion",
+      "hsl-colors",
+      "multi-layered-loop",
+      "cosmic-fragment"
+    ],
+    "votes": 0,
+    "filename": "fragment_088_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_088_p5.html"
+  },
+  {
+    "id": 9,
+    "tags": [
+      "random-walk",
+      "line-art",
+      "organic-motion",
+      "color-shifting",
+      "reflective",
+      "procedural",
+      "generative",
+      "abstract",
+      "minimal",
+      "dynamic"
+    ],
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1762300800,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_008_p5.html",
+    "tech": "p5.js",
+    "filename": "fragment_008_p5.html",
+    "title": "Random Walk",
+    "previewUrl": "/artworks/previews/fragment_008_p5.html"
+  },
+  {
+    "id": 90,
+    "tech": "p5.js",
+    "title": "Wind Memory",
+    "filename": "fragment_089_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_089_p5.html",
+    "votes": 0,
+    "url": "/artworks/full/fragment_089_p5.html",
+    "tags": [
+      "mouse-trail",
+      "fading-ellipse",
+      "wind-effect",
+      "hsl-colors",
+      "interactive",
+      "cosmic-fragment"
+    ]
+  },
+  {
+    "id": 91,
+    "votes": 0,
+    "title": "Invisible Dance",
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_090_p5.html",
+    "filename": "fragment_090_p5.html",
+    "tags": [
+      "radiating-lines",
+      "dynamic-angle",
+      "central-motion",
+      "hsl-colors",
+      "animated-pattern",
+      "cosmic-fragment"
+    ],
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_090_p5.html"
+  },
+  {
+    "id": 92,
+    "title": "Spectrum Flow",
+    "previewUrl": "/artworks/previews/fragment_091_p5.html",
+    "filename": "fragment_091_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763856000,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_091_p5.html",
+    "tags": [
+      "prism-light",
+      "rainbow-lines",
+      "dynamic-wave",
+      "hsl-colors",
+      "central-focus",
+      "cosmic-fragment"
+    ],
+    "tech": "p5.js",
+    "votes": 0
+  },
+  {
+    "id": 93,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763769600,
+      "nanoseconds": 0
+    },
+    "previewUrl": "/artworks/previews/fragment_092_p5.html",
+    "tech": "p5.js",
+    "url": "/artworks/full/fragment_092_p5.html",
+    "votes": 0,
+    "filename": "fragment_092_p5.html",
+    "tags": [
+      "concentric-ripples",
+      "rotating-hands",
+      "time-motion",
+      "hsl-colors",
+      "interactive-pattern",
+      "cosmic-fragment"
+    ],
+    "title": "Time Echo"
+  },
+  {
+    "id": 94,
+    "url": "/artworks/full/fragment_093_p5.html",
+    "votes": 0,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763856000,
+      "nanoseconds": 0
+    },
+    "tags": [
+      "pulsing-glow",
+      "soft-rings",
+      "gentle-motion",
+      "hsl-colors",
+      "ambient-pattern",
+      "cosmic-fragment"
+    ],
+    "tech": "p5.js",
+    "filename": "fragment_093_p5.html",
+    "previewUrl": "/artworks/previews/fragment_093_p5.html",
+    "title": "Breathe"
+  },
+  {
+    "id": 95,
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763856000,
+      "nanoseconds": 0
+    },
+    "votes": 0,
+    "filename": "fragment_094_p5.html",
+    "url": "/artworks/full/fragment_094_p5.html",
+    "previewUrl": "/artworks/previews/fragment_094_p5.html",
+    "tags": [
+      "mirrored-shapes",
+      "bezier-profiles",
+      "dynamic-noise",
+      "hsl-colors",
+      "abstract-pattern",
+      "cosmic-fragment"
+    ],
+    "title": "Division",
+    "tech": "p5.js"
+  },
+  {
+    "id": 96,
+    "tags": [
+      "rotating-rings",
+      "additive-burst",
+      "color-harmony",
+      "hsl-colors",
+      "celestial-pattern",
+      "cosmic-fragment"
+    ],
+    "tech": "p5.js",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763856000,
+      "nanoseconds": 0
+    },
+    "url": "/artworks/full/fragment_095_p5.html",
+    "title": "Eclipse",
+    "previewUrl": "/artworks/previews/fragment_095_p5.html",
+    "filename": "fragment_095_p5.html",
+    "votes": 0
+  },
+  {
+    "id": 97,
+    "tags": [
+      "grid",
+      "falling-blocks",
+      "wobble-animation",
+      "dynamic-collapse",
+      "abstract-geometry",
+      "light-leak"
+    ],
+    "url": "/artworks/full/fragment_096_p5.html",
+    "tech": "p5.js",
+    "title": "The Wall",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763942400,
+      "nanoseconds": 0
+    },
+    "filename": "fragment_096_p5.html",
+    "votes": 0,
+    "previewUrl": "/artworks/previews/fragment_096_p5.html"
+  },
+  {
+    "id": 99,
+    "previewUrl": "/artworks/previews/fragment_098_p5.html",
+    "createdAt": {
+      "type": "firestore/timestamp/1.0",
+      "seconds": 1763942400,
+      "nanoseconds": 0
+    },
+    "title": "Dreaming Dog",
+    "tech": "p5.js",
+    "tags": [
+      "dog",
+      "dream",
+      "floating-objects",
+      "bones-stars-moon",
+      "night-sky",
+      "soft-glow"
+    ],
+    "filename": "fragment_098_p5.html",
+    "url": "/artworks/full/fragment_098_p5.html",
+    "votes": 0
   }
 ]

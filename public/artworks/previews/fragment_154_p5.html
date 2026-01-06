@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Abstract</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="https://unpkg.com/p5.brush@1.0.3/dist/p5.brush.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+        z-index: 10;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Abstract”</div>
+    <script>
+      (y = 0), (setup = (_) => createCanvas((w = 1920), (h = 1080)));
+      draw = (_) => {
+        if (y < h)
+          for (x = w; x--; point(x, y)) {
+            stroke((c = f(x / 2e3 - 0.5, y / 2e3 - 0.02)), c * 2, c * c);
+          }
+        y++;
+      };
+      f = (x, y, n = 5) =>
+        n
+          ? f(sin(x * x * 3 - y * y * 2), 3 * sin(1 + x * y) + 1, n - 1)
+          : y * y * 8;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ellipse Slips</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="https://unpkg.com/p5.brush@1.0.3/dist/p5.brush.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+        z-index: 10;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Ellipse Slips”</div>
+    <script>
+      const w = 920;
+      const h = 690;
+      let palette = [];
+
+      let ease;
+      let num = 80;
+      let r = 640;
+      let gap = r / num;
+
+      window.setup = function () {
+        createCanvas(w, h, WEBGL);
+        colorMode(HSB, 255);
+        palette = colorArray[0].colors;
+        background(255);
+        strokeWeight(2);
+        noFill();
+        ease = createEasing(0.17, 0.67, 0.73, -1.6);
+      };
+
+      window.draw = function () {
+        background(255);
+        orbitControl();
+        for (let k = 0; k < num; k++) {
+          push();
+          stroke((frameCount + (k / num) * 255) % 255, 255, 255);
+          let count = (sin((PI / num) * k + frameCount * 0.04) + 1) / 2;
+          let angle = (ease(count) * PI) / 2;
+          rotateX(angle);
+          ellipse(0, 0, gap * k, gap * k, 50);
+          pop();
+        }
+      };
+
+      const colorArray = [
+        {
+          id: 0,
+          colors: ["#dfdad3", "#253276", "#000000", "#ffffff"],
+        },
+      ];
+
+      // イージング
+      function createEasing(p1x, p1y, p2x, p2y) {
+        function getX(t) {
+          return (
+            (1 - t) * (1 - t) * (1 - t) * 0 +
+            3 * (1 - t) * (1 - t) * t * p1x +
+            3 * (1 - t) * t * t * p2x +
+            t * t * t * 1
+          );
+        }
+        function getY(t) {
+          return (
+            (1 - t) * (1 - t) * (1 - t) * 0 +
+            3 * (1 - t) * (1 - t) * t * p1y +
+            3 * (1 - t) * t * t * p2y +
+            t * t * t * 1
+          );
+        }
+        function bezierEasing(time) {
+          if (time <= 0) return 0;
+          if (time >= 1) return 1;
+          let lower = 0;
+          let upper = 1;
+          let x = 0;
+          let currentT = 0;
+          for (let i = 0; i < 50; i++) {
+            currentT = (lower + upper) / 2;
+            x = getX(currentT);
+            if (x < time) {
+              lower = currentT;
+            } else {
+              upper = currentT;
+            }
+          }
+          return getY(currentT);
+        }
+        return bezierEasing;
+      }
+    </script>
+  </body>
+</html>

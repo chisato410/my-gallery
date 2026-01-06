@@ -3791,5 +3791,85 @@
       "generative-motion",
       "zen-aesthetic"
     ]
+  },
+  {
+    "filename": "fragment_154_p5.html",
+    "title": "Abstract",
+    "tech": "p5.js",
+    "createdAt": "2026-01-06",
+    "tags": [
+      "p5js",
+      "code-golf",
+      "recursion",
+      "chaos-theory",
+      "mathematical-abstraction",
+      "per-pixel-rendering",
+      "recursive-mapping",
+      "dynamic-range-color",
+      "minimalist-syntax",
+      "generative-landscape",
+      "fractal-dimension",
+      "non-linear-dynamics"
+    ]
+  },
+  {
+    "filename": "fragment_155_p5.html",
+    "title": "fire flower",
+    "tech": "p5.js",
+    "createdAt": "2026-01-06",
+    "tags": [
+      "p5js",
+      "recursive-subdivision",
+      "object-oriented-programming",
+      "blend-mode-add",
+      "noise-geometry",
+      "kaleidoscope-effect",
+      "neon-aesthetic",
+      "dynamic-palette",
+      "offscreen-graphics",
+      "perlin-noise",
+      "generative-flora",
+      "texture-mapping"
+    ]
+  },
+  {
+    "filename": "fragment_156_p5.html",
+    "title": "Blob",
+    "tech": "p5.js",
+    "createdAt": "2026-01-06",
+    "tags": [
+      "p5js",
+      "op-art",
+      "truchet-tiles",
+      "geometric-abstraction",
+      "arc-composition",
+      "modular-design",
+      "palette-shuffling",
+      "checkerboard-logic",
+      "minimalist-flat-design",
+      "generative-pattern",
+      "webgl-rendering",
+      "organic-connectivity"
+    ]
+  },
+  {
+    "filename": "fragment_157_p5.html",
+    "title": "Ellipse Slips",
+    "tech": "WEBGL",
+    "createdAt": "2026-01-06",
+    "tags": [
+      "p5js",
+      "webgl",
+      "concentric-circles",
+      "bezier-easing",
+      "sinusoidal-oscillation",
+      "phase-shift",
+      "3d-transformation",
+      "hsb-cycling",
+      "mathematical-motion",
+      "kinetic-art",
+      "orbit-control",
+      "recursive-rotation"
+    ]
   }
 ]

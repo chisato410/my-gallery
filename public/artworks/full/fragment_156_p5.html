@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Blob</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="https://unpkg.com/p5.brush@1.0.3/dist/p5.brush.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+        z-index: 10;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“Blob”</div>
+    <script>
+      let N;
+      let s,
+        margin = 3.5;
+
+      let detail = 555;
+
+      let palette1, palette2;
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight, WEBGL);
+        N = 4;
+        s = width / (N + 2 * margin);
+        margin *= s;
+        noStroke();
+        noLoop();
+      }
+
+      function draw() {
+        translate(-width / 2, -height / 0.97);
+
+        palette1 = ["#8661C1", "#F97068", "#57C4E5", "#39A56B", "#E9C46A"];
+        palette2 = shuffle(["#1F201F", "#EEE6E2"]);
+
+        let backCol = random([0, 1]);
+        background(palette2[backCol]);
+
+        for (let i = 0; i <= N; i++) {
+          let x = i * s + margin;
+          for (let j = 0; j <= N; j++) {
+            let y = j * s + margin;
+            fill(palette2[(i + j) % 2]);
+            ellipse(x, y, s, s, detail * 4);
+          }
+        }
+
+        for (let i = 0; i < N; i++) {
+          for (let j = 0; j < N; j++) {
+            makeTile(i, j);
+          }
+        }
+
+        for (let i = 0; i <= N; i++) {
+          let x = i * s + margin;
+          for (let j = 0; j <= N; j++) {
+            let y = j * s + margin;
+            if ((i + j) % 2 == backCol) fill(random(palette1));
+            else fill(palette2[1 - ((i + j) % 2)]);
+            ellipse(x, y, s / 2, s / 2, detail * 4);
+          }
+        }
+      }
+
+      function makeTile(i, j) {
+        let x = i * s + margin;
+        let y = j * s + margin;
+        if (random() < 1 / 2) {
+          fill(random(palette1));
+          square(x, y, s);
+          fill(palette2[(i + j) % 2]);
+          arc(x, y, s, s, 0, PI / 2, PIE, detail);
+          arc(x + s, y + s, s, s, PI, (3 * PI) / 2, PIE, detail);
+          fill(palette2[1 - ((i + j) % 2)]);
+          arc(x + s, y, s, s, PI / 2, PI, PIE, detail);
+          arc(x, y + s, s, s, (3 * PI) / 2, TAU, PIE, detail);
+        } else {
+          if (random() < 1 / 2) {
+            fill(palette2[1 - ((i + j) % 2)]);
+            square(x, y, s);
+            fill(palette2[(i + j) % 2]);
+            arc(x, y, s, s, 0, PI / 2, PIE, detail);
+            arc(x + s, y + s, s, s, PI, (3 * PI) / 2, PIE, detail);
+          } else {
+            fill(palette2[(i + j) % 2]);
+            square(x, y, s);
+            fill(palette2[1 - ((i + j) % 2)]);
+            arc(x + s, y, s, s, PI / 2, PI, PIE, detail);
+            arc(x, y + s, s, s, (3 * PI) / 2, TAU, PIE, detail);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
