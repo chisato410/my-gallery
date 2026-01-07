@@ -3871,5 +3871,25 @@
       "orbit-control",
       "recursive-rotation"
     ]
+  },
+  {
+    "filename": "fragment_158_p5.html",
+    "title": "Eye Tracking",
+    "tech": "Matter.js",
+    "createdAt": "2026-01-07",
+    "tags": [
+      "p5js",
+      "matter-js",
+      "physics-engine",
+      "interactive-character",
+      "mouse-interaction",
+      "eyeball-tracking",
+      "procedural-creature",
+      "spiky-shape-generator",
+      "texture-overlay",
+      "collision-detection",
+      "blinking-animation",
+      "reactive-art"
+    ]
   }
 ]
