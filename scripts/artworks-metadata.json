@@ -3891,5 +3891,125 @@
       "blinking-animation",
       "reactive-art"
     ]
+  },
+  {
+    "filename": "fragment_159_p5.html",
+    "title": "Kaleidoscope",
+    "tech": "p5.js",
+    "createdAt": "2026-01-07",
+    "tags": [
+      "p5js",
+      "vector-field",
+      "agent-based-simulation",
+      "mathematical-art",
+      "trigonometric-functions",
+      "weighted-random",
+      "generative-lines",
+      "perlin-noise-alternative",
+      "color-theory",
+      "trajectory-mapping",
+      "hsb-color-space",
+      "minimalist-structure"
+    ]
+  },
+  {
+    "filename": "fragment_160_p5.html",
+    "title": "broken",
+    "tech": "p5.js / Matter.js",
+    "createdAt": "2026-01-07",
+    "tags": [
+      "p5js",
+      "matter-js",
+      "physics-transition",
+      "grid-animation",
+      "order-to-disorder",
+      "ease-in-out-quint",
+      "delay-by-distance",
+      "dynamic-body-creation",
+      "interactive-reset",
+      "gravity-simulation",
+      "procedural-motion",
+      "entropy-art"
+    ]
+  },
+  {
+    "filename": "fragment_161_p5.html",
+    "title": "wave",
+    "tech": "p5.js (WEBGL)",
+    "createdAt": "2026-01-07",
+    "tags": [
+      "p5js",
+      "webgl",
+      "wave-interference",
+      "triangle-strip",
+      "exponential-decay",
+      "sinusoidal-functions",
+      "3d-surface-mapping",
+      "point-light",
+      "specular-material",
+      "interactive-surface",
+      "mathematical-topography",
+      "cyberpunk-aesthetic"
+    ]
+  },
+  {
+    "filename": "fragment_162_p5.html",
+    "title": "wave2",
+    "tech": "p5.js (WEBGL)",
+    "createdAt": "2026-01-07",
+    "tags": [
+      "p5js",
+      "webgl",
+      "space-aesthetic",
+      "data-visualization-art",
+      "interference-pattern",
+      "starfield-generation",
+      "light-pillars",
+      "additive-waves",
+      "cyber-grid",
+      "dynamic-camera-motion",
+      "transparency-blending",
+      "techno-sublime"
+    ]
+  },
+  {
+    "filename": "fragment_163_p5.html",
+    "title": "River",
+    "tech": "p5.js",
+    "createdAt": "2026-01-07",
+    "tags": [
+      "p5js",
+      "perlin-noise",
+      "flow-field",
+      "particle-system",
+      "weighted-random",
+      "stochastic-distribution",
+      "generative-painting",
+      "blue-monochrome",
+      "fluid-dynamics",
+      "ink-wash-aesthetic",
+      "noise-scaling",
+      "temporal-evolution"
+    ]
+  },
+  {
+    "filename": "fragment_164_p5.html",
+    "title": "soft",
+    "tech": "WEBGL",
+    "createdAt": "2026-01-07",
+    "tags": [
+      "p5js",
+      "webgl",
+      "custom-physics",
+      "elastic-collision",
+      "sphere-rendering",
+      "ambient-light",
+      "specular-material",
+      "vector-mathematics",
+      "pastel-palette",
+      "interactive-physics",
+      "boundary-logic",
+      "kinematic-motion"
+    ]
   }
 ]

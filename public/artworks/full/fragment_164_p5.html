@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>soft</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #000000;
+        font-family: Helvetica, Arial;
+        z-index: 10;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“soft”</div>
+    <script>
+      const particles = [];
+      const pad = 5;
+      let isRoofOpen = true;
+      let palette;
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight, WEBGL);
+        noStroke();
+
+        // 爽やかなパステルカラーのパレット
+        palette = [
+          color("#98f5e1"), // ミント
+          color("#87ceeb"), // スカイブルー
+          color("#fffacd"), // レモン
+        ];
+
+        for (let i = 30; i--; ) {
+          particles.push(new particle(width / 2, -i * 200));
+        }
+      }
+
+      class particle {
+        constructor(x, y) {
+          this.pos = createVector(x || mouseX, y || mouseY);
+          this.vel = createVector(random(-1, 1), random(-1, 1));
+          this.acc = createVector(0, 0);
+          this.r = Math.hypot(width, height) / 10;
+          this.d = this.r * 0.4;
+          // 生成時に色をランダムに決定
+          this.color = random(palette);
+        }
+      }
+
+      mouseClicked = () => {
+        if (mouseButton == LEFT) particles.push(new particle());
+        if (mouseButton == CENTER) particles.pop();
+      };
+
+      function draw() {
+        background(10, 20, 30);
+
+        // 環境光を白く明るく
+        ambientLight(100);
+        // 上からの白い光
+        directionalLight(255, 255, 255, 0, 1, -1);
+        // 柔らかいスポットライト
+        spotLight(
+          color(255),
+          mouseX - width / 2,
+          mouseY - height / 2,
+          1000,
+          0,
+          0,
+          -1,
+          PI / 8
+        );
+
+        for (const p of particles) {
+          p.vel.y += 2;
+          p.vel.add(p.acc);
+          p.pos.add(p.vel);
+          p.vel.mult(0.98);
+          p.acc.mult(0);
+        }
+
+        collideAll([...particles]);
+
+        if (isRoofOpen == true) {
+          if (particles.every((p) => p.pos.y > pad)) isRoofOpen = false;
+        }
+
+        for (const p of particles) {
+          if (p.pos.x < pad) {
+            p.pos.x = pad;
+            p.vel.x *= -1;
+          }
+          if (isRoofOpen == false && p.pos.y < pad) {
+            p.pos.y = pad;
+            p.vel.y *= -1;
+          }
+          if (p.pos.x > width - pad) {
+            p.pos.x = width - pad;
+            p.vel.x *= -1;
+          }
+          if (p.pos.y > height - pad) {
+            p.pos.y = height - pad;
+            p.vel.y *= -1;
+          }
+        }
+
+        particles.forEach((p) => {
+          push();
+          translate(p.pos.x - width / 2, p.pos.y - height / 2);
+          fill(p.color);
+          specularMaterial(255);
+          shininess(50);
+          sphere(p.r);
+          pop();
+        });
+      }
+
+      function collideAll(p) {
+        for (let i = p.length; i--; ) {
+          for (let j = i; j--; ) {
+            collide(p[i], p[j]);
+          }
+        }
+      }
+
+      function collide(current, other) {
+        const dir = p5.Vector.sub(current.pos, other.pos);
+        const dis = Math.hypot(dir.x, dir.y);
+        const sum = current.r + other.r;
+        if (sum > dis && dis > 0) {
+          const repel = dir.div(dis).mult((sum - dis) / current.d);
+          current.acc.add(repel);
+          other.acc.sub(repel);
+        }
+      }
+    </script>
+  </body>
+</html>

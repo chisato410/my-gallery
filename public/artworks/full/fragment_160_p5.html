@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>broken</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      canvas {
+        display: block;
+      }
+      .caption {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #fff;
+        font-family: Helvetica, Arial;
+        z-index: 10;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="caption">“broken”</div>
+    <script>
+      let colors = ["#7fc8f8", "#ffe45e", "#ff6392", "#17bebb"];
+      let motions = [];
+      let motionClasses = [];
+      let sceneTimer = 0;
+      let resetTime = 300; // 物理モードへ移行するまでの時間
+
+      // Matter.js 用の変数
+      let engine;
+      let world;
+      let physicsActive = false;
+
+      function setup() {
+        createCanvas(900, 900);
+        rectMode(CENTER);
+
+        // Matter.jsのセットアップ
+        engine = Matter.Engine.create();
+        world = engine.world;
+
+        INIT(width / 2, height / 2);
+      }
+
+      function draw() {
+        background(255);
+
+        if (physicsActive) {
+          Matter.Engine.update(engine);
+        }
+
+        for (let m of motions) {
+          m.run();
+        }
+
+        // 一定時間経つか、マウスが押されたら物理演算をオンにするなどの遊び
+        if (sceneTimer === resetTime) {
+          activatePhysics();
+        }
+
+        sceneTimer++;
+      }
+
+      function mousePressed() {
+        // クリックした場所からアニメーションをリセット
+        physicsActive = false;
+        Matter.World.clear(world);
+        engine.world.bodies = [];
+        INIT(mouseX, mouseY);
+      }
+
+      function INIT(originX, originY) {
+        sceneTimer = 0;
+        physicsActive = false;
+        motions = [];
+        motionClasses = [Motion01, Motion02, Motion03, Motion04, Motion05];
+
+        let drawingRegion = width * 0.75;
+        let cellCount = 20; // 動作を軽くするため少し数を調整
+        let cellSize = drawingRegion / cellCount;
+        let clr = "#000000";
+
+        for (let i = 0; i < cellCount; i++) {
+          for (let j = 0; j < cellCount; j++) {
+            let x = cellSize * j + cellSize / 2 + (width - drawingRegion) / 2;
+            let y = cellSize * i + cellSize / 2 + (height - drawingRegion) / 2;
+            let MotionClass = random(motionClasses);
+            // クリック地点（originX, originY）からの距離でディレイをかける
+            let t = -int(dist(x, y, originX, originY) * 0.5);
+            motions.push(new MotionClass(x, y, cellSize, t, clr));
+          }
+        }
+      }
+
+      function activatePhysics() {
+        physicsActive = true;
+        for (let m of motions) {
+          // 各エージェントの位置にMatter.jsのBodyを作成
+          let body = Matter.Bodies.rectangle(m.x, m.y, m.w, m.w, {
+            restitution: 0.5,
+            friction: 0.1,
+          });
+          // 初速を少しランダムに与えて弾けさせる
+          Matter.Body.setVelocity(body, {
+            x: random(-2, 2),
+            y: random(-5, 0),
+          });
+          m.body = body;
+          Matter.World.add(world, body);
+        }
+      }
+
+      function easeInOutQuint(x) {
+        return x < 0.5
+          ? 16 * x * x * x * x * x
+          : 1 - Math.pow(-2 * x + 2, 5) / 2;
+      }
+
+      // 共通クラスの拡張
+      class Agent {
+        constructor(x, y, w, t, clr) {
+          this.x = x;
+          this.y = y;
+          this.w = w;
+          this.t = t;
+          this.t1 = int(random(30, 60));
+          this.t2 = this.t1 + int(random(30, 60));
+          this.clr1 = color(random(colors));
+          this.clr2 = color(clr);
+          this.currentColor = this.clr1;
+          this.body = null;
+        }
+
+        run() {
+          if (physicsActive && this.body) {
+            this.x = this.body.position.x;
+            this.y = this.body.position.y;
+            this.rotation = this.body.angle;
+          } else {
+            this.move();
+            this.rotation = 0;
+          }
+          this.show();
+        }
+
+        move() {
+          if (0 < this.t && this.t < this.t1) {
+            let n = norm(this.t, 0, this.t1 - 1);
+            this.updateMotion1(easeInOutQuint(n));
+          } else if (this.t1 < this.t && this.t < this.t2) {
+            let n = norm(this.t, this.t1, this.t2 - 1);
+            this.updateMotion2(easeInOutQuint(n));
+          }
+          this.t++;
+        }
+
+        show() {}
+        updateMotion1(n) {}
+        updateMotion2(n) {}
+      }
+
+      // 各モーションは Agent を継承
+      // 代表して Motion01 を修正 (他も同様に描画時に rotation を考慮)
+      class Motion01 extends Agent {
+        constructor(x, y, w, t, clr) {
+          super(x, y, w, t, clr);
+          this.shift = this.w * 3;
+          this.ang = int(random(4)) * (TAU / 4);
+          this.size = 0;
+        }
+        show() {
+          push();
+          translate(this.x, this.y);
+          rotate(this.rotation); // 物理演算用の回転
+          noStroke();
+          fill(this.currentColor);
+          // 物理モード中は中心座標、それ以外はオリジナルのシフト
+          let ox = physicsActive ? 0 : this.shift * cos(this.ang);
+          let oy = physicsActive ? 0 : this.shift * sin(this.ang);
+          square(ox, oy, this.size);
+          pop();
+        }
+        updateMotion1(n) {
+          this.shift = lerp(this.w * 3, 0, n);
+          this.size = lerp(0, this.w, n);
+          this.currentColor = lerpColor(this.clr1, this.clr2, n);
+        }
+      }
+
+      class Motion02 extends Motion01 {}
+      class Motion03 extends Motion01 {}
+      class Motion04 extends Motion01 {}
+      class Motion05 extends Motion01 {}
+    </script>
+  </body>
+</html>
