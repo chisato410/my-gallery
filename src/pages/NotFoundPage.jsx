@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import p5 from "p5";
-import styles from "./NotFoundPage.module.css";
+import styles from "./NotFoundPage.module.scss";
 
 const NotFoundPage = () => {
   const sketchRef = useRef(null);
