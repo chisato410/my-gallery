@@ -1,13 +1,16 @@
-/* src/pages/NotFoundPage.module.scss */
 .container {
   position: relative;
-  min-height: 100vh;
-  background-color: #0a0a0a; // neutral-950
+  width: 100vw;
+  height: 100vh;
+  background-color: #e5e5e3; // 紙のような質感のグレー
   overflow: hidden;
+  font-family: "monospace", "Courier New", Courier, monospace;
 
   .canvasWrapper {
     position: absolute;
     inset: 0;
+    z-index: 1;
+    cursor: crosshair; // カーソルを十字にして「操作可能」な雰囲気にする
   }
 
   .content {
@@ -17,36 +20,32 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    color: white;
-    pointer-events: none;
-
-    h2 {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.5));
-    }
-
-    p {
-      margin-bottom: 2rem;
-      color: #a3a3a3; // neutral-400
-    }
+    height: 100%;
+    pointer-events: none; // マウスイベントを背後のp5.jsへ透過
 
     .linkButton {
-      pointer-events: auto;
-      padding: 0.75rem 1.5rem;
-      background-color: white;
-      color: black;
-      font-weight: 700;
-      border-radius: 9999px;
+      pointer-events: auto; // ボタンだけはクリック可能に
+      margin-top: 2rem;
+      padding: 0.8rem 2rem;
+      border: 1px solid #000;
+      color: #000;
+      background: transparent;
       text-decoration: none;
-      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      font-weight: bold;
+      letter-spacing: 0.2rem;
+      transition: all 0.2s ease-in-out;
 
+      // ホバー時に反転させる演出（ミニマルでおしゃれです）
       &:hover {
-        background-color: #3b82f6; // blue-500
-        color: white;
-        transform: scale(1.1);
+        background-color: #000;
+        color: #e5e5e3;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      &:active {
+        transform: translateY(0);
       }
     }
   }
