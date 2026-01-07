@@ -48,7 +48,7 @@ export default function App() {
         />{" "}
         <Route path="/about" element={<AboutPage />} />
         <Route path="/tech" element={<TechPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="*" element={<NotFoundPage />} />{" "}
       </Routes>
 
       {/* <BottomNav
