@@ -13,12 +13,12 @@ const NotFoundPage = () => {
     const sketch = (p) => {
       let txts = [];
       let sentence =
-        "THE NEW WORLD DIMENSION | THE NEW WORLD DIMENSION | THE NEW WORLD DIMENSION | THE NEW WORLD DIMENSION | THE NEW WORLD DIMENSION";
+        "404 DIMENSION NOT FOUND | LOST IN THE VOID | 404 DIMENSION NOT FOUND | LOST IN THE VOID | 404 DIMENSION NOT FOUND";
       let webGLGraphics;
       let overAllTexture;
 
       p.setup = () => {
-        p.createCanvas(1000, 1000);
+        p.createCanvas(p.windowWidth, p.windowHeight);
         p.pixelDensity(2);
         webGLGraphics = p.createGraphics(p.width, p.height, p.WEBGL);
 
@@ -112,15 +112,25 @@ const NotFoundPage = () => {
       };
 
       p.windowResized = () => {
-        const container = sketchRef.current;
-        if (container) {
-          const size = Math.min(
-            container.clientWidth,
-            container.clientHeight,
-            1000
-          );
-          p.resizeCanvas(size, size);
+        p.resizeCanvas(p.windowWidth, p.windowHeight);
+        webGLGraphics.resizeCanvas(p.windowWidth, p.windowHeight);
+
+        overAllTexture = p.createGraphics(p.width, p.height);
+        overAllTexture.loadPixels();
+        for (let i = 0; i < p.width + 50; i++) {
+          for (let o = 0; o < p.height + 50; o++) {
+            overAllTexture.set(
+              i,
+              o,
+              p.color(
+                100,
+                p.noise(i / 30, o / 30, (i * o) / 50) *
+                  p.random([0, 20, 40, 120])
+              )
+            );
+          }
         }
+        overAllTexture.updatePixels();
       };
     };
 
